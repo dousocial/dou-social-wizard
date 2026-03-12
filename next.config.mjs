@@ -14,6 +14,10 @@ const nextConfig = {
         source: "/3dtour/sirinkoyvilla",
         destination: "/3dtour/sirinkoyvilla/index.html",
       },
+      {
+        source: "/3dtour/ikizvilla",
+        destination: "/3dtour/ikizvilla/index.html",
+      },
     ];
   },
 };
