@@ -8,6 +8,14 @@ const nextConfig = {
   turbopack: {
     root: __dirname,
   },
+  async rewrites() {
+    return [
+      {
+        source: "/3dtour/sirinkoyvilla",
+        destination: "/3dtour/sirinkoyvilla/index.html",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
