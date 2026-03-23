@@ -42,6 +42,39 @@ a, a:hover, a:active, a:visited {
   overflow: hidden;
 }
 
+#sceneTransition {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.08) 14%, rgba(17,23,31,0.76) 42%, rgba(0,0,0,0.96) 72%);
+}
+
+.mobile.scene-transition #sceneTransition {
+  animation: mobileSceneTransition 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes mobileSceneTransition {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  18% {
+    opacity: 0.92;
+    transform: scale(1);
+  }
+  55% {
+    opacity: 0.94;
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.28);
+  }
+}
+
 #titleBar {
   position: absolute;
   top: 0;
