@@ -70,6 +70,9 @@
   // Initialize viewer.
   var viewer = new Marzipano.Viewer(panoElement, viewerOpts);
 
+  // Warm the initial scene tiles so the preview resolves to sharp imagery faster.
+  preloadInitialScene(data.scenes[0]);
+
   // Create scenes.
   var scenes = data.scenes.map(function(data) {
     var urlPrefix = "tiles";
@@ -180,6 +183,45 @@
 
   function sanitize(s) {
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
+  }
+
+  function preloadInitialScene(sceneData) {
+    if (!sceneData) {
+      return;
+    }
+
+    preloadImage("tiles/" + sceneData.id + "/preview.jpg");
+
+    var preferredLevel = null;
+    for (var i = sceneData.levels.length - 1; i >= 0; i--) {
+      var level = sceneData.levels[i];
+      if (!level.fallbackOnly && level.size <= 1024) {
+        preferredLevel = level;
+        break;
+      }
+    }
+
+    if (!preferredLevel) {
+      return;
+    }
+
+    var tilesPerAxis = Math.max(1, preferredLevel.size / preferredLevel.tileSize);
+    var faces = [ 'r', 'u', 'f', 'd', 'b', 'l' ];
+
+    faces.forEach(function(face) {
+      for (var y = 0; y < tilesPerAxis; y++) {
+        for (var x = 0; x < tilesPerAxis; x++) {
+          preloadImage("tiles/" + sceneData.id + "/" + preferredLevel.size / 512 + "/" + face + "/" + y + "/" + x + ".jpg");
+        }
+      }
+    });
+  }
+
+  function preloadImage(url) {
+    var img = new Image();
+    img.decoding = 'async';
+    img.fetchPriority = 'high';
+    img.src = url;
   }
 
   function switchScene(scene) {
