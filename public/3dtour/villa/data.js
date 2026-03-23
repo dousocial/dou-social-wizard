@@ -1,8 +1,8 @@
 var APP_DATA = {
   "scenes": [
     {
-      "id": "0-giri1",
-      "name": "giriş1",
+      "id": "0-gr1",
+      "name": "GİRİŞ1",
       "levels": [
         {
           "tileSize": 256,
@@ -24,35 +24,97 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": -0.24897309087596042,
-        "pitch": 0.19614303584175552,
+        "yaw": 0.14153215414743237,
+        "pitch": 0.09611362675843793,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": -0.4813591843086975,
-          "pitch": 0.14980341282539733,
-          "rotation": 1.5707963267948966,
+          "yaw": -1.5040724640558771,
+          "pitch": 0.814394013077198,
+          "rotation": 7.0685834705770345,
+          "target": "2-gr3"
+        },
+        {
+          "yaw": 0.5011611385051591,
+          "pitch": 0.543609452997023,
+          "rotation": 0.7853981633974483,
+          "target": "1-gr2"
+        },
+        {
+          "yaw": -0.4819114125575563,
+          "pitch": 0.31184676195105254,
+          "rotation": 0.7853981633974483,
+          "target": "8-mutfak2"
+        },
+        {
+          "yaw": 0.702040276267498,
+          "pitch": 0.12503557634919993,
+          "rotation": 0,
+          "target": "6-bahe"
+        },
+        {
+          "yaw": -0.7078394494482492,
+          "pitch": -0.11044107900163525,
+          "rotation": 5.497787143782138,
+          "target": "18-2kat-"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "1-gr2",
+      "name": "GİRİŞ2",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1520,
+      "initialViewParameters": {
+        "yaw": 0,
+        "pitch": 0,
+        "fov": 1.222445190334001
+      },
+      "linkHotspots": [
+        {
+          "yaw": -0.30679443420438623,
+          "pitch": 0.3752530126051372,
+          "rotation": 0,
           "target": "7-mutfak1"
         },
         {
-          "yaw": 0.8348297637413733,
-          "pitch": 0.418020362202979,
-          "rotation": 4.71238898038469,
-          "target": "1-giri2"
-        },
-        {
-          "yaw": 0.7377824809072244,
-          "pitch": 0.08420405347171389,
+          "yaw": 0.7185478428286736,
+          "pitch": 0.5944767188134463,
           "rotation": 0,
           "target": "6-bahe"
+        },
+        {
+          "yaw": -2.1175050792609973,
+          "pitch": 0.5918001348993833,
+          "rotation": 0,
+          "target": "0-gr1"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "1-giri2",
-      "name": "giriş2",
+      "id": "2-gr3",
+      "name": "GİRİŞ3",
       "levels": [
         {
           "tileSize": 256,
@@ -74,91 +136,35 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": -1.0946124111904219,
-        "pitch": 0.021449176286326477,
+        "yaw": 0,
+        "pitch": 0,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": -0.32206242525726836,
-          "pitch": 0.3552630063162656,
-          "rotation": 0,
-          "target": "8-mutfak2"
-        },
-        {
-          "yaw": 0.8021877503839292,
-          "pitch": 0.494032004122797,
+          "yaw": -1.4033279869610276,
+          "pitch": 0.174299951319572,
           "rotation": 0,
           "target": "6-bahe"
         },
         {
-          "yaw": -2.142233823465393,
-          "pitch": 0.1573223581468639,
-          "rotation": 0,
-          "target": "0-giri1"
-        }
-      ],
-      "infoHotspots": []
-    },
-    {
-      "id": "2-giri3",
-      "name": "giriş3",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1520,
-      "initialViewParameters": {
-        "yaw": -0.9464952551847308,
-        "pitch": 0.0687316189620013,
-        "fov": 1.222445190334001
-      },
-      "linkHotspots": [
-        {
-          "yaw": -2.418161658663438,
-          "pitch": 0.4402238215582752,
-          "rotation": 0,
-          "target": "8-mutfak2"
-        },
-        {
-          "yaw": -1.3507357853306647,
-          "pitch": 0.17082958248271574,
-          "rotation": 0,
-          "target": "6-bahe"
-        },
-        {
-          "yaw": 0.011878405501708045,
-          "pitch": 0.29053631978820604,
-          "rotation": 0,
-          "target": "0-giri1"
-        },
-        {
-          "yaw": -3.0647216903440757,
-          "pitch": -0.1964505782821746,
+          "yaw": -3.09532791204742,
+          "pitch": -0.1642712645779021,
           "rotation": 5.497787143782138,
-          "target": "18-kat2"
+          "target": "18-2kat-"
+        },
+        {
+          "yaw": -2.4275382607940124,
+          "pitch": 0.4482775901616929,
+          "rotation": 0,
+          "target": "8-mutfak2"
         }
       ],
       "infoHotspots": []
     },
     {
       "id": "3-oda1",
-      "name": "oda1",
+      "name": "ODA1",
       "levels": [
         {
           "tileSize": 256,
@@ -180,29 +186,29 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": -2.1341005388521275,
-        "pitch": 0.2826380691059658,
+        "yaw": -0.9501465855380573,
+        "pitch": -0.05428698111781216,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": 1.5163012138723877,
-          "pitch": 0.3532024973288337,
+          "yaw": 1.469610569702403,
+          "pitch": 0.4839829288169675,
           "rotation": 0,
-          "target": "5-giyinme1"
+          "target": "5-gynme1"
         },
         {
-          "yaw": 2.649716618352122,
-          "pitch": 0.45802159842435763,
-          "rotation": 0,
-          "target": "18-kat2"
+          "yaw": 2.6193033847840255,
+          "pitch": 0.39542354556853176,
+          "rotation": 0.7853981633974483,
+          "target": "18-2kat-"
         }
       ],
       "infoHotspots": []
     },
     {
       "id": "4-banyo1",
-      "name": "banyo1",
+      "name": "BANYO1",
       "levels": [
         {
           "tileSize": 256,
@@ -224,67 +230,29 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": 1.737726882787742,
-        "pitch": 0.20576152567971917,
+        "yaw": 0.8119424353214182,
+        "pitch": 0.21325210937031258,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": -2.1190779317459203,
-          "pitch": 0.6443118491097888,
+          "yaw": -2.097639715867894,
+          "pitch": 0.669597721843898,
           "rotation": 0,
-          "target": "5-giyinme1"
-        }
-      ],
-      "infoHotspots": []
-    },
-    {
-      "id": "5-giyinme1",
-      "name": "giyinme1",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
+          "target": "5-gynme1"
         },
         {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1520,
-      "initialViewParameters": {
-        "yaw": -0.6767871113648525,
-        "pitch": 0.10812783010323912,
-        "fov": 1.222445190334001
-      },
-      "linkHotspots": [
-        {
-          "yaw": 0.045366668975184155,
-          "pitch": 0.5885221907767431,
-          "rotation": 0,
-          "target": "4-banyo1"
-        },
-        {
-          "yaw": 1.4591430882100624,
-          "pitch": 0.7480134038507202,
-          "rotation": 0,
+          "yaw": -2.4924319300798725,
+          "pitch": 0.6623519765262174,
+          "rotation": 5.497787143782138,
           "target": "3-oda1"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "6-bahe",
-      "name": "bahçe",
+      "id": "5-gynme1",
+      "name": "GİYİNME1",
       "levels": [
         {
           "tileSize": 256,
@@ -306,23 +274,61 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": 0.19361704226895426,
-        "pitch": 0.17434294507993187,
+        "yaw": -0.920316351164626,
+        "pitch": 0.06002956650201696,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": -2.5829777480417846,
-          "pitch": 0.20103116323638126,
+          "yaw": 0.0512490812194244,
+          "pitch": 0.6667137289018719,
           "rotation": 0,
-          "target": "1-giri2"
+          "target": "4-banyo1"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "6-bahe",
+      "name": "BAHÇE",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1520,
+      "initialViewParameters": {
+        "yaw": 0.45594950422253966,
+        "pitch": 0.1591881943186788,
+        "fov": 1.222445190334001
+      },
+      "linkHotspots": [
+        {
+          "yaw": -2.6336413097095512,
+          "pitch": 0.3420263004185742,
+          "rotation": 0,
+          "target": "0-gr1"
         }
       ],
       "infoHotspots": []
     },
     {
       "id": "7-mutfak1",
-      "name": "mutfak1",
+      "name": "MUTFAK1",
       "levels": [
         {
           "tileSize": 256,
@@ -344,29 +350,35 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": 3.0957882409920288,
-        "pitch": 0.0364180538889336,
+        "yaw": 0.42470835078352565,
+        "pitch": 0.027031957525810668,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": 0.4204207299290257,
-          "pitch": 0.389440977405183,
-          "rotation": 10.995574287564278,
-          "target": "0-giri1"
+          "yaw": 1.2442718097181071,
+          "pitch": 0.40099537187808565,
+          "rotation": 0,
+          "target": "1-gr2"
         },
         {
-          "yaw": -2.8906805311551516,
-          "pitch": 0.09309709525318866,
+          "yaw": 3.118514078113817,
+          "pitch": 0.23039541174177813,
           "rotation": 0,
           "target": "8-mutfak2"
+        },
+        {
+          "yaw": 2.9269905043584927,
+          "pitch": 0.12966717628047775,
+          "rotation": 5.497787143782138,
+          "target": "0-gr1"
         }
       ],
       "infoHotspots": []
     },
     {
       "id": "8-mutfak2",
-      "name": "mutfak2",
+      "name": "MUTFAK2",
       "levels": [
         {
           "tileSize": 256,
@@ -388,29 +400,29 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": -2.236618917895367,
-        "pitch": -0.005186349725303074,
+        "yaw": 0.6391444298555786,
+        "pitch": 0.0420497117068237,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": 1.277430820505291,
-          "pitch": 0.3803405349876581,
-          "rotation": 0,
-          "target": "1-giri2"
-        },
-        {
-          "yaw": 2.9348920359391997,
-          "pitch": 0.1407020785009223,
+          "yaw": -2.498866153574049,
+          "pitch": 0.40522992824123705,
           "rotation": 0,
           "target": "7-mutfak1"
+        },
+        {
+          "yaw": 0.4760087180057475,
+          "pitch": 0.4970897108827472,
+          "rotation": 0,
+          "target": "2-gr3"
         }
       ],
       "infoHotspots": []
     },
     {
       "id": "9-teras",
-      "name": "teras",
+      "name": "TERAS",
       "levels": [
         {
           "tileSize": 256,
@@ -432,54 +444,23 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": 2.254306225907399,
-        "pitch": -0.2731393547449166,
-        "fov": 1.222445190334001
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "10-banyo3",
-      "name": "banyo3",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1520,
-      "initialViewParameters": {
-        "yaw": 2.1368751546114915,
-        "pitch": 0.14662521252428462,
+        "yaw": 2.3126446003745347,
+        "pitch": 0.23885500038416296,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": -1.964035890368498,
-          "pitch": 0.7006211759384833,
-          "rotation": 0,
-          "target": "11-giyinme3"
+          "yaw": 1.8596706572783006,
+          "pitch": 0.6990260648933209,
+          "rotation": 0.7853981633974483,
+          "target": "18-2kat-"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "11-giyinme3",
-      "name": "giyinme3",
+      "id": "10-oda3",
+      "name": "ODA3",
       "levels": [
         {
           "tileSize": 256,
@@ -501,72 +482,116 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": 2.5935929871913874,
-        "pitch": -0.0027715381340485123,
+        "yaw": -0.6953558292239936,
+        "pitch": 0.09911717759465688,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": 2.0875428532241083,
-          "pitch": 0.5440572138458108,
+          "yaw": 1.4066815593249995,
+          "pitch": 0.41353151592410065,
           "rotation": 0,
-          "target": "10-banyo3"
+          "target": "11-gynme3"
         },
         {
-          "yaw": -1.170406021537696,
-          "pitch": 0.6689970986438087,
-          "rotation": 0,
-          "target": "12-oda3"
-        }
-      ],
-      "infoHotspots": []
-    },
-    {
-      "id": "12-oda3",
-      "name": "oda3",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
+          "yaw": 0.7628138875333619,
+          "pitch": 0.30568191215911256,
+          "rotation": 5.497787143782138,
+          "target": "15-oda2"
         },
         {
-          "tileSize": 512,
-          "size": 512
+          "yaw": 0.8803408857851114,
+          "pitch": 0.3996993069176842,
+          "rotation": 0.7853981633974483,
+          "target": "17-kordor"
         },
         {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1520,
-      "initialViewParameters": {
-        "yaw": -2.2836223062850713,
-        "pitch": 0.08300233463621254,
-        "fov": 1.222445190334001
-      },
-      "linkHotspots": [
-        {
-          "yaw": -0.9823732455519156,
-          "pitch": 0.3312899778686358,
+          "yaw": -1.0016062674741306,
+          "pitch": 0.3892490131907316,
           "rotation": 0,
           "target": "13-balkon"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "11-gynme3",
+      "name": "GİYİNME3",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
         },
         {
-          "yaw": 1.390789453343837,
-          "pitch": 0.32910821188681183,
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1520,
+      "initialViewParameters": {
+        "yaw": 2.884633680962838,
+        "pitch": 0.054541830346881426,
+        "fov": 1.222445190334001
+      },
+      "linkHotspots": [
+        {
+          "yaw": 1.970392051242654,
+          "pitch": 0.5836508307149,
           "rotation": 0.7853981633974483,
-          "target": "11-giyinme3"
+          "target": "12-banyo3"
         },
         {
-          "yaw": 0.8546067459229487,
-          "pitch": 0.30902189515340694,
+          "yaw": -1.2975354814209066,
+          "pitch": 0.9040047335196739,
           "rotation": 0,
-          "target": "17-koridor"
+          "target": "10-oda3"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "12-banyo3",
+      "name": "BANYO3",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1520,
+      "initialViewParameters": {
+        "yaw": 1.8480501550208004,
+        "pitch": 0.2655679186590909,
+        "fov": 1.222445190334001
+      },
+      "linkHotspots": [
+        {
+          "yaw": -1.904341052549757,
+          "pitch": 0.6745875483719139,
+          "rotation": 0,
+          "target": "11-gynme3"
         }
       ],
       "infoHotspots": []
@@ -595,29 +620,29 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": -2.180221705830826,
-        "pitch": -0.18109501158599528,
+        "yaw": -2.542878451363922,
+        "pitch": -0.03384842480606309,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": 0.7926914051188128,
-          "pitch": 0.4643942563655301,
+          "yaw": 0.74838332773869,
+          "pitch": 0.5712495332367595,
           "rotation": 0,
           "target": "15-oda2"
         },
         {
-          "yaw": 1.9622072343690729,
-          "pitch": 0.3174183517123357,
+          "yaw": 1.997340654813378,
+          "pitch": 0.30577624588773844,
           "rotation": 0,
-          "target": "12-oda3"
+          "target": "10-oda3"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "14-giyinmebanyo2",
-      "name": "giyinmebanyo2",
+      "id": "14-banyo-gynme2",
+      "name": "BANYO-GİYİNME2",
       "levels": [
         {
           "tileSize": 256,
@@ -639,14 +664,14 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": -1.8750102508176028,
-        "pitch": 0.13468981571605987,
+        "yaw": -1.5668841155240845,
+        "pitch": 0.1965633853220723,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": 2.866724868560784,
-          "pitch": 0.5387469632869024,
+          "yaw": 2.928914802431124,
+          "pitch": 0.6511828992143904,
           "rotation": 0,
           "target": "15-oda2"
         }
@@ -655,7 +680,7 @@ var APP_DATA = {
     },
     {
       "id": "15-oda2",
-      "name": "oda2",
+      "name": "ODA2",
       "levels": [
         {
           "tileSize": 256,
@@ -677,35 +702,35 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": -0.2600013931939529,
-        "pitch": 0.13215623679287347,
+        "yaw": 0.3164531251779099,
+        "pitch": -0.05706746588781364,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": -2.146379799417428,
-          "pitch": 0.1286840460214549,
+          "yaw": 1.163327454733654,
+          "pitch": 0.44514902318390526,
+          "rotation": 0,
+          "target": "14-banyo-gynme2"
+        },
+        {
+          "yaw": -1.9777558527428223,
+          "pitch": 0.4744471296974524,
           "rotation": 0,
           "target": "13-balkon"
         },
         {
-          "yaw": 1.1462949387244539,
-          "pitch": 0.2995642342133671,
-          "rotation": 5.497787143782138,
-          "target": "14-giyinmebanyo2"
-        },
-        {
-          "yaw": 2.412204289238309,
-          "pitch": 0.2543952787853172,
+          "yaw": 2.42160324972376,
+          "pitch": 0.3147513247642806,
           "rotation": 0,
-          "target": "17-koridor"
+          "target": "17-kordor"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "16-amar-odas",
-      "name": "çamaşır odası",
+      "id": "16-amairodasi",
+      "name": "ÇAMAŞIRODASI",
       "levels": [
         {
           "tileSize": 256,
@@ -727,23 +752,23 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": -0.4629637688224424,
-        "pitch": -0.5808767275484641,
+        "yaw": -0.033217188344162096,
+        "pitch": -0.5263660761018887,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": -2.6834474235386594,
-          "pitch": 0.7681435405554744,
+          "yaw": -2.869802515342341,
+          "pitch": 0.8418814747643459,
           "rotation": 0,
-          "target": "17-koridor"
+          "target": "17-kordor"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "17-koridor",
-      "name": "koridor",
+      "id": "17-kordor",
+      "name": "KORİDOR",
       "levels": [
         {
           "tileSize": 256,
@@ -765,41 +790,41 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": -0.6079158746509314,
-        "pitch": 0.1321229875687866,
+        "yaw": -0.17169456067303024,
+        "pitch": 0.09617331765910464,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": 1.1213420085057777,
-          "pitch": 0.323448123903626,
-          "rotation": 5.497787143782138,
-          "target": "16-amar-odas"
+          "yaw": 1.947848114331478,
+          "pitch": 0.513623204970429,
+          "rotation": 12.566370614359176,
+          "target": "18-2kat-"
         },
         {
-          "yaw": -0.4607568729063942,
-          "pitch": 0.12483071702258641,
+          "yaw": 1.1627191897490459,
+          "pitch": 0.7640460340129565,
+          "rotation": 0,
+          "target": "16-amairodasi"
+        },
+        {
+          "yaw": -0.48195788076990276,
+          "pitch": 0.6354812647071739,
           "rotation": 0.7853981633974483,
           "target": "15-oda2"
         },
         {
-          "yaw": -1.0384382277658553,
-          "pitch": 0.0947264101084464,
-          "rotation": 5.497787143782138,
-          "target": "12-oda3"
-        },
-        {
-          "yaw": 2.0204407314741006,
-          "pitch": 0.2913777050360302,
+          "yaw": -1.0450808166977588,
+          "pitch": 0.40225056596304753,
           "rotation": 0,
-          "target": "18-kat2"
+          "target": "10-oda3"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "18-kat2",
-      "name": "kat2",
+      "id": "18-2kat-",
+      "name": "2.KAT ",
       "levels": [
         {
           "tileSize": 256,
@@ -821,50 +846,44 @@ var APP_DATA = {
       ],
       "faceSize": 1520,
       "initialViewParameters": {
-        "yaw": 0.3189876630393993,
-        "pitch": 0.030478016058061996,
+        "yaw": -0.3164457305623163,
+        "pitch": 0.024028406689609483,
         "fov": 1.222445190334001
       },
       "linkHotspots": [
         {
-          "yaw": -0.6618884187270986,
-          "pitch": 0.43280515487002447,
-          "rotation": 4.71238898038469,
-          "target": "9-teras"
-        },
-        {
-          "yaw": 1.9834759307828271,
-          "pitch": 0.6768873956059007,
-          "rotation": 0.7853981633974483,
+          "yaw": 1.984660410476656,
+          "pitch": 0.6544608284358837,
+          "rotation": 0,
           "target": "3-oda1"
         },
         {
-          "yaw": -0.3498265119197743,
-          "pitch": 0.2983688635051127,
-          "rotation": 0.7853981633974483,
-          "target": "16-amar-odas"
-        },
-        {
-          "yaw": -2.035288950372573,
-          "pitch": 0.7594522505173593,
+          "yaw": -0.39065355083942777,
+          "pitch": 0.34273022679643006,
           "rotation": 0,
-          "target": "2-giri3"
+          "target": "17-kordor"
         },
         {
-          "yaw": -0.49889297486733497,
-          "pitch": 0.19786365868855782,
-          "rotation": 6.283185307179586,
-          "target": "17-koridor"
+          "yaw": -1.2518407513417635,
+          "pitch": -0.07650061760310933,
+          "rotation": 5.497787143782138,
+          "target": "9-teras"
+        },
+        {
+          "yaw": -2.2630778914841905,
+          "pitch": 0.7153969969608838,
+          "rotation": 0.7853981633974483,
+          "target": "2-gr3"
         }
       ],
       "infoHotspots": []
     }
   ],
-  "name": "Project Title",
+  "name": "ŞİRİNKÖYVİLLA",
   "settings": {
     "mouseViewMode": "drag",
     "autorotateEnabled": true,
-    "fullscreenButton": true,
-    "viewControlButtons": true
+    "fullscreenButton": false,
+    "viewControlButtons": false
   }
 };
