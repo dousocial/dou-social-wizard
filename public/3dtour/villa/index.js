@@ -29,10 +29,6 @@
   var sceneListToggleElement = document.querySelector('#sceneListToggle');
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
-  var sceneTransitionElement = document.querySelector('#sceneTransition');
-  var sceneTransitionTimer = null;
-  var sceneTransitionCleanupTimer = null;
-  var sceneTransitionActive = false;
 
   // Detect desktop or mobile mode.
   if (window.matchMedia) {
@@ -229,14 +225,6 @@
   }
 
   function switchScene(scene) {
-    if (document.body.classList.contains('mobile')) {
-      switchSceneWithMobileTransition(scene);
-      return;
-    }
-    applySceneSwitch(scene);
-  }
-
-  function applySceneSwitch(scene) {
     stopAutorotate();
     scene.view.setParameters(scene.data.initialViewParameters);
     scene.scene.switchTo();
@@ -247,34 +235,6 @@
 
   function updateSceneName(scene) {
     sceneNameElement.innerHTML = sanitize(scene.data.name);
-  }
-
-  function switchSceneWithMobileTransition(scene) {
-    if (sceneTransitionActive) {
-      return;
-    }
-
-    sceneTransitionActive = true;
-    preloadInitialScene(scene.data);
-
-    document.body.classList.remove('scene-transition');
-    if (sceneTransitionElement) {
-      // Restart the CSS animation for each scene change.
-      void sceneTransitionElement.offsetWidth;
-    }
-    document.body.classList.add('scene-transition');
-
-    clearTimeout(sceneTransitionTimer);
-    clearTimeout(sceneTransitionCleanupTimer);
-
-    sceneTransitionTimer = window.setTimeout(function() {
-      applySceneSwitch(scene);
-    }, 170);
-
-    sceneTransitionCleanupTimer = window.setTimeout(function() {
-      document.body.classList.remove('scene-transition');
-      sceneTransitionActive = false;
-    }, 620);
   }
 
   function updateSceneList(scene) {
