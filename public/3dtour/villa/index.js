@@ -29,10 +29,11 @@
   var sceneListToggleElement = document.querySelector('#sceneListToggle');
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
-  var tourLoaderElement = document.querySelector('#tourLoader');
-  var tourLoaderStatusElement = document.querySelector('#tourLoaderStatus');
-  var tourLoaderBarElement = document.querySelector('#tourLoaderBar');
   var cubeFaces = [ 'b', 'd', 'f', 'l', 'r', 'u' ];
+  var preloadedAssets = {};
+  var preloadQueue = [];
+  var preloadActive = 0;
+  var preloadTimer = null;
 
   // Detect desktop or mobile mode.
   if (window.matchMedia) {
@@ -186,55 +187,29 @@
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
   }
 
-  function updateTourLoader(completed, total) {
-    if (!tourLoaderElement) {
-      return;
-    }
-    var safeTotal = Math.max(total || 0, 1);
-    var percent = Math.round((completed / safeTotal) * 100);
-    tourLoaderStatusElement.textContent = "Odalar yukleniyor... " + completed + "/" + total + " (" + percent + "%)";
-    tourLoaderBarElement.style.width = percent + "%";
-  }
-
-  function hideTourLoader() {
-    if (!tourLoaderElement) {
-      return;
-    }
-    tourLoaderElement.classList.remove('enabled');
-  }
-
-  function buildScenePreloadList() {
+  function buildSceneAssetList(sceneData, maxLevels) {
     var urls = [];
-    var seen = {};
+    var loadedLevels = 0;
+    var z = 1;
 
-    data.scenes.forEach(function(sceneData) {
-      var previewUrl = "tiles/" + sceneData.id + "/preview.jpg";
-      if (!seen[previewUrl]) {
-        urls.push(previewUrl);
-        seen[previewUrl] = true;
+    urls.push("tiles/" + sceneData.id + "/preview.jpg");
+
+    sceneData.levels.forEach(function(level) {
+      if (level.fallbackOnly || loadedLevels >= maxLevels) {
+        return;
       }
 
-      var z = 1;
-      sceneData.levels.forEach(function(level) {
-        if (level.fallbackOnly) {
-          return;
-        }
-
-        var tilesPerAxis = Math.ceil(level.size / level.tileSize);
-        cubeFaces.forEach(function(face) {
-          for (var y = 0; y < tilesPerAxis; y++) {
-            for (var x = 0; x < tilesPerAxis; x++) {
-              var url = "tiles/" + sceneData.id + "/" + z + "/" + face + "/" + y + "/" + x + ".jpg";
-              if (!seen[url]) {
-                urls.push(url);
-                seen[url] = true;
-              }
-            }
+      var tilesPerAxis = Math.ceil(level.size / level.tileSize);
+      cubeFaces.forEach(function(face) {
+        for (var y = 0; y < tilesPerAxis; y++) {
+          for (var x = 0; x < tilesPerAxis; x++) {
+            urls.push("tiles/" + sceneData.id + "/" + z + "/" + face + "/" + y + "/" + x + ".jpg");
           }
-        });
-
-        z += 1;
+        }
       });
+
+      loadedLevels += 1;
+      z += 1;
     });
 
     return urls;
@@ -264,41 +239,71 @@
     }
   }
 
-  function preloadAllScenes(urls) {
-    var concurrency = document.body.classList.contains('mobile') ? 6 : 12;
-    var total = urls.length;
-    var nextIndex = 0;
-    var completed = 0;
-    var active = 0;
+  function enqueueAsset(url) {
+    if (preloadedAssets[url]) {
+      return;
+    }
+    preloadedAssets[url] = true;
+    preloadQueue.push(url);
+  }
 
-    updateTourLoader(0, total);
+  function enqueueSceneAssets(sceneData, maxLevels) {
+    var urls = buildSceneAssetList(sceneData, maxLevels);
+    for (var i = 0; i < urls.length; i++) {
+      enqueueAsset(urls[i]);
+    }
+  }
 
-    return new Promise(function(resolve) {
-      function step() {
-        if (completed >= total) {
-          resolve();
-          return;
-        }
+  function pumpPreloadQueue() {
+    var concurrency = document.body.classList.contains('mobile') ? 2 : 4;
 
-        while (active < concurrency && nextIndex < total) {
-          active += 1;
-          preloadImage(urls[nextIndex], function() {
-            active -= 1;
-            completed += 1;
-            updateTourLoader(completed, total);
-            step();
-          });
-          nextIndex += 1;
-        }
-      }
+    while (preloadActive < concurrency && preloadQueue.length) {
+      preloadActive += 1;
+      preloadImage(preloadQueue.shift(), function() {
+        preloadActive -= 1;
+        pumpPreloadQueue();
+      });
+    }
+  }
 
-      if (!total) {
-        resolve();
+  function schedulePreloadPump() {
+    if (preloadTimer) {
+      window.clearTimeout(preloadTimer);
+    }
+    preloadTimer = window.setTimeout(function() {
+      preloadTimer = null;
+      pumpPreloadQueue();
+    }, document.body.classList.contains('mobile') ? 500 : 250);
+  }
+
+  function queueScenePrefetch(scene) {
+    var linkedSceneIds = {};
+    var currentSceneLevels = document.body.classList.contains('mobile') ? 1 : 2;
+
+    enqueueSceneAssets(scene.data, currentSceneLevels);
+
+    scene.data.linkHotspots.forEach(function(hotspot) {
+      var targetSceneData = findSceneDataById(hotspot.target);
+      if (!targetSceneData || linkedSceneIds[targetSceneData.id]) {
         return;
       }
 
-      step();
+      linkedSceneIds[targetSceneData.id] = true;
+      enqueueSceneAssets(targetSceneData, 1);
+
+      targetSceneData.linkHotspots.forEach(function(nextHotspot) {
+        var nextSceneData = findSceneDataById(nextHotspot.target);
+        if (nextSceneData) {
+          enqueueSceneAssets(nextSceneData, 0);
+        }
+      });
     });
+
+    data.scenes.forEach(function(sceneData) {
+      enqueueSceneAssets(sceneData, 0);
+    });
+
+    schedulePreloadPump();
   }
 
   function switchScene(scene) {
@@ -308,6 +313,7 @@
     startAutorotate();
     updateSceneName(scene);
     updateSceneList(scene);
+    queueScenePrefetch(scene);
   }
 
   function updateSceneName(scene) {
@@ -505,11 +511,8 @@
     return null;
   }
 
-  // Preload scene tiles before showing the tour so scene changes do not
-  // trigger visible tile-by-tile rendering on slower connections.
-  preloadAllScenes(buildScenePreloadList()).then(function() {
-    switchScene(scenes[0]);
-    hideTourLoader();
-  });
+  // Show the first scene immediately, then warm up likely next scenes in
+  // the background so mobile users do not sit on a long blocking splash.
+  switchScene(scenes[0]);
 
 })();
