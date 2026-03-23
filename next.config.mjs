@@ -18,6 +18,10 @@ const nextConfig = {
         source: "/3dtour/ikizvilla",
         destination: "/3dtour/ikizvilla/index.html",
       },
+      {
+        source: "/3dtour/villa",
+        destination: "/3dtour/villa/index.html",
+      },
     ];
   },
 };
