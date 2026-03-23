@@ -64,6 +64,9 @@
   var viewerOpts = {
     controls: {
       mouseViewMode: data.settings.mouseViewMode
+    },
+    stage: {
+      preserveDrawingBuffer: true
     }
   };
 
@@ -224,10 +227,56 @@
     img.src = url;
   }
 
+  // Track whether this is the very first scene load (no overlay needed).
+  var isFirstScene = true;
+
   function switchScene(scene) {
     updateSceneName(scene);
     updateSceneList(scene);
+
+    if (isFirstScene) {
+      // First scene: switch immediately, no overlay needed.
+      isFirstScene = false;
+      stopAutorotate();
+      scene.view.setParameters(scene.data.initialViewParameters);
+      scene.scene.switchTo();
+      startAutorotate();
+      // Preload adjacent scenes in background after initial load.
+      preloadAdjacentScenes(scene);
+      return;
+    }
+
     loadSceneThenSwitch(scene);
+  }
+
+  function createOverlayFromCanvas() {
+    var canvas = panoElement.querySelector('canvas');
+    if (!canvas) return null;
+
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;' +
+      'background-size:cover;background-position:center;' +
+      'transition:opacity 0.4s ease-out;opacity:1;pointer-events:none;';
+
+    try {
+      overlay.style.backgroundImage = 'url(' + canvas.toDataURL('image/jpeg', 0.85) + ')';
+    } catch (e) {
+      // Canvas tainted or unavailable - use solid background fallback.
+      overlay.style.background = '#000';
+    }
+
+    panoElement.appendChild(overlay);
+    return overlay;
+  }
+
+  function removeOverlay(overlay) {
+    if (!overlay) return;
+    overlay.style.opacity = '0';
+    setTimeout(function() {
+      if (overlay.parentNode) {
+        overlay.parentNode.removeChild(overlay);
+      }
+    }, 450);
   }
 
   function loadSceneThenSwitch(scene) {
@@ -236,14 +285,39 @@
     var pending = 0;
     var done = false;
 
+    // Capture current view as overlay before switching.
+    var overlay = createOverlayFromCanvas();
+
     function onAllLoaded() {
       if (done) return;
       done = true;
       stopAutorotate();
       scene.view.setParameters(sceneData.initialViewParameters);
       scene.scene.switchTo();
-      startAutorotate();
+
+      // Give Marzipano a few frames to render tiles from cache into WebGL textures,
+      // then fade out the overlay to reveal the fully-rendered scene.
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          removeOverlay(overlay);
+          startAutorotate();
+        });
+      });
+
+      // Preload adjacent scenes in background.
+      preloadAdjacentScenes(scene);
     }
+
+    // Safety timeout: if tiles take too long, switch anyway after 3 seconds.
+    var timeout = setTimeout(function() {
+      onAllLoaded();
+    }, 3000);
+
+    var originalOnAllLoaded = onAllLoaded;
+    onAllLoaded = function() {
+      clearTimeout(timeout);
+      originalOnAllLoaded();
+    };
 
     function loadImage(url) {
       pending++;
@@ -279,6 +353,22 @@
         }
       });
     }
+  }
+
+  // Preload tiles for scenes linked from the current scene.
+  function preloadAdjacentScenes(currentScene) {
+    var hotspots = currentScene.data.linkHotspots;
+    if (!hotspots || !hotspots.length) return;
+
+    var delay = 500;
+    hotspots.forEach(function(hotspot, index) {
+      setTimeout(function() {
+        var targetData = findSceneDataById(hotspot.target);
+        if (targetData) {
+          preloadInitialScene(targetData);
+        }
+      }, delay * (index + 1));
+    });
   }
 
   function updateSceneName(scene) {
