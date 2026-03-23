@@ -20,6 +20,7 @@
   var bowser = window.bowser;
   var screenfull = window.screenfull;
   var data = window.APP_DATA;
+  var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
 
   // Grab elements from DOM.
   var panoElement = document.querySelector('#pano');
@@ -34,6 +35,10 @@
   var preloadQueue = [];
   var preloadActive = 0;
   var preloadTimer = null;
+  var activeSceneId = null;
+  var mobilePreviewPrefetchTimer = null;
+  var mobileTilePrefetchTimer = null;
+  var lastInteractionAt = Date.now();
 
   // Detect desktop or mobile mode.
   if (window.matchMedia) {
@@ -58,6 +63,15 @@
   window.addEventListener('touchstart', function() {
     document.body.classList.remove('no-touch');
     document.body.classList.add('touch');
+  });
+  [ 'touchstart', 'pointerdown', 'mousedown', 'wheel' ].forEach(function(eventName) {
+    window.addEventListener(eventName, markInteractionTime);
+  });
+
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden && preloadQueue.length) {
+      schedulePreloadPump();
+    }
   });
 
   // Use tooltip fallback mode on IE < 11.
@@ -187,6 +201,38 @@
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
   }
 
+  function isMobileMode() {
+    return document.body.classList.contains('mobile');
+  }
+
+  function isConstrainedConnection() {
+    if (!connection) {
+      return false;
+    }
+
+    return Boolean(connection.saveData) || /(^slow-2g$|^2g$|^3g$)/.test(connection.effectiveType || '');
+  }
+
+  function markInteractionTime() {
+    lastInteractionAt = Date.now();
+  }
+
+  function getMobileIdleWindow() {
+    return isConstrainedConnection() ? 1800 : 1200;
+  }
+
+  function clearMobilePrefetchTimers() {
+    if (mobilePreviewPrefetchTimer) {
+      window.clearTimeout(mobilePreviewPrefetchTimer);
+      mobilePreviewPrefetchTimer = null;
+    }
+
+    if (mobileTilePrefetchTimer) {
+      window.clearTimeout(mobileTilePrefetchTimer);
+      mobileTilePrefetchTimer = null;
+    }
+  }
+
   function buildSceneAssetList(sceneData, maxLevels) {
     var urls = [];
     var loadedLevels = 0;
@@ -255,7 +301,11 @@
   }
 
   function pumpPreloadQueue() {
-    var concurrency = document.body.classList.contains('mobile') ? 2 : 4;
+    var concurrency = isMobileMode() ? 1 : 4;
+
+    if (document.hidden) {
+      return;
+    }
 
     while (preloadActive < concurrency && preloadQueue.length) {
       preloadActive += 1;
@@ -273,22 +323,29 @@
     preloadTimer = window.setTimeout(function() {
       preloadTimer = null;
       pumpPreloadQueue();
-    }, document.body.classList.contains('mobile') ? 500 : 250);
+    }, isMobileMode() ? 750 : 250);
   }
 
-  function queueScenePrefetch(scene) {
+  function forEachLinkedScene(sceneData, callback) {
     var linkedSceneIds = {};
-    var currentSceneLevels = document.body.classList.contains('mobile') ? 1 : 2;
 
-    enqueueSceneAssets(scene.data, currentSceneLevels);
-
-    scene.data.linkHotspots.forEach(function(hotspot) {
+    sceneData.linkHotspots.forEach(function(hotspot) {
       var targetSceneData = findSceneDataById(hotspot.target);
       if (!targetSceneData || linkedSceneIds[targetSceneData.id]) {
         return;
       }
 
       linkedSceneIds[targetSceneData.id] = true;
+      callback(targetSceneData);
+    });
+  }
+
+  function queueDesktopScenePrefetch(scene) {
+    var currentSceneLevels = 2;
+
+    enqueueSceneAssets(scene.data, currentSceneLevels);
+
+    forEachLinkedScene(scene.data, function(targetSceneData) {
       enqueueSceneAssets(targetSceneData, 1);
 
       targetSceneData.linkHotspots.forEach(function(nextHotspot) {
@@ -306,7 +363,80 @@
     schedulePreloadPump();
   }
 
+  function scheduleMobilePreviewPrefetch(scene) {
+    var sceneId = scene.data.id;
+    var delay = isConstrainedConnection() ? 1800 : 1200;
+
+    function run() {
+      if (sceneId !== activeSceneId || document.hidden) {
+        mobilePreviewPrefetchTimer = null;
+        return;
+      }
+
+      if (Date.now() - lastInteractionAt < getMobileIdleWindow()) {
+        mobilePreviewPrefetchTimer = window.setTimeout(run, getMobileIdleWindow());
+        return;
+      }
+
+      mobilePreviewPrefetchTimer = null;
+
+      forEachLinkedScene(scene.data, function(targetSceneData) {
+        enqueueSceneAssets(targetSceneData, 0);
+      });
+
+      schedulePreloadPump();
+    }
+
+    mobilePreviewPrefetchTimer = window.setTimeout(run, delay);
+  }
+
+  function scheduleMobileTilePrefetch(scene) {
+    var sceneId = scene.data.id;
+    var delay = isConstrainedConnection() ? 5000 : 3500;
+
+    function run() {
+      if (sceneId !== activeSceneId || document.hidden) {
+        mobileTilePrefetchTimer = null;
+        return;
+      }
+
+      if (Date.now() - lastInteractionAt < getMobileIdleWindow()) {
+        mobileTilePrefetchTimer = window.setTimeout(run, getMobileIdleWindow());
+        return;
+      }
+
+      mobileTilePrefetchTimer = null;
+
+      forEachLinkedScene(scene.data, function(targetSceneData) {
+        enqueueSceneAssets(targetSceneData, 1);
+      });
+
+      schedulePreloadPump();
+    }
+
+    mobileTilePrefetchTimer = window.setTimeout(run, delay);
+  }
+
+  function queueMobileScenePrefetch(scene) {
+    clearMobilePrefetchTimers();
+    scheduleMobilePreviewPrefetch(scene);
+
+    if (!isConstrainedConnection()) {
+      scheduleMobileTilePrefetch(scene);
+    }
+  }
+
+  function queueScenePrefetch(scene) {
+    if (isMobileMode()) {
+      queueMobileScenePrefetch(scene);
+      return;
+    }
+
+    queueDesktopScenePrefetch(scene);
+  }
+
   function switchScene(scene) {
+    activeSceneId = scene.data.id;
     stopAutorotate();
     scene.view.setParameters(scene.data.initialViewParameters);
     scene.scene.switchTo();
@@ -350,6 +480,13 @@
     if (!autorotateToggleElement.classList.contains('enabled')) {
       return;
     }
+
+    if (isMobileMode()) {
+      viewer.stopMovement();
+      viewer.setIdleMovement(6000, autorotate);
+      return;
+    }
+
     viewer.startMovement(autorotate);
     viewer.setIdleMovement(3000, autorotate);
   }
