@@ -225,12 +225,60 @@
   }
 
   function switchScene(scene) {
-    stopAutorotate();
-    scene.view.setParameters(scene.data.initialViewParameters);
-    scene.scene.switchTo();
-    startAutorotate();
     updateSceneName(scene);
     updateSceneList(scene);
+    loadSceneThenSwitch(scene);
+  }
+
+  function loadSceneThenSwitch(scene) {
+    var sceneData = scene.data;
+    var urlPrefix = "tiles";
+    var pending = 0;
+    var done = false;
+
+    function onAllLoaded() {
+      if (done) return;
+      done = true;
+      stopAutorotate();
+      scene.view.setParameters(sceneData.initialViewParameters);
+      scene.scene.switchTo();
+      startAutorotate();
+    }
+
+    function loadImage(url) {
+      pending++;
+      var img = new Image();
+      img.onload = img.onerror = function() {
+        pending--;
+        if (pending === 0) onAllLoaded();
+      };
+      img.src = url;
+    }
+
+    // Preview + 1024 level tiles
+    loadImage(urlPrefix + "/" + sceneData.id + "/preview.jpg");
+
+    var preferredLevel = null;
+    for (var i = sceneData.levels.length - 1; i >= 0; i--) {
+      var level = sceneData.levels[i];
+      if (!level.fallbackOnly && level.size <= 1024) {
+        preferredLevel = level;
+        break;
+      }
+    }
+
+    if (preferredLevel) {
+      var tilesPerAxis = Math.max(1, preferredLevel.size / preferredLevel.tileSize);
+      var z = preferredLevel.size / 512;
+      var faces = ['r', 'u', 'f', 'd', 'b', 'l'];
+      faces.forEach(function(face) {
+        for (var y = 0; y < tilesPerAxis; y++) {
+          for (var x = 0; x < tilesPerAxis; x++) {
+            loadImage(urlPrefix + "/" + sceneData.id + "/" + z + "/" + face + "/" + y + "/" + x + ".jpg");
+          }
+        }
+      });
+    }
   }
 
   function updateSceneName(scene) {
@@ -430,18 +478,5 @@
 
   // Display the initial scene.
   switchScene(scenes[0]);
-
-  // Diğer sahnelerin tile'larını arka planda preload et.
-  // İlk sahne render edildikten sonra başla, her sahne arasında 400ms bekle.
-  setTimeout(function() {
-    var index = 1;
-    function preloadNext() {
-      if (index >= data.scenes.length) return;
-      preloadInitialScene(data.scenes[index]);
-      index++;
-      setTimeout(preloadNext, 400);
-    }
-    preloadNext();
-  }, 1500);
 
 })();
