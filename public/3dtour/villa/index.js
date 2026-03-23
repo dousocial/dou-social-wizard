@@ -431,4 +431,17 @@
   // Display the initial scene.
   switchScene(scenes[0]);
 
+  // Diğer sahnelerin tile'larını arka planda preload et.
+  // İlk sahne render edildikten sonra başla, her sahne arasında 400ms bekle.
+  setTimeout(function() {
+    var index = 1;
+    function preloadNext() {
+      if (index >= data.scenes.length) return;
+      preloadInitialScene(data.scenes[index]);
+      index++;
+      setTimeout(preloadNext, 400);
+    }
+    preloadNext();
+  }, 1500);
+
 })();
