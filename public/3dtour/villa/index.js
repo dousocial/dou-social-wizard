@@ -29,6 +29,10 @@
   var sceneListToggleElement = document.querySelector('#sceneListToggle');
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
+  var tourLoaderElement = document.querySelector('#tourLoader');
+  var tourLoaderStatusElement = document.querySelector('#tourLoaderStatus');
+  var tourLoaderBarElement = document.querySelector('#tourLoaderBar');
+  var cubeFaces = [ 'b', 'd', 'f', 'l', 'r', 'u' ];
 
   // Detect desktop or mobile mode.
   if (window.matchMedia) {
@@ -180,6 +184,121 @@
 
   function sanitize(s) {
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
+  }
+
+  function updateTourLoader(completed, total) {
+    if (!tourLoaderElement) {
+      return;
+    }
+    var safeTotal = Math.max(total || 0, 1);
+    var percent = Math.round((completed / safeTotal) * 100);
+    tourLoaderStatusElement.textContent = "Odalar yukleniyor... " + completed + "/" + total + " (" + percent + "%)";
+    tourLoaderBarElement.style.width = percent + "%";
+  }
+
+  function hideTourLoader() {
+    if (!tourLoaderElement) {
+      return;
+    }
+    tourLoaderElement.classList.remove('enabled');
+  }
+
+  function buildScenePreloadList() {
+    var urls = [];
+    var seen = {};
+
+    data.scenes.forEach(function(sceneData) {
+      var previewUrl = "tiles/" + sceneData.id + "/preview.jpg";
+      if (!seen[previewUrl]) {
+        urls.push(previewUrl);
+        seen[previewUrl] = true;
+      }
+
+      var z = 1;
+      sceneData.levels.forEach(function(level) {
+        if (level.fallbackOnly) {
+          return;
+        }
+
+        var tilesPerAxis = Math.ceil(level.size / level.tileSize);
+        cubeFaces.forEach(function(face) {
+          for (var y = 0; y < tilesPerAxis; y++) {
+            for (var x = 0; x < tilesPerAxis; x++) {
+              var url = "tiles/" + sceneData.id + "/" + z + "/" + face + "/" + y + "/" + x + ".jpg";
+              if (!seen[url]) {
+                urls.push(url);
+                seen[url] = true;
+              }
+            }
+          }
+        });
+
+        z += 1;
+      });
+    });
+
+    return urls;
+  }
+
+  function preloadImage(url, done) {
+    var img = new Image();
+    var settled = false;
+    var timeoutId = window.setTimeout(finalize, 15000);
+
+    function finalize() {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      window.clearTimeout(timeoutId);
+      img.onload = null;
+      img.onerror = null;
+      done();
+    }
+
+    img.onload = finalize;
+    img.onerror = finalize;
+    img.src = url;
+    if (img.complete) {
+      window.setTimeout(finalize, 0);
+    }
+  }
+
+  function preloadAllScenes(urls) {
+    var concurrency = document.body.classList.contains('mobile') ? 6 : 12;
+    var total = urls.length;
+    var nextIndex = 0;
+    var completed = 0;
+    var active = 0;
+
+    updateTourLoader(0, total);
+
+    return new Promise(function(resolve) {
+      function step() {
+        if (completed >= total) {
+          resolve();
+          return;
+        }
+
+        while (active < concurrency && nextIndex < total) {
+          active += 1;
+          preloadImage(urls[nextIndex], function() {
+            active -= 1;
+            completed += 1;
+            updateTourLoader(completed, total);
+            step();
+          });
+          nextIndex += 1;
+        }
+      }
+
+      if (!total) {
+        resolve();
+        return;
+      }
+
+      step();
+    });
   }
 
   function switchScene(scene) {
@@ -386,7 +505,11 @@
     return null;
   }
 
-  // Display the initial scene.
-  switchScene(scenes[0]);
+  // Preload scene tiles before showing the tour so scene changes do not
+  // trigger visible tile-by-tile rendering on slower connections.
+  preloadAllScenes(buildScenePreloadList()).then(function() {
+    switchScene(scenes[0]);
+    hideTourLoader();
+  });
 
 })();
