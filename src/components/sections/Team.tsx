@@ -65,7 +65,7 @@ function MemberCard({ member, index }: { member: typeof TEAM[number]; index: num
             <img
               src={member.photo}
               alt={member.name}
-              className="h-full w-full object-cover grayscale transition-all duration-300 group-hover:grayscale-0"
+              className="h-full w-full object-cover transition-all duration-300 md:grayscale md:group-hover:grayscale-0"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-mute-100 to-mute-200">
