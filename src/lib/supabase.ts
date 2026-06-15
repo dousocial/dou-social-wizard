@@ -1,6 +1,24 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const url  = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const key  = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyClient = SupabaseClient<any>;
 
-export const supabase = createClient(url, key);
+let _client: AnyClient | null = null;
+
+function getClient(): AnyClient {
+  if (!_client) {
+    _client = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+  }
+  return _client;
+}
+
+// Lazy proxy: createClient is deferred until first use so module import
+// during Next.js build does not throw when env vars are absent.
+export const supabase: AnyClient = new Proxy({} as AnyClient, {
+  get(_, prop: string | symbol) {
+    return Reflect.get(getClient(), prop, getClient());
+  },
+});
