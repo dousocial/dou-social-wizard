@@ -1,0 +1,2319 @@
+{
+  "Hero": {
+    "titleBefore": "The ads you see?",
+    "titleHighlight": "We",
+    "titleAfter": "designed them.",
+    "subtitle": "Meta Ads, social media management, content creation and brand strategy. We make your ad spend more efficient and your brand more visible.",
+    "ctaPrimary": "Get a free analysis",
+    "ctaSecondary": "See our projects"
+  },
+  "Meta": {
+    "siteTitle": "DOU Social — The digital team that grows your brand",
+    "siteDescription": "Meta Ads, social media and content management. Denizli-based, nationwide digital growth agency. Measurable results, transparent process."
+  },
+  "Nav": {
+    "services": "Services",
+    "projects": "Work",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "cta": "Free analysis",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "ClientLogos": {
+    "eyebrow": "Our Clients",
+    "title": "Brands that trust us."
+  },
+  "Services": {
+    "eyebrow": "Services",
+    "title": "Everything you need to grow.",
+    "subtitle": "From advertising to content, web design to brand strategy — we manage all digital channels through a single, cohesive operation.",
+    "more": "Learn more",
+    "allServices": "View all services",
+    "sosyal-medya-marka": {
+      "title": "Social Media & Brand Management",
+      "description": "Strategic content planning, community management and brand communications to strengthen your digital presence."
+    },
+    "meta-reklamlari": {
+      "title": "Meta Ads Management",
+      "description": "Precise targeting, optimised budget usage and measurable results across Instagram and Facebook."
+    },
+    "icerik-video": {
+      "title": "Content Production & Video",
+      "description": "Photography, video and creative content tailored to your brand — building standout digital experiences."
+    },
+    "performans-pazarlama": {
+      "title": "Performance Marketing",
+      "description": "Data-driven ad strategies delivering more conversions, higher ROI and sustainable growth."
+    }
+  },
+  "HowWeWork": {
+    "eyebrow": "HOW WE WORK",
+    "title": "Strategic planning, measurable growth.",
+    "discover": {
+      "title": "Analysis",
+      "description": "We examine your brand, industry and competitors in detail. We analyse your digital assets to identify growth opportunities and areas for improvement."
+    },
+    "strategy": {
+      "title": "Strategy",
+      "description": "We build a content, advertising and growth plan tailored to your goals. We define clear KPIs for each channel and shape the roadmap together."
+    },
+    "execute": {
+      "title": "Production & Launch",
+      "description": "We prepare professional shoots, creative designs and performance-driven ad campaigns. All processes move through an approval mechanism and are reported regularly."
+    },
+    "scale": {
+      "title": "Optimisation & Scaling",
+      "description": "We analyse data, scale high-performing strategies and manage your budget as efficiently as possible. The goal: more visibility, more customers and sustainable growth."
+    }
+  },
+  "Metrics": {
+    "roas": "Average return on ad spend (ROAS)",
+    "cpl": "Reduction in cost-per-lead per campaign",
+    "engagement": "Lift in organic engagement",
+    "brands": "Brands we've worked with"
+  },
+  "CaseStudies": {
+    "eyebrow": "Work",
+    "title": "Results speak for themselves.",
+    "viewAll": "All projects",
+    "case1": {
+      "industry": "E-commerce",
+      "title": "E-commerce conversion rate grew by 3.4×",
+      "metric": "Meta Ads + landing optimization"
+    },
+    "case2": {
+      "industry": "B2B services",
+      "title": "Cost per lead reduced by 58%",
+      "metric": "LinkedIn + Google Ads strategy"
+    },
+    "case3": {
+      "industry": "Restaurant",
+      "title": "Branch visits doubled in three months",
+      "metric": "Local SEO + Instagram content"
+    }
+  },
+  "LeadMagnet": {
+    "eyebrow": "Free",
+    "title": "A free analysis of your digital presence.",
+    "subtitle": "Are there improvement opportunities in your ad account, Instagram profile or LinkedIn presence? Evaluate it in 15 minutes.",
+    "cta": "Get my Check-Up",
+    "note": "Email only. No sign-up required, PDF delivered instantly.",
+    "instagram": {
+      "title": "Instagram audit",
+      "description": "Bio, content mix, engagement rate and hashtag strategy — fast wins to grab."
+    },
+    "ads": {
+      "title": "Ad mistake scanner",
+      "description": "On average 30% of ad budgets leak from setup mistakes. Which line items are at risk for you?"
+    },
+    "linkedin": {
+      "title": "LinkedIn opportunities",
+      "description": "Quick fixes for company page, personal profile and content calendar."
+    }
+  },
+  "FinalCTA": {
+    "title": "Let's grow together.",
+    "subtitle": "In a free 30-minute strategy call, we listen to your brand and present a concrete growth plan. No commitment required.",
+    "ctaPrimary": "Schedule a call",
+    "ctaSecondary": "Message on WhatsApp"
+  },
+  "About": {
+    "metaTitle": "About Us",
+    "metaDescription": "DOU Social is a full-service digital growth agency based in Denizli, offering creative content, performance ads, automation, and brand strategy under one roof.",
+    "eyebrow": "About Us",
+    "heroTitle": "Not Just an Agency. Your Growth Partner.",
+    "heroLead": "DOU Social is a full-service digital growth agency that brings together creative content production, performance advertising, automation, and brand strategy under one roof.",
+    "legalNote": "DOU Social is a registered trademark of Yapımedya Reklamcılık A.Ş.",
+    "story": {
+      "eyebrow": "Mission & Vision",
+      "title": "Why we exist and where we're headed.",
+      "p1": "At DOU Social, we build custom growth systems for every brand. We manage advertising, content, web, and automation with an integrated strategy — producing measurable and sustainable results.",
+      "p2": "Our goal is always the same: to strengthen your brand's digital presence and prove it with concrete data.",
+      "mission": {
+        "label": "Our Mission",
+        "description": "To help brands achieve measurable, sustainable, and effective growth in the digital world."
+      },
+      "vision": {
+        "label": "Our Vision",
+        "description": "To become Turkey's most innovative, results-oriented, and trusted digital growth agency."
+      }
+    },
+    "process": {
+      "eyebrow": "How We Work",
+      "title": "Systematic process, measurable results.",
+      "analyze": {
+        "title": "Analyze",
+        "description": "We conduct an in-depth analysis of your brand, target audience, and competitive landscape to identify growth opportunities."
+      },
+      "strategy": {
+        "title": "Strategy",
+        "description": "We develop data-driven growth targets and a digital roadmap, crafting specific tactics for every channel."
+      },
+      "produce": {
+        "title": "Produce",
+        "description": "We carry out photography, video, design, and content production to institutional quality standards."
+      },
+      "optimize": {
+        "title": "Optimize",
+        "description": "We continuously improve your campaigns through ad performance analysis, reporting, and automation."
+      }
+    },
+    "values": {
+      "eyebrow": "DOU Social in Numbers",
+      "title": "Trust is built on facts.",
+      "projects": {
+        "value": "1000+",
+        "label": "Completed Projects"
+      },
+      "brands": {
+        "value": "5+",
+        "label": "Active Brands"
+      },
+      "satisfaction": {
+        "value": "100%",
+        "label": "Client Satisfaction"
+      }
+    }
+  },
+  "Contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Get in touch with DOU Social. Reach our Denizli office by phone, WhatsApp, email or form — we reply within 24 hours.",
+    "eyebrow": "Contact",
+    "heroTitle": "Let's talk about your project.",
+    "heroLead": "Let's evaluate what we can do for your brand in 30 minutes. Fill in the form or reach out directly — we'll get back to you within 24 hours.",
+    "methods": {
+      "whatsapp": {
+        "label": "WhatsApp",
+        "cta": "Start a chat"
+      },
+      "phone": {
+        "label": "Phone",
+        "cta": "Call now"
+      },
+      "email": {
+        "label": "Email",
+        "cta": "Send mail"
+      },
+      "address": {
+        "label": "Office",
+        "cta": "Get directions"
+      }
+    },
+    "form": {
+      "eyebrow": "Form",
+      "title": "Tell us about your brand.",
+      "subtitle": "Share your goals and current situation — we will plan the rest together.",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "consent": "I consent to my personal data being processed within the scope of this form (GDPR).",
+      "submit": "Send",
+      "sending": "Sending...",
+      "successTitle": "Got it!",
+      "successBody": "Your message reached us. We'll get back within 24 hours.",
+      "errors": {
+        "missing-fields": "Please fill in the required fields.",
+        "invalid-email": "Please enter a valid email.",
+        "invalid-input": "Some fields are invalid or too long.",
+        "consent-required": "Consent is required to submit.",
+        "rate-limited": "Sending too fast. Please try again in a few minutes."
+      },
+      "optional": "optional",
+      "consentPrefix": "I have read the",
+      "consentLinkText": "Personal Data Protection Policy",
+      "consentSuffix": "and consent to the processing of my personal data within the scope of this form."
+    },
+    "visit": {
+      "eyebrow": "Visit us",
+      "title": "Visit our office.",
+      "hoursLabel": "Office hours",
+      "hours": "Monday – Friday · 09:00 – 18:00"
+    }
+  },
+  "ServicesHub": {
+    "metaTitle": "Services",
+    "metaDescription": "Social media, Meta ads, content production, performance marketing and more — DOU Social's full digital growth operation.",
+    "eyebrow": "Services",
+    "heroTitle": "Every dimension of digital growth, from one source.",
+    "heroLead": "From social media to ads, content production to web solutions — ten core services forming a single, integrated growth operation.",
+    "more": "Learn more",
+    "items": {
+      "sosyal-medya-marka": {
+        "title": "Social Media & Brand Management",
+        "summary": "Strategic content planning, community management and brand communications to strengthen your digital presence."
+      },
+      "meta-reklamlari": {
+        "title": "Meta Ads Management",
+        "summary": "Precise targeting, optimised budget usage and measurable results across Instagram and Facebook."
+      },
+      "icerik-video": {
+        "title": "Content Production & Video",
+        "summary": "Photography, video and creative content tailored to your brand — building standout digital experiences."
+      },
+      "performans-pazarlama": {
+        "title": "Performance Marketing",
+        "summary": "Data-driven ad strategies delivering more conversions, higher ROI and sustainable growth."
+      },
+      "google-seo": {
+        "title": "Google Maps & Local SEO",
+        "summary": "Optimisation work to make your business more visible on Google Maps and in local search results."
+      },
+      "web-yazilim": {
+        "title": "Web Design & Software",
+        "summary": "Fast, user-friendly and conversion-focused websites to strengthen your digital infrastructure."
+      },
+      "kurumsal-kimlik": {
+        "title": "Corporate Identity & Design",
+        "summary": "Professional logo, brand identity and design systems that reflect your brand's character."
+      },
+      "influencer-marketing": {
+        "title": "Influencer Marketing",
+        "summary": "Bringing together the right content creators for your brand to build effective partnerships."
+      },
+      "eticaret-buyume": {
+        "title": "E-Commerce Growth Strategies",
+        "summary": "Sales-focused advertising, analytics and optimisation to increase your e-commerce performance."
+      },
+      "crm-dijital": {
+        "title": "CRM & Digital Transformation",
+        "summary": "Digitalising your business processes to make customer management more efficient and sustainable."
+      }
+    }
+  },
+  "ServicesDetail": {
+    "_shared": {
+      "back": "All services",
+      "ctaPrimary": "Get a quote",
+      "ctaSecondary": "Talk to us",
+      "problemEyebrow": "Problem",
+      "processEyebrow": "Process",
+      "deliverablesEyebrow": "What's included",
+      "faqEyebrow": "FAQ"
+    },
+    "sosyal-medya-marka": {
+      "eyebrow": "Social Media",
+      "title": "Your brand's digital voice — strategic and consistent.",
+      "lead": "We strengthen your social media presence through content planning, community management and brand communications, turning your audience into a loyal community.",
+      "problem": {
+        "title": "Common social media challenges brands face",
+        "points": [
+          "No content calendar — posts are produced in last-minute panic.",
+          "Different voice on every platform, brand feels inconsistent.",
+          "Engagement is low, follower count stagnant, cause unknown."
+        ]
+      },
+      "process": {
+        "title": "From strategy to publish in 5 steps.",
+        "steps": [
+          {
+            "title": "Brand & Competitor Analysis",
+            "description": "Current account, competitor content and audience analysis. A clear digital picture of your brand emerges."
+          },
+          {
+            "title": "Content Strategy",
+            "description": "Monthly themes, content pillars, format mix and growth targets are defined."
+          },
+          {
+            "title": "Content Calendar",
+            "description": "Copy, visual brief, hashtags and scheduling — a monthly plan ready for approval."
+          },
+          {
+            "title": "Production & Publishing",
+            "description": "Design, editing and scheduling. Approved content goes live on time."
+          },
+          {
+            "title": "Community & Reporting",
+            "description": "Comment and DM management, monthly performance report and strategy revision."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "What's included each month?",
+        "items": [
+          "Monthly content calendar (12-20 posts + 8-12 stories)",
+          "4-8 reels / short-form videos",
+          "Copy + hashtags + alt text",
+          "Visual design & editing",
+          "Comment & DM management (business hours)",
+          "Monthly performance report"
+        ]
+      },
+      "faq": {
+        "title": "Your questions.",
+        "items": [
+          {
+            "q": "Which platforms do you manage?",
+            "a": "Instagram, TikTok, LinkedIn, Facebook and X. We recommend focusing on 2-4 platforms depending on your industry."
+          },
+          {
+            "q": "Who approves the content?",
+            "a": "The monthly calendar is shared with you for joint approval. 24 hours turnaround for urgent posts is fine."
+          },
+          {
+            "q": "Do you come on location for shoots?",
+            "a": "Yes, one full-day on-location shoot per month is included. Additional needs are covered by a separate package."
+          },
+          {
+            "q": "Is community management 24/7?",
+            "a": "Active during business hours (09:00-18:00). A dedicated crisis communication protocol is established."
+          }
+        ]
+      }
+    },
+    "meta-reklamlari": {
+      "eyebrow": "Ad Management",
+      "title": "Don't spend your ad budget — convert it.",
+      "lead": "We achieve measurable results through precise targeting, optimised budget usage and continuous A/B testing on Instagram and Facebook.",
+      "problem": {
+        "title": "What we typically find in ad accounts",
+        "points": [
+          "Budget scattered across broad audiences with no real impact.",
+          "Same creative running for months — fatigue unnoticed.",
+          "Reports exist but decisions are unclear."
+        ]
+      },
+      "process": {
+        "title": "From account audit to scaling in 5 steps.",
+        "steps": [
+          {
+            "title": "Account Audit",
+            "description": "Existing campaigns, audiences and creative data are reviewed. Quick-win opportunities identified."
+          },
+          {
+            "title": "Strategy & Funnel",
+            "description": "Separate campaign structure for awareness, consideration and conversion — with clear KPIs."
+          },
+          {
+            "title": "Creative Package",
+            "description": "Static, video, story and reel formats — minimum 3 hypotheses for A/B testing."
+          },
+          {
+            "title": "Launch & Test",
+            "description": "Controlled launch, aggressive first-week testing, automatic scaling of winners."
+          },
+          {
+            "title": "Optimisation & Report",
+            "description": "Weekly dashboard, monthly strategy review and continuous optimisation."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "What's included each month?",
+        "items": [
+          "Account & competitor audit report",
+          "Monthly strategy + creative brief",
+          "Minimum 6 creative variations",
+          "Weekly performance dashboard",
+          "Continuous A/B testing & optimisation",
+          "Monthly strategy review"
+        ]
+      },
+      "faq": {
+        "title": "Your questions.",
+        "items": [
+          {
+            "q": "What is the minimum ad budget?",
+            "a": "We recommend starting with at least ₺15,000/month. Lower budgets make meaningful testing difficult."
+          },
+          {
+            "q": "When will I see results?",
+            "a": "First 2 weeks are the learning phase. Winners emerge by week 4, CPL/ROAS stabilises around week 8."
+          },
+          {
+            "q": "Who produces the creatives?",
+            "a": "We do. A combined content + ads package comes at a special rate."
+          },
+          {
+            "q": "How do I see the reports?",
+            "a": "You get 24/7 access to a Looker Studio dashboard. Weekly summaries are also sent by email."
+          }
+        ]
+      }
+    },
+    "icerik-video": {
+      "eyebrow": "Content Production",
+      "title": "Fast on set, strong in post.",
+      "lead": "We create standout, memorable digital experiences through photography, video and creative content tailored to your brand.",
+      "problem": {
+        "title": "Typical content production bottlenecks",
+        "points": [
+          "Chaotic shoot day, vague brief, key shots missed.",
+          "Post-production drags on for weeks while social trends pass.",
+          "Assets pile up that don't match the brand tone and can't be used."
+        ]
+      },
+      "process": {
+        "title": "From brief to delivery in 6 steps.",
+        "steps": [
+          {
+            "title": "Brief & Moodboard",
+            "description": "Goals, format, tone and references are consolidated in a single document."
+          },
+          {
+            "title": "Pre-Production",
+            "description": "Shot list, location, equipment and casting are planned. No surprises on shoot day."
+          },
+          {
+            "title": "Shoot",
+            "description": "Professional equipment and direction — brief-led on-location capture."
+          },
+          {
+            "title": "Edit & Post-Production",
+            "description": "Fast first cut, revisions, sound design, subtitles and colour grading."
+          },
+          {
+            "title": "Approval",
+            "description": "Clear revision rounds and quick turnaround loops."
+          },
+          {
+            "title": "Delivery & Adaptation",
+            "description": "9:16, 1:1 and 16:9 format exports — full asset package delivered."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "What comes with a typical package?",
+        "items": [
+          "Full shoot day (1-2 sets)",
+          "Professional equipment (camera, lighting, audio)",
+          "10-20 edited photos",
+          "4-6 reels / short-form videos",
+          "Format exports (9:16, 1:1, 16:9)",
+          "Raw + edited asset package"
+        ]
+      },
+      "faq": {
+        "title": "Your questions.",
+        "items": [
+          {
+            "q": "Where is the shoot?",
+            "a": "At your location, in a studio or a hired venue — decided based on the brief."
+          },
+          {
+            "q": "How many sets per day?",
+            "a": "1-2 sets in the standard package. Multiple shoot days can be planned for more."
+          },
+          {
+            "q": "Is music licensing included?",
+            "a": "Yes, licensed from commercial-use platforms (Artlist, Epidemic Sound)."
+          },
+          {
+            "q": "How many revisions do I get?",
+            "a": "2 major revisions per deliverable. Further rounds are billed hourly."
+          }
+        ]
+      }
+    },
+    "performans-pazarlama": {
+      "eyebrow": "Performance",
+      "title": "More conversions, higher return on investment.",
+      "lead": "We squeeze maximum value from every budget unit through data-driven ad strategies, achieving sustainable growth.",
+      "problem": {
+        "title": "Common performance campaign problems",
+        "points": [
+          "Ad spend rising but conversion rates flat or falling.",
+          "Unclear which channel actually contributes to sales.",
+          "Campaigns run in silos, budget distributed inefficiently."
+        ]
+      },
+      "process": {
+        "title": "From data to growth in 5 steps.",
+        "steps": [
+          {
+            "title": "Analysis & Diagnosis",
+            "description": "Existing campaigns, channels and attribution data reviewed. Losses and opportunities mapped."
+          },
+          {
+            "title": "Channel Strategy",
+            "description": "Highest-ROI channels prioritised, budget allocation optimised."
+          },
+          {
+            "title": "Campaign Architecture",
+            "description": "Full-funnel structure: awareness, interest, conversion and retargeting layers built."
+          },
+          {
+            "title": "Test & Optimisation",
+            "description": "Creatives, audiences and bid strategies are continuously tested and refined."
+          },
+          {
+            "title": "Measurement & Reporting",
+            "description": "Weekly KPI tracking, attribution analysis and transparent growth recommendations."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "What's included each month?",
+        "items": [
+          "Multi-channel campaign management",
+          "Attribution & conversion analysis",
+          "Weekly performance report",
+          "A/B test results and recommendations",
+          "Budget optimisation plan",
+          "Monthly growth review"
+        ]
+      },
+      "faq": {
+        "title": "Your questions.",
+        "items": [
+          {
+            "q": "Which channels do you cover?",
+            "a": "Meta (Instagram & Facebook), Google, TikTok and other digital channels. The best-performing mix is determined for your industry."
+          },
+          {
+            "q": "Do you guarantee performance?",
+            "a": "We don't guarantee specific KPI targets — market conditions vary. However, we set transparent goals and optimise continuously."
+          },
+          {
+            "q": "What budget do I need to start?",
+            "a": "We recommend a minimum of ₺25,000/month in ad spend. This threshold matters for meaningful multi-channel results."
+          },
+          {
+            "q": "Can you take over my existing campaigns?",
+            "a": "Yes, we start with an account audit and take over after reviewing current performance."
+          }
+        ]
+      }
+    },
+    "google-seo": {
+      "eyebrow": "Local SEO",
+      "title": "Help nearby customers find you.",
+      "lead": "We increase your organic visibility by optimising your presence on Google Maps and in local search results.",
+      "problem": {
+        "title": "Common local SEO problems",
+        "points": [
+          "Business doesn't appear at the top when its name is searched.",
+          "Google Business Profile is incomplete or full of incorrect information.",
+          "Competitors always rank higher on the map, no organic customers reaching you."
+        ]
+      },
+      "process": {
+        "title": "5 steps to improved visibility.",
+        "steps": [
+          {
+            "title": "Profile Audit",
+            "description": "Google Business Profile, NAP consistency and current ranking positions are analysed."
+          },
+          {
+            "title": "Profile Optimisation",
+            "description": "Information updated, images added, services and categories optimised."
+          },
+          {
+            "title": "Content & Keywords",
+            "description": "Content and keyword strategy aligned with local search intent."
+          },
+          {
+            "title": "Review & Reputation Management",
+            "description": "Positive review strategy established; professional responses to negative reviews."
+          },
+          {
+            "title": "Tracking & Reporting",
+            "description": "Monthly ranking tracking, visibility report and optimisation recommendations."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "What's included?",
+        "items": [
+          "Full Google Business Profile optimisation",
+          "NAP consistency fixes",
+          "Local keyword research",
+          "Review management and response strategy",
+          "Monthly visibility report",
+          "Competitor analysis and position comparison"
+        ]
+      },
+      "faq": {
+        "title": "Your questions.",
+        "items": [
+          {
+            "q": "When will results show?",
+            "a": "Profile optimisation completes in weeks 4-6. Ranking improvements are typically observed within 2-3 months."
+          },
+          {
+            "q": "Can you handle multiple branches?",
+            "a": "Yes, we optimise each branch separately. Multi-location packages are available."
+          },
+          {
+            "q": "Does it work without a website?",
+            "a": "Partially yes. Local SEO supported by a website delivers far stronger results."
+          },
+          {
+            "q": "How do you get more reviews?",
+            "a": "We build a systematic process for your customers — via email, QR code or message."
+          }
+        ]
+      }
+    },
+    "web-yazilim": {
+      "eyebrow": "Web & Software",
+      "title": "Fast, user-friendly, conversion-focused.",
+      "lead": "We strengthen your online presence with websites and digital infrastructure built on modern technologies.",
+      "problem": {
+        "title": "What we typically see on corporate sites",
+        "points": [
+          "Page loads in 4+ seconds, most mobile users leave.",
+          "Dependent on an agency to update content — small changes take weeks.",
+          "Weak SEO foundation, almost no organic traffic, fully reliant on ads."
+        ]
+      },
+      "process": {
+        "title": "From discovery to launch in 5 steps.",
+        "steps": [
+          {
+            "title": "Discovery",
+            "description": "Goals, user journey and current analytics reviewed. What the site needs to achieve becomes clear."
+          },
+          {
+            "title": "Wireframe & Strategy",
+            "description": "Page structure, content flow, conversion points and SEO architecture planned."
+          },
+          {
+            "title": "Design",
+            "description": "Brand-aligned, mobile-first, modern visual language."
+          },
+          {
+            "title": "Development",
+            "description": "Next.js + TypeScript + Tailwind — tested for performance, accessibility and SEO."
+          },
+          {
+            "title": "Launch & Support",
+            "description": "DNS, analytics, Search Console setup, documentation. Free support for the first 30 days."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "What's in the full package?",
+        "items": [
+          "Discovery + content strategy document",
+          "Wireframe + design for all pages",
+          "Production-grade Next.js build",
+          "Content management system (CMS)",
+          "SEO infrastructure (sitemap, schema, hreflang)",
+          "Analytics + Search Console setup",
+          "Hosting setup (Vercel)",
+          "Documentation + 30-day support"
+        ]
+      },
+      "faq": {
+        "title": "Your questions.",
+        "items": [
+          {
+            "q": "How long does the project take?",
+            "a": "A standard corporate site takes 6-8 weeks. E-commerce or custom-feature projects run 10-12 weeks."
+          },
+          {
+            "q": "What tech stack do you use?",
+            "a": "Next.js + TypeScript + Tailwind + Vercel. Sanity, Payload or MDX for CMS depending on content type."
+          },
+          {
+            "q": "Who writes the content?",
+            "a": "You write, we copy-edit. A copywriting package can be added."
+          },
+          {
+            "q": "Who owns the site?",
+            "a": "You do. All code, domain and hosting accounts are fully in your name."
+          }
+        ]
+      }
+    },
+    "kurumsal-kimlik": {
+      "eyebrow": "Brand Identity",
+      "title": "Turn your brand's character into design.",
+      "lead": "We build a strong, consistent visual language for your brand through professional logo design, corporate identity and design systems.",
+      "problem": {
+        "title": "What corporate identity problems look like",
+        "points": [
+          "Logo used differently everywhere — brand perceived as inconsistent.",
+          "A fresh brief is needed every time new content or a campaign is produced.",
+          "Competitors look similar — no distinctive visual identity to stand out."
+        ]
+      },
+      "process": {
+        "title": "From discovery to brand book in 5 steps.",
+        "steps": [
+          {
+            "title": "Discovery",
+            "description": "Brand values, target audience, competitor analysis and market research conducted."
+          },
+          {
+            "title": "Positioning & Messaging",
+            "description": "Brand's market position, value proposition and core communication framework defined."
+          },
+          {
+            "title": "Visual Identity",
+            "description": "Logo, colour palette, typography and visual system designed. Minimum 3 concepts presented."
+          },
+          {
+            "title": "Design System",
+            "description": "Consistent templates and usage guidelines prepared for all touchpoints."
+          },
+          {
+            "title": "Brand Book Delivery",
+            "description": "A comprehensive brand book containing all rules, assets and guidelines is delivered."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "What's in the package?",
+        "items": [
+          "Logo (multiple formats and variations)",
+          "Colour palette & typography guide",
+          "Corporate identity templates",
+          "Social media templates",
+          "Usage guide (brand book)",
+          "All design files (AI, PDF, PNG)"
+        ]
+      },
+      "faq": {
+        "title": "Your questions.",
+        "items": [
+          {
+            "q": "How many logo concepts do you present?",
+            "a": "3 distinct directions in the standard process, each taking a different approach."
+          },
+          {
+            "q": "How long does it take?",
+            "a": "Basic logo and identity package: 3-4 weeks. Full brand book: 6-8 weeks."
+          },
+          {
+            "q": "Can I just get a logo?",
+            "a": "Yes, we offer a standalone logo package. But without an identity system, a logo alone is incomplete."
+          },
+          {
+            "q": "Do we own all the files?",
+            "a": "Yes, all design files and rights are transferred to you on delivery."
+          }
+        ]
+      }
+    },
+    "influencer-marketing": {
+      "eyebrow": "Influencer",
+      "title": "Powerful partnerships with the right creators.",
+      "lead": "We manage campaigns that connect with real audiences and convert to sales and awareness by selecting the most suitable influencers for your brand.",
+      "problem": {
+        "title": "Common influencer partnership problems",
+        "points": [
+          "Influencers chosen for high follower counts but real engagement is very low.",
+          "No content brief — output doesn't match brand tone.",
+          "Campaign results can't be measured, ROI unclear."
+        ]
+      },
+      "process": {
+        "title": "From partnership to measurement in 5 steps.",
+        "steps": [
+          {
+            "title": "Goal & Audience Definition",
+            "description": "Campaign objective, target audience profile and budget are defined."
+          },
+          {
+            "title": "Influencer Research & Selection",
+            "description": "Creators aligned with the brand are shortlisted after filtering for fake followers and low engagement."
+          },
+          {
+            "title": "Brief & Agreement",
+            "description": "Detailed content brief prepared; contract and rights management handled."
+          },
+          {
+            "title": "Content Production & Publishing",
+            "description": "Content approved and goes live in platform-appropriate formats on schedule."
+          },
+          {
+            "title": "Measurement & Reporting",
+            "description": "Campaign performance analysed, ROI calculated and recommendations provided."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "What's included in each campaign?",
+        "items": [
+          "Influencer research & selection report",
+          "Content brief and approval process",
+          "Contract management",
+          "Campaign tracking and management",
+          "Post-campaign performance report",
+          "ROI analysis and recommendations"
+        ]
+      },
+      "faq": {
+        "title": "Your questions.",
+        "items": [
+          {
+            "q": "Nano, micro or macro influencer?",
+            "a": "Depends on your goal. Nano and micro influencers typically offer higher engagement at a lower cost."
+          },
+          {
+            "q": "Do you handle outreach?",
+            "a": "Yes, we manage all communication, negotiation and agreement processes."
+          },
+          {
+            "q": "Do we own the content rights?",
+            "a": "Repurposing rights are defined in the brief. A separate agreement is made for paid promotion content."
+          },
+          {
+            "q": "How many influencers can we work with?",
+            "a": "We recommend 1 macro or 5-10 micro influencer combination depending on budget and goals."
+          }
+        ]
+      }
+    },
+    "eticaret-buyume": {
+      "eyebrow": "E-Commerce",
+      "title": "More sales, lower cost.",
+      "lead": "We accelerate the growth of your e-commerce store through sales-focused advertising, analytics and optimisation.",
+      "problem": {
+        "title": "Common e-commerce store problems we encounter",
+        "points": [
+          "Traffic exists but conversion rates are very low, cart abandonment is high.",
+          "Ad spend increasing but ROAS dropping, budget not used efficiently.",
+          "Unclear which products or categories are worth advertising."
+        ]
+      },
+      "process": {
+        "title": "From analysis to growth in 5 steps.",
+        "steps": [
+          {
+            "title": "Store & Analytics Audit",
+            "description": "Conversion funnel, user behaviour and ad performance are analysed."
+          },
+          {
+            "title": "Growth Strategy",
+            "description": "Highest-potential products, target audiences and growth channels identified."
+          },
+          {
+            "title": "Campaign Structure",
+            "description": "Prospecting, retargeting and cart abandonment campaigns are set up."
+          },
+          {
+            "title": "CRO & UX Recommendations",
+            "description": "Page and user experience improvements to increase conversion rates."
+          },
+          {
+            "title": "Optimisation & Scaling",
+            "description": "Winning products and campaigns are scaled; underperformers optimised."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "What's included each month?",
+        "items": [
+          "E-commerce analytics report",
+          "Product & category performance analysis",
+          "Ad campaign management (Meta + Google)",
+          "Retargeting & cart abandonment strategy",
+          "CRO recommendations",
+          "Monthly growth review"
+        ]
+      },
+      "faq": {
+        "title": "Your questions.",
+        "items": [
+          {
+            "q": "Which e-commerce platforms do you work with?",
+            "a": "Shopify, Ticimax, IdeaSoft, WooCommerce and custom builds — all major platforms."
+          },
+          {
+            "q": "Is there a minimum budget requirement?",
+            "a": "We work with a minimum of ₺20,000/month in ad spend. Can vary by product range and goals."
+          },
+          {
+            "q": "Can you also design my store?",
+            "a": "Yes, our web design service provides a complete solution. CRO-focused improvements are also available."
+          },
+          {
+            "q": "Is Google Ads included?",
+            "a": "Yes, managing Meta and Google Ads together yields the highest ROAS. Offered as a package."
+          }
+        ]
+      }
+    },
+    "crm-dijital": {
+      "eyebrow": "Digital Transformation",
+      "title": "Digitalise your business processes.",
+      "lead": "We make customer management more efficient and scalable through CRM implementation, process automation and digital transformation consulting.",
+      "problem": {
+        "title": "Common barriers to digital transformation",
+        "points": [
+          "Customer tracking done in Excel or notes — information gets lost.",
+          "Sales process not standardised — every team member uses different methods.",
+          "Marketing and sales teams work in silos — leads slip through the cracks."
+        ]
+      },
+      "process": {
+        "title": "From needs analysis to go-live in 5 steps.",
+        "steps": [
+          {
+            "title": "Process Analysis",
+            "description": "Existing workflows, tools and team structure are reviewed. Improvement points identified."
+          },
+          {
+            "title": "CRM Selection & Setup",
+            "description": "The right CRM platform is selected (HubSpot, Salesforce, etc.) and implemented."
+          },
+          {
+            "title": "Customisation & Integration",
+            "description": "Sales funnel, lead tracking and reporting modules configured for your business."
+          },
+          {
+            "title": "Automation Setup",
+            "description": "Email sequences, notifications and sales processes are automated."
+          },
+          {
+            "title": "Training & Support",
+            "description": "Team training delivered, usage guide prepared and first 30 days of support provided."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "What's included?",
+        "items": [
+          "Process analysis document",
+          "CRM platform setup and configuration",
+          "Sales funnel and pipeline design",
+          "Automation scenarios",
+          "Team training",
+          "Usage guide + 30-day support"
+        ]
+      },
+      "faq": {
+        "title": "Your questions.",
+        "items": [
+          {
+            "q": "Which CRM platforms do you work with?",
+            "a": "HubSpot, Salesforce, Zoho CRM and Pipedrive — all major platforms."
+          },
+          {
+            "q": "Will you use our existing CRM?",
+            "a": "Yes, we can optimise your existing system or migrate it if needed."
+          },
+          {
+            "q": "How long does it take?",
+            "a": "Basic CRM setup takes 2-4 weeks. Projects requiring integrations and customisation run 6-8 weeks."
+          },
+          {
+            "q": "How is team adoption ensured?",
+            "a": "Hands-on training, video guides and first-month continuous support ease the adoption process."
+          }
+        ]
+      }
+    }
+  },
+  "Cases": {
+    "metaTitle": "Work",
+    "metaDescription": "Measurable outcomes from brands working with DOU Social. Real case studies across Meta Ads, social, web and brand strategy.",
+    "eyebrow": "Work",
+    "heroTitle": "Work that speaks in numbers.",
+    "heroLead": "Not likes — conversions. Not impressions — sales. Measurable outcomes from the brands we work with.",
+    "_shared": {
+      "back": "All projects",
+      "viewAll": "All projects",
+      "relatedTitle": "Other projects.",
+      "challengeEyebrow": "Challenge",
+      "approachEyebrow": "Approach",
+      "resultsEyebrow": "Results",
+      "galleryEyebrow": "Visuals",
+      "galleryNote": "Case data is real customer data; visuals are demo placeholders.",
+      "ctaProject": "View Case Study",
+      "ctaContact": "Contact Us"
+    },
+    "items": {
+      "e-ticaret-3x-donusum": {
+        "industry": "E-commerce",
+        "duration": "90 days",
+        "title": "Lifted store conversions 3.4x.",
+        "summary": "A local e-commerce brand's Meta Ads account and product pages were rebuilt from scratch. In 90 days, conversions hit 3.4x and CPL dropped 48%.",
+        "coverMetric": "3.4x",
+        "coverMetricLabel": "conversion lift",
+        "challenge": {
+          "title": "Budget out, orders barely in.",
+          "intro": "The brand spent 80,000 TRY/month on Meta Ads but ROAS was stuck at 1.2. High add-to-cart, low checkout.",
+          "points": [
+            "The same creative ran for 6 months with no fatigue tracking.",
+            "Audiences were too broad: 18-65, all of Turkey, no interests.",
+            "Product page loaded in 5s; mobile abandonment hit 60%."
+          ]
+        },
+        "approach": {
+          "title": "From account audit to landing page rebuild.",
+          "steps": [
+            {
+              "title": "Audit & cleanup",
+              "description": "Killed inactive campaigns, ran creative fatigue analysis, narrowed targeting."
+            },
+            {
+              "title": "Funnel rebuild",
+              "description": "Separate awareness → consideration → conversion campaigns with retargeting layers."
+            },
+            {
+              "title": "Creative pack",
+              "description": "12 new creatives (static + video + UGC-style); A/B tests revealed 3 winners."
+            },
+            {
+              "title": "Landing optimization",
+              "description": "Product page redesigned, page speed 5s → 1.4s, mobile-first checkout."
+            }
+          ]
+        },
+        "results": {
+          "title": "What changed in 90 days.",
+          "summary": "Budget held flat; sales multiplied, lead cost halved.",
+          "metrics": [
+            {
+              "value": "3.4x",
+              "label": "ROAS lift (1.2 → 4.1)"
+            },
+            {
+              "value": "−48%",
+              "label": "Cost per lead"
+            },
+            {
+              "value": "+62%",
+              "label": "Conversion rate"
+            },
+            {
+              "value": "1.4s",
+              "label": "Page load time"
+            }
+          ]
+        },
+        "galleryTitle": "Before / after screenshots."
+      },
+      "b2b-yazilim-lead-jenerasyonu": {
+        "industry": "B2B SaaS",
+        "duration": "6 months",
+        "title": "Cut cost-per-lead by 58%.",
+        "summary": "A B2B software firm's LinkedIn + Google Ads strategy. Niche ICP targeting and content-led funnel cut lead cost 58% in 6 months.",
+        "coverMetric": "−58%",
+        "coverMetricLabel": "drop in cost per lead",
+        "challenge": {
+          "title": "Reaching the right person in B2B was expensive.",
+          "intro": "The firm was acquiring SQLs at 3,200 TRY each. Slow sales pipeline, growing marketing-sales friction.",
+          "points": [
+            "LinkedIn ads ran broad; off-ICP clicks ate the budget.",
+            "Google Ads relied on generic keywords; no niche-intent targeting.",
+            "No content; ad → form → sell loop skipped the education stage."
+          ]
+        },
+        "approach": {
+          "title": "ICP-focused targeting + content-led funnel.",
+          "steps": [
+            {
+              "title": "ICP mapping",
+              "description": "Defined ideal customer profile, personas and target job titles with the sales team."
+            },
+            {
+              "title": "LinkedIn ABM",
+              "description": "Account-based campaigns aimed at 200 target accounts × decision-maker roles."
+            },
+            {
+              "title": "Content funnel",
+              "description": "Sector benchmark report, video case studies, ROI calculator — gated content."
+            },
+            {
+              "title": "Niche Google Ads",
+              "description": "Long-tail intent keywords, custom landing pages, search → demo flow."
+            }
+          ]
+        },
+        "results": {
+          "title": "Where it landed after 6 months.",
+          "summary": "Lead quality up, cost down; sales and marketing speak the same language.",
+          "metrics": [
+            {
+              "value": "−58%",
+              "label": "Cost per lead"
+            },
+            {
+              "value": "2.3x",
+              "label": "MQL → SQL conversion"
+            },
+            {
+              "value": "240",
+              "label": "Monthly MQLs (was 95)"
+            },
+            {
+              "value": "−41%",
+              "label": "Sales cycle length"
+            }
+          ]
+        },
+        "galleryTitle": "Funnel and content samples."
+      },
+      "restoran-yerel-buyume": {
+        "industry": "Restaurant",
+        "duration": "120 days",
+        "title": "Doubled in-store visits.",
+        "summary": "Local SEO + Instagram strategy for a Denizli restaurant. In 4 months, Google Business views grew 5x and store visits doubled.",
+        "coverMetric": "2x",
+        "coverMetricLabel": "in-store visits",
+        "challenge": {
+          "title": "Locally known, digitally invisible.",
+          "intro": "12-year-old restaurant, but Google Business profile was incomplete, Instagram irregular and online ordering missing. The new generation of customers wasn't being reached.",
+          "points": [
+            "Google Business profile had 18 photos, missing info, last post 8 months old.",
+            "Instagram averaged 1 post per week, no stories, no reels ever tried.",
+            "Local SEO ranking for 'denizli breakfast' wasn't even on the first 3 pages."
+          ]
+        },
+        "approach": {
+          "title": "Local SEO + Instagram + on-site shoots.",
+          "steps": [
+            {
+              "title": "Google Business optimization",
+              "description": "Profile gaps filled, weekly posts, customer review response routine."
+            },
+            {
+              "title": "On-site shoots & content",
+              "description": "Two shoot days per month, 30 reels + 60 static posts, brand voice clarified."
+            },
+            {
+              "title": "Local SEO content",
+              "description": "City + category long-tail blog posts, schema markup, local backlinks."
+            },
+            {
+              "title": "Community management",
+              "description": "Comment & DM responses, hashtag strategy, local influencer collabs."
+            }
+          ]
+        },
+        "results": {
+          "title": "What 4 months produced.",
+          "summary": "Digital visibility grew, physical traffic returned to the restaurant.",
+          "metrics": [
+            {
+              "value": "2x",
+              "label": "In-store visits"
+            },
+            {
+              "value": "5x",
+              "label": "Google Business views"
+            },
+            {
+              "value": "8.3K",
+              "label": "New Instagram followers"
+            },
+            {
+              "value": "#2",
+              "label": "'denizli breakfast' rank"
+            }
+          ]
+        },
+        "galleryTitle": "Shoot and content samples."
+      },
+      "online-egitim-lansmani": {
+        "industry": "Online Education",
+        "duration": "75 days",
+        "title": "New course launch: 940 sales.",
+        "summary": "Personal-brand-led online course launch. From zero email list to content funnel and Meta Ads campaign — 940 product sales in 75 days.",
+        "coverMetric": "940",
+        "coverMetricLabel": "launch sales",
+        "challenge": {
+          "title": "The instructor's only asset was an Instagram account.",
+          "intro": "Course content was ready, demand seemed real, but no sales infrastructure. Email list at 0, launch plan at 0.",
+          "points": [
+            "Only organic Instagram traffic; conversion rate unknown.",
+            "Launch date 75 days out with no marketing plan in place.",
+            "First launch — failure could damage the personal brand."
+          ]
+        },
+        "approach": {
+          "title": "Content + email + ads triangle.",
+          "steps": [
+            {
+              "title": "Lead magnet",
+              "description": "Mini version of the course (PDF + video) free download — 4,200 emails in 30 days."
+            },
+            {
+              "title": "Nurture sequence",
+              "description": "12-email automated flow that addresses customer objections in stages."
+            },
+            {
+              "title": "Ad funnel",
+              "description": "Awareness (video) → consideration (case) → conversion (offer). Retargeting included."
+            },
+            {
+              "title": "Launch week",
+              "description": "Early access, 7-day cart-open window, last-24-hour urgency messaging."
+            }
+          ]
+        },
+        "results": {
+          "title": "What 75 days produced.",
+          "summary": "From-scratch launch closed at 3x the category average conversion rate.",
+          "metrics": [
+            {
+              "value": "940",
+              "label": "Total sales"
+            },
+            {
+              "value": "4.2K",
+              "label": "Email list (new)"
+            },
+            {
+              "value": "18.4%",
+              "label": "Email → sale conversion"
+            },
+            {
+              "value": "5.8x",
+              "label": "Ad ROAS"
+            }
+          ]
+        },
+        "galleryTitle": "Funnel and email samples."
+      },
+      "saglik-klinigi-marka-yenileme": {
+        "industry": "Healthcare",
+        "duration": "16 weeks",
+        "title": "A clinic brand rebuilt from scratch.",
+        "summary": "Brand strategy + visual system + new website for an aesthetic clinic. In 16 weeks the brand became coherent and organic search visibility grew 4x.",
+        "coverMetric": "4x",
+        "coverMetricLabel": "organic traffic",
+        "challenge": {
+          "title": "Strong service, scattered brand.",
+          "intro": "A 10-year-old clinic with strong medical credibility but a fragmented digital presence. Logo, message, web and social were disconnected.",
+          "points": [
+            "3 different logo variations were being used across channels.",
+            "Website was from 2017, not mobile-friendly, no booking system.",
+            "Content was full of medical jargon; patients were intimidated, brand felt unapproachable."
+          ]
+        },
+        "approach": {
+          "title": "Strategy → visual system → web → content.",
+          "steps": [
+            {
+              "title": "Brand discovery",
+              "description": "Interviews with doctors, current patients, competitor analysis, new positioning."
+            },
+            {
+              "title": "Visual system",
+              "description": "Single logo system, color palette, typography, photography direction, brand book."
+            },
+            {
+              "title": "Website",
+              "description": "Next.js + CMS, mobile-first, online booking, service detail pages, blog."
+            },
+            {
+              "title": "Content & SEO",
+              "description": "20 SEO-focused blog posts, patient-language content, schema markup."
+            }
+          ]
+        },
+        "results": {
+          "title": "What 16 weeks produced.",
+          "summary": "Brand consistent, site fast, patients booking online; non-paid channels driving more inquiries.",
+          "metrics": [
+            {
+              "value": "4x",
+              "label": "Organic traffic lift"
+            },
+            {
+              "value": "61%",
+              "label": "Online booking rate"
+            },
+            {
+              "value": "1.6s",
+              "label": "Page load time"
+            },
+            {
+              "value": "92",
+              "label": "Lighthouse score"
+            }
+          ]
+        },
+        "galleryTitle": "Brand book + website screenshots."
+      }
+    }
+  },
+  "Quote": {
+    "metaTitle": "Get a Quote",
+    "metaDescription": "Get a free, custom proposal from DOU Social. Tell us your sector, goals and budget — we'll come back within 24 hours.",
+    "eyebrow": "Get a Quote",
+    "heroTitle": "A proposal made for your brand.",
+    "heroLead": "Fill the form in 5 minutes; we come back within 24 hours with a sector-specific proposal. Not a generic price — a plan made for you.",
+    "perks": {
+      "p1": "First call is free, zero obligation.",
+      "p2": "We share 2-3 case studies similar to your sector.",
+      "p3": "Realistic recommendation regardless of budget size."
+    },
+    "form": {
+      "step1": {
+        "title": "01 — What sector is your brand in?",
+        "description": "So we can speak in the right benchmarks."
+      },
+      "step2": {
+        "title": "02 — Which services interest you?",
+        "description": "Pick more than one. We also offer bundle pricing."
+      },
+      "step3": {
+        "title": "03 — Monthly digital marketing budget?",
+        "description": "Approximate range including ad spend + agency. Doesn't have to be exact."
+      },
+      "step4": {
+        "title": "04 — Who are you?",
+        "description": "Let's get acquainted. We need contact details for a quick reply."
+      },
+      "industry": {
+        "label": "Sector",
+        "options": {
+          "ecommerce": "E-commerce",
+          "b2b": "B2B / SaaS",
+          "restaurant": "Restaurant / Cafe",
+          "education": "Education",
+          "healthcare": "Healthcare",
+          "other": "Other"
+        }
+      },
+      "services": {
+        "label": "Services you're interested in",
+        "options": {
+          "meta-ads": "Meta Ads Management",
+          "social": "Social Media Management",
+          "content": "Content Production",
+          "web": "Web Design",
+          "strategy": "Brand Strategy"
+        }
+      },
+      "budget": {
+        "label": "Monthly budget",
+        "options": {
+          "lt25k": "Under 25,000 TRY",
+          "25-50k": "25,000 – 50,000 TRY",
+          "50-100k": "50,000 – 100,000 TRY",
+          "gt100k": "Over 100,000 TRY"
+        }
+      },
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company / Brand name",
+      "message": "Anything to add?",
+      "messagePlaceholder": "Goals, current state, timeline — keep it brief.",
+      "optional": "optional",
+      "consent": "I consent to my personal data being processed within the scope of this form (GDPR).",
+      "submit": "Request quote",
+      "sending": "Sending...",
+      "successTitle": "Got it!",
+      "successBody": "Your request reached us. Within 24 hours we come back with a sector-specific proposal and a few case studies.",
+      "errors": {
+        "missing-fields": "Please fill in the required fields.",
+        "invalid-email": "Please enter a valid email.",
+        "invalid-input": "Some fields are invalid or too long.",
+        "consent-required": "Consent is required to submit.",
+        "rate-limited": "Sending too fast. Please try again in a few minutes."
+      }
+    }
+  },
+  "Checkup": {
+    "metaTitle": "Free Social Media Analysis — DOU Social",
+    "metaDescription": "How are your Instagram, ads, and LinkedIn performing? Fill out the form and get your custom PDF report in 5 minutes.",
+    "eyebrow": "Free",
+    "heroTitle": "How is your social media doing? We'll tell you.",
+    "heroLead": "Are your Instagram, ad budget, and other platforms actually working? Fill out the form and get your custom evaluation PDF in 5 minutes.",
+    "points": {
+      "analysis": {
+        "title": "Your personal report",
+        "description": "Not generic advice. We look at your accounts and produce an honest 4–6 page evaluation."
+      },
+      "actionable": {
+        "title": "What should you do?",
+        "description": "Every issue comes with a concrete next step. Things you can apply this week."
+      },
+      "free": {
+        "title": "Free, no sign-up",
+        "description": "Your email is enough. No meeting or phone call required. If you like it, we'll talk."
+      }
+    },
+    "formEyebrow": "Analysis Form",
+    "formTitle": "Which accounts should we look at?",
+    "formNote": "We don't need access to your accounts. We create your report from the screenshots and info you share.",
+    "form": {
+      "platforms": {
+        "label": "Which platforms do you have accounts on?",
+        "hint": "You can select more than one",
+        "options": {
+          "instagram": "Instagram",
+          "meta-ads": "Meta Ads (Facebook / Instagram)",
+          "tiktok": "TikTok",
+          "youtube": "YouTube",
+          "google": "Google Business Profile",
+          "linkedin": "LinkedIn"
+        }
+      },
+      "handles": {
+        "instagram": "Your Instagram username",
+        "meta-ads": "Your Facebook Page or ad account name",
+        "tiktok": "Your TikTok username",
+        "youtube": "Your YouTube channel name",
+        "google": "Your business name on Google",
+        "linkedin": "Your LinkedIn company page name"
+      },
+      "handlePlaceholders": {
+        "instagram": "@youraccount",
+        "meta-ads": "Page name or Business Manager name",
+        "tiktok": "@youraccount",
+        "youtube": "Channel name",
+        "google": "Business name",
+        "linkedin": "Company page name"
+      },
+      "screenshots": {
+        "label": "Add a screenshot",
+        "hint": "Optional — sharing a screenshot lets us give you a more detailed analysis",
+        "guides": {
+          "instagram": "Open Instagram → Profile → Professional Dashboard → Insights and take a screenshot",
+          "meta-ads": "Go to business.facebook.com → Ads Manager → Campaigns, select last 30 days and take a screenshot",
+          "tiktok": "Open TikTok → Profile → Content Analytics and take a screenshot",
+          "youtube": "In YouTube Studio, go to Analytics → Overview and take a screenshot",
+          "google": "Find your business on Google Maps → See performance and take a screenshot",
+          "linkedin": "Go to your LinkedIn company page → Analytics → Visitors tab and take a screenshot"
+        }
+      },
+      "sector": {
+        "label": "What industry are you in?",
+        "placeholder": "Select industry",
+        "options": {
+          "ecommerce": "E-commerce / Online Sales",
+          "food": "Restaurant / Café / Food",
+          "beauty": "Beauty / Aesthetics / Hair",
+          "health": "Health / Clinic / Dental",
+          "education": "Education / Courses / Coaching",
+          "hospitality": "Hotel / Accommodation / Tourism",
+          "retail": "Retail / Store",
+          "realestate": "Construction / Real Estate / Architecture",
+          "legal": "Legal / Financial Advisory",
+          "tech": "Technology / Software",
+          "other": "Other"
+        }
+      },
+      "website": {
+        "label": "Does your brand have a website?",
+        "options": {
+          "yes": "Yes, it does",
+          "no": "No, it doesn't",
+          "renewal": "Yes, but I want to redesign it"
+        }
+      },
+      "name": "Your name",
+      "phone": "Phone number",
+      "phonePlaceholder": "0555 555 5555",
+      "email": "Your email address",
+      "submit": "Send me my analysis report",
+      "sending": "Sending...",
+      "successTitle": "Report on its way!",
+      "successBody": "Your analysis report will arrive in your inbox within 5 minutes. Don't forget to check your spam folder.",
+      "errors": {
+        "missing-fields": "Please fill in the required fields.",
+        "invalid-email": "Please enter a valid email address.",
+        "invalid-phone": "Please enter a valid phone number (e.g. 0555 555 5555).",
+        "invalid-input": "Some fields are invalid or too long.",
+        "consent-required": "You must give your consent to continue.",
+        "rate-limited": "You submitted too quickly. Please try again in a few minutes."
+      }
+    }
+  },
+  "Meeting": {
+    "metaTitle": "Strategy Call",
+    "metaDescription": "A 30-minute free strategy call. We listen to your brand and tell you what we can do digitally. No sales pitch.",
+    "eyebrow": "Strategy Call",
+    "heroTitle": "30 minutes. A real plan.",
+    "heroLead": "We listen to your brand and tell you what we can do. No sales pitch, no pressure to close.",
+    "info": {
+      "duration": {
+        "label": "Duration",
+        "value": "30 minutes"
+      },
+      "format": {
+        "label": "Format",
+        "value": "Online (Google Meet) or in office"
+      },
+      "cost": {
+        "label": "Cost",
+        "value": "Free"
+      }
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "optional": "optional",
+      "topic": {
+        "label": "What do you want to talk about?",
+        "placeholder": "What problem are you trying to solve, what are you trying to grow? Keep it brief."
+      },
+      "slots": {
+        "label": "Which time windows work for you?",
+        "options": {
+          "morning": "Morning (09:00 – 12:00)",
+          "afternoon": "Afternoon (12:00 – 16:00)",
+          "evening": "Evening (16:00 – 19:00)"
+        }
+      },
+      "consent": "I consent to my personal data being processed within the scope of this form (GDPR).",
+      "submit": "Book the call",
+      "sending": "Sending...",
+      "successTitle": "We've got your call!",
+      "successBody": "Your request reached us. We'll come back within 24 hours with a slot that fits.",
+      "errors": {
+        "missing-fields": "Please fill in the required fields.",
+        "invalid-email": "Please enter a valid email.",
+        "invalid-input": "Some fields are invalid or too long.",
+        "consent-required": "Consent is required to submit.",
+        "rate-limited": "Sending too fast. Please try again in a few minutes."
+      }
+    }
+  },
+  "SeoLanding": {
+    "_shared": {
+      "ctaPrimary": "Get a free quote",
+      "ctaSecondary": "Book a call",
+      "problemEyebrow": "Problem",
+      "processEyebrow": "How we work",
+      "casesEyebrow": "Outcomes",
+      "faqEyebrow": "FAQ"
+    },
+    "denizli-sosyal-medya-ajansi": {
+      "metaTitle": "Denizli Social Media Agency — DOU Social",
+      "metaDescription": "Looking for a social media agency in Denizli? Instagram, TikTok and Meta Ads management with measurable outcomes. Free quote.",
+      "eyebrow": "Denizli · Social Media Agency",
+      "title": "The social media agency of Denizli.",
+      "lead": "Instagram, TikTok and Meta Ads management for Denizli-based brands. A team that knows the local market and delivers measurable outcomes.",
+      "proof": [
+        {
+          "value": "30+",
+          "label": "Denizli brands we work with"
+        },
+        {
+          "value": "3.2x",
+          "label": "Average ROAS"
+        },
+        {
+          "value": "−41%",
+          "label": "Cost per lead"
+        }
+      ],
+      "problemsTitle": "What we typically see in Denizli social media accounts.",
+      "problems": [
+        {
+          "title": "Irregular content",
+          "description": "1-2 posts per week, no stories, brand voice unclear. Followers stagnate."
+        },
+        {
+          "title": "Weak local targeting",
+          "description": "Ads run nationwide; reaching Denizli customers is expensive."
+        },
+        {
+          "title": "No measurement",
+          "description": "Which content works, which ad converts — none of it is visible."
+        }
+      ],
+      "processTitle": "A custom social media operation in 4 steps.",
+      "process": [
+        {
+          "title": "Audit & strategy",
+          "description": "Account, competitor and local market analysis. Monthly themes and content calendar."
+        },
+        {
+          "title": "On-site shoots",
+          "description": "1-2 shoot days per month with our Denizli crew. Reels + static content production."
+        },
+        {
+          "title": "Publish & community",
+          "description": "Calendar live, comment/DM management, hashtag strategy."
+        },
+        {
+          "title": "Ads & measurement",
+          "description": "Locally-targeted Meta Ads, weekly dashboard, monthly optimization call."
+        }
+      ],
+      "casesTitle": "Local outcomes.",
+      "cases": [
+        {
+          "slug": "restoran-yerel-buyume",
+          "metric": "2x",
+          "industry": "Restaurant · Denizli",
+          "title": "Doubled in-store visits"
+        },
+        {
+          "slug": "e-ticaret-3x-donusum",
+          "metric": "3.4x",
+          "industry": "E-commerce",
+          "title": "3.4x conversions"
+        },
+        {
+          "slug": "saglik-klinigi-marka-yenileme",
+          "metric": "4x",
+          "industry": "Healthcare",
+          "title": "4x organic traffic"
+        }
+      ],
+      "faqTitle": "What you might wonder.",
+      "faq": [
+        {
+          "q": "Do you have a physical office in Denizli?",
+          "a": "Yes — Zafer Caddesi, Merkezefendi. We come on-site to see your brand and you can visit us."
+        },
+        {
+          "q": "Do you only work with Denizli clients?",
+          "a": "No, we work with brands across Turkey and global English-speaking clients too. But being physically present in Denizli is an advantage."
+        },
+        {
+          "q": "Do you come on-site for shoots?",
+          "a": "Yes — 1-2 shoot days per month included. No extra fee within Denizli."
+        },
+        {
+          "q": "Minimum contract length?",
+          "a": "3 months. Social media needs at least 3 months of consistent work to produce meaningful data."
+        }
+      ]
+    },
+    "meta-ads-ajansi": {
+      "metaTitle": "Meta Ads Agency — Facebook & Instagram Ad Management",
+      "metaDescription": "Looking for a Meta Ads agency? Measurable ROAS on Facebook and Instagram. Account audit to scaling, all under one roof.",
+      "eyebrow": "Meta Ads Agency",
+      "title": "Stop spending. Start converting.",
+      "lead": "Smart targeting, continuous A/B testing, strict budget discipline on Facebook and Instagram. Not guesses — measurable ROAS.",
+      "proof": [
+        {
+          "value": "3.2x",
+          "label": "Average ROAS lift"
+        },
+        {
+          "value": "−41%",
+          "label": "CPL reduction"
+        },
+        {
+          "value": "100+",
+          "label": "Campaigns managed"
+        }
+      ],
+      "problemsTitle": "What we commonly see in Meta Ads accounts.",
+      "problems": [
+        {
+          "title": "Budget leak",
+          "description": "Broad audiences, single creative, no fatigue tracking. ~30% of budget wasted."
+        },
+        {
+          "title": "Wrong funnel",
+          "description": "Awareness and conversion mixed in one campaign. Performance data is meaningless."
+        },
+        {
+          "title": "No decisions made",
+          "description": "Reports exist but next decision is unclear. Same campaign runs for months."
+        }
+      ],
+      "processTitle": "From account audit to scaling, 4 steps.",
+      "process": [
+        {
+          "title": "Account audit",
+          "description": "Deep scan of current account, creative, audiences and performance data. Quick wins identified."
+        },
+        {
+          "title": "Funnel rebuild",
+          "description": "Separate awareness → consideration → conversion campaigns with retargeting layers."
+        },
+        {
+          "title": "Creative & test",
+          "description": "Minimum 6 creative variations, controlled A/B testing, automatic scaling of winners."
+        },
+        {
+          "title": "Optimize & report",
+          "description": "Weekly dashboard, end-of-month strategy call. Clear visibility for every decision."
+        }
+      ],
+      "casesTitle": "Performance stories.",
+      "cases": [
+        {
+          "slug": "e-ticaret-3x-donusum",
+          "metric": "3.4x",
+          "industry": "E-commerce",
+          "title": "ROAS 1.2 → 4.1"
+        },
+        {
+          "slug": "online-egitim-lansmani",
+          "metric": "5.8x",
+          "industry": "Online Education",
+          "title": "Launch ROAS 5.8x"
+        },
+        {
+          "slug": "b2b-yazilim-lead-jenerasyonu",
+          "metric": "−58%",
+          "industry": "B2B SaaS",
+          "title": "CPL down 58%"
+        }
+      ],
+      "faqTitle": "What you might wonder.",
+      "faq": [
+        {
+          "q": "Minimum ad budget?",
+          "a": "We recommend starting at 15,000 TRY/month. Lower budgets make meaningful data and tests difficult."
+        },
+        {
+          "q": "Do you rebuild my account from scratch?",
+          "a": "We audit and clean the existing account. If structure is broken and tracking history is clean, we recommend a rebuild."
+        },
+        {
+          "q": "Who makes the creatives?",
+          "a": "We do. Our content production package bundled with Meta Ads has special pricing."
+        },
+        {
+          "q": "Contract length?",
+          "a": "Minimum 3 months. Meta's learning phase + first optimization round needs at least this."
+        }
+      ]
+    },
+    "instagram-reklam-yonetimi": {
+      "metaTitle": "Instagram Ads Management — DOU Social",
+      "metaDescription": "Expert Instagram ads management: smart targeting, native creatives, continuous optimization. Make every ad TRY count.",
+      "eyebrow": "Instagram Ads Management",
+      "title": "On Instagram, don't just appear — sell.",
+      "lead": "Right creative, right audience, right budget on Instagram ads. Not likes — conversions. Not impressions — sales.",
+      "proof": [
+        {
+          "value": "−41%",
+          "label": "Average CPL reduction"
+        },
+        {
+          "value": "2.8x",
+          "label": "Engagement lift"
+        },
+        {
+          "value": "100+",
+          "label": "Campaigns managed"
+        }
+      ],
+      "problemsTitle": "What we typically see on Instagram ads.",
+      "problems": [
+        {
+          "title": "Reels and static mixed",
+          "description": "No per-format campaigns; Instagram's algorithm gets confused."
+        },
+        {
+          "title": "No mobile-first design",
+          "description": "Landing page breaks on mobile; the ad-clicker bounces."
+        },
+        {
+          "title": "Story ads ignored",
+          "description": "Story format is cost-efficient but skipped; budget all goes to feed."
+        }
+      ],
+      "processTitle": "4 steps in Instagram ad management.",
+      "process": [
+        {
+          "title": "Format strategy",
+          "description": "Story, reel, feed, explore — separate campaigns and creative approaches per format."
+        },
+        {
+          "title": "Creative pack",
+          "description": "9:16 vertical video, 1:1 square, native Instagram design language. On-brand."
+        },
+        {
+          "title": "Targeting & test",
+          "description": "Lookalike, interest, retargeting layers. A/B test to identify winners."
+        },
+        {
+          "title": "Landing optimization",
+          "description": "Ad → mobile-first landing → checkout. Plug the leak, scale conversion."
+        }
+      ],
+      "casesTitle": "Instagram ad outcomes.",
+      "cases": [
+        {
+          "slug": "e-ticaret-3x-donusum",
+          "metric": "3.4x",
+          "industry": "E-commerce",
+          "title": "Store conversion 3.4x"
+        },
+        {
+          "slug": "online-egitim-lansmani",
+          "metric": "940",
+          "industry": "Online Education",
+          "title": "940 launch sales"
+        },
+        {
+          "slug": "restoran-yerel-buyume",
+          "metric": "8.3K",
+          "industry": "Restaurant",
+          "title": "New followers + 2x visits"
+        }
+      ],
+      "faqTitle": "What you might wonder.",
+      "faq": [
+        {
+          "q": "Do you only focus on Instagram?",
+          "a": "Instagram ads can be standalone, but Facebook ads can run via Meta Business Suite. We recommend the Instagram + Facebook combo."
+        },
+        {
+          "q": "Reels need video — where does it come from?",
+          "a": "Bundle our content production or supply your own. We build the creative strategy either way."
+        },
+        {
+          "q": "What budget should I start with?",
+          "a": "We recommend 15,000 TRY/month. Lower budgets make meaningful testing hard."
+        },
+        {
+          "q": "Do Story ads actually work?",
+          "a": "Used right, yes. Native Story design (full-bleed, fast tempo, clear CTA) has shown 20-30% lower CPL than feed for us."
+        }
+      ]
+    },
+    "dijital-pazarlama-ajansi": {
+      "metaTitle": "Digital Marketing Agency — DOU Social",
+      "metaDescription": "Ads, content, social, web and brand strategy — your brand's digital growth managed under one roof. Turkey + global.",
+      "eyebrow": "Digital Marketing Agency",
+      "title": "Your brand's digital growth operation.",
+      "lead": "Ads, content, social, web and brand strategy — five services, one operation. Consistent brand, measurable outcomes.",
+      "proof": [
+        {
+          "value": "30+",
+          "label": "Brands we work with"
+        },
+        {
+          "value": "5",
+          "label": "Services managed under one roof"
+        },
+        {
+          "value": "−41%",
+          "label": "Average CPL reduction"
+        }
+      ],
+      "problemsTitle": "The cost of having your digital scattered.",
+      "problems": [
+        {
+          "title": "Multiple agencies, multiple messages",
+          "description": "The ad agency says one thing, content another, web another. Brand reads inconsistent."
+        },
+        {
+          "title": "Data scattered everywhere",
+          "description": "Which channel produces value isn't clear. Budget optimization needs the full picture."
+        },
+        {
+          "title": "Slow decisions, slower delivery",
+          "description": "Decisions pass through three agencies + internal team; briefs ping-pong; speed drops."
+        }
+      ],
+      "processTitle": "4 layers in one operation.",
+      "process": [
+        {
+          "title": "Strategy",
+          "description": "Brand positioning, audience, channel mix, KPIs. One single plan."
+        },
+        {
+          "title": "Production",
+          "description": "Content, ad creative, web — same design language, same voice."
+        },
+        {
+          "title": "Delivery",
+          "description": "Paid and organic in coordination. Same message, different format."
+        },
+        {
+          "title": "Measure & optimize",
+          "description": "One dashboard, weekly decisions, monthly strategy call. The picture stays clear."
+        }
+      ],
+      "casesTitle": "Outcomes managed under one roof.",
+      "cases": [
+        {
+          "slug": "saglik-klinigi-marka-yenileme",
+          "metric": "4x",
+          "industry": "Healthcare",
+          "title": "Brand + web + content + SEO"
+        },
+        {
+          "slug": "online-egitim-lansmani",
+          "metric": "940",
+          "industry": "Online Education",
+          "title": "Content + email + ads"
+        },
+        {
+          "slug": "b2b-yazilim-lead-jenerasyonu",
+          "metric": "−58%",
+          "industry": "B2B SaaS",
+          "title": "LinkedIn + Google + content"
+        }
+      ],
+      "faqTitle": "What you might wonder.",
+      "faq": [
+        {
+          "q": "Can I take a single service?",
+          "a": "Yes. Meta Ads only, social only, web only — every service is available as its own package."
+        },
+        {
+          "q": "Are bundles better priced?",
+          "a": "Yes. With 2+ services together, 15-25% bundle pricing applies. More importantly: the same team avoids brief-handover chaos."
+        },
+        {
+          "q": "Is migrating from my current agency hard?",
+          "a": "Standard transition is 30 days. Account access, asset transfer, history docs — we run it via checklist."
+        },
+        {
+          "q": "Contract terms?",
+          "a": "Minimum 3 months, then monthly. If you're not happy in the first 30 days, the contract closes and the paid month is refunded."
+        }
+      ]
+    }
+  },
+  "Blog": {
+    "metaTitle": "Blog",
+    "metaDescription": "Field notes on ads, content and brand strategy. Tactics, frameworks and case analysis from the DOU Social team.",
+    "eyebrow": "Blog",
+    "heroTitle": "Notes from the field.",
+    "heroLead": "Tactical, usable writing on ads, content, social media and brand strategy.",
+    "empty": "No posts yet. Soon.",
+    "read": "Read the article",
+    "back": "All posts",
+    "relatedTitle": "Related posts.",
+    "readingTime": "{minutes} min read"
+  },
+  "Privacy": {
+    "metaTitle": "Privacy Policy",
+    "metaDescription": "DOU Social Privacy Policy. Information about personal data we collect, process and store under GDPR and KVKK.",
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: May 6, 2026",
+    "sections": [
+      {
+        "heading": "1. Data Controller",
+        "paragraphs": [
+          "This site (dousocial.com) is operated by DOU Social. For the processing of your personal data under GDPR and KVKK Law No. 6698, DOU Social acts as the data controller.",
+          "Contact: info@dousocial.com · Zafer Mah. Zafer Cd. No: 60/1, Merkezefendi / Denizli, Turkey."
+        ]
+      },
+      {
+        "heading": "2. Data Collected",
+        "paragraphs": [
+          "Through our forms, we collect the data you voluntarily submit: name, surname, email address, phone number, company info and form contents (message/request). This data is collected only when you fill in forms by your own consent.",
+          "Automatically: IP address, browser type, pages visited, session duration. This data is processed for analytics purposes, in line with your cookie consent."
+        ]
+      },
+      {
+        "heading": "3. Purpose of Processing",
+        "paragraphs": [
+          "Your data is processed for: (a) responding to your requests and form submissions, (b) sharing information about our services, (c) handling pre-contractual conversations, (d) measuring and improving site performance.",
+          "Your data is not shared with third parties for marketing without your explicit consent."
+        ]
+      },
+      {
+        "heading": "4. Retention Period",
+        "paragraphs": [
+          "Data submitted through forms is retained for 24 months following the resolution of the request. When a contracted client relationship begins, applicable legal retention periods (tax law, etc.) apply.",
+          "Cookie data is retained for the durations specified in our cookie policy."
+        ]
+      },
+      {
+        "heading": "5. Data Transfer",
+        "paragraphs": [
+          "Your data may be shared with our service providers (email: Resend; web hosting: Vercel; analytics: Google Analytics). These providers process data under their own privacy policies.",
+          "Where international data transfer occurs, transfer happens only to countries with adequate protection or under standard contractual clauses."
+        ]
+      },
+      {
+        "heading": "6. Your Rights",
+        "paragraphs": [
+          "Regarding your personal data, you have the right to: (a) know whether it's being processed, (b) request information if it is, (c) learn the purpose of processing, (d) request correction/deletion, (e) object to processing.",
+          "For requests, write to info@dousocial.com. Requests are answered within 30 days."
+        ]
+      },
+      {
+        "heading": "7. Data Security",
+        "paragraphs": [
+          "We take technical and administrative measures to secure your data: HTTPS encryption, access control, secure database, regular security updates.",
+          "However, no method of transmission over the internet is 100% secure."
+        ]
+      },
+      {
+        "heading": "8. Changes",
+        "paragraphs": [
+          "This privacy policy may be updated as needed. Important changes are posted on this page and you may be notified by email when relevant."
+        ]
+      }
+    ]
+  },
+  "Terms": {
+    "metaTitle": "Terms of Service",
+    "metaDescription": "DOU Social website terms of service. Access to site content, intellectual property and liability limitations.",
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: May 6, 2026",
+    "sections": [
+      {
+        "heading": "1. Acceptance",
+        "paragraphs": [
+          "By visiting this site (dousocial.com) you accept the following terms. If you do not accept the terms, you should not use the site."
+        ]
+      },
+      {
+        "heading": "2. Service Description",
+        "paragraphs": [
+          "This site is an informational presence about DOU Social's services (Meta Ads management, social media management, content production, web design, brand strategy).",
+          "Content is for informational purposes; it does not constitute legal, financial or professional advice."
+        ]
+      },
+      {
+        "heading": "3. Intellectual Property",
+        "paragraphs": [
+          "All content on the site (text, images, logo, design, code) belongs to DOU Social or is licensed for use. It cannot be copied, reproduced or used commercially without written permission.",
+          "Blog posts may be shared for personal reading and quoted with attribution."
+        ]
+      },
+      {
+        "heading": "4. User Obligations",
+        "paragraphs": [
+          "When using the site you agree to: (a) not submit unlawful content, (b) not attempt to compromise site security, (c) not infringe others' rights, (d) provide accurate, current information."
+        ]
+      },
+      {
+        "heading": "5. Limitation of Liability",
+        "paragraphs": [
+          "While reasonable effort is made for content accuracy, DOU Social cannot be held liable for possible errors in content or damages arising from site use.",
+          "Obligations regarding contracted client services are specified in separately signed contract documents."
+        ]
+      },
+      {
+        "heading": "6. Third-Party Links",
+        "paragraphs": [
+          "The site may contain links to third-party sites. DOU Social is not responsible for the content or privacy practices of such sites."
+        ]
+      },
+      {
+        "heading": "7. Changes",
+        "paragraphs": [
+          "These terms may be updated from time to time. The current version is always published on this page."
+        ]
+      },
+      {
+        "heading": "8. Governing Law",
+        "paragraphs": [
+          "These terms are governed by the laws of the Republic of Turkey. Any disputes are subject to the jurisdiction of Denizli courts and enforcement offices."
+        ]
+      }
+    ]
+  },
+  "Cookies": {
+    "metaTitle": "Cookie Policy",
+    "metaDescription": "DOU Social cookie policy. Which cookies we use, how long we store them and how you can control them.",
+    "title": "Cookie Policy",
+    "lastUpdated": "Last updated: May 6, 2026",
+    "sections": [
+      {
+        "heading": "1. What is a Cookie?",
+        "paragraphs": [
+          "Cookies are small text files placed in your browser by websites you visit. They allow the site to recognize you, remember your preferences and understand how the site is used."
+        ]
+      },
+      {
+        "heading": "2. Which Cookies We Use",
+        "paragraphs": [
+          "Essential cookies: Required for basic site functions (e.g., language preference, cookie consent). These cookies cannot be disabled.",
+          "Analytics cookies: Anonymous visit statistics via Google Analytics 4 and Google Tag Manager. These cookies load only when you give explicit consent.",
+          "Marketing cookies: Meta Pixel (for Facebook/Instagram ad optimization). These cookies also load only when you give explicit consent."
+        ]
+      },
+      {
+        "heading": "3. Cookie Consent",
+        "paragraphs": [
+          "On your first visit a cookie consent banner appears. If you click \"Accept\", analytics and marketing cookies load. If you click \"Essential only\", only essential cookies load.",
+          "You can revoke your consent any time: clearing the dou_consent_v1 key from your browser's localStorage, or clearing site data via your browser's cookie settings."
+        ]
+      },
+      {
+        "heading": "4. Third-Party Cookies",
+        "paragraphs": [
+          "Google (Analytics + Tag Manager) and Meta (Facebook Pixel) may set their own cookies through this site. These cookies are subject to their own privacy policies.",
+          "Google: policies.google.com/privacy · Meta: facebook.com/privacy"
+        ]
+      },
+      {
+        "heading": "5. Retention",
+        "paragraphs": [
+          "Essential cookies last for the session or 12 months. Analytics cookies for 14 months. Marketing cookies for 90 days."
+        ]
+      },
+      {
+        "heading": "6. Browser Settings",
+        "paragraphs": [
+          "You can manage cookies via your browser settings. Rejecting all cookies may break some site functionality."
+        ]
+      }
+    ]
+  },
+  "Consent": {
+    "title": "Cookies.",
+    "body": "We use cookies to improve your experience and measure performance. You can revoke consent any time.",
+    "policyLink": "Our cookie policy",
+    "accept": "Accept",
+    "reject": "Essential only"
+  },
+  "NotFound": {
+    "title": "Page not found.",
+    "body": "The page you're looking for may have moved or never existed. You can continue from below.",
+    "home": "Back to home",
+    "contact": "Get in touch",
+    "seeWork": "Or browse our work"
+  },
+  "Error": {
+    "title": "Something went wrong.",
+    "body": "An unexpected error occurred. Reload to retry, or go back home.",
+    "ref": "Error ref: {digest}",
+    "retry": "Try again",
+    "home": "Back to home"
+  },
+  "Testimonials": {
+    "eyebrow": "Client Reviews",
+    "title": "Why brands trust us.",
+    "items": [
+      {
+        "name": "Gülsüm Aydın",
+        "role": "Founder",
+        "company": "E-Commerce",
+        "text": "Since working with DOU Social, our ad costs dropped 40% and sales tripled. Weekly reports keep us on top of everything in real time."
+      },
+      {
+        "name": "Mehmet Yıldız",
+        "role": "CEO",
+        "company": "B2B Software",
+        "text": "They don't just run ads and wait. Weekly reports, monthly strategy updates. They treat us like a real business partner."
+      },
+      {
+        "name": "Serap Kaya",
+        "role": "Manager",
+        "company": "Restaurant Group",
+        "text": "Our Instagram visibility has grown incredibly. The reels content is very professional. Customer feedback has also picked up noticeably."
+      },
+      {
+        "name": "Berkay Özdemir",
+        "role": "Co-Founder",
+        "company": "SaaS Startup",
+        "text": "They respond within 24 hours and tell you clearly what they're going to do. That's rare in this industry. Their transparency is invaluable."
+      },
+      {
+        "name": "Ayşe Çelik",
+        "role": "Clinic Manager",
+        "company": "Healthcare",
+        "text": "The website redesign came out exactly as we wanted. After the SEO work, organic traffic grew 80% and new patient inquiries increased significantly."
+      },
+      {
+        "name": "Deniz Karabaş",
+        "role": "Marketing Director",
+        "company": "EdTech",
+        "text": "We had concerns about switching agencies, but the transition was completely smooth. The team took over everything and we focused on growth."
+      }
+    ]
+  },
+  "FAQ": {
+    "metaTitle": "Frequently Asked Questions",
+    "metaDescription": "Answers to questions about DOU Social. Learn about our services, pricing, process, and how to get in touch.",
+    "eyebrow": "FAQ",
+    "heroTitle": "Answers to your questions.",
+    "heroLead": "The most common questions are answered here. If you can't find what you're looking for, reach out — we reply within 24 hours.",
+    "ctaLabel": "Still have questions?",
+    "ctaText": "Reach out for a free strategy consultation.",
+    "ctaButton": "Get in Touch",
+    "items": [
+      {
+        "question": "What services does DOU Social offer?",
+        "answer": "We offer Meta Ads (Facebook & Instagram advertising), social media management, content production (photography, video, design), web design, and brand strategy. All services are managed with an integrated strategy — you can combine modules to fit your needs."
+      },
+      {
+        "question": "How does pricing work? Do you have fixed packages?",
+        "answer": "Every brand comes with different needs, so we don't have a standard price list. After a free discovery call to understand your brand and goals, we prepare a tailored proposal. We offer packages in three tiers: Starter, Growth, and Scale."
+      },
+      {
+        "question": "Do you work with brands outside of Denizli?",
+        "answer": "Yes, we work with brands across Turkey and internationally. All processes and reporting are conducted online — location is no barrier."
+      },
+      {
+        "question": "What is the minimum budget for Meta ad management?",
+        "answer": "The minimum ad spend budget is 5,000 TL per month. An agency management fee is added on top. We also develop specific optimization strategies to maximize efficiency on smaller budgets."
+      },
+      {
+        "question": "How does reporting work? Is it transparent?",
+        "answer": "In addition to comprehensive monthly reports, we provide live dashboard access. Ad spend, conversion rates, cost per lead, and other KPIs can be tracked in real time. No surprises — every decision is data-driven."
+      },
+      {
+        "question": "Who produces the social media content?",
+        "answer": "All content is produced by the in-house content team at DOU Social — including photography, video, reels, graphic design, and copywriting. Monthly content calendars are submitted for your approval in advance."
+      },
+      {
+        "question": "How long is the contract? Can I exit easily?",
+        "answer": "We offer contract options from 3 to 12 months depending on the service. Contracts can be terminated with 30 days written notice. The minimum term commitment ensures the working time needed to deliver on our promises."
+      },
+      {
+        "question": "Can I switch from my current agency?",
+        "answer": "Yes. We manage the entire transition: ad account transfers, content archives, page access, and strategy handover included. The process is typically completed within 5-7 business days."
+      },
+      {
+        "question": "What is the first step to getting started?",
+        "answer": "Fill out our free analysis form or reach us directly via WhatsApp or phone. We'll get in touch within 24 hours to schedule a brief discovery call — about 30 minutes and completely free."
+      }
+    ]
+  },
+  "Footer": {
+    "tagline": "A Denizli-based digital agency making your ad spend smarter and your brand more visible.",
+    "services": "Services",
+    "company": "Company",
+    "contact": "Contact",
+    "metaAds": "Meta Ads Management",
+    "social": "Social Media",
+    "content": "Content Production",
+    "web": "Web Design",
+    "strategy": "Brand Strategy",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "Status": {
+    "wip": "v0.1 — work in progress"
+  },
+  "KVKK": {
+    "eyebrow": "Law No. 6698 (KVKK)",
+    "title": "Personal Data Protection and Processing Policy",
+    "lastUpdated": "Last updated: June 2026",
+    "close": "Got it, close",
+    "sections": [
+      {
+        "heading": "",
+        "body": "At Dou Social, ensuring the privacy and security of your personal data is among our top priorities under the Personal Data Protection Law No. 6698 (\"KVKK\"). This policy has been prepared to explain the purposes for which personal data collected through our website at www.dousocial.com and our digital/social media services is processed, stored, and protected."
+      },
+      {
+        "heading": "1. Data Controller",
+        "body": "Data Controller: Dou Social\nAddress: Zafer, Zafer Cd. No: 60, 20020 Denizli Merkezefendi/Denizli\nPhone: +90 530 084 5468\nEmail: info@dousocial.com"
+      },
+      {
+        "heading": "2. Personal Data Processed",
+        "body": "Identity information (name-surname), contact information (email, phone), customer transaction information (platform usage details, interaction data), financial information (service purchases, if any), corporate information, internet usage information (IP address, cookie records), complaints and support requests."
+      },
+      {
+        "heading": "3. Purposes of Personal Data Processing",
+        "body": "Service delivery (access to social media and digital platform services), account and campaign management, billing, customer communication, user interaction and performance analysis, and fulfillment of legal obligations."
+      },
+      {
+        "heading": "4. Methods of Collection and Legal Bases",
+        "body": "Your personal data is collected through our website, email communications, our social media accounts (@dousocial etc.), analytics tools, and integrated digital platforms (Meta, Google, etc.)."
+      },
+      {
+        "heading": "5. Transfer of Personal Data",
+        "body": "Your data may be shared with financial advisors, banks and payment institutions for accounting purposes, technical infrastructure providers (AWS, Google Cloud, Meta, Google Analytics, etc.), and authorized public authorities when legally required."
+      },
+      {
+        "heading": "6. Storage and Protection of Personal Data",
+        "body": "Your personal data is retained for as long as the purposes of processing require, taking into account applicable statutory limitation periods. Once the purpose of processing ceases, data is deleted or anonymized by Dou Social.\nEncryption and up-to-date firewalls are used in digital environments.\nAccess is restricted to authorized personnel and administrators only."
+      },
+      {
+        "heading": "7. Rights of Data Subjects",
+        "body": "Under Article 11 of KVKK, you have the right to learn whether your data is being processed, request correction, and request deletion. You may submit your requests to info@dousocial.com. Applications are concluded within the legal period of 30 days at the latest."
+      },
+      {
+        "heading": "8. Cookie Policy",
+        "body": "www.dousocial.com uses cookies to improve your user experience, remember your preferences on the site, and analyze site traffic (performance and analytics cookies). Users may manage or disable cookies at any time through their browser settings."
+      },
+      {
+        "heading": "9. Policy Updates",
+        "body": "This policy may be updated in accordance with changes in legislation affecting the information technology and digital media sector and company practices. The current version is always published at www.dousocial.com."
+      },
+      {
+        "heading": "10. Entry into Force",
+        "body": "This policy enters into force on the date of publication and is binding for all data processing activities carried out by Dou Social."
+      }
+    ]
+  }
+}

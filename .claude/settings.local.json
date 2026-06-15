@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm add:*)",
+      "Bash(pnpm build:*)",
+      "Bash(node -e \"const t=require\\('./messages/tr.json'\\); console.log\\(JSON.stringify\\({Hero:t.Hero, Nav:t.Nav}, null, 2\\)\\)\")",
+      "Bash(node -e \"const t=require\\('./messages/tr.json'\\); console.log\\(JSON.stringify\\({Metrics:t.Metrics, Services:t.Services, CaseStudies:t.CaseStudies}, null, 2\\)\\)\")",
+      "Bash(node -e \"const t=require\\('./messages/tr.json'\\); console.log\\(JSON.stringify\\({Blog:t.Blog, Quote:t.Quote}, null, 2\\)\\)\")",
+      "Bash(npx next *)",
+      "Bash(python -c \"import json; d = json.load\\(open\\('messages/en.json'\\)\\); print\\(list\\(d.get\\('Contact', {}\\).get\\('form', {}\\).keys\\(\\)\\)\\)\")",
+      "Bash(powershell -Command \"\\(Get-Content src/app/[locale]/strateji-gorusmesi/page.tsx\\) -replace 'spacing=\\\\\"lg\\\\\"', 'spacing=\\\\\"hero\\\\\"' | Set-Content src/app/[locale]/strateji-gorusmesi/page.tsx; \\(Get-Content src/app/[locale]/teklif-al/page.tsx\\) -replace 'spacing=\\\\\"lg\\\\\"', 'spacing=\\\\\"hero\\\\\"' | Set-Content src/app/[locale]/teklif-al/page.tsx; \\(Get-Content src/app/[locale]/dijital-checkup/page.tsx\\) -replace 'spacing=\\\\\"lg\\\\\"', 'spacing=\\\\\"hero\\\\\"' | Set-Content src/app/[locale]/dijital-checkup/page.tsx; echo done\")",
+      "Bash(del \"src\\\\components\\\\sections\\\\ManifestoSection.tsx\")",
+      "Bash(Remove-Item \"C:\\\\Users\\\\Efe\\\\Downloads\\\\dou-social-web-main\\\\src\\\\components\\\\sections\\\\ManifestoSection.tsx\" -Force)",
+      "Bash(python -c ' *)",
+      "Bash(npx tsc *)",
+      "Bash(Select-String \"ContactMethods\")",
+      "Bash(node -e \"const t = require\\('./messages/tr.json'\\); console.log\\(JSON.stringify\\({Services: t.Services, ServicesHub: t.ServicesHub}, null, 2\\)\\)\")",
+      "Bash(node -e \"const t = require\\('./messages/en.json'\\); console.log\\(JSON.stringify\\({Services: t.Services, ServicesHub: t.ServicesHub}, null, 2\\)\\)\")",
+      "Bash(node -e \"const fs=require\\('fs'\\); const t=fs.readFileSync\\('./messages/tr.json','utf8'\\); const start=t.indexOf\\('\\\\\"Services\\\\\"'\\); const end=t.indexOf\\('}',t.indexOf\\('\\\\\"web\\\\\"',start\\)+200\\)+2; console.log\\(t.slice\\(start,end\\)\\)\")",
+      "Bash(node -e \"const fs=require\\('fs'\\); const t=fs.readFileSync\\('./src/app/[locale]/hizmetler/page.tsx','utf8'\\); const s=t.indexOf\\('heroTitle'\\); console.log\\(t.slice\\(s-150, s+200\\)\\)\")",
+      "Bash(findstr /i \"Services\\\\|HubGrid\\\\|hizmetler\")",
+      "Bash(Select-String \"Services|HubGrid|hizmetler\")",
+      "Bash(node -e \"const {SERVICE_SLUGS} = require\\('./src/lib/services'\\); const [f, ...r] = SERVICE_SLUGS; console.log\\('featured:', f\\); console.log\\('rest:', r\\);\")",
+      "Bash(node -e \"const t = require\\('./messages/tr.json'\\); const keys = ['metaAds','social','content','web','brandStrategy']; console.log\\(JSON.stringify\\(t.Services, null, 2\\)\\)\")",
+      "Bash(node -e \"const t = require\\('./messages/tr.json'\\); console.log\\(JSON.stringify\\(t.ServiceDetail || t.ServicePage || t.ServiceDetail || null, null, 2\\)\\)\")",
+      "Bash(node -e \"const t = require\\('./messages/tr.json'\\); const keys = Object.keys\\(t\\); console.log\\(keys.join\\('\\\\n'\\)\\)\")"
+    ]
+  }
+}
