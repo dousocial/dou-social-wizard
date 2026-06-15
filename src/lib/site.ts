@@ -1,5 +1,5 @@
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://dousocial.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.dousocial.com";
 
 export const STATIC_PATHS = [
   "/",
