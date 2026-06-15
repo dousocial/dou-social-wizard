@@ -126,7 +126,7 @@ export default async function ContactsPage({
                 <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                   <p style={{ margin: 0, fontSize: 11, color: "#555", marginBottom: 3 }}>İletişim</p>
                   <a href={`mailto:${c.email}`} style={{ color: "#f87171", textDecoration: "none", fontSize: 13 }}>{String(c.email)}</a>
-                  {c.phone && (
+                  {!!c.phone && (
                     <a href={`tel:${c.phone}`} style={{ color: "#9ca3af", textDecoration: "none", fontSize: 13 }}>{String(c.phone)}</a>
                   )}
                 </div>

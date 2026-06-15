@@ -70,7 +70,7 @@ export function ContactsList({ contacts }: { contacts: Contact[] }) {
                   >
                     {String(c.email)}
                   </a>
-                  {c.phone && (
+                  {!!c.phone && (
                     <a
                       href={`tel:${c.phone}`}
                       onClick={e => e.stopPropagation()}

@@ -323,7 +323,7 @@ function ContactDetail({ data }: { data: Record<string, unknown> }) {
             : <span style={{ color: "var(--c-dim)" }}>—</span>
         } />
       </div>
-      {data.message && (
+      {!!data.message && (
         <div>
           <span style={{ fontSize: 11, color: "var(--c-dim)", fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.05em" }}>Mesaj</span>
           <p style={{ margin: "6px 0 0", fontSize: 14, color: "var(--c-text)", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
@@ -404,7 +404,7 @@ function AuditDetail({ data }: { data: Record<string, unknown> }) {
         </div>
       </div>
 
-      {data.report_text && String(data.report_text).trim() && (
+      {!!data.report_text && String(data.report_text).trim() && (
         <div>
           <span style={{ fontSize: 11, color: "var(--c-dim)", fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.05em" }}>Rapor</span>
           <p style={{ margin: "6px 0 0", fontSize: 13, color: "var(--c-text)", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
