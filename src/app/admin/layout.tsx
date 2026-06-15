@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { AdminNav } from "./_components/AdminNav";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
