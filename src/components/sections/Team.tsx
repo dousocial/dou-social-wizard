@@ -65,6 +65,8 @@ function MemberCard({ member, index }: { member: typeof TEAM[number]; index: num
             <img
               src={member.photo}
               alt={member.name}
+              loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover transition-all duration-300 md:grayscale md:group-hover:grayscale-0"
             />
           ) : (

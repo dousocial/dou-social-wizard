@@ -29,7 +29,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ["500", "600", "700"],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dousocial.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.dousocial.com";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

@@ -47,6 +47,8 @@ export async function ClientLogos() {
                   <img
                     src={client.logo}
                     alt={client.name}
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 h-full w-full object-cover opacity-70 transition-all duration-300 md:grayscale md:opacity-50 md:group-hover:grayscale-0 md:group-hover:brightness-0 md:group-hover:invert md:group-hover:opacity-100 md:group-hover:scale-105"
                   />
                 ) : (

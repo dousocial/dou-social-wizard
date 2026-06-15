@@ -112,18 +112,17 @@ export function Hero() {
         style={bgStyle}
         className="pointer-events-none absolute inset-0 select-none"
       >
-        {isClient && !reduceMotion ? (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover"
-            src="/videos/hero-bg.mp4"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-ink" />
-        )}
+        {/* Rendered server-side for LCP; CSS hides it when prefers-reduced-motion is set */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+          src="/videos/hero-bg.mp4"
+        />
+        {/* Fallback dark background for reduced-motion / no-video */}
+        <div className="absolute inset-0 bg-ink motion-safe:opacity-0" />
 
         {/* Karartma + marka rengi geçişi */}
         <div className="absolute inset-0 bg-black/55" />
