@@ -17,43 +17,43 @@ const EASE_SPRING    = [0.34, 1.56, 0.64, 1] as const;
 //       React may override styles, breaking the animation start position.
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: EASE_OUT_EXPO },
+    transition: { duration: 0.5, ease: EASE_OUT_EXPO },
   },
 };
 
 const fadeOnly: Variants = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { duration: 0.4, ease: EASE_OUT_QUART } },
+  show: { opacity: 1, transition: { duration: 0.3, ease: EASE_OUT_QUART } },
 };
 
 const slideRight: Variants = {
-  hidden: { opacity: 0, x: -36 },
+  hidden: { opacity: 0, x: -24 },
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.7, ease: EASE_OUT_EXPO },
+    transition: { duration: 0.5, ease: EASE_OUT_EXPO },
   },
 };
 
 const slideLeft: Variants = {
-  hidden: { opacity: 0, x: 36 },
+  hidden: { opacity: 0, x: 24 },
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.7, ease: EASE_OUT_EXPO },
+    transition: { duration: 0.5, ease: EASE_OUT_EXPO },
   },
 };
 
 const scaleUp: Variants = {
-  hidden: { opacity: 0, scale: 0.94 },
+  hidden: { opacity: 0, scale: 0.96 },
   show: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.7, ease: EASE_OUT_EXPO },
+    transition: { duration: 0.5, ease: EASE_OUT_EXPO },
   },
 };
 
@@ -62,25 +62,25 @@ const clipReveal: Variants = {
   show: {
     clipPath: "inset(0 0 0% 0)",
     opacity: 1,
-    transition: { duration: 0.8, ease: EASE_OUT_EXPO },
+    transition: { duration: 0.55, ease: EASE_OUT_EXPO },
   },
 };
 
 const blurIn: Variants = {
-  hidden: { opacity: 0, scale: 1.04 },
+  hidden: { opacity: 0, scale: 1.02 },
   show: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 1.0, ease: EASE_OUT_QUART },
+    transition: { duration: 0.6, ease: EASE_OUT_QUART },
   },
 };
 
 const popIn: Variants = {
-  hidden: { opacity: 0, scale: 0.78 },
+  hidden: { opacity: 0, scale: 0.85 },
   show: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.55, ease: EASE_SPRING },
+    transition: { duration: 0.4, ease: EASE_SPRING },
   },
 };
 

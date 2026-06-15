@@ -55,10 +55,10 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     history.scrollRestoration = "manual";
 
     const lenis = new Lenis({
-      duration: 1.0,
+      duration: 0.7,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: !prefersReducedMotion,
-      touchMultiplier: 1.5,
+      touchMultiplier: 1.2,
     });
 
     _lenis = lenis;

@@ -17,18 +17,16 @@ import "../globals.css";
 // Body text — Inter: neutral, highly legible, industry-standard for premium UIs
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin", "latin-ext"], // latin-ext covers full Turkish character set
+  subsets: ["latin", "latin-ext"],
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600"],
 });
 
-// Heading / display text — Plus Jakarta Sans: dynamic, modern, strong personality
-// Already loaded → zero additional network request vs a new font family
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
   subsets: ["latin", "latin-ext"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["500", "600", "700"],
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dousocial.com";
