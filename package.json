@@ -30,6 +30,9 @@
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.5.0"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": ["core-js", "sharp"]
+  },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.2.6",
     "@tailwindcss/postcss": "^4",
