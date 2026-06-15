@@ -29,7 +29,7 @@ const TEAM = [
     name: "Fuat Koraç",
     role: "Videographer",
     photo: "/team/fuat.png",
-    quote: "Bir kare bin kelimeden fazlasını anlatır.",
+    quote: "Hayatı bir kadrajın içinden, en estetik haliyle yakalamayı seviyorum. Hızlı tüketilen dijital dünyada kaliteden ödün vermeden, dinamik çekimler ve ritmik kurgularla markaların ve fikirlerin görsel kimliğini tasarlıyorum.",
   },
   {
     name: "Nur Tekin",
@@ -112,11 +112,11 @@ export function Team() {
               className="mt-3 font-display font-bold leading-tight tracking-tight text-ink"
               style={{ fontSize: "var(--text-4xl)" }}
             >
-              Arkamızdaki isimler.
+              Birlikte yapıyoruz.
             </h2>
           </div>
           <p className="max-w-xs text-sm text-mute-500 md:text-right">
-            Deneyimli ve tutkulu bir ekiple markanızı büyütüyoruz.
+            Strateji, içerik, kamera, kod — hepsi tek çatı altında, hepsi sizin için.
           </p>
         </Reveal>
 

@@ -16,7 +16,7 @@ const CLIENTS = [
   { id: 6,  name: "VİNTORA ETİKET",         initials: "VE", logo:"/logos/vintora.png"  },
   { id: 7,  name: "REAL BROKER",            initials: "RB", logo:"/logos/rb.png"  },
   { id: 8,  name: "DİYETİSYEN CEYLİN YASTIKÇI", initials: "CY", logo:"/logos/ceylin.png"  },
-  { id: 9,  name: "HANGARAGE",              initials: "HG", logo:"/logos/yapigranit.png"  },
+  { id: 9,  name: "HANGARAGE",              initials: "HG", logo:"/logos/han.png"  },
   { id: 10, name: "PAMAİR HAVACILIK",       initials: "PA", logo:"/logos/pamair.png"  },
 ];
 
