@@ -39,7 +39,7 @@ function MoonIcon() {
   );
 }
 
-export function ThemeToggle({ className }: { className?: string }) {
+export function ThemeToggle({ className, forceLight }: { className?: string; forceLight?: boolean }) {
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
@@ -69,7 +69,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={toggle}
       aria-label={isDark ? "Açık moda geç" : "Koyu moda geç"}
-      className={`relative flex h-8 w-8 items-center justify-center rounded-full text-mute-500 transition-colors duration-200 hover:bg-mute-100 hover:text-ink ${className ?? ""}`}
+      className={`relative flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-200 ${forceLight ? "text-white/80 hover:bg-white/10 hover:text-white" : "text-mute-500 hover:bg-mute-100 hover:text-ink"} ${className ?? ""}`}
     >
       <AnimatePresence mode="wait" initial={false}>
         {isDark ? (

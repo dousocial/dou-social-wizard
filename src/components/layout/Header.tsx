@@ -63,7 +63,10 @@ export function Header() {
                 scrollToTop();
               }
             }}
-            className="flex shrink-0 items-center text-ink transition-opacity duration-200 hover:opacity-70"
+            className={cn(
+              "flex shrink-0 items-center transition-[color,opacity] duration-300 hover:opacity-70",
+              scrolled ? "text-ink" : "text-white"
+            )}
             aria-label="DOU Social — Ana sayfa"
           >
             <Logo className="h-10 w-[100px]" />
@@ -85,7 +88,9 @@ export function Header() {
                   }}
                   className={cn(
                     "relative px-2 py-2 text-sm font-medium transition-colors duration-200",
-                    active ? "text-ink" : "text-mute-500 hover:text-ink"
+                    scrolled
+                      ? (active ? "text-ink" : "text-mute-500 hover:text-ink")
+                      : (active ? "text-white" : "text-white/65 hover:text-white")
                   )}
                 >
                   {t(item.key)}
@@ -95,7 +100,10 @@ export function Header() {
                     {active && (
                       <motion.span
                         layoutId="nav-active"
-                        className="absolute bottom-0.5 left-2 right-2 h-px bg-ink"
+                        className={cn(
+                          "absolute bottom-0.5 left-2 right-2 h-px",
+                          scrolled ? "bg-ink" : "bg-white"
+                        )}
                         initial={{ opacity: 0, scaleX: 0 }}
                         animate={{ opacity: 1, scaleX: 1 }}
                         exit={{ opacity: 0, scaleX: 0 }}
@@ -106,7 +114,10 @@ export function Header() {
 
                   {/* Hover arka planı */}
                   <motion.span
-                    className="absolute inset-0 rounded-md bg-mute-100"
+                    className={cn(
+                      "absolute inset-0 rounded-md",
+                      scrolled ? "bg-mute-100" : "bg-white/10"
+                    )}
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
                     transition={{ duration: 0.15 }}
@@ -119,8 +130,11 @@ export function Header() {
 
           {/* Sağ taraf aksiyonları */}
           <div className="flex items-center gap-3">
-            <LangSwitcher className="hidden sm:flex" />
-            <ThemeToggle />
+            <LangSwitcher
+              className="hidden sm:flex"
+              forceLight={!scrolled}
+            />
+            <ThemeToggle forceLight={!scrolled} />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}

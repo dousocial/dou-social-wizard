@@ -41,7 +41,7 @@ export async function ClientLogos() {
         <Reveal stagger className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5 md:gap-4">
           {CLIENTS.map((client) => (
             <RevealItem key={client.id}>
-              <div className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-mute-100 transition-all duration-300 hover:bg-accent hover:shadow-md">
+              <div className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-mute-200 transition-all duration-300 hover:bg-accent hover:shadow-md">
                 {client.logo ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -49,11 +49,11 @@ export async function ClientLogos() {
                     alt={client.name}
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 h-full w-full object-cover opacity-70 transition-all duration-300 md:grayscale md:opacity-50 md:group-hover:grayscale-0 md:group-hover:brightness-0 md:group-hover:invert md:group-hover:opacity-100 md:group-hover:scale-105"
+                    className="absolute inset-0 h-full w-full object-contain p-3 opacity-80 transition-all duration-300 md:grayscale md:opacity-65 md:group-hover:grayscale-0 md:group-hover:brightness-0 md:group-hover:invert md:group-hover:opacity-100 md:group-hover:scale-105"
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display text-2xl font-bold text-mute-300 transition-colors duration-300 group-hover:text-white/60">
+                    <span className="font-display text-2xl font-bold text-mute-400 transition-colors duration-300 group-hover:text-white/80">
                       {client.initials}
                     </span>
                   </div>
