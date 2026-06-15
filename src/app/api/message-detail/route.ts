@@ -1,11 +1,6 @@
 import { cookies } from "next/headers";
-import { createClient } from "@supabase/supabase-js";
 import { verifyToken } from "@/lib/session";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+import { supabase } from "@/lib/supabase";
 
 export async function GET(request: Request) {
   const cookieStore = await cookies();
