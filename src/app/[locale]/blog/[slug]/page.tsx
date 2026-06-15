@@ -15,10 +15,10 @@ import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { mdxComponents } from "@/components/blog/MdxComponents";
 import { ArticleSchema } from "@/components/blog/ArticleSchema";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { getAllSlugs, getAllPosts, getPostBySlug } from "@/lib/blog";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dousocial.com";
+import { SITE_URL } from "@/lib/site";
 
 export async function generateStaticParams() {
   const all = await Promise.all(
@@ -60,6 +60,14 @@ export default function BlogPostPage({
   return (
     <>
       <ArticleSchema post={post} url={url} siteUrl={SITE_URL} />
+      <BreadcrumbSchema
+        locale={locale as "tr" | "en"}
+        crumbs={[
+          { name: "Ana Sayfa", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: `/blog/${slug}` },
+        ]}
+      />
 
       <Section spacing="lg">
         <Container>

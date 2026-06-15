@@ -5,6 +5,8 @@ import { ContactHero } from "@/components/sections/ContactHero";
 import { ContactMethods } from "@/components/sections/ContactMethods";
 import { ContactFormSection } from "@/components/sections/ContactFormSection";
 import { ContactMap } from "@/components/sections/ContactMap";
+import { LocalBusinessSchema } from "@/components/seo/LocalBusinessSchema";
+import { SITE_URL } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -25,6 +27,7 @@ export default function ContactPage({
 
   return (
     <>
+      <LocalBusinessSchema url={SITE_URL} />
       <ContactHero />
       <ContactMethods />
       <ContactFormSection />
