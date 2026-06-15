@@ -77,13 +77,18 @@ export async function submitContactForm(
   const sharedErr = validateShared(shared);
   if (sharedErr) return { status: "error", error: sharedErr };
 
-  await supabase.from("contacts").insert({
+  const { error: dbErr } = await supabase.from("contacts").insert({
     type: "iletisim",
     name: shared.name,
     email: shared.email,
     phone: shared.phone ?? null,
     message: shared.message,
   });
+
+  if (dbErr) {
+    console.error("[contact form] supabase error:", dbErr.message, dbErr.code);
+    return { status: "error", error: "db-error: " + dbErr.message };
+  }
 
   return { status: "success" };
 }
