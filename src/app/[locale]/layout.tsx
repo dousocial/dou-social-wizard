@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
@@ -30,6 +30,16 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.dousocial.com";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)",  color: "#111111" },
+  ],
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
