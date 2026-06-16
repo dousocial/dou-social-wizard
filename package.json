@@ -14,6 +14,7 @@
     "@supabase/supabase-js": "^2.108.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
+    "googleapis": "^173.0.0",
     "gray-matter": "^4.0.3",
     "gsap": "^3.15.0",
     "html2canvas": "^1.4.1",
@@ -31,7 +32,10 @@
     "tailwind-merge": "^3.5.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["core-js", "sharp"]
+    "onlyBuiltDependencies": [
+      "core-js",
+      "sharp"
+    ]
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.2.6",

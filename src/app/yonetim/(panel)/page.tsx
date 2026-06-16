@@ -1,4 +1,92 @@
+import { google } from "googleapis";
 import { createClient } from "@supabase/supabase-js";
+
+// ─── Google Auth helper ──────────────────────────────────────────────────────
+
+function getGoogleAuth(scopes: string[]) {
+  const raw = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
+  if (!raw) return null;
+  try {
+    const credentials = JSON.parse(raw);
+    return new google.auth.GoogleAuth({ credentials, scopes });
+  } catch {
+    return null;
+  }
+}
+
+// ─── GA4 Data API ─────────────────────────────────────────────────────────────
+
+type GA4Data = {
+  users: number | null;
+  sessions: number | null;
+  pageViews: number | null;
+  error?: string;
+};
+
+async function getGA4Data(): Promise<GA4Data> {
+  const auth = getGoogleAuth(["https://www.googleapis.com/auth/analytics.readonly"]);
+  if (!auth) return { users: null, sessions: null, pageViews: null, error: "credentials missing" };
+  try {
+    const analyticsdata = google.analyticsdata({ version: "v1beta", auth });
+    const res = await analyticsdata.properties.runReport({
+      property: "properties/541672727",
+      requestBody: {
+        dateRanges: [{ startDate: "7daysAgo", endDate: "today" }],
+        metrics: [
+          { name: "activeUsers" },
+          { name: "sessions" },
+          { name: "screenPageViews" },
+        ],
+      },
+    });
+    const row = res.data.rows?.[0]?.metricValues;
+    return {
+      users:     parseInt(row?.[0]?.value ?? "0"),
+      sessions:  parseInt(row?.[1]?.value ?? "0"),
+      pageViews: parseInt(row?.[2]?.value ?? "0"),
+    };
+  } catch {
+    return { users: null, sessions: null, pageViews: null, error: "fetch failed" };
+  }
+}
+
+// ─── Search Console API ───────────────────────────────────────────────────────
+
+type SearchConsoleData = {
+  clicks: number | null;
+  impressions: number | null;
+  ctr: number | null;
+  position: number | null;
+  error?: string;
+};
+
+async function getSearchConsoleData(): Promise<SearchConsoleData> {
+  const auth = getGoogleAuth(["https://www.googleapis.com/auth/webmasters.readonly"]);
+  if (!auth) return { clicks: null, impressions: null, ctr: null, position: null, error: "credentials missing" };
+  try {
+    const searchconsole = google.searchconsole({ version: "v1", auth });
+    const end = new Date();
+    const start = new Date();
+    start.setDate(end.getDate() - 7);
+    const fmt = (d: Date) => d.toISOString().split("T")[0];
+    const res = await searchconsole.searchanalytics.query({
+      siteUrl: "https://www.dousocial.com",
+      requestBody: {
+        startDate: fmt(start),
+        endDate: fmt(end),
+      },
+    });
+    const totals = res.data.rows?.[0];
+    return {
+      clicks:      totals?.clicks      ?? 0,
+      impressions: totals?.impressions ?? 0,
+      ctr:         totals?.ctr         ?? 0,
+      position:    totals?.position    ?? 0,
+    };
+  } catch {
+    return { clicks: null, impressions: null, ctr: null, position: null, error: "fetch failed" };
+  }
+}
 
 // ─── Google Business (Places API) ────────────────────────────────────────────
 // Env vars required: GOOGLE_MAPS_API_KEY + GOOGLE_PLACE_ID
@@ -227,9 +315,11 @@ function excerpt(text: string, len = 60) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function DashboardPage() {
-  const [{ stats, chartData, recentContacts, recentAudits }, gbiz] = await Promise.all([
+  const [{ stats, chartData, recentContacts, recentAudits }, gbiz, ga4, gsc] = await Promise.all([
     getDashboardData(),
     getGoogleBusiness(),
+    getGA4Data(),
+    getSearchConsoleData(),
   ]);
 
   const statCards = [
@@ -490,6 +580,74 @@ export default async function DashboardPage() {
               : "⚠️ Google verisi alınamadı"}
           </div>
         )}
+      </div>
+
+      {/* ── GA4 + Search Console ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 14 }}>
+
+        {/* GA4 label */}
+        <div style={{ ...card, padding: "14px 16px", display: "flex", alignItems: "center", gap: 8 }}>
+          <svg viewBox="0 0 24 24" style={{ width: 20, height: 20, flexShrink: 0 }}>
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z" fill="#EA4335"/>
+          </svg>
+          <div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: "var(--c-text2)" }}>Analytics</div>
+            <div style={{ fontSize: 10, color: "var(--c-dim)" }}>Son 7 gün</div>
+          </div>
+        </div>
+
+        {/* Kullanıcılar */}
+        <div style={{ ...card, padding: "14px 18px" }}>
+          <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: "-0.04em", color: "#60a5fa", fontVariantNumeric: "tabular-nums" }}>
+            {ga4.users != null ? ga4.users.toLocaleString("tr-TR") : "—"}
+          </div>
+          <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4, fontWeight: 500 }}>Aktif Kullanıcı</div>
+          {ga4.error && <div style={{ fontSize: 9, color: "#f87171", marginTop: 2 }}>{ga4.error === "credentials missing" ? "env eksik" : "hata"}</div>}
+        </div>
+
+        {/* Oturum */}
+        <div style={{ ...card, padding: "14px 18px" }}>
+          <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: "-0.04em", color: "#34d399", fontVariantNumeric: "tabular-nums" }}>
+            {ga4.sessions != null ? ga4.sessions.toLocaleString("tr-TR") : "—"}
+          </div>
+          <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4, fontWeight: 500 }}>Oturum</div>
+        </div>
+
+        {/* Sayfa görüntüleme */}
+        <div style={{ ...card, padding: "14px 18px" }}>
+          <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: "-0.04em", color: "#a78bfa", fontVariantNumeric: "tabular-nums" }}>
+            {ga4.pageViews != null ? ga4.pageViews.toLocaleString("tr-TR") : "—"}
+          </div>
+          <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4, fontWeight: 500 }}>Sayfa Görüntüleme</div>
+        </div>
+
+        {/* Search Console tıklama */}
+        <div style={{ ...card, padding: "14px 18px" }}>
+          <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: "-0.04em", color: "#f59e0b", fontVariantNumeric: "tabular-nums" }}>
+            {gsc.clicks != null ? gsc.clicks.toLocaleString("tr-TR") : "—"}
+          </div>
+          <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4, fontWeight: 500 }}>Google Tıklama</div>
+          {gsc.error && <div style={{ fontSize: 9, color: "#f87171", marginTop: 2 }}>{gsc.error === "credentials missing" ? "env eksik" : "hata"}</div>}
+        </div>
+
+        {/* Gösterim */}
+        <div style={{ ...card, padding: "14px 18px" }}>
+          <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: "-0.04em", color: "#fb923c", fontVariantNumeric: "tabular-nums" }}>
+            {gsc.impressions != null ? gsc.impressions.toLocaleString("tr-TR") : "—"}
+          </div>
+          <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4, fontWeight: 500 }}>Gösterim</div>
+        </div>
+
+        {/* Ortalama sıra */}
+        <div style={{ ...card, padding: "14px 18px" }}>
+          <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: "-0.04em", color: "#f472b6", fontVariantNumeric: "tabular-nums" }}>
+            {gsc.position != null ? gsc.position.toFixed(1) : "—"}
+          </div>
+          <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4, fontWeight: 500 }}>Ort. Sıralama</div>
+        </div>
       </div>
 
       {/* ── Chart + Recent contacts ── */}
