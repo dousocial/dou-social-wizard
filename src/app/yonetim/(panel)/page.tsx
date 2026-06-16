@@ -45,8 +45,9 @@ async function getGA4Data(): Promise<GA4Data> {
       sessions:  parseInt(row?.[1]?.value ?? "0"),
       pageViews: parseInt(row?.[2]?.value ?? "0"),
     };
-  } catch {
-    return { users: null, sessions: null, pageViews: null, error: "fetch failed" };
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message.slice(0, 120) : "fetch failed";
+    return { users: null, sessions: null, pageViews: null, error: msg };
   }
 }
 
@@ -83,8 +84,9 @@ async function getSearchConsoleData(): Promise<SearchConsoleData> {
       ctr:         totals?.ctr         ?? 0,
       position:    totals?.position    ?? 0,
     };
-  } catch {
-    return { clicks: null, impressions: null, ctr: null, position: null, error: "fetch failed" };
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message.slice(0, 120) : "fetch failed";
+    return { clicks: null, impressions: null, ctr: null, position: null, error: msg };
   }
 }
 
@@ -605,7 +607,7 @@ export default async function DashboardPage() {
             {ga4.users != null ? ga4.users.toLocaleString("tr-TR") : "—"}
           </div>
           <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4, fontWeight: 500 }}>Aktif Kullanıcı</div>
-          {ga4.error && <div style={{ fontSize: 9, color: "#f87171", marginTop: 2 }}>{ga4.error === "credentials missing" ? "env eksik" : "hata"}</div>}
+          {ga4.error && <div style={{ fontSize: 9, color: "#f87171", marginTop: 2, wordBreak: "break-all" }}>{ga4.error}</div>}
         </div>
 
         {/* Oturum */}
@@ -630,7 +632,7 @@ export default async function DashboardPage() {
             {gsc.clicks != null ? gsc.clicks.toLocaleString("tr-TR") : "—"}
           </div>
           <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4, fontWeight: 500 }}>Google Tıklama</div>
-          {gsc.error && <div style={{ fontSize: 9, color: "#f87171", marginTop: 2 }}>{gsc.error === "credentials missing" ? "env eksik" : "hata"}</div>}
+          {gsc.error && <div style={{ fontSize: 9, color: "#f87171", marginTop: 2, wordBreak: "break-all" }}>{gsc.error}</div>}
         </div>
 
         {/* Gösterim */}
