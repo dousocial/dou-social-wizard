@@ -71,7 +71,7 @@ async function getSearchConsoleData(): Promise<SearchConsoleData> {
     start.setDate(end.getDate() - 7);
     const fmt = (d: Date) => d.toISOString().split("T")[0];
     const res = await searchconsole.searchanalytics.query({
-      siteUrl: "https://www.dousocial.com",
+      siteUrl: "sc-domain:dousocial.com",
       requestBody: {
         startDate: fmt(start),
         endDate: fmt(end),
