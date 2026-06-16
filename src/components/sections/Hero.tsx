@@ -114,7 +114,15 @@ export function Hero() {
       >
         {/* Dark fallback — always in DOM, video renders on top when it loads */}
         <div className="absolute inset-0 bg-ink" />
-        {/* Video rendered server-side for LCP; browser hides it if prefers-reduced-motion */}
+        {/* Mobile: still frame from the video — no video element = no native play/pause overlay */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/videos/hero-bg-poster.jpg"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover md:hidden"
+        />
+        {/* Desktop: actual video */}
         <video
           autoPlay
           muted
@@ -127,8 +135,8 @@ export function Hero() {
           style={{ display: reduceMotion ? "none" : undefined, pointerEvents: "none" }}
         />
 
-        {/* Karartma + marka rengi geçişi */}
-        <div className="absolute inset-0 bg-black/55" />
+        {/* Karartma + marka rengi geçişi — mobilde biraz daha açık ki poster görünsün */}
+        <div className="absolute inset-0 bg-black/35 md:bg-black/55" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,_rgb(128_0_0_/_0.25)_0%,_transparent_65%)]" />
 
         {/* Noise texture */}
