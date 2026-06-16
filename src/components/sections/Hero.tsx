@@ -122,7 +122,7 @@ export function Hero() {
           playsInline
           disablePictureInPicture
           tabIndex={-1}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover hidden md:block"
           src="/videos/hero-bg.mp4"
           style={{ display: reduceMotion ? "none" : undefined, pointerEvents: "none" }}
         />
