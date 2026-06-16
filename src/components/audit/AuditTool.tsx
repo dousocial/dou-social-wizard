@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { getLenis } from "@/components/layout/SmoothScrollProvider";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -501,7 +502,17 @@ export function AuditTool() {
   }, [result?.text]);
 
   useEffect(() => {
-    if (result) setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 150);
+    if (!result) return;
+    setTimeout(() => {
+      const el = resultsRef.current;
+      if (!el) return;
+      const lenis = getLenis();
+      if (lenis) {
+        lenis.scrollTo(el, { offset: -32, duration: 0.8 });
+      } else {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 200);
   }, [result]);
 
   function updateLead(key: keyof LeadInfo, value: string) {
