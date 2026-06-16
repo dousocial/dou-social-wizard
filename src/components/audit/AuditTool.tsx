@@ -506,7 +506,10 @@ export function AuditTool() {
     if (!el) return;
     const lenis = getLenis();
     if (lenis) {
-      lenis.scrollTo(el, { offset: -32, duration: 0.8 });
+      lenis.resize();
+      requestAnimationFrame(() => {
+        lenis.scrollTo(el, { offset: -32, duration: 0.9 });
+      });
     } else {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
