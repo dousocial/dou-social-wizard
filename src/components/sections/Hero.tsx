@@ -120,6 +120,7 @@ export function Hero() {
           muted
           loop
           playsInline
+          disablePictureInPicture
           className="absolute inset-0 h-full w-full object-cover"
           src="/videos/hero-bg.mp4"
           style={{ display: reduceMotion ? "none" : undefined }}

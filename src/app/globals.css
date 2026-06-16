@@ -177,6 +177,19 @@ body {
   border: 1px solid rgb(255 255 255 / 0.06);
 }
 
+/* ─── Hide iOS/Safari native video overlay controls ────────────────── */
+/* autoPlay+muted videos still show a native play/pause indicator on    */
+/* iOS Safari. These pseudo-elements suppress that chrome entirely.     */
+video::-webkit-media-controls,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+}
+
 /* ─── Marquee animations ────────────────────────────────────────────── */
 @keyframes marquee-left {
   from { transform: translateX(0); }
