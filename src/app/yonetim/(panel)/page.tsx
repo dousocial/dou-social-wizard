@@ -1,5 +1,33 @@
 import { createClient } from "@supabase/supabase-js";
 
+// ─── Google Business (Places API) ────────────────────────────────────────────
+// Env vars required: GOOGLE_MAPS_API_KEY + GOOGLE_PLACE_ID
+
+type GoogleBusiness = {
+  rating: number | null;
+  reviewCount: number | null;
+  error?: string;
+};
+
+async function getGoogleBusiness(): Promise<GoogleBusiness> {
+  const key = process.env.GOOGLE_MAPS_API_KEY;
+  const pid = process.env.GOOGLE_PLACE_ID;
+  if (!key || !pid) return { rating: null, reviewCount: null, error: "credentials missing" };
+  try {
+    const url =
+      `https://maps.googleapis.com/maps/api/place/details/json` +
+      `?place_id=${encodeURIComponent(pid)}&fields=rating%2Cuser_ratings_total&key=${key}`;
+    const res = await fetch(url, { next: { revalidate: 3600 } }); // 1 saatte bir tazele
+    const json = await res.json() as { result?: { rating?: number; user_ratings_total?: number } };
+    return {
+      rating:      json.result?.rating      ?? null,
+      reviewCount: json.result?.user_ratings_total ?? null,
+    };
+  } catch {
+    return { rating: null, reviewCount: null, error: "fetch failed" };
+  }
+}
+
 // ─── Supabase ─────────────────────────────────────────────────────────────────
 
 async function getDashboardData() {
@@ -199,7 +227,10 @@ function excerpt(text: string, len = 60) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function DashboardPage() {
-  const { stats, chartData, recentContacts, recentAudits } = await getDashboardData();
+  const [{ stats, chartData, recentContacts, recentAudits }, gbiz] = await Promise.all([
+    getDashboardData(),
+    getGoogleBusiness(),
+  ]);
 
   const statCards = [
     {
@@ -333,6 +364,98 @@ export default async function DashboardPage() {
             </div>
           </a>
         ))}
+      </div>
+
+      {/* ── Google Business ── */}
+      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        {/* Google logo badge */}
+        <div style={{
+          ...card,
+          padding: "14px 20px",
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          flexShrink: 0,
+        }}>
+          {/* Coloured "G" */}
+          <svg viewBox="0 0 24 24" style={{ width: 22, height: 22 }} fill="none">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z" fill="#EA4335"/>
+          </svg>
+          <span style={{ fontSize: 12, fontWeight: 700, color: "var(--c-text2)", letterSpacing: "-0.01em" }}>
+            Google Business
+          </span>
+        </div>
+
+        {/* Rating */}
+        <div style={{
+          ...card,
+          padding: "14px 24px",
+          display: "flex",
+          alignItems: "center",
+          gap: 14,
+          flex: "0 0 auto",
+        }}>
+          <div>
+            <div style={{
+              fontSize: 32, fontWeight: 800, lineHeight: 1, letterSpacing: "-0.04em",
+              color: gbiz.rating != null ? "#fbbf24" : "var(--c-dim)",
+              fontVariantNumeric: "tabular-nums",
+            }}>
+              {gbiz.rating != null ? gbiz.rating.toFixed(1) : "—"}
+            </div>
+            <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4, fontWeight: 500 }}>
+              Ortalama Puan
+            </div>
+          </div>
+          {/* Stars */}
+          {gbiz.rating != null && (
+            <div style={{ display: "flex", gap: 2 }}>
+              {[1, 2, 3, 4, 5].map((n) => (
+                <svg key={n} viewBox="0 0 20 20" style={{ width: 16, height: 16 }}
+                  fill={gbiz.rating! >= n ? "#fbbf24" : gbiz.rating! >= n - 0.5 ? "url(#half)" : "none"}
+                  stroke="#fbbf24" strokeWidth="1.2">
+                  <defs>
+                    <linearGradient id="half">
+                      <stop offset="50%" stopColor="#fbbf24" />
+                      <stop offset="50%" stopColor="transparent" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M10 1l2.39 4.84L18 6.72l-4 3.9.94 5.5L10 13.77l-4.94 2.35.94-5.5-4-3.9 5.61-.88L10 1z" />
+                </svg>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Review count */}
+        <div style={{
+          ...card,
+          padding: "14px 24px",
+          flex: "0 0 auto",
+        }}>
+          <div style={{
+            fontSize: 32, fontWeight: 800, lineHeight: 1, letterSpacing: "-0.04em",
+            color: "var(--c-text)",
+            fontVariantNumeric: "tabular-nums",
+          }}>
+            {gbiz.reviewCount != null ? gbiz.reviewCount.toLocaleString("tr-TR") : "—"}
+          </div>
+          <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4, fontWeight: 500 }}>
+            Google Yorum
+          </div>
+        </div>
+
+        {/* Error or refresh note */}
+        {gbiz.error && (
+          <div style={{ fontSize: 12, color: "var(--c-dim)", padding: "0 8px" }}>
+            {gbiz.error === "credentials missing"
+              ? "⚠️ GOOGLE_MAPS_API_KEY veya GOOGLE_PLACE_ID eksik"
+              : "⚠️ Google verisi alınamadı"}
+          </div>
+        )}
       </div>
 
       {/* ── Chart + Recent contacts ── */}
