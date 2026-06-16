@@ -237,45 +237,63 @@ export default async function DashboardPage() {
       label: "Okunmamış Mesaj",
       value: stats.unread,
       icon: Icons.envelope,
-      accent: stats.unread > 0,
       href: "/yonetim/contacts",
+      color: "#f87171",
+      bg: "rgba(248,113,113,0.12)",
+      border: "rgba(248,113,113,0.3)",
+      gradient: "linear-gradient(135deg, rgba(248,113,113,0.18) 0%, rgba(239,68,68,0.06) 100%)",
     },
     {
       label: "Toplam Başvuru",
       value: stats.audits,
       icon: Icons.clipboard,
-      accent: false,
       href: "/yonetim/leads",
+      color: "#fbbf24",
+      bg: "rgba(251,191,36,0.12)",
+      border: "rgba(251,191,36,0.3)",
+      gradient: "linear-gradient(135deg, rgba(251,191,36,0.18) 0%, rgba(245,158,11,0.06) 100%)",
     },
     {
       label: "Toplam İletişim",
       value: stats.contacts,
       icon: Icons.chat,
-      accent: false,
       href: "/yonetim/contacts",
+      color: "#34d399",
+      bg: "rgba(52,211,153,0.12)",
+      border: "rgba(52,211,153,0.3)",
+      gradient: "linear-gradient(135deg, rgba(52,211,153,0.18) 0%, rgba(16,185,129,0.06) 100%)",
     },
     {
       label: "Yayınlanan Blog",
       value: stats.blogPub,
       sub: stats.blogDraft > 0 ? `${stats.blogDraft} taslak` : undefined,
       icon: Icons.document,
-      accent: false,
       href: "/yonetim/blog",
+      color: "#60a5fa",
+      bg: "rgba(96,165,250,0.12)",
+      border: "rgba(96,165,250,0.3)",
+      gradient: "linear-gradient(135deg, rgba(96,165,250,0.18) 0%, rgba(59,130,246,0.06) 100%)",
     },
     {
       label: "Yayınlanan Proje",
       value: stats.projPub,
       sub: stats.projDraft > 0 ? `${stats.projDraft} taslak` : undefined,
       icon: Icons.folder,
-      accent: false,
       href: "/yonetim/projeler",
+      color: "#f472b6",
+      bg: "rgba(244,114,182,0.12)",
+      border: "rgba(244,114,182,0.3)",
+      gradient: "linear-gradient(135deg, rgba(244,114,182,0.18) 0%, rgba(236,72,153,0.06) 100%)",
     },
     {
       label: "Panel Kullanıcısı",
       value: stats.users,
       icon: Icons.users,
-      accent: false,
       href: "/yonetim/kullanicilar",
+      color: "#a78bfa",
+      bg: "rgba(167,139,250,0.12)",
+      border: "rgba(167,139,250,0.3)",
+      gradient: "linear-gradient(135deg, rgba(167,139,250,0.18) 0%, rgba(139,92,246,0.06) 100%)",
     },
   ];
 
@@ -326,29 +344,45 @@ export default async function DashboardPage() {
             key={s.label}
             href={s.href}
             style={{
-              ...card,
-              padding: "18px 20px",
+              padding: "20px",
+              borderRadius: 14,
               textDecoration: "none",
               display: "flex",
               flexDirection: "column",
-              gap: 12,
-              border: s.accent && stats.unread > 0 ? "1px solid rgba(155,28,28,0.5)" : "1px solid var(--c-border)",
-              background: s.accent && stats.unread > 0 ? "rgba(155,28,28,0.12)" : "var(--c-surface)",
-              transition: "border-color 0.15s",
+              gap: 14,
+              border: `1px solid ${s.border}`,
+              background: s.gradient,
+              transition: "transform 0.15s, box-shadow 0.15s",
+              position: "relative",
+              overflow: "hidden",
             }}
           >
+            {/* Glow spot */}
             <div style={{
-              width: 36, height: 36, borderRadius: 9,
-              background: s.accent && stats.unread > 0 ? "rgba(155,28,28,0.25)" : "var(--c-border)",
+              position: "absolute",
+              top: -20,
+              right: -20,
+              width: 80,
+              height: 80,
+              borderRadius: "50%",
+              background: s.color,
+              opacity: 0.1,
+              filter: "blur(20px)",
+              pointerEvents: "none",
+            }} />
+            <div style={{
+              width: 38, height: 38, borderRadius: 10,
+              background: s.bg,
               display: "flex", alignItems: "center", justifyContent: "center",
-              color: s.accent && stats.unread > 0 ? "#fca5a5" : "var(--c-text3)",
+              color: s.color,
+              border: `1px solid ${s.border}`,
             }}>
               {s.icon}
             </div>
             <div>
               <div style={{
-                fontSize: 28, fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1,
-                color: s.accent && stats.unread > 0 ? "#fca5a5" : "var(--c-text)",
+                fontSize: 30, fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1,
+                color: s.color,
                 fontVariantNumeric: "tabular-nums",
               }}>
                 {s.value}
