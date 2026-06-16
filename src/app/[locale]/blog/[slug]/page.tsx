@@ -38,7 +38,7 @@ export async function generateMetadata({
   const post = await getPostBySlug(locale, slug);
   if (!post) return {};
   return {
-    title: post.title,
+    title: post.seoTitle ?? post.title,
     description: post.description,
     openGraph: post.cover ? { images: [{ url: post.cover }] } : undefined,
   };

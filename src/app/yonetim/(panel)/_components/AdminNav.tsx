@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 const BASE_LINKS = [
   { href: "/yonetim/leads",    label: "Audit Başvuruları" },
   { href: "/yonetim/contacts", label: "İletişim Formu" },
+  { href: "/yonetim/blog",     label: "Blog" },
 ];
 
 const YONETICI_LINKS = [
