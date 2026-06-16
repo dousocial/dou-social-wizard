@@ -501,19 +501,16 @@ export function AuditTool() {
     return () => clearInterval(iv);
   }, [result?.text]);
 
-  useEffect(() => {
-    if (!result) return;
-    setTimeout(() => {
-      const el = resultsRef.current;
-      if (!el) return;
-      const lenis = getLenis();
-      if (lenis) {
-        lenis.scrollTo(el, { offset: -32, duration: 0.8 });
-      } else {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 200);
-  }, [result]);
+  function scrollToResults() {
+    const el = resultsRef.current;
+    if (!el) return;
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(el, { offset: -32, duration: 0.8 });
+    } else {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
 
   function updateLead(key: keyof LeadInfo, value: string) {
     setLead((p) => ({ ...p, [key]: value }));
@@ -807,7 +804,7 @@ export function AuditTool() {
         {/* Results */}
         <AnimatePresence>
           {result && (
-            <motion.div ref={resultsRef} key="results" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="mt-12 space-y-6">
+            <motion.div ref={resultsRef} key="results" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} onAnimationComplete={scrollToResults} className="mt-12 space-y-6">
               <div className="flex items-center gap-4">
                 <div className="h-px flex-1 bg-mute-100" />
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Analiz Sonucu</span>
