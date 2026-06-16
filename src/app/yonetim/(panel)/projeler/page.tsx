@@ -7,7 +7,7 @@ async function getProjects() {
   );
   const { data, error } = await supabase
     .from("projects")
-    .select("id, slug, title, locale, industry, is_published, created_at")
+    .select("id, slug, title, locale, industry, summary, is_published, created_at")
     .order("created_at", { ascending: false });
   if (error) throw new Error(error.message);
   return data ?? [];
@@ -16,7 +16,7 @@ async function getProjects() {
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("tr-TR", {
     year: "numeric",
-    month: "short",
+    month: "long",
     day: "numeric",
   });
 }
@@ -35,89 +35,111 @@ export default async function ProjectsAdminPage() {
   const drafts = projects.length - published;
 
   return (
-    <div>
-      <div style={{ marginBottom: 24, display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+    <div style={{ maxWidth: 860 }}>
+
+      {/* Başlık */}
+      <div style={{ marginBottom: 32, display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: 17, fontWeight: 600, color: "var(--c-text)" }}>Projeler</h1>
-          <p style={{ margin: "4px 0 0", fontSize: 13, color: "var(--c-dim)" }}>
-            {projects.length} proje · {published} yayında · {drafts} taslak
+          <h1 style={{ margin: 0, fontSize: 28, fontWeight: 800, color: "var(--c-text)", letterSpacing: "-0.025em", lineHeight: 1.1 }}>
+            Projeler
+          </h1>
+          <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--c-dim)", lineHeight: 1.5 }}>
+            {projects.length > 0
+              ? <>{published} proje yayında · {drafts} taslak</>
+              : "Henüz proje eklenmemiş"}
           </p>
         </div>
         <a
           href="/yonetim/projeler/yeni"
           style={{
-            padding: "9px 20px",
-            borderRadius: 8,
+            padding: "10px 22px",
+            borderRadius: 9,
             fontSize: 14,
-            fontWeight: 600,
+            fontWeight: 700,
             textDecoration: "none",
-            background: "#9b1c1c",
+            background: "linear-gradient(135deg, #9b1c1c 0%, #7f1d1d 100%)",
             color: "#fff",
             flexShrink: 0,
+            boxShadow: "0 2px 8px rgba(155,28,28,0.3)",
+            letterSpacing: "0.01em",
           }}
         >
           + Yeni Proje
         </a>
       </div>
 
+      {/* Hata */}
       {dbError && (
         <div style={{
-          padding: "14px 18px",
+          padding: "16px 20px",
           borderRadius: 10,
-          background: "rgba(248,113,113,0.08)",
+          background: "rgba(248,113,113,0.07)",
           border: "1px solid rgba(248,113,113,0.2)",
           color: "#f87171",
           fontSize: 14,
-          marginBottom: 16,
+          marginBottom: 20,
+          lineHeight: 1.6,
         }}>
           <strong>Veritabanı hatası:</strong> {dbError}
           <br />
-          <span style={{ fontSize: 12, opacity: 0.8 }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>
             Supabase&apos;de <code>projects</code> tablosunun oluşturulduğundan emin olun.
           </span>
         </div>
       )}
 
+      {/* Boş durum */}
       {!dbError && projects.length === 0 && (
         <div style={{
           textAlign: "center",
-          padding: "72px 0",
+          padding: "80px 0",
           color: "var(--c-dim)",
-          fontSize: 14,
-          background: "var(--c-surface2)",
-          borderRadius: 10,
-          border: "1px solid var(--c-border)",
+          background: "var(--c-surface)",
+          borderRadius: 14,
+          border: "1px dashed var(--c-border)",
         }}>
-          Henüz proje yok.{" "}
-          <a href="/yonetim/projeler/yeni" style={{ color: "#fca5a5", textDecoration: "none" }}>
+          <p style={{ margin: "0 0 4px", fontSize: 18, fontWeight: 700, color: "var(--c-text3)" }}>Boş sayfa</p>
+          <p style={{ margin: "0 0 20px", fontSize: 14 }}>İlk projeyi ekleyerek başla.</p>
+          <a href="/yonetim/projeler/yeni" style={{
+            display: "inline-block",
+            padding: "10px 22px",
+            borderRadius: 9,
+            fontSize: 14,
+            fontWeight: 600,
+            textDecoration: "none",
+            background: "rgba(155,28,28,0.12)",
+            color: "#fca5a5",
+            border: "1px solid rgba(155,28,28,0.3)",
+          }}>
             İlk projeyi ekle →
           </a>
         </div>
       )}
 
+      {/* Liste */}
       {projects.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          {projects.map((project) => (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {projects.map((project, i) => (
             <div
               key={project.id}
               style={{
-                background: "var(--c-surface)",
-                border: "1px solid var(--c-border)",
-                borderRadius: 10,
-                padding: "14px 18px",
+                padding: "20px 0",
                 display: "flex",
-                alignItems: "center",
+                alignItems: "flex-start",
                 justifyContent: "space-between",
-                gap: 16,
+                gap: 24,
+                borderBottom: i < projects.length - 1 ? "1px solid var(--c-border)" : "none",
               }}
             >
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                {/* Badges */}
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 7 }}>
                   <span style={{
                     fontSize: 11,
-                    padding: "2px 8px",
-                    borderRadius: 6,
-                    fontWeight: 600,
+                    padding: "2px 9px",
+                    borderRadius: 20,
+                    fontWeight: 700,
+                    letterSpacing: "0.04em",
                     background: project.is_published ? "rgba(34,197,94,0.1)" : "rgba(251,191,36,0.1)",
                     color: project.is_published ? "#86efac" : "#fde68a",
                     border: `1px solid ${project.is_published ? "rgba(34,197,94,0.25)" : "rgba(251,191,36,0.25)"}`,
@@ -125,31 +147,72 @@ export default async function ProjectsAdminPage() {
                     {project.is_published ? "Yayında" : "Taslak"}
                   </span>
                   {project.industry && (
-                    <span style={{ fontSize: 11, color: "var(--c-dim)", fontWeight: 500 }}>
+                    <span style={{
+                      fontSize: 11,
+                      padding: "2px 9px",
+                      borderRadius: 20,
+                      fontWeight: 500,
+                      background: "rgba(96,165,250,0.1)",
+                      color: "#93c5fd",
+                      border: "1px solid rgba(96,165,250,0.2)",
+                    }}>
                       {project.industry}
                     </span>
                   )}
-                  <span style={{ fontSize: 11, color: "var(--c-dim)", fontWeight: 600 }}>
+                  <span style={{
+                    fontSize: 11,
+                    padding: "2px 7px",
+                    borderRadius: 20,
+                    fontWeight: 600,
+                    background: "var(--c-surface2)",
+                    color: "var(--c-text3)",
+                    border: "1px solid var(--c-border)",
+                  }}>
                     {project.locale.toUpperCase()}
                   </span>
                 </div>
-                <p style={{
-                  margin: 0,
-                  fontSize: 15,
-                  fontWeight: 600,
-                  color: "var(--c-text)",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}>
-                  {project.title}
-                </p>
-                <p style={{ margin: "3px 0 0", fontSize: 12, color: "var(--c-dim)" }}>
+
+                {/* Başlık */}
+                <a
+                  href={`/yonetim/projeler/${project.id}/duzenle`}
+                  style={{ textDecoration: "none", display: "block" }}
+                >
+                  <p style={{
+                    margin: "0 0 5px",
+                    fontSize: 17,
+                    fontWeight: 700,
+                    color: "var(--c-text)",
+                    lineHeight: 1.3,
+                    letterSpacing: "-0.01em",
+                  }}>
+                    {project.title}
+                  </p>
+                </a>
+
+                {/* Özet */}
+                {project.summary && (
+                  <p style={{
+                    margin: "0 0 8px",
+                    fontSize: 13,
+                    color: "var(--c-dim)",
+                    lineHeight: 1.5,
+                    overflow: "hidden",
+                    display: "-webkit-box",
+                    WebkitLineClamp: "2",
+                    WebkitBoxOrient: "vertical" as const,
+                  }}>
+                    {project.summary}
+                  </p>
+                )}
+
+                {/* Meta */}
+                <p style={{ margin: 0, fontSize: 12, color: "var(--c-dim)", fontFamily: "monospace" }}>
                   /projeler/{project.slug} · {formatDate(project.created_at)}
                 </p>
               </div>
 
-              <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+              {/* Aksiyonlar */}
+              <div style={{ display: "flex", gap: 8, flexShrink: 0, paddingTop: 2 }}>
                 {project.is_published && (
                   <a
                     href={`/${project.locale}/projeler/${project.slug}`}
@@ -158,10 +221,10 @@ export default async function ProjectsAdminPage() {
                     style={{
                       padding: "6px 14px",
                       borderRadius: 7,
-                      fontSize: 13,
+                      fontSize: 12,
                       fontWeight: 500,
                       textDecoration: "none",
-                      color: "var(--c-text2)",
+                      color: "var(--c-text3)",
                       border: "1px solid var(--c-border)",
                     }}
                   >
@@ -173,12 +236,12 @@ export default async function ProjectsAdminPage() {
                   style={{
                     padding: "6px 14px",
                     borderRadius: 7,
-                    fontSize: 13,
-                    fontWeight: 500,
+                    fontSize: 12,
+                    fontWeight: 600,
                     textDecoration: "none",
                     color: "#fca5a5",
-                    border: "1px solid rgba(155,28,28,0.4)",
-                    background: "rgba(155,28,28,0.1)",
+                    border: "1px solid rgba(155,28,28,0.35)",
+                    background: "rgba(155,28,28,0.08)",
                   }}
                 >
                   Düzenle

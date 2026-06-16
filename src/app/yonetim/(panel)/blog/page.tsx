@@ -7,7 +7,7 @@ async function getBlogPosts() {
   );
   const { data, error } = await supabase
     .from("blog_posts")
-    .select("id, slug, title, locale, is_published, published_at, created_at, seo_title")
+    .select("id, slug, title, locale, is_published, published_at, created_at, description")
     .order("created_at", { ascending: false });
   if (error) throw new Error(error.message);
   return data ?? [];
@@ -16,7 +16,7 @@ async function getBlogPosts() {
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("tr-TR", {
     year: "numeric",
-    month: "short",
+    month: "long",
     day: "numeric",
   });
 }
@@ -35,140 +35,187 @@ export default async function BlogAdminPage() {
   const drafts = posts.length - published;
 
   return (
-    <div>
-      {/* Header */}
-      <div style={{ marginBottom: 24, display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+    <div style={{ maxWidth: 860 }}>
+
+      {/* Başlık */}
+      <div style={{ marginBottom: 32, display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: 17, fontWeight: 600, color: "var(--c-text)" }}>Blog Yazıları</h1>
-          <p style={{ margin: "4px 0 0", fontSize: 13, color: "var(--c-dim)" }}>
-            {posts.length} yazı · {published} yayında · {drafts} taslak
+          <h1 style={{ margin: 0, fontSize: 28, fontWeight: 800, color: "var(--c-text)", letterSpacing: "-0.025em", lineHeight: 1.1 }}>
+            Blog
+          </h1>
+          <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--c-dim)", lineHeight: 1.5 }}>
+            {posts.length > 0
+              ? <>{published} yazı yayında · {drafts} taslak</>
+              : "Henüz yazı eklenmemiş"}
           </p>
         </div>
         <a
           href="/yonetim/blog/yeni"
           style={{
-            padding: "9px 20px",
-            borderRadius: 8,
+            padding: "10px 22px",
+            borderRadius: 9,
             fontSize: 14,
-            fontWeight: 600,
+            fontWeight: 700,
             textDecoration: "none",
-            background: "#9b1c1c",
+            background: "linear-gradient(135deg, #9b1c1c 0%, #7f1d1d 100%)",
             color: "#fff",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 6,
             flexShrink: 0,
+            boxShadow: "0 2px 8px rgba(155,28,28,0.3)",
+            letterSpacing: "0.01em",
           }}
         >
           + Yeni Yazı
         </a>
       </div>
 
-      {/* DB error */}
+      {/* Hata */}
       {dbError && (
         <div style={{
-          padding: "14px 18px",
+          padding: "16px 20px",
           borderRadius: 10,
-          background: "rgba(248,113,113,0.08)",
+          background: "rgba(248,113,113,0.07)",
           border: "1px solid rgba(248,113,113,0.2)",
           color: "#f87171",
           fontSize: 14,
-          marginBottom: 16,
+          marginBottom: 20,
+          lineHeight: 1.6,
         }}>
           <strong>Veritabanı hatası:</strong> {dbError}
           <br />
-          <span style={{ fontSize: 12, opacity: 0.8 }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>
             Supabase&apos;de <code>blog_posts</code> tablosunun oluşturulduğundan emin olun.
           </span>
         </div>
       )}
 
-      {/* Empty state */}
+      {/* Boş durum */}
       {!dbError && posts.length === 0 && (
         <div style={{
           textAlign: "center",
-          padding: "72px 0",
+          padding: "80px 0",
           color: "var(--c-dim)",
-          fontSize: 14,
-          background: "var(--c-surface2)",
-          borderRadius: 10,
-          border: "1px solid var(--c-border)",
+          background: "var(--c-surface)",
+          borderRadius: 14,
+          border: "1px dashed var(--c-border)",
         }}>
-          Henüz blog yazısı yok.{" "}
-          <a href="/yonetim/blog/yeni" style={{ color: "#fca5a5", textDecoration: "none" }}>
+          <p style={{ margin: "0 0 4px", fontSize: 18, fontWeight: 700, color: "var(--c-text3)" }}>Boş sayfa</p>
+          <p style={{ margin: "0 0 20px", fontSize: 14 }}>İlk blog yazını ekleyerek başla.</p>
+          <a href="/yonetim/blog/yeni" style={{
+            display: "inline-block",
+            padding: "10px 22px",
+            borderRadius: 9,
+            fontSize: 14,
+            fontWeight: 600,
+            textDecoration: "none",
+            background: "rgba(155,28,28,0.12)",
+            color: "#fca5a5",
+            border: "1px solid rgba(155,28,28,0.3)",
+          }}>
             İlk yazıyı ekle →
           </a>
         </div>
       )}
 
-      {/* Post list */}
+      {/* Liste */}
       {posts.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          {posts.map((post) => (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {posts.map((post, i) => (
             <div
               key={post.id}
               style={{
-                background: "var(--c-surface)",
-                border: "1px solid var(--c-border)",
-                borderRadius: 10,
-                padding: "14px 18px",
+                padding: "20px 0",
                 display: "flex",
-                alignItems: "center",
+                alignItems: "flex-start",
                 justifyContent: "space-between",
-                gap: 16,
+                gap: 24,
+                borderBottom: i < posts.length - 1 ? "1px solid var(--c-border)" : "none",
               }}
             >
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      padding: "2px 8px",
-                      borderRadius: 6,
-                      fontWeight: 600,
-                      background: post.is_published ? "rgba(34,197,94,0.1)" : "rgba(251,191,36,0.1)",
-                      color: post.is_published ? "#86efac" : "#fde68a",
-                      border: `1px solid ${post.is_published ? "rgba(34,197,94,0.25)" : "rgba(251,191,36,0.25)"}`,
-                    }}
-                  >
+                {/* Status + dil */}
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 7 }}>
+                  <span style={{
+                    fontSize: 11,
+                    padding: "2px 9px",
+                    borderRadius: 20,
+                    fontWeight: 700,
+                    letterSpacing: "0.04em",
+                    background: post.is_published ? "rgba(34,197,94,0.1)" : "rgba(251,191,36,0.1)",
+                    color: post.is_published ? "#86efac" : "#fde68a",
+                    border: `1px solid ${post.is_published ? "rgba(34,197,94,0.25)" : "rgba(251,191,36,0.25)"}`,
+                  }}>
                     {post.is_published ? "Yayında" : "Taslak"}
                   </span>
-                  <span style={{ fontSize: 11, color: "var(--c-dim)", fontWeight: 600 }}>
+                  <span style={{
+                    fontSize: 11,
+                    padding: "2px 7px",
+                    borderRadius: 20,
+                    fontWeight: 600,
+                    background: "var(--c-surface2)",
+                    color: "var(--c-text3)",
+                    border: "1px solid var(--c-border)",
+                  }}>
                     {post.locale.toUpperCase()}
                   </span>
                 </div>
-                <p
-                  style={{
-                    margin: 0,
-                    fontSize: 15,
-                    fontWeight: 600,
-                    color: "var(--c-text)",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
+
+                {/* Başlık */}
+                <a
+                  href={`/yonetim/blog/${post.id}/duzenle`}
+                  style={{ textDecoration: "none", display: "block" }}
                 >
-                  {post.title}
-                </p>
-                <p style={{ margin: "3px 0 0", fontSize: 12, color: "var(--c-dim)" }}>
+                  <p style={{
+                    margin: "0 0 5px",
+                    fontSize: 17,
+                    fontWeight: 700,
+                    color: "var(--c-text)",
+                    lineHeight: 1.3,
+                    letterSpacing: "-0.01em",
+                  }}>
+                    {post.title}
+                  </p>
+                </a>
+
+                {/* Açıklama */}
+                {post.description && (
+                  <p style={{
+                    margin: "0 0 8px",
+                    fontSize: 13,
+                    color: "var(--c-dim)",
+                    lineHeight: 1.5,
+                    overflow: "hidden",
+                    display: "-webkit-box",
+                    WebkitLineClamp: "2",
+                    WebkitBoxOrient: "vertical" as const,
+                  }}>
+                    {post.description}
+                  </p>
+                )}
+
+                {/* Meta */}
+                <p style={{ margin: 0, fontSize: 12, color: "var(--c-dim)", fontFamily: "monospace" }}>
                   /blog/{post.slug}
-                  {post.published_at ? ` · ${formatDate(post.published_at)}` : ` · Oluşturuldu: ${formatDate(post.created_at)}`}
+                  {" · "}
+                  {post.published_at
+                    ? formatDate(post.published_at)
+                    : `Oluşturuldu: ${formatDate(post.created_at)}`}
                 </p>
               </div>
 
-              <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+              {/* Aksiyonlar */}
+              <div style={{ display: "flex", gap: 8, flexShrink: 0, paddingTop: 2 }}>
                 {post.is_published && (
                   <a
-                    href={`/${post.locale === "tr" ? "tr" : post.locale}/blog/${post.slug}`}
+                    href={`/${post.locale}/blog/${post.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
                       padding: "6px 14px",
                       borderRadius: 7,
-                      fontSize: 13,
+                      fontSize: 12,
                       fontWeight: 500,
                       textDecoration: "none",
-                      color: "var(--c-text2)",
+                      color: "var(--c-text3)",
                       border: "1px solid var(--c-border)",
                     }}
                   >
@@ -180,12 +227,12 @@ export default async function BlogAdminPage() {
                   style={{
                     padding: "6px 14px",
                     borderRadius: 7,
-                    fontSize: 13,
-                    fontWeight: 500,
+                    fontSize: 12,
+                    fontWeight: 600,
                     textDecoration: "none",
                     color: "#fca5a5",
-                    border: "1px solid rgba(155,28,28,0.4)",
-                    background: "rgba(155,28,28,0.1)",
+                    border: "1px solid rgba(155,28,28,0.35)",
+                    background: "rgba(155,28,28,0.08)",
                   }}
                 >
                   Düzenle

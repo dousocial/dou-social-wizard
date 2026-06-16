@@ -15,7 +15,8 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
-      // Add external image hosts here as needed (e.g., Cloudinary, S3)
+      // Supabase Storage
+      { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" },
     ],
   },
   async headers() {

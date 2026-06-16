@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState, useEffect, useTransition } from "react";
+import { useActionState, useState, useEffect, useTransition, useRef } from "react";
 import { useRouter } from "next/navigation";
 import {
   createBlogPost,
@@ -8,11 +8,9 @@ import {
   deleteBlogPost,
   type BlogActionState,
 } from "@/lib/actions/blog";
+import { uploadImage } from "@/lib/actions/upload";
 
-interface FAQ {
-  q: string;
-  a: string;
-}
+interface FAQ { q: string; a: string; }
 
 interface BlogFormProps {
   mode: "create" | "edit";
@@ -69,17 +67,33 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
   const [deletePending, startDeleteTransition] = useTransition();
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
-  // Auto-generate slug from title
+  // Upload
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploadPending, startUploadTransition] = useTransition();
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [dragOver, setDragOver] = useState(false);
+
+  function handleFileChange(file: File | null) {
+    if (!file) return;
+    setUploadError(null);
+    startUploadTransition(async () => {
+      const fd = new FormData();
+      fd.set("file", file);
+      fd.set("folder", "blog");
+      const result = await uploadImage(fd);
+      if (result.error) setUploadError(result.error);
+      else if (result.url) setCover(result.url);
+    });
+  }
+
   useEffect(() => {
     if (!slugEdited && title) setSlug(slugify(title));
   }, [title, slugEdited]);
 
-  // Auto-fill SEO title from title if user hasn't edited it
   useEffect(() => {
     if (!seoTitleEdited && title) setSeoTitle(title);
   }, [title, seoTitleEdited]);
 
-  // Redirect on success
   useEffect(() => {
     if (state?.success) router.push("/yonetim/blog");
   }, [state?.success, router]);
@@ -95,20 +109,6 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
     });
   }
 
-  function addFAQ() {
-    setFaqItems((prev) => [...prev, { q: "", a: "" }]);
-  }
-
-  function removeFAQ(i: number) {
-    setFaqItems((prev) => prev.filter((_, idx) => idx !== i));
-  }
-
-  function updateFAQ(i: number, field: "q" | "a", val: string) {
-    setFaqItems((prev) =>
-      prev.map((item, idx) => (idx === i ? { ...item, [field]: val } : item))
-    );
-  }
-
   const seoLen = seoTitle.length;
   const descLen = description.length;
 
@@ -120,8 +120,6 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
         )}
         <input type="hidden" name="locale" value={locale} />
         <input type="hidden" name="is_published" value={String(isPublished)} />
-
-        {/* Hidden FAQ inputs */}
         {faqItems.map((item, i) => (
           <span key={i}>
             <input type="hidden" name={`faq_q_${i}`} value={item.q} />
@@ -129,157 +127,195 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
           </span>
         ))}
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: 24, alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: 40, alignItems: "start" }}>
 
-          {/* ── Left column ── */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          {/* ── Sol: Belge editörü ── */}
+          <div>
 
-            {/* Title */}
-            <div>
-              <label style={labelStyle}>Başlık</label>
+            {/* Başlık — büyük, belge hissi */}
+            <input
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Yazının başlığı..."
+              required
+              style={{
+                display: "block",
+                width: "100%",
+                fontSize: 34,
+                fontWeight: 800,
+                color: "var(--c-text)",
+                border: "none",
+                outline: "none",
+                background: "transparent",
+                lineHeight: 1.15,
+                padding: "6px 0",
+                letterSpacing: "-0.025em",
+                boxSizing: "border-box",
+              }}
+            />
+
+            {/* Slug + meta satırı */}
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              marginTop: 10,
+              paddingBottom: 20,
+              borderBottom: "1px solid var(--c-border)",
+            }}>
+              <span style={{ fontSize: 12, color: "var(--c-dim)", fontFamily: "monospace" }}>
+                dousocial.com/blog/
+              </span>
               <input
-                name="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Blog yazısının başlığı..."
-                required
-                style={inputStyle}
-              />
-            </div>
-
-            {/* Slug */}
-            <div>
-              <label style={labelStyle}>URL Slug</label>
-              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                <span style={{ fontSize: 13, color: "var(--c-dim)", whiteSpace: "nowrap" }}>/blog/</span>
-                <input
-                  name="slug"
-                  value={slug}
-                  onChange={(e) => { setSlug(e.target.value); setSlugEdited(true); }}
-                  placeholder="url-slug"
-                  style={{ ...inputStyle, flex: 1 }}
-                />
-              </div>
-            </div>
-
-            {/* Content */}
-            <div>
-              <label style={labelStyle}>İçerik (Markdown)</label>
-              <textarea
-                name="content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder={"Blog içeriğini buraya yazın...\n\nMarkdown kullanabilirsiniz:\n## Başlık\n**kalın** *italik*\n- liste"}
-                rows={26}
+                name="slug"
+                value={slug}
+                onChange={(e) => { setSlug(e.target.value); setSlugEdited(true); }}
                 style={{
-                  ...inputStyle,
-                  resize: "vertical",
+                  fontSize: 12,
+                  color: "var(--c-dim)",
                   fontFamily: "monospace",
-                  fontSize: 13,
-                  lineHeight: 1.7,
+                  border: "none",
+                  outline: "none",
+                  background: "transparent",
+                  flex: 1,
+                  minWidth: 0,
                 }}
               />
             </div>
 
-            {/* FAQ builder */}
-            <div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                <label style={{ ...labelStyle, marginBottom: 0 }}>Sıkça Sorulan Sorular</label>
-                <button type="button" onClick={addFAQ} style={smallBtnStyle}>+ Soru Ekle</button>
+            {/* İçerik editörü */}
+            <div style={{ marginTop: 28 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+                <span style={sectionLabel}>İçerik</span>
+                <span style={{ fontSize: 11, color: "var(--c-dim)" }}>Markdown desteklenir</span>
               </div>
-              <p style={{ margin: "0 0 12px", fontSize: 12, color: "var(--c-dim)" }}>
-                SSS bölümü içeriğin sonuna otomatik eklenir ve Google&apos;da öne çıkan snippet olarak görünebilir.
+              <textarea
+                name="content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder={"Yazmaya başlayın...\n\n## Başlık\n\nMetin paragrafı **kalın** veya *italik* olabilir.\n\n- Liste maddesi"}
+                rows={32}
+                style={{
+                  width: "100%",
+                  border: "1px solid var(--c-border)",
+                  borderRadius: 10,
+                  background: "var(--c-surface)",
+                  color: "var(--c-text)",
+                  fontSize: 15,
+                  lineHeight: 1.8,
+                  fontFamily: "'SF Mono', 'Fira Code', Consolas, monospace",
+                  resize: "vertical",
+                  outline: "none",
+                  padding: "20px 24px",
+                  boxSizing: "border-box",
+                }}
+              />
+            </div>
+
+            {/* SSS builder */}
+            <div style={{ marginTop: 36, paddingTop: 28, borderTop: "1px solid var(--c-border)" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
+                <span style={sectionLabel}>Sıkça Sorulan Sorular</span>
+                <button
+                  type="button"
+                  onClick={() => setFaqItems((p) => [...p, { q: "", a: "" }])}
+                  style={outlineBtnStyle}
+                >
+                  + Soru Ekle
+                </button>
+              </div>
+              <p style={{ margin: "0 0 16px", fontSize: 13, color: "var(--c-dim)", lineHeight: 1.5 }}>
+                SSS, içeriğin sonuna otomatik eklenir. Google&apos;da öne çıkan snippet olarak görünebilir.
               </p>
               {faqItems.map((item, i) => (
-                <div
-                  key={i}
-                  style={{
+                <div key={i} style={{ marginBottom: 12, border: "1px solid var(--c-border)", borderRadius: 10, overflow: "hidden" }}>
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "10px 16px",
                     background: "var(--c-surface2)",
-                    border: "1px solid var(--c-border)",
-                    borderRadius: 8,
-                    padding: 14,
-                    marginBottom: 10,
-                  }}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                    <span style={{ fontSize: 12, color: "var(--c-dim)", fontWeight: 600 }}>SSS #{i + 1}</span>
+                    borderBottom: "1px solid var(--c-border)",
+                  }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: "var(--c-text3)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                      Soru {i + 1}
+                    </span>
                     {faqItems.length > 1 && (
                       <button
                         type="button"
-                        onClick={() => removeFAQ(i)}
-                        style={{ ...smallBtnStyle, color: "#f87171", borderColor: "rgba(248,113,113,0.3)" }}
+                        onClick={() => setFaqItems((p) => p.filter((_, idx) => idx !== i))}
+                        style={{ ...outlineBtnStyle, color: "#f87171", borderColor: "rgba(248,113,113,0.35)" }}
                       >
                         Kaldır
                       </button>
                     )}
                   </div>
-                  <input
-                    value={item.q}
-                    onChange={(e) => updateFAQ(i, "q", e.target.value)}
-                    placeholder="Soru..."
-                    style={{ ...inputStyle, marginBottom: 8 }}
-                  />
-                  <textarea
-                    value={item.a}
-                    onChange={(e) => updateFAQ(i, "a", e.target.value)}
-                    placeholder="Cevap..."
-                    rows={3}
-                    style={{ ...inputStyle, resize: "vertical" }}
-                  />
+                  <div style={{ padding: 16, display: "flex", flexDirection: "column", gap: 10 }}>
+                    <input
+                      value={item.q}
+                      onChange={(e) => setFaqItems((p) => p.map((x, idx) => idx === i ? { ...x, q: e.target.value } : x))}
+                      placeholder="Soru..."
+                      style={{ ...fieldInput, fontWeight: 600 }}
+                    />
+                    <textarea
+                      value={item.a}
+                      onChange={(e) => setFaqItems((p) => p.map((x, idx) => idx === i ? { ...x, a: e.target.value } : x))}
+                      placeholder="Cevap..."
+                      rows={3}
+                      style={{ ...fieldInput, resize: "vertical", lineHeight: 1.6 }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* ── Right column (sidebar) ── */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 14, position: "sticky", top: 80 }}>
+          {/* ── Sağ: Yayın paneli ── */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 16, position: "sticky", top: 76 }}>
 
-            {/* Publish panel */}
-            <div style={panelStyle}>
-              <p style={panelTitleStyle}>Yayın</p>
+            {/* Yayın durumu + kaydet */}
+            <div style={cardStyle}>
+              <p style={cardTitle}>Yayın Durumu</p>
 
-              <div style={{ display: "flex", gap: 8, marginBottom: 14 }}>
+              <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
                 <button
                   type="button"
                   onClick={() => setIsPublished(false)}
                   style={{
-                    ...toggleBtnStyle,
+                    ...statusBtn,
                     background: !isPublished ? "rgba(251,191,36,0.12)" : "transparent",
                     color: !isPublished ? "#fde68a" : "var(--c-text3)",
-                    borderColor: !isPublished ? "rgba(251,191,36,0.35)" : "var(--c-border)",
+                    borderColor: !isPublished ? "rgba(251,191,36,0.4)" : "var(--c-border)",
                   }}
                 >
-                  Taslak
+                  ○ Taslak
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsPublished(true)}
                   style={{
-                    ...toggleBtnStyle,
+                    ...statusBtn,
                     background: isPublished ? "rgba(34,197,94,0.12)" : "transparent",
                     color: isPublished ? "#86efac" : "var(--c-text3)",
-                    borderColor: isPublished ? "rgba(34,197,94,0.35)" : "var(--c-border)",
+                    borderColor: isPublished ? "rgba(34,197,94,0.4)" : "var(--c-border)",
                   }}
                 >
-                  Yayınla
+                  ● Yayınla
                 </button>
               </div>
 
-              <label style={labelStyle}>Yayın Tarihi</label>
+              <label style={fieldLabel}>Yayın Tarihi</label>
               <input
                 name="published_at"
                 type="date"
                 value={publishedAt}
                 onChange={(e) => setPublishedAt(e.target.value)}
-                style={inputStyle}
+                style={fieldInput}
               />
 
-              <label style={{ ...labelStyle, marginTop: 12 }}>Dil</label>
-              <select
-                value={locale}
-                onChange={(e) => setLocale(e.target.value)}
-                style={inputStyle}
-              >
+              <label style={{ ...fieldLabel, marginTop: 12 }}>Dil</label>
+              <select value={locale} onChange={(e) => setLocale(e.target.value)} style={fieldInput}>
                 <option value="tr">Türkçe</option>
                 <option value="en">English</option>
               </select>
@@ -288,185 +324,279 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
                 type="submit"
                 disabled={pending}
                 style={{
-                  marginTop: 14,
+                  marginTop: 16,
                   width: "100%",
-                  padding: "10px 18px",
-                  borderRadius: 8,
+                  padding: "12px 18px",
+                  borderRadius: 9,
                   fontSize: 14,
-                  fontWeight: 600,
+                  fontWeight: 700,
                   border: "none",
                   cursor: pending ? "not-allowed" : "pointer",
-                  background: "#9b1c1c",
-                  color: "#fff",
-                  opacity: pending ? 0.7 : 1,
+                  background: isPublished
+                    ? "linear-gradient(135deg, #9b1c1c 0%, #7f1d1d 100%)"
+                    : "var(--c-border)",
+                  color: isPublished ? "#fff" : "var(--c-text3)",
+                  opacity: pending ? 0.65 : 1,
+                  letterSpacing: "0.01em",
+                  boxShadow: isPublished ? "0 2px 8px rgba(155,28,28,0.3)" : "none",
                 }}
               >
-                {pending ? "Kaydediliyor..." : mode === "create" ? "Oluştur" : "Güncelle"}
+                {pending ? "Kaydediliyor..." : mode === "create" ? (isPublished ? "Yayınla" : "Taslak Kaydet") : "Güncelle"}
               </button>
 
               {state?.error && (
-                <p style={{ margin: "10px 0 0", fontSize: 13, color: "#f87171" }}>
-                  Hata: {state.error}
+                <p style={{ margin: "10px 0 0", fontSize: 13, color: "#f87171", lineHeight: 1.4 }}>
+                  ⚠ {state.error}
                 </p>
               )}
             </div>
 
-            {/* SEO panel */}
-            <div style={panelStyle}>
-              <p style={panelTitleStyle}>SEO</p>
+            {/* SEO */}
+            <div style={cardStyle}>
+              <p style={cardTitle}>SEO</p>
 
-              <label style={labelStyle}>
-                SEO Başlığı
-                <span style={{ float: "right", color: seoLen > 60 ? "#f87171" : seoLen > 50 ? "#fde68a" : "var(--c-dim)" }}>
-                  {seoLen}/60
+              <label style={fieldLabel}>
+                Başlık
+                <span style={{
+                  float: "right",
+                  fontWeight: 400,
+                  color: seoLen > 60 ? "#f87171" : seoLen > 50 ? "#fde68a" : "var(--c-dim)",
+                }}>
+                  {seoLen} / 60
                 </span>
               </label>
               <input
                 name="seo_title"
                 value={seoTitle}
                 onChange={(e) => { setSeoTitle(e.target.value); setSeoTitleEdited(true); }}
-                placeholder="Google'da <title> olarak görünecek..."
+                placeholder="<title> etiketi..."
                 style={{
-                  ...inputStyle,
+                  ...fieldInput,
                   borderColor: seoLen > 60 ? "rgba(248,113,113,0.5)" : undefined,
                 }}
               />
 
-              <label style={{ ...labelStyle, marginTop: 12 }}>
+              <label style={{ ...fieldLabel, marginTop: 12 }}>
                 Meta Açıklama
-                <span style={{ float: "right", color: descLen > 160 ? "#f87171" : descLen > 140 ? "#fde68a" : "var(--c-dim)" }}>
-                  {descLen}/160
+                <span style={{
+                  float: "right",
+                  fontWeight: 400,
+                  color: descLen > 160 ? "#f87171" : descLen > 140 ? "#fde68a" : "var(--c-dim)",
+                }}>
+                  {descLen} / 160
                 </span>
               </label>
               <textarea
                 name="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Google arama sonucunda gösterilecek açıklama..."
+                placeholder="Arama sonucunda görünecek açıklama..."
                 rows={4}
                 style={{
-                  ...inputStyle,
+                  ...fieldInput,
                   resize: "none",
+                  lineHeight: 1.6,
                   borderColor: descLen > 160 ? "rgba(248,113,113,0.5)" : undefined,
                 }}
               />
 
-              {/* SERP preview */}
-              <div
-                style={{
-                  marginTop: 14,
-                  padding: 12,
-                  background: "var(--c-surface2)",
-                  borderRadius: 8,
-                  border: "1px solid var(--c-border)",
-                }}
-              >
-                <p style={{ margin: "0 0 6px", fontSize: 10, color: "var(--c-dim)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+              {/* SERP önizleme */}
+              <div style={{
+                marginTop: 14,
+                padding: "12px 14px",
+                background: "var(--c-surface2)",
+                borderRadius: 8,
+                border: "1px solid var(--c-border)",
+              }}>
+                <p style={{ margin: "0 0 8px", fontSize: 10, fontWeight: 700, color: "var(--c-dim)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
                   Google Önizleme
                 </p>
-                <p style={{ margin: "0 0 1px", fontSize: 12, color: "#6ee7b7", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                <p style={{ margin: "0 0 2px", fontSize: 11, color: "#6ee7b7", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                   dousocial.com › blog › {slug || "slug"}
                 </p>
-                <p style={{ margin: "0 0 2px", fontSize: 14, color: "#60a5fa", fontWeight: 500, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: "2", WebkitBoxOrient: "vertical" as const }}>
+                <p style={{ margin: "0 0 3px", fontSize: 14, color: "#60a5fa", fontWeight: 600, lineHeight: 1.3, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: "2", WebkitBoxOrient: "vertical" as const }}>
                   {seoTitle || title || "SEO Başlığı..."}
                 </p>
-                <p style={{ margin: 0, fontSize: 12, color: "var(--c-dim)", overflow: "hidden", display: "-webkit-box", WebkitLineClamp: "2", WebkitBoxOrient: "vertical" as const }}>
+                <p style={{ margin: 0, fontSize: 12, color: "var(--c-dim)", lineHeight: 1.4, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: "2", WebkitBoxOrient: "vertical" as const }}>
                   {description || "Meta açıklama buraya gelecek..."}
                 </p>
               </div>
             </div>
 
-            {/* Cover + Tags */}
-            <div style={panelStyle}>
-              <p style={panelTitleStyle}>Görsel & Etiketler</p>
+            {/* Görsel & Etiketler */}
+            <div style={cardStyle}>
+              <p style={cardTitle}>Kapak Görseli</p>
 
-              <label style={labelStyle}>Kapak Görseli URL</label>
+              {/* Hidden file input */}
               <input
-                name="cover"
-                value={cover}
-                onChange={(e) => setCover(e.target.value)}
-                placeholder="/blog/yazi-slug/kapak.jpg"
-                style={inputStyle}
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={(e) => handleFileChange(e.target.files?.[0] ?? null)}
               />
-              {cover && (
-                <div style={{ marginTop: 8, borderRadius: 6, overflow: "hidden", aspectRatio: "16/9", background: "var(--c-surface2)" }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={cover}
-                    alt="kapak önizleme"
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                  />
-                </div>
+              {/* Hidden form input for cover URL (goes with form submit) */}
+              <input type="hidden" name="cover" value={cover} />
+
+              {/* Drop zone / preview */}
+              <div
+                onClick={() => !uploadPending && fileInputRef.current?.click()}
+                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  setDragOver(false);
+                  handleFileChange(e.dataTransfer.files?.[0] ?? null);
+                }}
+                style={{
+                  position: "relative",
+                  borderRadius: 9,
+                  overflow: "hidden",
+                  aspectRatio: "16/9",
+                  background: "var(--c-surface2)",
+                  border: dragOver
+                    ? "2px dashed #fca5a5"
+                    : cover
+                    ? "none"
+                    : "2px dashed var(--c-border)",
+                  cursor: uploadPending ? "wait" : "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  gap: 6,
+                }}
+              >
+                {cover && !uploadPending ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={cover}
+                      alt="kapak"
+                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                    />
+                    {/* Hover overlay */}
+                    <div style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "rgba(0,0,0,0.55)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      opacity: 0,
+                      transition: "opacity 0.15s",
+                    }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = "1"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = "0"; }}
+                    >
+                      <span style={{ fontSize: 13, fontWeight: 600, color: "#fff" }}>Değiştir</span>
+                    </div>
+                  </>
+                ) : uploadPending ? (
+                  <div style={{ textAlign: "center" }}>
+                    <div style={{
+                      width: 28, height: 28,
+                      border: "3px solid var(--c-border)",
+                      borderTopColor: "#fca5a5",
+                      borderRadius: "50%",
+                      animation: "spin 0.7s linear infinite",
+                      margin: "0 auto 8px",
+                    }} />
+                    <p style={{ margin: 0, fontSize: 12, color: "var(--c-dim)" }}>Yükleniyor…</p>
+                  </div>
+                ) : (
+                  <div style={{ textAlign: "center", padding: 12 }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ margin: "0 auto 8px", display: "block", opacity: 0.4 }}>
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <p style={{ margin: "0 0 2px", fontSize: 13, fontWeight: 600, color: "var(--c-text3)" }}>
+                      {dragOver ? "Bırak!" : "Tıkla veya sürükle bırak"}
+                    </p>
+                    <p style={{ margin: 0, fontSize: 11, color: "var(--c-dim)" }}>
+                      JPG, PNG, WEBP · maks 20 MB
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Hata */}
+              {uploadError && (
+                <p style={{ margin: "8px 0 0", fontSize: 12, color: "#f87171" }}>⚠ {uploadError}</p>
               )}
 
-              <label style={{ ...labelStyle, marginTop: 12 }}>Etiketler</label>
+              {/* URL elle giriş (opsiyonel) */}
+              <div style={{ marginTop: 10 }}>
+                <input
+                  value={cover}
+                  onChange={(e) => setCover(e.target.value)}
+                  placeholder="Ya da URL yapıştır..."
+                  style={{ ...fieldInput, fontSize: 12, color: "var(--c-dim)" }}
+                />
+              </div>
+
+              {cover && (
+                <button
+                  type="button"
+                  onClick={() => { setCover(""); setUploadError(null); }}
+                  style={{ ...outlineBtnStyle, marginTop: 8, width: "100%", padding: "6px", fontSize: 12, color: "#f87171", borderColor: "rgba(248,113,113,0.3)" }}
+                >
+                  Görseli Kaldır
+                </button>
+              )}
+            </div>
+
+            {/* Etiketler */}
+            <div style={cardStyle}>
+              <p style={cardTitle}>Etiketler</p>
               <input
                 name="tags"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
-                placeholder="Dijital Pazarlama, SEO, Trendler"
-                style={inputStyle}
+                placeholder="SEO, Dijital Pazarlama, Trendler"
+                style={fieldInput}
               />
-              <p style={{ margin: "5px 0 0", fontSize: 12, color: "var(--c-dim)" }}>Virgülle ayırın</p>
+              <p style={{ margin: "6px 0 0", fontSize: 12, color: "var(--c-dim)" }}>Virgülle ayırın</p>
             </div>
           </div>
         </div>
       </form>
 
-      {/* Delete section — outside main form to avoid nested forms */}
+      {/* Sil — ayrı form */}
       {mode === "edit" && initialData && (
-        <div
-          style={{
-            marginTop: 24,
-            maxWidth: 320,
-            marginLeft: "auto",
-            background: "var(--c-surface)",
-            border: "1px solid rgba(248,113,113,0.2)",
-            borderRadius: 10,
-            padding: 16,
-          }}
-        >
-          <p style={{ ...panelTitleStyle, color: "#f87171" }}>Tehlikeli Bölge</p>
+        <div style={{
+          marginTop: 32,
+          maxWidth: 300,
+          marginLeft: "auto",
+          padding: 16,
+          background: "var(--c-surface)",
+          border: "1px solid rgba(248,113,113,0.2)",
+          borderRadius: 10,
+        }}>
+          <p style={{ margin: "0 0 12px", fontSize: 11, fontWeight: 700, color: "#f87171", textTransform: "uppercase", letterSpacing: "0.07em" }}>Tehlikeli Bölge</p>
           {!showDeleteConfirm ? (
             <button
               type="button"
               onClick={() => setShowDeleteConfirm(true)}
-              style={{ ...smallBtnStyle, width: "100%", padding: "8px 14px", color: "#f87171", borderColor: "rgba(248,113,113,0.3)" }}
+              style={{ ...outlineBtnStyle, width: "100%", padding: "9px 14px", color: "#f87171", borderColor: "rgba(248,113,113,0.35)" }}
             >
               Yazıyı Sil
             </button>
           ) : (
             <div>
-              <p style={{ margin: "0 0 12px", fontSize: 13, color: "var(--c-text3)" }}>
+              <p style={{ margin: "0 0 12px", fontSize: 13, color: "var(--c-text3)", lineHeight: 1.5 }}>
                 Bu işlem geri alınamaz. Emin misiniz?
               </p>
-              {deleteError && (
-                <p style={{ margin: "0 0 10px", fontSize: 13, color: "#f87171" }}>Hata: {deleteError}</p>
-              )}
+              {deleteError && <p style={{ margin: "0 0 10px", fontSize: 13, color: "#f87171" }}>{deleteError}</p>}
               <div style={{ display: "flex", gap: 8 }}>
-                <button
-                  type="button"
-                  onClick={() => setShowDeleteConfirm(false)}
-                  style={{ ...smallBtnStyle, flex: 1, padding: "8px 14px" }}
-                >
-                  İptal
-                </button>
+                <button type="button" onClick={() => setShowDeleteConfirm(false)} style={{ ...outlineBtnStyle, flex: 1, padding: "9px" }}>İptal</button>
                 <button
                   type="button"
                   onClick={handleDelete}
                   disabled={deletePending}
-                  style={{
-                    ...smallBtnStyle,
-                    flex: 1,
-                    padding: "8px 14px",
-                    color: "#f87171",
-                    borderColor: "rgba(248,113,113,0.3)",
-                    background: "rgba(248,113,113,0.1)",
-                    opacity: deletePending ? 0.7 : 1,
-                  }}
+                  style={{ ...outlineBtnStyle, flex: 1, padding: "9px", color: "#f87171", borderColor: "rgba(248,113,113,0.35)", background: "rgba(248,113,113,0.08)", opacity: deletePending ? 0.7 : 1 }}
                 >
-                  {deletePending ? "Siliniyor..." : "Evet, Sil"}
+                  {deletePending ? "..." : "Evet, Sil"}
                 </button>
               </div>
             </div>
@@ -477,9 +607,17 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
   );
 }
 
-// ─── Shared styles ────────────────────────────────────────────────────────────
+// ─── Styles ──────────────────────────────────────────────────────────────────
 
-const labelStyle: React.CSSProperties = {
+const sectionLabel: React.CSSProperties = {
+  fontSize: 11,
+  fontWeight: 700,
+  color: "var(--c-text3)",
+  textTransform: "uppercase",
+  letterSpacing: "0.08em",
+};
+
+const fieldLabel: React.CSSProperties = {
   display: "block",
   fontSize: 11,
   fontWeight: 700,
@@ -489,19 +627,19 @@ const labelStyle: React.CSSProperties = {
   marginBottom: 6,
 };
 
-const inputStyle: React.CSSProperties = {
+const fieldInput: React.CSSProperties = {
   width: "100%",
-  padding: "9px 12px",
+  padding: "9px 11px",
   borderRadius: 7,
   border: "1px solid var(--c-border)",
   background: "var(--c-surface2)",
   color: "var(--c-text)",
-  fontSize: 14,
+  fontSize: 13,
   outline: "none",
   boxSizing: "border-box",
 };
 
-const smallBtnStyle: React.CSSProperties = {
+const outlineBtnStyle: React.CSSProperties = {
   padding: "5px 12px",
   borderRadius: 6,
   fontSize: 12,
@@ -512,28 +650,29 @@ const smallBtnStyle: React.CSSProperties = {
   cursor: "pointer",
 };
 
-const panelStyle: React.CSSProperties = {
+const cardStyle: React.CSSProperties = {
   background: "var(--c-surface)",
   border: "1px solid var(--c-border)",
-  borderRadius: 10,
-  padding: 16,
+  borderRadius: 12,
+  padding: 18,
 };
 
-const panelTitleStyle: React.CSSProperties = {
+const cardTitle: React.CSSProperties = {
   margin: "0 0 14px",
   fontSize: 11,
   fontWeight: 700,
   color: "var(--c-text2)",
   textTransform: "uppercase",
-  letterSpacing: "0.07em",
+  letterSpacing: "0.08em",
 };
 
-const toggleBtnStyle: React.CSSProperties = {
+const statusBtn: React.CSSProperties = {
   flex: 1,
-  padding: "8px 12px",
+  padding: "8px 10px",
   borderRadius: 7,
-  fontSize: 13,
-  fontWeight: 500,
+  fontSize: 12,
+  fontWeight: 600,
   border: "1px solid",
   cursor: "pointer",
+  letterSpacing: "0.02em",
 };
