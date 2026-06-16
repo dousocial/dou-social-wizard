@@ -485,7 +485,9 @@ export function AuditTool() {
   const [apiError, setApiError] = useState<string | null>(null);
   const [result, setResult] = useState<{ text: string; scores: Scores } | null>(null);
   const [displayedText, setDisplayedText] = useState("");
+  const [reportOpen, setReportOpen] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   // Typing animation
   useEffect(() => {
@@ -500,6 +502,18 @@ export function AuditTool() {
     }, 16);
     return () => clearInterval(iv);
   }, [result?.text]);
+
+  function openReport() {
+    setReportOpen(true);
+    dialogRef.current?.showModal();
+    getLenis()?.stop();
+  }
+
+  function closeReport() {
+    dialogRef.current?.close();
+    setReportOpen(false);
+    getLenis()?.start();
+  }
 
   function scrollToResults() {
     const el = resultsRef.current;
@@ -823,29 +837,89 @@ export function AuditTool() {
                 </div>
               </div>
 
-              {/* Text */}
-              <div className="rounded-2xl border border-mute-100 bg-paper p-6 md:p-8">
-                <div className="mb-4 flex items-center justify-between">
-                  <h2 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-mute-500">Detaylı Rapor</h2>
-                  <button type="button" onClick={handleDownloadPDF}
-                    className="inline-flex items-center gap-2 rounded-full border border-mute-200 px-4 py-2 text-xs font-semibold text-ink transition-all duration-200 hover:border-ink hover:bg-ink hover:text-paper">
-                    <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5">
-                      <path d="M8 2v9M4 8l4 4 4-4M2 13h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              {/* Butonlar */}
+              <div className="flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  onClick={openReport}
+                  className="inline-flex h-12 items-center gap-2.5 rounded-full border border-mute-200 bg-paper px-6 text-sm font-semibold text-ink transition-all duration-200 hover:border-ink hover:bg-ink hover:text-paper"
+                >
+                  <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4">
+                    <path d="M8 3a5 5 0 100 10A5 5 0 008 3z" stroke="currentColor" strokeWidth="1.5"/>
+                    <path d="M8 6v2l1.5 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                  Dosyayı Görüntüle
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDownloadPDF}
+                  className="inline-flex h-12 items-center gap-2.5 rounded-full bg-accent px-6 text-sm font-semibold text-paper transition-all duration-200 hover:bg-accent-hover"
+                >
+                  <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4">
+                    <path d="M8 2v9M4 8l4 4 4-4M2 13h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  PDF İndir
+                </button>
+              </div>
+
+              {/* Rapor Modalı */}
+              <dialog
+                ref={dialogRef}
+                onClick={(e) => e.target === e.currentTarget && closeReport()}
+                onWheel={(e) => { if (dialogRef.current) dialogRef.current.scrollTop += e.deltaY; }}
+                className="m-auto w-full max-w-2xl rounded-2xl bg-paper p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+                style={{ maxHeight: "85dvh", overflowY: "auto", overscrollBehavior: "contain" }}
+              >
+                {/* Header */}
+                <div className="sticky top-0 z-10 flex items-start justify-between border-b border-mute-100 bg-paper px-8 py-5">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">DouAI · Analiz Raporu</p>
+                    <h2 className="mt-1 font-display text-xl font-bold leading-tight tracking-tight text-ink">
+                      Detaylı Rapor
+                    </h2>
+                    <p className="mt-0.5 text-xs text-mute-400">{result.scores.overall > 0 ? `Genel Skor: ${result.scores.overall}` : ""}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={closeReport}
+                    aria-label="Kapat"
+                    className="ml-4 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-mute-400 transition-colors hover:bg-mute-100 hover:text-ink"
+                  >
+                    <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" aria-hidden>
+                      <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
                     </svg>
-                    PDF İndir
                   </button>
                 </div>
-                <div className="max-h-[520px] overflow-y-auto overscroll-contain rounded-xl pr-2 space-y-1 text-sm leading-relaxed text-mute-700">
-                  {displayedText.split("\n").map((line, i) => (
-                    <p key={i} className={cn(line.match(/^\d+\)|^[A-ZÇŞĞÜÖİ].*:$/) ? "mt-4 font-display font-bold text-ink" : "")}>
-                      {line || <span className="block h-2" />}
-                    </p>
-                  ))}
-                  {displayedText.length < result.text.length && (
-                    <span className="inline-block h-4 w-0.5 animate-pulse bg-accent" />
-                  )}
+
+                {/* Body */}
+                <div className="px-8 py-6 text-sm leading-relaxed text-mute-700">
+                  <div className="space-y-1">
+                    {(reportOpen ? result.text : displayedText).split("\n").map((line, i) => (
+                      <p key={i} className={cn(line.match(/^\d+\)|^[A-ZÇŞĞÜÖİ].*:$/) ? "mt-4 font-display font-bold text-ink" : "")}>
+                        {line || <span className="block h-2" />}
+                      </p>
+                    ))}
+                  </div>
                 </div>
-              </div>
+
+                {/* Footer */}
+                <div className="sticky bottom-0 flex items-center justify-between border-t border-mute-100 bg-paper px-8 py-4">
+                  <button
+                    type="button"
+                    onClick={handleDownloadPDF}
+                    className="inline-flex items-center gap-2 text-xs font-semibold text-accent underline underline-offset-2 hover:text-accent/70"
+                  >
+                    PDF İndir
+                  </button>
+                  <button
+                    type="button"
+                    onClick={closeReport}
+                    className="rounded-xl bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-mute-800"
+                  >
+                    Kapat
+                  </button>
+                </div>
+              </dialog>
 
               {/* Bottom CTA */}
               <div className="rounded-2xl border border-mute-100 bg-ink p-6 text-center md:p-8">
