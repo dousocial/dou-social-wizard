@@ -263,7 +263,7 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
                       Görsel Ekle
                     </button>
                   )}
-                  <span style={{ fontSize: 11, color: "var(--c-dim)" }}>Markdown desteklenir</span>
+                  <span style={{ fontSize: 11, color: "var(--c-dim)" }}>Markdown · Görsel için ≤2 MB önerilir</span>
                 </div>
               </div>
 
@@ -656,8 +656,9 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
                     <p style={{ margin: "0 0 2px", fontSize: 13, fontWeight: 600, color: "var(--c-text3)" }}>
                       {dragOver ? "Bırak!" : "Tıkla veya sürükle bırak"}
                     </p>
-                    <p style={{ margin: 0, fontSize: 11, color: "var(--c-dim)" }}>
-                      JPG, PNG, WEBP · maks 20 MB
+                    <p style={{ margin: 0, fontSize: 11, color: "var(--c-dim)", lineHeight: 1.5 }}>
+                      JPG, PNG, WEBP · maks 20 MB<br />
+                      <span style={{ color: "#fbbf24" }}>Sitenin hızı için ≤2 MB önerilir</span>
                     </p>
                   </div>
                 )}

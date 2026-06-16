@@ -409,7 +409,10 @@ export function ProjectForm({ mode, initialData }: ProjectFormProps) {
                           <p style={{ margin: "0 0 2px", fontSize: 13, fontWeight: 600, color: "var(--c-text3)" }}>
                             {dragOver ? "Bırak!" : "Tıkla veya sürükle bırak"}
                           </p>
-                          <p style={{ margin: 0, fontSize: 11, color: "var(--c-dim)" }}>JPG, PNG, WEBP · maks 20 MB</p>
+                          <p style={{ margin: 0, fontSize: 11, color: "var(--c-dim)", lineHeight: 1.5 }}>
+                            JPG, PNG, WEBP · maks 20 MB<br />
+                            <span style={{ color: "#fbbf24" }}>Sitenin hızı için ≤2 MB önerilir</span>
+                          </p>
                         </div>
                       )}
                     </div>
@@ -693,7 +696,7 @@ export function ProjectForm({ mode, initialData }: ProjectFormProps) {
                                 <p style={{ margin: "0 0 1px", fontSize: 11, fontWeight: 600, color: "var(--c-text3)" }}>
                                   {isDragOver ? "Bırak!" : `Görsel ${i + 1}`}
                                 </p>
-                                <p style={{ margin: 0, fontSize: 10, color: "var(--c-dim)" }}>Tıkla veya sürükle</p>
+                                <p style={{ margin: 0, fontSize: 10, color: "var(--c-dim)", lineHeight: 1.5 }}>Tıkla veya sürükle<br /><span style={{ color: "#fbbf24" }}>≤2 MB önerilir</span></p>
                               </div>
                             )}
                           </div>
