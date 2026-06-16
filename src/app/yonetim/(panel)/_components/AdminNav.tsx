@@ -6,6 +6,7 @@ const BASE_LINKS = [
   { href: "/yonetim/leads",    label: "Audit Başvuruları" },
   { href: "/yonetim/contacts", label: "İletişim Formu" },
   { href: "/yonetim/blog",     label: "Blog" },
+  { href: "/yonetim/projeler", label: "Projeler" },
 ];
 
 const YONETICI_LINKS = [
