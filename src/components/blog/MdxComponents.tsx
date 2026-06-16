@@ -75,6 +75,11 @@ export const mdxComponents: MDXRemoteProps["components"] = {
   ),
   img: (props) => (
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    <img className="mt-8 w-full rounded-lg" {...props} />
+    <img
+      loading="lazy"
+      decoding="async"
+      className="mt-10 w-full rounded-xl"
+      {...props}
+    />
   ),
 };
