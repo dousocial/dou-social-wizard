@@ -4,8 +4,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ─── Slide data ───────────────────────────────────────────────────────────────
-// Her objenin `image` alanına gerçek fotoğraf yolu eklenebilir.
-// Örnek: image: "/gallery/meta-kampanya.jpg"
+// image: "/gallery/kampanya.jpg"
+// video: "/videos/reel-showcase.mp4"  ← video varsa öncelikli gösterilir
 
 const SLIDES = [
   {
@@ -16,6 +16,7 @@ const SLIDES = [
     gradient: "from-[#1a0a0a] via-[#3d1010] to-[#1a0505]",
     accent: "#c0392b",
     image: null as string | null,
+    video: null as string | null,
   },
   {
     id: "social",
@@ -25,6 +26,7 @@ const SLIDES = [
     gradient: "from-[#0a0a1a] via-[#101040] to-[#050520]",
     accent: "#5b6cf5",
     image: null as string | null,
+    video: null as string | null,
   },
   {
     id: "content",
@@ -34,6 +36,7 @@ const SLIDES = [
     gradient: "from-[#0a1510] via-[#0d2d18] to-[#061008]",
     accent: "#27ae60",
     image: null as string | null,
+    video: null as string | null,
   },
   {
     id: "web",
@@ -43,6 +46,7 @@ const SLIDES = [
     gradient: "from-[#0a0a0a] via-[#1a1a2e] to-[#080810]",
     accent: "#9b59b6",
     image: null as string | null,
+    video: null as string | null,
   },
   {
     id: "analytics",
@@ -52,8 +56,9 @@ const SLIDES = [
     gradient: "from-[#0a0f1a] via-[#0d1f3c] to-[#050a14]",
     accent: "#2980b9",
     image: null as string | null,
+    video: null as string | null,
   },
-] as const;
+];
 
 const INTERVAL_MS = 2800;
 
@@ -63,6 +68,8 @@ export function ServiceGallery() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const touchStartX = useRef<number>(0);
 
   const advance = useCallback(() => {
     setCurrent((c) => (c + 1) % SLIDES.length);
@@ -74,25 +81,42 @@ export function ServiceGallery() {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [paused, advance]);
 
+  // Video pause/resume on hover
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    if (paused) vid.pause();
+    else vid.play().catch(() => {});
+  }, [paused, current]);
+
   const goTo = (i: number) => {
     setCurrent(i);
     if (timerRef.current) clearInterval(timerRef.current);
-    if (!paused) {
-      timerRef.current = setInterval(advance, INTERVAL_MS);
-    }
+    if (!paused) timerRef.current = setInterval(advance, INTERVAL_MS);
   };
 
   const prev = () => goTo((current - 1 + SLIDES.length) % SLIDES.length);
   const next = () => goTo((current + 1) % SLIDES.length);
 
+  // Touch swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 40) delta > 0 ? next() : prev();
+  };
+
   const slide = SLIDES[current];
+  const hasMedia = !!(slide.video || slide.image);
 
   return (
     <div
-      className="relative mt-12 overflow-hidden rounded-2xl"
-      style={{ aspectRatio: "16 / 6" }}
+      className="relative mt-12 overflow-hidden rounded-2xl aspect-[4/3] sm:aspect-[16/8] md:aspect-[16/6]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* ── Slides ── */}
       <AnimatePresence mode="wait">
@@ -104,8 +128,21 @@ export function ServiceGallery() {
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className={`absolute inset-0 bg-gradient-to-br ${slide.gradient}`}
         >
-          {/* Fotoğraf varsa göster */}
-          {slide.image && (
+          {/* Video (öncelikli) */}
+          {slide.video && (
+            <video
+              ref={videoRef}
+              src={slide.video}
+              className="absolute inset-0 h-full w-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          )}
+
+          {/* Fotoğraf (video yoksa) */}
+          {!slide.video && slide.image && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={slide.image}
@@ -114,7 +151,7 @@ export function ServiceGallery() {
             />
           )}
 
-          {/* Dekoratif noise overlay */}
+          {/* Noise overlay */}
           <div
             className="absolute inset-0 opacity-[0.04]"
             style={{
@@ -123,8 +160,8 @@ export function ServiceGallery() {
             }}
           />
 
-          {/* Gradient vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
+          {/* Gradient vignette — video/resim varsa daha güçlü karart */}
+          <div className={`absolute inset-0 bg-gradient-to-t ${hasMedia ? "from-black/70 via-black/20" : "from-black/60 via-transparent"} to-black/10`} />
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
 
           {/* Dekoratif daire */}
@@ -134,7 +171,7 @@ export function ServiceGallery() {
           />
 
           {/* İçerik */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+          <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7 md:p-10">
             <motion.div
               initial={{ y: 16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -148,9 +185,18 @@ export function ServiceGallery() {
                 {slide.label}
               </span>
 
+              {/* Video badge */}
+              {slide.video && (
+                <span className="ml-2 inline-block rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[9px] font-medium uppercase tracking-widest text-white/60 backdrop-blur-sm">
+                  Video
+                </span>
+              )}
+
               {/* Başlık */}
-              <h3 className="mt-3 max-w-xl font-display font-bold leading-tight tracking-tight text-white"
-                style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.75rem)" }}>
+              <h3
+                className="mt-2 max-w-xl font-display font-bold leading-tight tracking-tight text-white"
+                style={{ fontSize: "clamp(1rem, 3.5vw, 1.75rem)" }}
+              >
                 {slide.title}
               </h3>
 
@@ -162,7 +208,7 @@ export function ServiceGallery() {
       </AnimatePresence>
 
       {/* ── Progress bar ── */}
-      <div className="absolute bottom-0 left-0 right-0 flex gap-1 px-6 pb-2 md:px-10">
+      <div className="absolute bottom-0 left-0 right-0 flex gap-1 px-5 pb-2 sm:px-7 md:px-10">
         {SLIDES.map((s, i) => (
           <button
             key={s.id}
@@ -187,15 +233,15 @@ export function ServiceGallery() {
         ))}
       </div>
 
-      {/* ── İleri / Geri butonları ── */}
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 flex items-center gap-2 md:right-10">
+      {/* ── İleri / Geri butonları — mobilde biraz daha küçük ── */}
+      <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1.5 sm:right-6 md:right-10 md:gap-2">
         <button
           type="button"
           onClick={prev}
           aria-label="Önceki slayt"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white/70 backdrop-blur-sm transition-all duration-200 hover:border-white/50 hover:bg-black/50 hover:text-white"
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white/70 backdrop-blur-sm transition-all duration-200 hover:border-white/50 hover:bg-black/50 hover:text-white md:h-9 md:w-9"
         >
-          <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" aria-hidden>
+          <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 md:h-4 md:w-4" fill="none" aria-hidden>
             <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
@@ -203,16 +249,16 @@ export function ServiceGallery() {
           type="button"
           onClick={next}
           aria-label="Sonraki slayt"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white/70 backdrop-blur-sm transition-all duration-200 hover:border-white/50 hover:bg-black/50 hover:text-white"
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white/70 backdrop-blur-sm transition-all duration-200 hover:border-white/50 hover:bg-black/50 hover:text-white md:h-9 md:w-9"
         >
-          <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" aria-hidden>
+          <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 md:h-4 md:w-4" fill="none" aria-hidden>
             <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       </div>
 
       {/* ── Slide counter ── */}
-      <div className="absolute left-6 top-5 font-display text-xs tracking-widest text-white/40 md:left-10">
+      <div className="absolute left-5 top-4 font-display text-xs tracking-widest text-white/40 sm:left-7 md:left-10">
         {String(current + 1).padStart(2, "0")}
         <span className="text-white/20"> / {String(SLIDES.length).padStart(2, "0")}</span>
       </div>
