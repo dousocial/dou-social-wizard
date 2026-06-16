@@ -3,14 +3,15 @@
 import { usePathname } from "next/navigation";
 
 const BASE_LINKS = [
-  { href: "/yonetim/leads",    label: "Audit Başvuruları" },
-  { href: "/yonetim/contacts", label: "İletişim Formu" },
-  { href: "/yonetim/blog",     label: "Blog" },
-  { href: "/yonetim/projeler", label: "Projeler" },
+  { href: "/yonetim",          label: "Dashboard",         exact: true },
+  { href: "/yonetim/leads",    label: "Audit Başvuruları", exact: false },
+  { href: "/yonetim/contacts", label: "İletişim Formu",    exact: false },
+  { href: "/yonetim/blog",     label: "Blog",              exact: false },
+  { href: "/yonetim/projeler", label: "Projeler",          exact: false },
 ];
 
 const YONETICI_LINKS = [
-  { href: "/yonetim/kullanicilar", label: "Kullanıcılar" },
+  { href: "/yonetim/kullanicilar", label: "Kullanıcılar", exact: false },
 ];
 
 export function AdminNav({ role }: { role: string }) {
@@ -20,7 +21,7 @@ export function AdminNav({ role }: { role: string }) {
   return (
     <nav style={{ display: "flex", gap: 4 }}>
       {links.map((l) => {
-        const active = path.startsWith(l.href);
+        const active = l.exact ? path === l.href : path.startsWith(l.href);
         return (
           <a
             key={l.href}

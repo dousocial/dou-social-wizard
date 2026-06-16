@@ -36,7 +36,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
         backdropFilter: "blur(12px)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          <a href="/yonetim/leads" style={{ display: "flex", alignItems: "center", gap: 9, textDecoration: "none" }}>
+          <a href="/yonetim" style={{ display: "flex", alignItems: "center", gap: 9, textDecoration: "none" }}>
             <div style={{
               width: 30,
               height: 30,
