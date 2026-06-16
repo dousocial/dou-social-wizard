@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import {
   motion,
+  AnimatePresence,
   useScroll,
   useTransform,
   useReducedMotion,
@@ -91,8 +92,7 @@ const ICONS = {
   address:  LocationIcon,
 } as const;
 
-// ─── Light-mode token override — forces this section to always render dark
-// regardless of the site's dark/light mode toggle.
+// ─── Light-mode token override — forces this section to always render dark ─────
 const FORCE_DARK: React.CSSProperties = {
   "--color-ink":    "#000000",
   "--color-paper":  "#ffffff",
@@ -108,7 +108,7 @@ const FORCE_DARK: React.CSSProperties = {
   "--color-mute-900": "#171717",
 } as React.CSSProperties;
 
-// ─── Fallback (SSR + reduced motion) ─────────────────────────────────────────
+// ─── Fallback (SSR + reduced motion) ──────────────────────────────────────────
 
 function MethodsFallback({ t }: { t: ReturnType<typeof useTranslations<"Contact.methods">> }) {
   return (
@@ -146,17 +146,165 @@ function MethodsFallback({ t }: { t: ReturnType<typeof useTranslations<"Contact.
   );
 }
 
-// ─── Inner (client-only) ──────────────────────────────────────────────────────
-// Split from outer so useScroll runs only after hydration — ref is always live.
+// ─── Mobile swipe carousel ────────────────────────────────────────────────────
 
 type TMethod = ReturnType<typeof useTranslations<"Contact.methods">>;
+
+function MobileCarousel({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
+  const [current, setCurrent] = useState(0);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+
+  const prev = () => setCurrent((c) => Math.max(0, c - 1));
+  const next = () => setCurrent((c) => Math.min(METHODS.length - 1, c + 1));
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const dx = touchStartX.current - e.changedTouches[0].clientX;
+    const dy = touchStartY.current - e.changedTouches[0].clientY;
+    // Only trigger if horizontal swipe is dominant
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      dx > 0 ? next() : prev();
+    }
+  };
+
+  const method = METHODS[current];
+  const Icon = ICONS[method.key];
+
+  return (
+    <div className="bg-ink select-none" style={FORCE_DARK}>
+      {/* Top bar */}
+      <div className="px-6 pt-8">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mute-600">
+            {eyebrow}
+          </p>
+          <p className="font-display text-xs tracking-widest text-mute-600">
+            0{current + 1}
+            <span className="text-mute-800"> / 0{METHODS.length}</span>
+          </p>
+        </div>
+        <div className="mt-4 h-px bg-mute-800" />
+      </div>
+
+      {/* Swipeable slide */}
+      <div
+        className="min-h-[56vh] px-6 py-8"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={method.key}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -40 }}
+            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            className="flex h-full flex-col justify-between gap-10"
+          >
+            {/* Number + icon */}
+            <div className="flex items-start justify-between">
+              <span className="font-display text-xs font-semibold uppercase tracking-[0.25em] text-mute-700">
+                {method.num}
+              </span>
+              <div className="h-10 w-10 text-mute-700">
+                <Icon />
+              </div>
+            </div>
+
+            {/* Label + big text */}
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
+                {t(`${method.key}.label`)}
+              </p>
+              <div
+                className="mt-5 font-display font-bold leading-[0.95] tracking-tight"
+                style={{ fontSize: "clamp(2.6rem, 12vw, 7rem)" }}
+              >
+                <div className="text-paper">{method.line1}</div>
+                <div className="text-mute-500">{method.line2}</div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <a
+              href={method.href}
+              target={method.external ? "_blank" : undefined}
+              rel={method.external ? "noopener noreferrer" : undefined}
+              className="group inline-flex items-center gap-4 self-start"
+            >
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-mute-700 text-mute-600 transition-all duration-300 group-hover:border-paper group-hover:bg-paper group-hover:text-ink">
+                <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" aria-hidden>
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <span className="text-base font-medium text-mute-500 transition-colors duration-200 group-hover:text-paper">
+                {t(`${method.key}.cta`)}
+              </span>
+            </a>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Dots + prev/next buttons */}
+      <div className="flex items-center justify-between px-6 pb-8">
+        <button
+          type="button"
+          aria-label="Önceki"
+          onClick={prev}
+          disabled={current === 0}
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-mute-700 text-mute-500 transition-all duration-200 disabled:opacity-25 active:scale-95"
+        >
+          <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" aria-hidden>
+            <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+
+        <div className="flex items-center gap-2">
+          {METHODS.map((_, i) => (
+            <motion.button
+              type="button"
+              key={i}
+              aria-label={`Slayt ${i + 1}`}
+              onClick={() => setCurrent(i)}
+              className="rounded-full"
+              animate={{
+                width:           current === i ? 28 : 6,
+                height:          6,
+                backgroundColor: current === i ? "rgb(160 53 53)" : "rgb(64 64 64)",
+              }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          aria-label="Sonraki"
+          onClick={next}
+          disabled={current === METHODS.length - 1}
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-mute-700 text-mute-500 transition-all duration-200 disabled:opacity-25 active:scale-95"
+        >
+          <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" aria-hidden>
+            <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Desktop scroll-jacking version ──────────────────────────────────────────
 
 function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const boundsRef = useRef({ start: 0, end: 1 });
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Measure container document bounds after first paint + on resize
   useEffect(() => {
     const measure = () => {
       const el = containerRef.current;
@@ -169,7 +317,6 @@ function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
     return () => { cancelAnimationFrame(id); window.removeEventListener("resize", measure); };
   }, []);
 
-  // useScroll() without target — tracks window, compatible with Lenis
   const { scrollY } = useScroll();
 
   const progress = useTransform(scrollY, (v) => {
@@ -178,11 +325,8 @@ function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
     return Math.max(0, Math.min(1, (v - start) / (end - start)));
   });
 
-  // Progress bar scale: 0→1 as scroll covers all 4 methods
   const progressBarScale = useTransform(progress, [0, 1], [0, 1]);
 
-  // Horizontal track with 4 slides
-  // Each slide: ~22% hold, ~6% transition to next
   const x = useTransform(
     progress,
     [0, 0.16, 0.25, 0.41, 0.50, 0.66, 0.75, 1],
@@ -197,14 +341,12 @@ function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
     <div ref={containerRef} className="h-[380vh]" style={FORCE_DARK}>
       <div className="sticky top-0 flex h-screen flex-col overflow-hidden bg-ink">
 
-        {/* ── Top bar ── */}
+        {/* Top bar */}
         <div className="mx-auto w-full max-w-[1280px] flex-none px-6 pt-10 md:px-10 md:pt-12">
           <div className="flex items-center justify-between pb-5">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mute-600">
               {eyebrow}
             </p>
-
-            {/* Animated progress bar — desktop only */}
             <div className="relative hidden h-px w-48 overflow-hidden bg-mute-800 md:block">
               <motion.div
                 suppressHydrationWarning
@@ -212,8 +354,6 @@ function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
                 style={{ scaleX: progressBarScale, width: "100%" }}
               />
             </div>
-
-            {/* Slide counter */}
             <p className="font-display text-xs tracking-widest text-mute-600">
               0{activeIndex + 1}
               <span className="text-mute-800"> / 04</span>
@@ -222,7 +362,7 @@ function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
           <div className="h-px bg-mute-800" />
         </div>
 
-        {/* ── Slide track ── */}
+        {/* Slide track */}
         <div className="flex-1 overflow-hidden">
           <motion.div
             suppressHydrationWarning
@@ -236,7 +376,6 @@ function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
                   key={method.key}
                   className="flex h-full w-1/4 flex-col justify-between px-6 py-8 md:px-10 md:py-10"
                 >
-                  {/* Method number + icon */}
                   <div className="flex items-start justify-between">
                     <span className="font-display text-xs font-semibold uppercase tracking-[0.25em] text-mute-700">
                       {method.num}
@@ -246,7 +385,6 @@ function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
                     </div>
                   </div>
 
-                  {/* Main contact info */}
                   <div>
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
                       {t(`${method.key}.label`)}
@@ -260,7 +398,6 @@ function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
                     </div>
                   </div>
 
-                  {/* CTA */}
                   <a
                     href={method.href}
                     target={method.external ? "_blank" : undefined}
@@ -282,7 +419,7 @@ function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
           </motion.div>
         </div>
 
-        {/* ── Progress dots ── */}
+        {/* Progress dots */}
         <div className="flex-none pb-8">
           <div className="flex items-center justify-center gap-2">
             {METHODS.map((_, i) => (
@@ -306,18 +443,27 @@ function ContactMethodsInner({ t, eyebrow }: { t: TMethod; eyebrow: string }) {
   );
 }
 
-// ─── Public export ────────────────────────────────────────────────────────────
+// ─── Public export ─────────────────────────────────────────────────────────────
 
 export function ContactMethods() {
   const t = useTranslations("Contact.methods");
   const tContact = useTranslations("Contact");
   const reduceMotion = useReducedMotion();
   const [isClient, setIsClient] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => { setIsClient(true); }, []);
+  useEffect(() => {
+    setIsClient(true);
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
-  if (!isClient || reduceMotion) {
-    return <MethodsFallback t={t} />;
+  if (!isClient || reduceMotion) return <MethodsFallback t={t} />;
+
+  if (isMobile) {
+    return <MobileCarousel t={t} eyebrow={tContact("eyebrow")} />;
   }
 
   return <ContactMethodsInner t={t} eyebrow={tContact("eyebrow")} />;
