@@ -22,8 +22,8 @@ const TEAM = [
   {
     name: "Miray Dede",
     role: "Koordinatör",
-    photo: null as string | null,
-    quote: "Ekipler arası köprü kurarken her sabah bu enerjik ofise gelmek motivasyon kaynağım. DOU’da düzeni sağlamak, bu harika ekiple çok daha keyifli!",
+    photo: "/team/miray.png" as string | null,
+    quote: "DOU’da koordinasyon sadece süreç yönetimi değil, aynı zamanda yaratıcılığın doğru zamanda doğru noktaya ulaşmasını sağlamaktır. Markalarımızın dijitalde güçlü bir iz bırakmasına katkı sunmaktan gurur duyuyorum.",
   },
   {
     name: "Fuat Koraç",
