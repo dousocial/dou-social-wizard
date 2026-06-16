@@ -121,9 +121,10 @@ export function Hero() {
           loop
           playsInline
           disablePictureInPicture
+          tabIndex={-1}
           className="absolute inset-0 h-full w-full object-cover"
           src="/videos/hero-bg.mp4"
-          style={{ display: reduceMotion ? "none" : undefined }}
+          style={{ display: reduceMotion ? "none" : undefined, pointerEvents: "none" }}
         />
 
         {/* Karartma + marka rengi geçişi */}
@@ -133,6 +134,13 @@ export function Hero() {
         {/* Noise texture */}
         <Noise opacity={0.03} />
       </motion.div>
+
+      {/* ── Touch shield — z-[1], sits between video bg and z-10 content.
+           iOS Safari shows its native play/pause overlay whenever a touch
+           lands "on" a video element. This invisible div intercepts every
+           tap in the hero area so the video element never receives touch
+           attribution from the WebKit media layer. ─────────────────────── */}
+      <div aria-hidden className="pointer-events-auto absolute inset-0 z-[1]" />
 
       {/* ── Content ────────────────────────────────────────────────── */}
       <Container className="relative z-10 w-full">
