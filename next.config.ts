@@ -9,6 +9,11 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "20mb",
+    },
+  },
   turbopack: {
     root: path.resolve(import.meta.dirname),
   },

@@ -67,7 +67,7 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
   const [deletePending, startDeleteTransition] = useTransition();
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
-  // Upload
+  // Cover upload
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadPending, startUploadTransition] = useTransition();
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -75,6 +75,7 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
 
   function handleFileChange(file: File | null) {
     if (!file) return;
+    if (file.size > 20 * 1024 * 1024) { setUploadError("20 MB'dan büyük dosya yüklenemez."); return; }
     setUploadError(null);
     startUploadTransition(async () => {
       const fd = new FormData();
@@ -83,6 +84,46 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
       const result = await uploadImage(fd);
       if (result.error) setUploadError(result.error);
       else if (result.url) setCover(result.url);
+    });
+  }
+
+  // Inline content image upload
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const lastCursorRef = useRef<number>(0);
+  const inlineFileRef = useRef<HTMLInputElement>(null);
+  const [inlineUploadPending, startInlineUploadTransition] = useTransition();
+  const [inlineUploadError, setInlineUploadError] = useState<string | null>(null);
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+
+  function insertImageAtCursor(url: string) {
+    const ta = textareaRef.current;
+    const pos = ta ? ta.selectionStart ?? lastCursorRef.current : lastCursorRef.current;
+    const before = content.slice(0, pos);
+    const after = content.slice(pos);
+    const insertion = `\n\n![](${url})\n\n`;
+    const newContent = before + insertion + after;
+    setContent(newContent);
+    const newPos = pos + insertion.length;
+    lastCursorRef.current = newPos;
+    setTimeout(() => {
+      if (ta) { ta.focus(); ta.setSelectionRange(newPos, newPos); }
+    }, 0);
+  }
+
+  function handleInlineUpload(file: File | null) {
+    if (!file) return;
+    if (file.size > 20 * 1024 * 1024) { setInlineUploadError("20 MB'dan büyük dosya yüklenemez."); return; }
+    setInlineUploadError(null);
+    startInlineUploadTransition(async () => {
+      const fd = new FormData();
+      fd.set("file", file);
+      fd.set("folder", "blog");
+      const result = await uploadImage(fd);
+      if (result.error) { setInlineUploadError(result.error); return; }
+      if (result.url) {
+        setUploadedImages((prev) => [...prev, result.url!]);
+        insertImageAtCursor(result.url);
+      }
     });
   }
 
@@ -186,14 +227,66 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
 
             {/* İçerik editörü */}
             <div style={{ marginTop: 28 }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+              {/* Toolbar */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 0 }}>
                 <span style={sectionLabel}>İçerik</span>
-                <span style={{ fontSize: 11, color: "var(--c-dim)" }}>Markdown desteklenir</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  {inlineUploadPending ? (
+                    <span style={{ fontSize: 12, color: "var(--c-dim)", display: "flex", alignItems: "center", gap: 6 }}>
+                      <span style={{ width: 14, height: 14, border: "2px solid var(--c-border)", borderTopColor: "#fca5a5", borderRadius: "50%", animation: "spin 0.7s linear infinite", display: "inline-block" }} />
+                      Yükleniyor…
+                    </span>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => inlineFileRef.current?.click()}
+                      title="Görsel yükle ve cursor konumuna ekle"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 5,
+                        padding: "4px 10px",
+                        borderRadius: 6,
+                        fontSize: 12,
+                        fontWeight: 600,
+                        border: "1px solid var(--c-border)",
+                        background: "transparent",
+                        color: "var(--c-text3)",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/>
+                        <path d="m21 15-5-5L5 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      </svg>
+                      Görsel Ekle
+                    </button>
+                  )}
+                  <span style={{ fontSize: 11, color: "var(--c-dim)" }}>Markdown desteklenir</span>
+                </div>
               </div>
+
+              {inlineUploadError && (
+                <p style={{ margin: "6px 0 0", fontSize: 12, color: "#f87171" }}>⚠ {inlineUploadError}</p>
+              )}
+
+              {/* Hidden inline file input */}
+              <input
+                ref={inlineFileRef}
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={(e) => { handleInlineUpload(e.target.files?.[0] ?? null); e.target.value = ""; }}
+              />
+
               <textarea
+                ref={textareaRef}
                 name="content"
                 value={content}
-                onChange={(e) => setContent(e.target.value)}
+                onChange={(e) => { setContent(e.target.value); lastCursorRef.current = e.target.selectionStart; }}
+                onSelect={(e) => { lastCursorRef.current = (e.target as HTMLTextAreaElement).selectionStart; }}
+                onBlur={(e) => { lastCursorRef.current = e.target.selectionStart; }}
                 placeholder={"Yazmaya başlayın...\n\n## Başlık\n\nMetin paragrafı **kalın** veya *italik* olabilir.\n\n- Liste maddesi"}
                 rows={32}
                 style={{
@@ -209,9 +302,59 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
                   outline: "none",
                   padding: "20px 24px",
                   boxSizing: "border-box",
+                  marginTop: 10,
                 }}
               />
             </div>
+
+            {/* Yüklenen Görseller */}
+            {uploadedImages.length > 0 && (
+              <div style={{ marginTop: 20, padding: 16, background: "var(--c-surface)", border: "1px solid var(--c-border)", borderRadius: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+                  <span style={sectionLabel}>Bu Yazıya Yüklenen Görseller</span>
+                  <span style={{ fontSize: 11, color: "var(--c-dim)" }}>Tıkla → cursor konumuna ekle</span>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))", gap: 8 }}>
+                  {uploadedImages.map((url, i) => (
+                    <div
+                      key={i}
+                      onClick={() => insertImageAtCursor(url)}
+                      title="Metne ekle"
+                      style={{
+                        position: "relative",
+                        aspectRatio: "16/9",
+                        borderRadius: 7,
+                        overflow: "hidden",
+                        background: "var(--c-surface2)",
+                        border: "1px solid var(--c-border)",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      <div style={{
+                        position: "absolute",
+                        inset: 0,
+                        background: "rgba(0,0,0,0.5)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        opacity: 0,
+                        transition: "opacity 0.15s",
+                        fontSize: 11,
+                        fontWeight: 600,
+                        color: "#fff",
+                      }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = "1"; }}
+                        onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = "0"; }}
+                      >
+                        + Ekle
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* SSS builder */}
             <div style={{ marginTop: 36, paddingTop: 28, borderTop: "1px solid var(--c-border)" }}>

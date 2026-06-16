@@ -104,7 +104,7 @@ export function ProjectForm({ mode, initialData }: ProjectFormProps) {
   const [deletePending, startDeleteTransition] = useTransition();
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
-  // Upload
+  // Cover upload
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadPending, startUploadTransition] = useTransition();
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -112,6 +112,7 @@ export function ProjectForm({ mode, initialData }: ProjectFormProps) {
 
   function handleFileChange(file: File | null) {
     if (!file) return;
+    if (file.size > 20 * 1024 * 1024) { setUploadError("20 MB'dan büyük dosya yüklenemez."); return; }
     setUploadError(null);
     startUploadTransition(async () => {
       const fd = new FormData();
@@ -120,6 +121,36 @@ export function ProjectForm({ mode, initialData }: ProjectFormProps) {
       const result = await uploadImage(fd);
       if (result.error) setUploadError(result.error);
       else if (result.url) setCoverImage(result.url);
+    });
+  }
+
+  // Gallery upload — tek file input, hangi slot yükleniyor takip edilir
+  const galleryFileRef = useRef<HTMLInputElement>(null);
+  const galleryUploadIdxRef = useRef<number>(0);
+  const [galleryUploadingIdx, setGalleryUploadingIdx] = useState<number | null>(null);
+  const [galleryUploadError, setGalleryUploadError] = useState<string | null>(null);
+  const [galleryDragOverIdx, setGalleryDragOverIdx] = useState<number | null>(null);
+  const [galleryUploadPending, startGalleryUploadTransition] = useTransition();
+
+  function triggerGalleryUpload(idx: number) {
+    galleryUploadIdxRef.current = idx;
+    galleryFileRef.current?.click();
+  }
+
+  function handleGalleryFile(file: File | null) {
+    if (!file) return;
+    if (file.size > 20 * 1024 * 1024) { setGalleryUploadError("20 MB'dan büyük dosya yüklenemez."); return; }
+    const idx = galleryUploadIdxRef.current;
+    setGalleryUploadingIdx(idx);
+    setGalleryUploadError(null);
+    startGalleryUploadTransition(async () => {
+      const fd = new FormData();
+      fd.set("file", file);
+      fd.set("folder", "projeler/galeri");
+      const result = await uploadImage(fd);
+      setGalleryUploadingIdx(null);
+      if (result.error) setGalleryUploadError(result.error);
+      else if (result.url) setGalleryImages((g) => g.map((x, i) => i === idx ? result.url! : x));
     });
   }
 
@@ -576,38 +607,119 @@ export function ProjectForm({ mode, initialData }: ProjectFormProps) {
               {/* ── Galeri ── */}
               {activeTab === "Galeri" && (
                 <div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                  {/* Hidden file input for gallery uploads */}
+                  <input
+                    ref={galleryFileRef}
+                    type="file"
+                    accept="image/*"
+                    style={{ display: "none" }}
+                    onChange={(e) => { handleGalleryFile(e.target.files?.[0] ?? null); e.target.value = ""; }}
+                  />
+
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                     <label style={{ ...labelStyle, marginBottom: 0 }}>Galeri Görselleri</label>
-                    <button type="button" onClick={() => setGalleryImages((g) => [...g, ""])} style={outlineBtn}>
-                      + Görsel Ekle
+                    <button
+                      type="button"
+                      onClick={() => setGalleryImages((g) => [...g, ""])}
+                      style={outlineBtn}
+                    >
+                      + Slot Ekle
                     </button>
                   </div>
                   <p style={{ margin: "0 0 16px", fontSize: 13, color: "var(--c-dim)", lineHeight: 1.5 }}>
-                    Her satıra bir görsel URL&apos;si girin. 4 görsel en iyi görünümü verir.
+                    Sınırsız görsel ekleyebilirsin. Proje detay sayfasında grid olarak görünür.
                   </p>
-                  {galleryImages.map((img, i) => (
-                    <div key={i} style={{ marginBottom: 12 }}>
-                      <div style={{ display: "flex", gap: 8, marginBottom: img ? 8 : 0 }}>
-                        <input
-                          value={img}
-                          onChange={(e) => setGalleryImages((g) => g.map((x, idx) => idx === i ? e.target.value : x))}
-                          placeholder={`Görsel ${i + 1} URL...`}
-                          style={{ ...fieldInput, flex: 1 }}
-                        />
-                        {galleryImages.length > 1 && (
-                          <button type="button" onClick={() => setGalleryImages((g) => g.filter((_, idx) => idx !== i))} style={{ ...outlineBtn, color: "#f87171", borderColor: "rgba(248,113,113,0.3)", flexShrink: 0 }}>
-                            ×
-                          </button>
-                        )}
-                      </div>
-                      {img && (
-                        <div style={{ height: 90, borderRadius: 8, overflow: "hidden", background: "var(--c-surface2)" }}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+
+                  {galleryUploadError && (
+                    <p style={{ margin: "0 0 12px", fontSize: 12, color: "#f87171" }}>⚠ {galleryUploadError}</p>
+                  )}
+
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                    {galleryImages.map((img, i) => {
+                      const isUploading = galleryUploadingIdx === i;
+                      const isDragOver = galleryDragOverIdx === i;
+                      return (
+                        <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                          {/* Drop zone */}
+                          <div
+                            onClick={() => !galleryUploadPending && triggerGalleryUpload(i)}
+                            onDragOver={(e) => { e.preventDefault(); setGalleryDragOverIdx(i); }}
+                            onDragLeave={() => setGalleryDragOverIdx(null)}
+                            onDrop={(e) => {
+                              e.preventDefault();
+                              setGalleryDragOverIdx(null);
+                              galleryUploadIdxRef.current = i;
+                              handleGalleryFile(e.dataTransfer.files?.[0] ?? null);
+                            }}
+                            style={{
+                              position: "relative",
+                              aspectRatio: "4/3",
+                              borderRadius: 9,
+                              overflow: "hidden",
+                              background: "var(--c-surface2)",
+                              border: isDragOver
+                                ? "2px dashed #fca5a5"
+                                : img ? "none" : "2px dashed var(--c-border)",
+                              cursor: galleryUploadPending ? "wait" : "pointer",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              flexDirection: "column",
+                              gap: 4,
+                            }}
+                          >
+                            {img && !isUploading ? (
+                              <>
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img src={img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                                <div
+                                  style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", display: "flex", alignItems: "center", justifyContent: "center", opacity: 0, transition: "opacity 0.15s", fontSize: 12, fontWeight: 600, color: "#fff" }}
+                                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = "1"; }}
+                                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = "0"; }}
+                                >
+                                  Değiştir
+                                </div>
+                              </>
+                            ) : isUploading ? (
+                              <div style={{ textAlign: "center" }}>
+                                <div style={{ width: 22, height: 22, border: "2px solid var(--c-border)", borderTopColor: "#fca5a5", borderRadius: "50%", animation: "spin 0.7s linear infinite", margin: "0 auto 6px" }} />
+                                <p style={{ margin: 0, fontSize: 11, color: "var(--c-dim)" }}>Yükleniyor…</p>
+                              </div>
+                            ) : (
+                              <div style={{ textAlign: "center", padding: 8 }}>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ margin: "0 auto 6px", display: "block", opacity: 0.35 }}>
+                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                                <p style={{ margin: "0 0 1px", fontSize: 11, fontWeight: 600, color: "var(--c-text3)" }}>
+                                  {isDragOver ? "Bırak!" : `Görsel ${i + 1}`}
+                                </p>
+                                <p style={{ margin: 0, fontSize: 10, color: "var(--c-dim)" }}>Tıkla veya sürükle</p>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* URL input + sil */}
+                          <div style={{ display: "flex", gap: 5 }}>
+                            <input
+                              value={img}
+                              onChange={(e) => setGalleryImages((g) => g.map((x, idx) => idx === i ? e.target.value : x))}
+                              placeholder="Ya da URL yapıştır..."
+                              style={{ ...fieldInput, fontSize: 11, color: "var(--c-dim)", flex: 1 }}
+                            />
+                            {galleryImages.length > 1 && (
+                              <button
+                                type="button"
+                                onClick={() => setGalleryImages((g) => g.filter((_, idx) => idx !== i))}
+                                style={{ ...outlineBtn, padding: "5px 9px", color: "#f87171", borderColor: "rgba(248,113,113,0.3)", flexShrink: 0 }}
+                              >
+                                ×
+                              </button>
+                            )}
+                          </div>
                         </div>
-                      )}
-                    </div>
-                  ))}
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
