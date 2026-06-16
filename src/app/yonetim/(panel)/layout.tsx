@@ -93,11 +93,11 @@ export default async function PanelLayout({ children }: { children: React.ReactN
               fontWeight: 700,
               color: "#fff",
             }}>
-              {(session.username?.[0] ?? "U").toUpperCase()}
+              {session.role[0].toUpperCase()}
             </div>
             <div style={{ minWidth: 0 }}>
               <div style={{ fontSize: 13, fontWeight: 600, color: "var(--c-text)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                {session.username ?? "Kullanıcı"}
+                {ROLE_LABEL[session.role] ?? session.role}
               </div>
               <div style={{
                 fontSize: 10,
