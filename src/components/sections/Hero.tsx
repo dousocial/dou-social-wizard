@@ -112,8 +112,8 @@ export function Hero() {
         style={bgStyle}
         className="pointer-events-none absolute inset-0 select-none"
       >
-        {/* Dark fallback — always in DOM, video renders on top when it loads */}
-        <div className="absolute inset-0 bg-ink" />
+        {/* Fallback — her zaman siyah, tema değişiminden etkilenmiyor */}
+        <div className="absolute inset-0 bg-black" />
         {/* Mobile: still frame from the video — no video element = no native play/pause overlay */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -135,8 +135,8 @@ export function Hero() {
           style={{ display: reduceMotion ? "none" : undefined, pointerEvents: "none" }}
         />
 
-        {/* Karartma + marka rengi geçişi — mobilde biraz daha açık ki poster görünsün */}
-        <div className="absolute inset-0 bg-black/35 md:bg-black/55" />
+        {/* Karartma + marka rengi geçişi — her iki temada da güçlü kontrast */}
+        <div className="absolute inset-0 bg-black/50 md:bg-black/60" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,_rgb(128_0_0_/_0.25)_0%,_transparent_65%)]" />
 
         {/* Noise texture */}
