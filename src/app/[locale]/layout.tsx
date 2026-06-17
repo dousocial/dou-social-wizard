@@ -109,6 +109,8 @@ export default async function LocaleLayout({
             __html: `(function(){try{var s=localStorage.getItem('theme');var dark=s!=='light';document.documentElement.classList.toggle('dark',dark);document.cookie='theme='+(dark?'dark':'light')+';path=/;max-age=31536000;SameSite=Lax'}catch(e){}})();`,
           }}
         />
+        {/* Google reCAPTCHA v3 */}
+        <script async src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`} />
         {/* Google Analytics 4 */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6YE41E5EC" />
         <script

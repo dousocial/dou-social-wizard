@@ -1,12 +1,23 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { submitContactForm, type FormState } from "@/lib/actions/forms";
 import { Button } from "@/components/ui/Button";
 import { TextField, TextArea } from "./Field";
 import { Honeypot } from "./Honeypot";
 import { KVKKConsentField } from "./KVKKConsentField";
+
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (cb: () => void) => void;
+      execute: (siteKey: string, opts: { action: string }) => Promise<string>;
+    };
+  }
+}
+
+const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
 
 const initial: FormState = { status: "idle" };
 
@@ -20,10 +31,31 @@ function formatPhone(raw: string): string {
 export function ContactForm() {
   const t = useTranslations("Contact.form");
   const [phone, setPhone] = useState("");
-  const [state, formAction, isPending] = useActionState(
-    submitContactForm,
-    initial
-  );
+  const [state, formAction] = useActionState(submitContactForm, initial);
+  const [isPending, startTransition] = useTransition();
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    if (SITE_KEY && typeof window !== "undefined" && window.grecaptcha) {
+      await new Promise<void>((resolve) => {
+        window.grecaptcha.ready(async () => {
+          try {
+            const token = await window.grecaptcha.execute(SITE_KEY, { action: "contact" });
+            formData.set("recaptcha_token", token);
+          } catch {
+            // token alınamazsa yine de gönder
+          }
+          resolve();
+        });
+      });
+    }
+
+    startTransition(() => {
+      formAction(formData);
+    });
+  }
 
   if (state.status === "success") {
     return (
@@ -37,7 +69,7 @@ export function ContactForm() {
   }
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <Honeypot />
 
       <div className="grid gap-6 md:grid-cols-2">

@@ -220,7 +220,8 @@
         "invalid-email": "Geçerli bir e-posta gir.",
         "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
         "consent-required": "KVKK onayı vermeden gönderemiyoruz.",
-        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene."
+        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene.",
+        "recaptcha-failed": "Bot doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar dene."
       },
       "optional": "opsiyonel",
       "consentPrefix": "Kişisel verilerimin işlenmesine ilişkin",

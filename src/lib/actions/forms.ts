@@ -2,6 +2,7 @@
 
 import { rateLimit, getClientId } from "@/lib/rate-limit";
 import { supabase } from "@/lib/supabase";
+import { verifyRecaptcha } from "@/lib/recaptcha";
 
 export type FormState =
   | { status: "idle" }
@@ -63,8 +64,13 @@ export async function submitContactForm(
   formData: FormData
 ): Promise<FormState> {
   if (isHoneypotTriggered(formData)) {
-    // Silently succeed for bots — don't reveal the trap.
     return { status: "success" };
+  }
+
+  const recaptchaToken = String(formData.get("recaptcha_token") ?? "");
+  const recaptchaOk = await verifyRecaptcha(recaptchaToken);
+  if (!recaptchaOk) {
+    return { status: "error", error: "recaptcha-failed" };
   }
 
   const limited = await checkRateLimit("contact");

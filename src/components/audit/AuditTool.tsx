@@ -5,6 +5,31 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { getLenis } from "@/components/layout/SmoothScrollProvider";
 
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (cb: () => void) => void;
+      execute: (siteKey: string, opts: { action: string }) => Promise<string>;
+    };
+  }
+}
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
+
+async function getRecaptchaToken(action: string): Promise<string> {
+  if (!RECAPTCHA_SITE_KEY || typeof window === "undefined" || !window.grecaptcha) return "";
+  return new Promise((resolve) => {
+    window.grecaptcha.ready(async () => {
+      try {
+        const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action });
+        resolve(token);
+      } catch {
+        resolve("");
+      }
+    });
+  });
+}
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type Platform = "instagram" | "linkedin" | "youtube" | "google";
@@ -575,6 +600,9 @@ export function AuditTool() {
         if (Object.keys(screenshotData).length === 0) { setApiError("En az bir ekran görüntüsü yükle."); setLoading(false); return; }
         body = { mode: "screenshot", ...lead, screenshots: screenshotData };
       }
+
+      const recaptchaToken = await getRecaptchaToken("audit");
+      body.recaptchaToken = recaptchaToken;
 
       const res = await fetch("/api/audit", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
       const data = await res.json();

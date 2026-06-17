@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { verifyRecaptcha } from "@/lib/recaptcha";
 
 // ─── System prompt ─────────────────────────────────────────────────────────────
 
@@ -273,6 +274,7 @@ export async function POST(request: Request) {
     metrics?: Record<string, Record<string, string>>;
     activePlatforms?: string[];
     screenshots?: Record<string, string>;
+    recaptchaToken?: string;
   };
 
   try {
@@ -288,7 +290,13 @@ export async function POST(request: Request) {
     metrics = {},
     activePlatforms = [],
     screenshots = {},
+    recaptchaToken,
   } = body;
+
+  const recaptchaOk = await verifyRecaptcha(recaptchaToken);
+  if (!recaptchaOk) {
+    return NextResponse.json({ error: "Bot koruması doğrulaması başarısız." }, { status: 403 });
+  }
 
   type OAIContent = string | { type: string; text?: string; image_url?: { url: string } }[];
   let userContent: OAIContent;
