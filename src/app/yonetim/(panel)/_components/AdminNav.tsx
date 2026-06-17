@@ -72,6 +72,24 @@ const BASE_LINKS = [
   },
 ];
 
+const CRM_LINKS = [
+  {
+    href: "/yonetim/musteriler",
+    label: "Müşteriler",
+    exact: false,
+    color: "#06b6d4",
+    bg: "rgba(6,182,212,0.15)",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
+        <rect x="2" y="5" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="1.6"/>
+        <path d="M2 9h16" stroke="currentColor" strokeWidth="1.6"/>
+        <path d="M6 13h2M6 16h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+        <path d="M10 2l4 3H6l4-3z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+];
+
 const YONETICI_LINKS = [
   {
     href: "/yonetim/kullanicilar",
@@ -92,7 +110,9 @@ const YONETICI_LINKS = [
 
 export function AdminNav({ role }: { role: string }) {
   const path = usePathname();
-  const links = role === "yonetici" ? [...BASE_LINKS, ...YONETICI_LINKS] : BASE_LINKS;
+  const links = role === "yonetici"
+    ? [...BASE_LINKS, ...CRM_LINKS, ...YONETICI_LINKS]
+    : [...BASE_LINKS, ...CRM_LINKS];
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
