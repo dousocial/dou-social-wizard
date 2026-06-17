@@ -5,15 +5,15 @@
 
 @theme {
   /* ─── Brand colors ──────────────────────────────────────────────── */
-  --color-ink: #000000;
-  --color-paper: #ffffff;
+  --color-ink: #111111;
+  --color-paper: #faf9f7;
   --color-accent: #800000;
   --color-accent-hover: #5c0000;
 
-  /* Neutral scale */
-  --color-mute-50: #fafafa;
-  --color-mute-100: #f5f5f5;
-  --color-mute-200: #e5e5e5;
+  /* Neutral scale — sıcak gri tonu */
+  --color-mute-50: #f5f4f1;
+  --color-mute-100: #edece9;
+  --color-mute-200: #e2e0dc;
   --color-mute-300: #d4d4d4;
   --color-mute-400: #a3a3a3;
   --color-mute-500: #737373;
@@ -123,7 +123,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  transition: background-color 350ms ease;
+  transition: background-color 350ms ease, color 350ms ease;
   font-family: var(--font-sans);
   font-size: var(--text-base);
   line-height: 1.6;
@@ -158,9 +158,18 @@ body {
 .text-fluid-6xl  { font-size: var(--text-6xl); }
 .text-fluid-7xl  { font-size: var(--text-7xl); }
 
+/* ─── Light mode subtle warm background gradient ────────────────────── */
+:root:not(.dark) body {
+  background-image: radial-gradient(
+    ellipse 80% 40% at 50% 0%,
+    rgb(128 0 0 / 0.04) 0%,
+    transparent 60%
+  );
+}
+
 /* ─── Glassmorphism utility ─────────────────────────────────────────── */
 .glass {
-  background: rgb(255 255 255 / 0.72);
+  background: rgb(250 249 247 / 0.82);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgb(255 255 255 / 0.18);

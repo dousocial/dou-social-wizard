@@ -200,7 +200,12 @@ export function Hero() {
             <ButtonLink href="/audit" variant="primary" size="lg">
               {t("ctaPrimary")}
             </ButtonLink>
-            <ButtonLink href="/projeler" variant="secondary" size="lg">
+            <ButtonLink
+              href="/projeler"
+              variant="secondary"
+              size="lg"
+              className="border-white/60 text-white hover:bg-white/15 hover:text-white focus-visible:outline-white"
+            >
               {t("ctaSecondary")}
             </ButtonLink>
           </motion.div>
