@@ -168,14 +168,13 @@ export function MusteriDetailClient({ musteri, metriks }: { musteri: Musteri; me
     };
     setEditError("");
     setIsPending(true);
-    try {
-      await updateMusteri(musteri.id, data);
+    const result = await updateMusteri(musteri.id, data);
+    setIsPending(false);
+    if (result.error) {
+      setEditError(result.error);
+    } else {
       setEditOpen(false);
       router.refresh();
-    } catch (err) {
-      setEditError((err as Error).message);
-    } finally {
-      setIsPending(false);
     }
   }
 
@@ -219,44 +218,38 @@ export function MusteriDetailClient({ musteri, metriks }: { musteri: Musteri; me
     };
     setMetrikError("");
     setIsPending(true);
-    try {
-      if (metrikModal.open && metrikModal.editing) {
-        await updateMetrik(metrikModal.editing.id, musteri.id, data);
-      } else {
-        await addMetrik(data as MetrikInput);
-      }
+    let result;
+    if (metrikModal.open && metrikModal.editing) {
+      result = await updateMetrik(metrikModal.editing.id, musteri.id, data);
+    } else {
+      result = await addMetrik(data as MetrikInput);
+    }
+    setIsPending(false);
+    if (result.error) {
+      setMetrikError(result.error);
+    } else {
       setMetrikModal({ open: false });
       router.refresh();
-    } catch (err) {
-      setMetrikError((err as Error).message);
-    } finally {
-      setIsPending(false);
     }
   }
 
   async function handleDeleteMusteri() {
     setIsPending(true);
-    try {
-      await deleteMusteri(musteri.id);
+    const result = await deleteMusteri(musteri.id);
+    setIsPending(false);
+    if (!result.error) {
       router.push("/yonetim/musteriler");
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsPending(false);
     }
   }
 
   async function handleDeleteMetrik() {
     if (!deleteMetrikId) return;
     setIsPending(true);
-    try {
-      await deleteMetrik(deleteMetrikId, musteri.id);
+    const result = await deleteMetrik(deleteMetrikId, musteri.id);
+    setIsPending(false);
+    if (!result.error) {
       setDeleteMetrikId(null);
       router.refresh();
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsPending(false);
     }
   }
 

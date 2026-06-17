@@ -172,32 +172,31 @@ export function MusterilerClient({ musteriler }: { musteriler: Musteri[] }) {
 
     setFormError("");
     setIsPending(true);
-    try {
-      if (modal.open && modal.editing) {
-        await updateMusteri(modal.editing.id, data);
-      } else {
-        await addMusteri(data);
-      }
+    let result;
+    if (modal.open && modal.editing) {
+      result = await updateMusteri(modal.editing.id, data);
+    } else {
+      result = await addMusteri(data);
+    }
+    setIsPending(false);
+    if (result.error) {
+      setFormError(result.error);
+    } else {
       setModal({ open: false });
       router.refresh();
-    } catch (err) {
-      setFormError((err as Error).message);
-    } finally {
-      setIsPending(false);
     }
   }
 
   async function handleDelete() {
     if (!deleteTarget) return;
     setIsPending(true);
-    try {
-      await deleteMusteri(deleteTarget.id);
+    const result = await deleteMusteri(deleteTarget.id);
+    setIsPending(false);
+    if (result.error) {
+      setFormError(result.error);
+    } else {
       setDeleteTarget(null);
       router.refresh();
-    } catch (err) {
-      setFormError((err as Error).message);
-    } finally {
-      setIsPending(false);
     }
   }
 
