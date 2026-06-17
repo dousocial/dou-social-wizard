@@ -11,6 +11,7 @@ import {
   type MusteriInput,
   type MetrikInput,
 } from "@/lib/actions/musteriler";
+import { DatePicker } from "../../_components/DatePicker";
 
 type Musteri = {
   id: string;
@@ -604,7 +605,11 @@ export function MusteriDetailClient({ musteri, metriks }: { musteri: Musteri; me
                 </div>
                 <div>
                   <label style={LABEL}>Başlangıç Tarihi</label>
-                  <input type="date" style={INPUT} value={editForm.baslangic_tarihi} onChange={(e) => setEditForm((f) => ({ ...f, baslangic_tarihi: e.target.value }))} />
+                  <DatePicker
+                    value={editForm.baslangic_tarihi}
+                    onChange={(v) => setEditForm((f) => ({ ...f, baslangic_tarihi: v }))}
+                    placeholder="Gün Ay Yıl seçin"
+                  />
                 </div>
                 <div>
                   <label style={LABEL}>Sorumlu</label>

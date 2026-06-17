@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { addMusteri, updateMusteri, deleteMusteri } from "@/lib/actions/musteriler";
+import { DatePicker } from "./DatePicker";
 
 type Musteri = {
   id: string;
@@ -525,7 +526,12 @@ export function MusterilerClient({ musteriler }: { musteriler: Musteri[] }) {
                 </div>
                 <div>
                   <label style={LABEL}>Başlangıç Tarihi *</label>
-                  <input type="date" style={INPUT} value={form.baslangic_tarihi} onChange={(e) => setForm((f) => ({ ...f, baslangic_tarihi: e.target.value }))} />
+                  <DatePicker
+                    value={form.baslangic_tarihi}
+                    onChange={(v) => setForm((f) => ({ ...f, baslangic_tarihi: v }))}
+                    placeholder="Gün Ay Yıl seçin"
+                    required
+                  />
                 </div>
                 <div>
                   <label style={LABEL}>E-posta</label>
