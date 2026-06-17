@@ -44,7 +44,7 @@ const navItemVariants = {
   show:   { opacity: 1, x: 0, transition: { duration: 0.35, ease: EASE } },
 };
 
-export function MobileMenu() {
+export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
   const [open, setOpen]       = useState(false);
   const [mounted, setMounted] = useState(false);
   const t        = useTranslations("Nav");
@@ -92,7 +92,10 @@ export function MobileMenu() {
         aria-expanded={open}
         aria-controls="mobile-menu-panel"
         onClick={() => setOpen((v) => !v)}
-        className="relative flex h-10 w-10 items-center justify-center text-ink md:hidden"
+        className={cn(
+          "relative flex h-10 w-10 items-center justify-center md:hidden transition-colors duration-300",
+          forceLight ? "text-white" : "text-ink"
+        )}
       >
         {/* CSS bar animasyonu — SVG d-morph yerine, tarayıcı uyumlu */}
         <span className="relative flex h-5 w-5 flex-col items-center justify-center gap-[5px]">

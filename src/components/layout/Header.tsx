@@ -24,6 +24,9 @@ const NAV_ITEMS = [
 
 const SCROLL_THRESHOLD = 24;
 
+// Koyu hero arka planı olan sayfalar — burada header şeffaf + beyaz metin doğru görünür
+const DARK_HERO_PAGES = new Set(["/"]);
+
 export function Header() {
   const t = useTranslations("Nav");
   const pathname = usePathname();
@@ -33,7 +36,6 @@ export function Header() {
     const handleScroll = () => {
       setScrolled(window.scrollY > SCROLL_THRESHOLD);
     };
-    // İlk render'da kontrol et
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -42,13 +44,19 @@ export function Header() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  // Sadece ana sayfada (koyu video hero) şeffaf+beyaz header kullan
+  const hasDarkHero = DARK_HERO_PAGES.has(pathname);
+  const forceWhite  = !scrolled && hasDarkHero;
+
   return (
     <header
       className={cn(
         "sticky top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-b border-mute-100/80 bg-paper/85 shadow-sm backdrop-blur-xl backdrop-saturate-150"
-          : "border-b border-transparent bg-transparent"
+          ? "border-b border-mute-100/80 bg-paper/90 shadow-sm backdrop-blur-xl backdrop-saturate-150"
+          : hasDarkHero
+            ? "border-b border-transparent bg-transparent"
+            : "border-b border-mute-100/60 bg-paper/80 backdrop-blur-md"
       )}
     >
       <Container size="wide">
@@ -65,7 +73,7 @@ export function Header() {
             }}
             className={cn(
               "flex shrink-0 items-center transition-[color,opacity] duration-300 hover:opacity-70",
-              scrolled ? "text-ink" : "text-white"
+              forceWhite ? "text-white" : "text-ink"
             )}
             aria-label="DOU Social — Ana sayfa"
           >
@@ -88,9 +96,9 @@ export function Header() {
                   }}
                   className={cn(
                     "relative px-2 py-2 text-sm font-medium transition-colors duration-200",
-                    scrolled
-                      ? (active ? "text-ink" : "text-mute-500 hover:text-ink")
-                      : (active ? "text-white" : "text-white/65 hover:text-white")
+                    forceWhite
+                      ? active ? "text-white" : "text-white/65 hover:text-white"
+                      : active ? "text-ink"  : "text-mute-500 hover:text-ink"
                   )}
                 >
                   {t(item.key)}
@@ -102,7 +110,7 @@ export function Header() {
                         layoutId="nav-active"
                         className={cn(
                           "absolute bottom-0.5 left-2 right-2 h-px",
-                          scrolled ? "bg-ink" : "bg-white"
+                          forceWhite ? "bg-white" : "bg-ink"
                         )}
                         initial={{ opacity: 0, scaleX: 0 }}
                         animate={{ opacity: 1, scaleX: 1 }}
@@ -116,7 +124,7 @@ export function Header() {
                   <motion.span
                     className={cn(
                       "absolute inset-0 rounded-md",
-                      scrolled ? "bg-mute-100" : "bg-white/10"
+                      forceWhite ? "bg-white/10" : "bg-mute-100"
                     )}
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
@@ -132,9 +140,9 @@ export function Header() {
           <div className="flex items-center gap-3">
             <LangSwitcher
               className="hidden sm:flex"
-              forceLight={!scrolled}
+              forceLight={forceWhite}
             />
-            <ThemeToggle forceLight={!scrolled} />
+            <ThemeToggle forceLight={forceWhite} />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -147,7 +155,7 @@ export function Header() {
               </ButtonLink>
             </motion.div>
 
-            <MobileMenu />
+            <MobileMenu forceLight={forceWhite} />
           </div>
         </div>
       </Container>
