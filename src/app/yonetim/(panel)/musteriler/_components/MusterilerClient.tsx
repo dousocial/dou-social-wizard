@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { addMusteri, updateMusteri, deleteMusteri } from "@/lib/actions/musteriler";
 
@@ -93,7 +93,7 @@ export function MusterilerClient({ musteriler }: { musteriler: Musteri[] }) {
   const [search, setSearch] = useState("");
   const [durumFilter, setDurumFilter] = useState("all");
   const [form, setForm] = useState(EMPTY_FORM);
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const [formError, setFormError] = useState("");
 
   const stats = useMemo(() => {
@@ -151,7 +151,7 @@ export function MusterilerClient({ musteriler }: { musteriler: Musteri[] }) {
     }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.ad.trim()) { setFormError("Müşteri adı zorunludur."); return; }
     if (!form.sektor.trim()) { setFormError("Sektör zorunludur."); return; }
@@ -171,32 +171,34 @@ export function MusterilerClient({ musteriler }: { musteriler: Musteri[] }) {
     };
 
     setFormError("");
-    startTransition(async () => {
-      try {
-        if (modal.open && modal.editing) {
-          await updateMusteri(modal.editing.id, data);
-        } else {
-          await addMusteri(data);
-        }
-        setModal({ open: false });
-        router.refresh();
-      } catch (err) {
-        setFormError((err as Error).message);
+    setIsPending(true);
+    try {
+      if (modal.open && modal.editing) {
+        await updateMusteri(modal.editing.id, data);
+      } else {
+        await addMusteri(data);
       }
-    });
+      setModal({ open: false });
+      router.refresh();
+    } catch (err) {
+      setFormError((err as Error).message);
+    } finally {
+      setIsPending(false);
+    }
   }
 
-  function handleDelete() {
+  async function handleDelete() {
     if (!deleteTarget) return;
-    startTransition(async () => {
-      try {
-        await deleteMusteri(deleteTarget.id);
-        setDeleteTarget(null);
-        router.refresh();
-      } catch (err) {
-        setFormError((err as Error).message);
-      }
-    });
+    setIsPending(true);
+    try {
+      await deleteMusteri(deleteTarget.id);
+      setDeleteTarget(null);
+      router.refresh();
+    } catch (err) {
+      setFormError((err as Error).message);
+    } finally {
+      setIsPending(false);
+    }
   }
 
   return (

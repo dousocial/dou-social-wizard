@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   updateMusteri,
@@ -127,7 +127,7 @@ const EMPTY_METRIK = {
 
 export function MusteriDetailClient({ musteri, metriks }: { musteri: Musteri; metriks: Metrik[] }) {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
 
   const [editOpen, setEditOpen]     = useState(false);
   const [editForm, setEditForm]     = useState(() => EMPTY_MUSTERI_FORM(musteri));
@@ -154,7 +154,7 @@ export function MusteriDetailClient({ musteri, metriks }: { musteri: Musteri; me
     }));
   }
 
-  function handleEditSubmit(e: React.FormEvent) {
+  async function handleEditSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!editForm.ad.trim()) { setEditError("Müşteri adı zorunludur."); return; }
     const data: MusteriInput = {
@@ -167,13 +167,16 @@ export function MusteriDetailClient({ musteri, metriks }: { musteri: Musteri; me
       notlar: editForm.notlar.trim(),
     };
     setEditError("");
-    startTransition(async () => {
-      try {
-        await updateMusteri(musteri.id, data);
-        setEditOpen(false);
-        router.refresh();
-      } catch (err) { setEditError((err as Error).message); }
-    });
+    setIsPending(true);
+    try {
+      await updateMusteri(musteri.id, data);
+      setEditOpen(false);
+      router.refresh();
+    } catch (err) {
+      setEditError((err as Error).message);
+    } finally {
+      setIsPending(false);
+    }
   }
 
   function openMetrikAdd() {
@@ -198,7 +201,7 @@ export function MusteriDetailClient({ musteri, metriks }: { musteri: Musteri; me
     setMetrikModal({ open: true, editing: m });
   }
 
-  function handleMetrikSubmit(e: React.FormEvent) {
+  async function handleMetrikSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!metrikForm.ay) { setMetrikError("Ay seçimi zorunludur."); return; }
     const data = {
@@ -215,37 +218,46 @@ export function MusteriDetailClient({ musteri, metriks }: { musteri: Musteri; me
       notlar: metrikForm.notlar.trim(),
     };
     setMetrikError("");
-    startTransition(async () => {
-      try {
-        if (metrikModal.open && metrikModal.editing) {
-          await updateMetrik(metrikModal.editing.id, musteri.id, data);
-        } else {
-          await addMetrik(data as MetrikInput);
-        }
-        setMetrikModal({ open: false });
-        router.refresh();
-      } catch (err) { setMetrikError((err as Error).message); }
-    });
+    setIsPending(true);
+    try {
+      if (metrikModal.open && metrikModal.editing) {
+        await updateMetrik(metrikModal.editing.id, musteri.id, data);
+      } else {
+        await addMetrik(data as MetrikInput);
+      }
+      setMetrikModal({ open: false });
+      router.refresh();
+    } catch (err) {
+      setMetrikError((err as Error).message);
+    } finally {
+      setIsPending(false);
+    }
   }
 
-  function handleDeleteMusteri() {
-    startTransition(async () => {
-      try {
-        await deleteMusteri(musteri.id);
-        router.push("/yonetim/musteriler");
-      } catch (err) { console.error(err); }
-    });
+  async function handleDeleteMusteri() {
+    setIsPending(true);
+    try {
+      await deleteMusteri(musteri.id);
+      router.push("/yonetim/musteriler");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsPending(false);
+    }
   }
 
-  function handleDeleteMetrik() {
+  async function handleDeleteMetrik() {
     if (!deleteMetrikId) return;
-    startTransition(async () => {
-      try {
-        await deleteMetrik(deleteMetrikId, musteri.id);
-        setDeleteMetrikId(null);
-        router.refresh();
-      } catch (err) { console.error(err); }
-    });
+    setIsPending(true);
+    try {
+      await deleteMetrik(deleteMetrikId, musteri.id);
+      setDeleteMetrikId(null);
+      router.refresh();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsPending(false);
+    }
   }
 
   function delta(a: number, b: number) {
