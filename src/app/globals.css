@@ -260,3 +260,6 @@ video::-webkit-media-controls-start-playback-button {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
+
+/* reCAPTCHA badge'i gizle — formlarda manuel bildirim var */
+.grecaptcha-badge { visibility: hidden !important; }

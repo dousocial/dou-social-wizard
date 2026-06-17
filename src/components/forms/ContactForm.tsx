@@ -114,6 +114,14 @@ export function ContactForm() {
       <Button type="submit" disabled={isPending}>
         {isPending ? t("sending") : t("submit")}
       </Button>
+
+      <p className="text-xs text-mute-400">
+        Bu form Google reCAPTCHA ile korunmaktadır.{" "}
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-mute-600">Gizlilik Politikası</a>{" "}
+        ve{" "}
+        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-mute-600">Hizmet Koşulları</a>{" "}
+        geçerlidir.
+      </p>
     </form>
   );
 }
