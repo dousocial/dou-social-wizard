@@ -19,6 +19,8 @@ type Musteri = {
   aylik_ucret: number;
   baslangic_tarihi: string | null;
   notlar: string;
+  sozlesme_bitis_tarihi: string | null;
+  yenileme_hatirlatma_gun: number;
 };
 
 const DURUM: Record<string, { label: string; color: string; bg: string; border: string }> = {
@@ -47,6 +49,17 @@ function fmt(n: number) { return new Intl.NumberFormat("tr-TR").format(n); }
 function fmtDate(d: string | null) {
   if (!d) return "—";
   return new Date(d).toLocaleDateString("tr-TR", { year: "numeric", month: "short" });
+}
+
+function getSozlesmeTag(sozlesme_bitis_tarihi: string | null, hatirlatma: number) {
+  if (!sozlesme_bitis_tarihi) return null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const bitis = new Date(sozlesme_bitis_tarihi);
+  const diffDays = Math.ceil((bitis.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+  if (diffDays < 0) return { label: "SÖZ. DOLDU", color: "#ef4444", bg: "rgba(239,68,68,0.12)", border: "rgba(239,68,68,0.3)" };
+  if (diffDays <= hatirlatma) return { label: `${diffDays} gün`, color: "#f59e0b", bg: "rgba(245,158,11,0.12)", border: "rgba(245,158,11,0.3)" };
+  return null;
 }
 
 function formatTelefon(raw: string) {
@@ -85,6 +98,7 @@ const EMPTY_FORM = {
   ad: "", sektor: "", website: "", email: "", telefon: "",
   sorumlu: "", durum: "aktif", aylik_ucret: "", baslangic_tarihi: "", notlar: "",
   platformlar: [] as string[],
+  sozlesme_bitis_tarihi: "", yenileme_hatirlatma_gun: "30",
 };
 
 function validate(form: typeof EMPTY_FORM) {
@@ -170,6 +184,8 @@ export function MusterilerClient({ musteriler }: { musteriler: Musteri[] }) {
       aylik_ucret: m.aylik_ucret ? String(m.aylik_ucret) : "",
       baslangic_tarihi: m.baslangic_tarihi || "", notlar: m.notlar || "",
       platformlar: m.platformlar || [],
+      sozlesme_bitis_tarihi: m.sozlesme_bitis_tarihi || "",
+      yenileme_hatirlatma_gun: m.yenileme_hatirlatma_gun ? String(m.yenileme_hatirlatma_gun) : "30",
     });
     setFormError("");
     setModal({ open: true, editing: m });
@@ -197,6 +213,8 @@ export function MusterilerClient({ musteriler }: { musteriler: Musteri[] }) {
       aylik_ucret: parseFloat(form.aylik_ucret) || 0,
       baslangic_tarihi: form.baslangic_tarihi || null,
       notlar: form.notlar.trim(),
+      sozlesme_bitis_tarihi: form.sozlesme_bitis_tarihi || null,
+      yenileme_hatirlatma_gun: parseInt(form.yenileme_hatirlatma_gun) || 30,
     };
 
     setFormError("");
@@ -388,9 +406,24 @@ export function MusterilerClient({ musteriler }: { musteriler: Musteri[] }) {
                   {m.ad[0].toUpperCase()}
                 </div>
                 <div>
-                  <a href={`/yonetim/musteriler/${m.id}`} style={{ fontSize: 13, fontWeight: 600, color: "var(--c-text)", textDecoration: "none" }}>
-                    {m.ad}
-                  </a>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <a href={`/yonetim/musteriler/${m.id}`} style={{ fontSize: 13, fontWeight: 600, color: "var(--c-text)", textDecoration: "none" }}>
+                      {m.ad}
+                    </a>
+                    {(() => {
+                      const tag = getSozlesmeTag(m.sozlesme_bitis_tarihi, m.yenileme_hatirlatma_gun ?? 30);
+                      if (!tag) return null;
+                      return (
+                        <span style={{
+                          fontSize: 9, fontWeight: 700, padding: "1px 5px", borderRadius: 4,
+                          color: tag.color, background: tag.bg, border: `1px solid ${tag.border}`,
+                          whiteSpace: "nowrap",
+                        }}>
+                          {tag.label}
+                        </span>
+                      );
+                    })()}
+                  </div>
                   <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 1 }}>{m.sektor}</div>
                 </div>
               </div>
@@ -550,6 +583,25 @@ export function MusterilerClient({ musteriler }: { musteriler: Musteri[] }) {
               <div>
                 <label style={LABEL}>Website</label>
                 <input style={INPUT} value={form.website} onChange={(e) => setForm((f) => ({ ...f, website: e.target.value }))} placeholder="https://sirket.com" />
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div>
+                  <label style={LABEL}>Sözleşme Bitiş Tarihi</label>
+                  <DatePicker
+                    value={form.sozlesme_bitis_tarihi}
+                    onChange={(v) => setForm((f) => ({ ...f, sozlesme_bitis_tarihi: v }))}
+                    placeholder="Gün Ay Yıl seçin"
+                  />
+                </div>
+                <div>
+                  <label style={LABEL}>Yenileme Hatırlatması (gün)</label>
+                  <input
+                    type="number" style={INPUT} value={form.yenileme_hatirlatma_gun}
+                    onChange={(e) => setForm((f) => ({ ...f, yenileme_hatirlatma_gun: e.target.value }))}
+                    min="1" placeholder="30"
+                  />
+                </div>
               </div>
 
               <div>

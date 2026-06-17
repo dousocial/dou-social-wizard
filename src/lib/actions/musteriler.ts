@@ -22,6 +22,8 @@ export type MusteriInput = {
   aylik_ucret?: number;
   baslangic_tarihi?: string | null;
   notlar?: string;
+  sozlesme_bitis_tarihi?: string | null;
+  yenileme_hatirlatma_gun?: number;
 };
 
 export type ActionResult = { error: string | null };
