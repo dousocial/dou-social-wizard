@@ -1,4 +1,5 @@
 import { SITE_URL } from "@/lib/site";
+import { siteConfig } from "@/config/site";
 
 const NAV_LINKS = [
   { name: "Hizmetler",  url: `${SITE_URL}/hizmetler` },
@@ -11,31 +12,31 @@ const NAV_LINKS = [
 ];
 
 export function OrganizationSchema() {
+  const { brand, contact, social, seo } = siteConfig;
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${SITE_URL}#organization`,
-    name: "DOU Social",
-    alternateName: "Digital Outreach Utility",
+    name: brand.name,
+    alternateName: brand.alternateName,
     url: SITE_URL,
-    logo: `${SITE_URL}/brand/dou-logo-dark.png`,
-    image: `${SITE_URL}/brand/dou-logo-dark.png`,
-    description:
-      "Meta Ads, sosyal medya yönetimi, içerik üretimi, web tasarımı ve marka stratejisini tek elden yöneten Denizli merkezli dijital ajans.",
-    email: "info@dousocial.com",
-    telephone: "+905300845468",
+    logo: `${SITE_URL}${brand.logo.dark}`,
+    image: `${SITE_URL}${brand.logo.dark}`,
+    description: seo.description.tr,
+    email: contact.email,
+    telephone: contact.phoneTel,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Zafer Mah. Zafer Cd. No: 60/1",
-      addressLocality: "Merkezefendi",
-      addressRegion: "Denizli",
-      addressCountry: "TR",
+      streetAddress: contact.address.street,
+      addressLocality: contact.address.district,
+      addressRegion: contact.address.city,
+      addressCountry: contact.address.country,
     },
     sameAs: [
-      "https://www.instagram.com/dou.social",
-      "https://www.linkedin.com/company/dou-dijital-marketing/",
-      "https://www.youtube.com/@DouSocial",
-      "https://www.facebook.com/profile.php?id=61587124940165",
+      social.instagram,
+      social.linkedin,
+      social.youtube,
+      social.facebook,
     ],
   };
 
@@ -43,7 +44,7 @@ export function OrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${SITE_URL}#website`,
-    name: "DOU Social",
+    name: brand.name,
     url: SITE_URL,
     publisher: { "@id": `${SITE_URL}#organization` },
     inLanguage: "tr-TR",

@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Noise } from "@/components/ui/Noise";
+import { siteConfig } from "@/config/site";
 
 // ─── Easing ──────────────────────────────────────────────────────────────────
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -168,7 +169,7 @@ export function Hero() {
                 aria-hidden
                 className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"
               />
-              Denizli · Türkiye
+              {siteConfig.contact.location}
             </span>
           </motion.div>
 

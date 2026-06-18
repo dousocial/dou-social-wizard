@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { siteConfig } from "@/config/site";
 
 type Hizmet = { ad: string; fiyat: number };
 
@@ -68,15 +69,16 @@ function buildHTML(
     ? `<div style="margin-top:16px;font-size:11px;color:#555;font-style:italic;">${esc(notlar)}</div>`
     : "";
 
+  const { brand, contact, pdf } = siteConfig;
   const logoHtml = logoBase64
-    ? `<img src="${logoBase64}" alt="DOU Social" style="width:120px;display:block;" />`
-    : `<div style="font-size:22px;font-weight:900;color:#111;letter-spacing:2px;">DOU Social</div>`;
+    ? `<img src="${logoBase64}" alt="${esc(brand.name)}" style="width:120px;display:block;" />`
+    : `<div style="font-size:22px;font-weight:900;color:#111;letter-spacing:2px;">${esc(brand.name)}</div>`;
 
   return `
 <div style="display:flex;width:794px;height:1123px;font-family:Arial,Helvetica,sans-serif;background:#fff;overflow:hidden;">
 
   <!-- Sol sidebar -->
-  <div style="width:175px;background:#111;flex-shrink:0;position:relative;overflow:hidden;">
+  <div style="width:175px;background:${pdf.sidebarColor};flex-shrink:0;position:relative;overflow:hidden;">
     <div style="
       position:absolute;
       left:50%;
@@ -89,7 +91,7 @@ function buildHTML(
       letter-spacing:5px;
       text-transform:uppercase;
       font-family:Arial,Helvetica,sans-serif;
-    ">Sosyal Medya HİZMETLERİ</div>
+    ">${esc(pdf.sidebarText)}</div>
   </div>
 
   <!-- Sağ içerik -->
@@ -126,14 +128,14 @@ function buildHTML(
     <!-- Footer -->
     <div style="border-top:1px solid #ddd;margin-top:24px;padding-top:16px;display:flex;justify-content:space-between;align-items:flex-end;">
       <div style="font-size:10px;color:#666;line-height:1.9;">
-        <div>0 (530) 084 54 68</div>
-        <div>info@dousocial.com</div>
-        <div>www.dousocial.com</div>
+        <div>${esc(contact.phone)}</div>
+        <div>${esc(contact.email)}</div>
+        <div>${esc(contact.website)}</div>
       </div>
       <div style="text-align:right;font-size:10px;color:#666;line-height:1.9;">
-        <div><strong>E-Fatura:</strong> info@yapimedyagroup.com</div>
-        <div style="font-weight:900;font-size:13px;letter-spacing:1px;color:#111;margin-top:6px;">YAPIMEDYA</div>
-        <div style="font-size:9px;color:#aaa;margin-top:2px;">© DOU Social — Tüm hakları saklıdır.</div>
+        <div><strong>E-Fatura:</strong> ${esc(contact.invoiceEmail)}</div>
+        <div style="font-weight:900;font-size:13px;letter-spacing:1px;color:#111;margin-top:6px;">${esc(pdf.parentCompany)}</div>
+        <div style="font-size:9px;color:#aaa;margin-top:2px;">${esc(pdf.copyright)}</div>
       </div>
     </div>
 
@@ -160,7 +162,7 @@ export function TeklifPDFButton({ teklif, musteriAd }: { teklif: TeklifForPDF; m
 
     try {
       // 1. Logoyu base64'e çevir (off-screen yükleme sorunundan kaçınmak için)
-      const logoBase64 = await toBase64("/brand/dou-logo-light.png");
+      const logoBase64 = await toBase64(siteConfig.brand.logo.dark);
 
       // 2. Sayfaya geçici div ekle, HTML'i inject et
       container = document.createElement("div");

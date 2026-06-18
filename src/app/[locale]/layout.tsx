@@ -6,6 +6,7 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { siteConfig } from "@/config/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
@@ -58,7 +59,7 @@ export async function generateMetadata({
     metadataBase: new URL(SITE_URL),
     title: {
       default: t("siteTitle"),
-      template: "%s · DOU Social",
+      template: `%s · ${siteConfig.brand.name}`,
     },
     description: t("siteDescription"),
     alternates: {
@@ -74,7 +75,7 @@ export async function generateMetadata({
       locale: locale === "tr" ? "tr_TR" : "en_US",
       alternateLocale: locale === "tr" ? "en_US" : "tr_TR",
       url: localeUrl,
-      siteName: "DOU Social",
+      siteName: siteConfig.brand.name,
     },
     robots: { index: true, follow: true },
   };
@@ -130,14 +131,14 @@ export default async function LocaleLayout({
         </NextIntlClientProvider>
         {/* Google Analytics 4 — afterInteractive: yüklenmesi sayfa etkileşimine kadar ertelenir */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-K6YE41E5EC"
+          src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics.ga4Id}`}
           strategy="afterInteractive"
         />
         <Script id="ga4-config" strategy="afterInteractive">{`
           window.dataLayer=window.dataLayer||[];
           function gtag(){dataLayer.push(arguments);}
           gtag('js',new Date());
-          gtag('config','G-K6YE41E5EC',{send_page_view:true});
+          gtag('config','${siteConfig.analytics.ga4Id}',{send_page_view:true});
         `}</Script>
         {/* Google reCAPTCHA v3 */}
         <Script
