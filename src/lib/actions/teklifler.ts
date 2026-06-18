@@ -14,6 +14,8 @@ export type TeklifInput = {
   durum?: string;
   gonderim_tarihi?: string | null;
   notlar?: string;
+  teklif_no?: string;
+  hizmetler?: { ad: string; fiyat: number }[];
 };
 
 export type ActionResult = { error: string | null };

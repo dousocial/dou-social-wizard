@@ -13,6 +13,7 @@ import {
 } from "@/lib/actions/musteriler";
 import { addGorev, updateGorev, deleteGorev } from "@/lib/actions/gorevler";
 import { addTeklif, updateTeklif, deleteTeklif } from "@/lib/actions/teklifler";
+import { TeklifPDFButton } from "@/components/admin/TeklifPDFButton";
 import { addIletisim, deleteIletisim } from "@/lib/actions/iletisimler";
 import { DatePicker } from "../../_components/DatePicker";
 
@@ -69,6 +70,8 @@ type Teklif = {
   gonderim_tarihi: string | null;
   notlar: string;
   created_at: string;
+  teklif_no?: string;
+  hizmetler?: { ad: string; fiyat: number }[];
 };
 
 type Iletisim = {
@@ -229,6 +232,8 @@ const EMPTY_GOREV = {
 
 const EMPTY_TEKLIF = {
   baslik: "", tutar: "", durum: "hazirlaniyor", gonderim_tarihi: "", notlar: "",
+  teklif_no: "",
+  hizmetler: [{ ad: "", fiyat: "" }] as { ad: string; fiyat: string }[],
 };
 
 const EMPTY_ILETISIM = {
@@ -473,8 +478,15 @@ export function MusteriDetailClient({
 
   function openTeklifEdit(t: Teklif) {
     setTeklifForm({
-      baslik: t.baslik, tutar: t.tutar ? String(t.tutar) : "",
-      durum: t.durum, gonderim_tarihi: t.gonderim_tarihi || "", notlar: t.notlar || "",
+      baslik: t.baslik,
+      tutar: t.tutar ? String(t.tutar) : "",
+      durum: t.durum,
+      gonderim_tarihi: t.gonderim_tarihi || "",
+      notlar: t.notlar || "",
+      teklif_no: t.teklif_no || "",
+      hizmetler: t.hizmetler?.length
+        ? t.hizmetler.map(h => ({ ad: h.ad, fiyat: String(h.fiyat) }))
+        : [{ ad: t.baslik, fiyat: t.tutar ? String(t.tutar) : "" }],
     });
     setTeklifError("");
     setTeklifModal({ open: true, editing: t });
@@ -482,27 +494,30 @@ export function MusteriDetailClient({
 
   async function handleTeklifSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!teklifForm.baslik.trim()) { setTeklifError("Başlık zorunludur."); return; }
+    const validHizmetler = teklifForm.hizmetler.filter(h => h.ad.trim());
+    if (validHizmetler.length === 0) { setTeklifError("En az bir hizmet eklemelisiniz."); return; }
     setTeklifError("");
     setIsPending(true);
+
+    const hizmetlerData = validHizmetler.map(h => ({ ad: h.ad.trim(), fiyat: parseFloat(h.fiyat) || 0 }));
+    const tutar = hizmetlerData.reduce((s, h) => s + h.fiyat, 0);
+    const baslik = teklifForm.baslik.trim() || hizmetlerData[0].ad;
+
+    const payload = {
+      baslik,
+      tutar,
+      durum: teklifForm.durum,
+      gonderim_tarihi: teklifForm.gonderim_tarihi || null,
+      notlar: teklifForm.notlar.trim(),
+      teklif_no: teklifForm.teklif_no.trim(),
+      hizmetler: hizmetlerData,
+    };
+
     let result;
     if (teklifModal.open && teklifModal.editing) {
-      result = await updateTeklif(teklifModal.editing.id, musteri.id, {
-        baslik: teklifForm.baslik.trim(),
-        tutar: parseFloat(teklifForm.tutar) || 0,
-        durum: teklifForm.durum,
-        gonderim_tarihi: teklifForm.gonderim_tarihi || null,
-        notlar: teklifForm.notlar.trim(),
-      });
+      result = await updateTeklif(teklifModal.editing.id, musteri.id, payload);
     } else {
-      result = await addTeklif({
-        musteri_id: musteri.id,
-        baslik: teklifForm.baslik.trim(),
-        tutar: parseFloat(teklifForm.tutar) || 0,
-        durum: teklifForm.durum,
-        gonderim_tarihi: teklifForm.gonderim_tarihi || null,
-        notlar: teklifForm.notlar.trim(),
-      });
+      result = await addTeklif({ musteri_id: musteri.id, ...payload });
     }
     setIsPending(false);
     if (result.error) { setTeklifError(result.error); }
@@ -1089,7 +1104,7 @@ export function MusteriDetailClient({
               <div>
                 {/* Header row */}
                 <div style={{
-                  display: "grid", gridTemplateColumns: "2fr 120px 120px 130px 80px",
+                  display: "grid", gridTemplateColumns: "2fr 120px 120px 130px 120px",
                   padding: "8px 18px", background: "var(--c-surface2)",
                   borderBottom: "1px solid var(--c-border)",
                 }}>
@@ -1099,7 +1114,7 @@ export function MusteriDetailClient({
                 </div>
                 {teklifler.map((t, i) => (
                   <div key={t.id} style={{
-                    display: "grid", gridTemplateColumns: "2fr 120px 120px 130px 80px",
+                    display: "grid", gridTemplateColumns: "2fr 120px 120px 130px 120px",
                     padding: "12px 18px", alignItems: "center",
                     borderBottom: i < teklifler.length - 1 ? "1px solid var(--c-border)" : "none",
                   }}>
@@ -1120,7 +1135,8 @@ export function MusteriDetailClient({
                       </span>
                     </div>
                     <div style={{ fontSize: 12, color: "var(--c-dim)" }}>{fmtDateShort(t.gonderim_tarihi)}</div>
-                    <div style={{ display: "flex", gap: 5 }}>
+                    <div style={{ display: "flex", gap: 5, alignItems: "center" }}>
+                      <TeklifPDFButton teklif={t} musteriAd={musteri.ad} />
                       <button onClick={() => openTeklifEdit(t)} style={{
                         padding: "4px 7px", borderRadius: 5, background: "transparent",
                         border: "1px solid var(--c-border)", color: "var(--c-text3)", cursor: "pointer",
@@ -1502,14 +1518,11 @@ export function MusteriDetailClient({
               </button>
             </div>
             <form onSubmit={handleTeklifSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div>
-                <label style={LABEL}>Başlık *</label>
-                <input style={INPUT} value={teklifForm.baslik} onChange={(e) => setTeklifForm((f) => ({ ...f, baslik: e.target.value }))} placeholder="Teklif başlığı" />
-              </div>
+              {/* Teklif No + Durum */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 <div>
-                  <label style={LABEL}>Tutar (₺)</label>
-                  <input type="number" style={INPUT} value={teklifForm.tutar} onChange={(e) => setTeklifForm((f) => ({ ...f, tutar: e.target.value }))} placeholder="0" min="0" />
+                  <label style={LABEL}>Teklif No</label>
+                  <input style={INPUT} value={teklifForm.teklif_no} onChange={(e) => setTeklifForm((f) => ({ ...f, teklif_no: e.target.value }))} placeholder="Örn: 2025-001" />
                 </div>
                 <div>
                   <label style={LABEL}>Durum</label>
@@ -1522,6 +1535,59 @@ export function MusteriDetailClient({
                   </select>
                 </div>
               </div>
+
+              {/* Hizmetler */}
+              <div>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+                  <label style={LABEL}>Hizmetler *</label>
+                  <button
+                    type="button"
+                    onClick={() => setTeklifForm((f) => ({ ...f, hizmetler: [...f.hizmetler, { ad: "", fiyat: "" }] }))}
+                    style={{ fontSize: 11, fontWeight: 600, color: "#ef4444", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+                  >
+                    + Satır Ekle
+                  </button>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {teklifForm.hizmetler.map((h, i) => (
+                    <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 130px 30px", gap: 8, alignItems: "center" }}>
+                      <input
+                        style={INPUT}
+                        value={h.ad}
+                        onChange={(e) => setTeklifForm((f) => {
+                          const hs = [...f.hizmetler]; hs[i] = { ...hs[i], ad: e.target.value }; return { ...f, hizmetler: hs };
+                        })}
+                        placeholder="Hizmet adı"
+                      />
+                      <input
+                        type="number"
+                        style={INPUT}
+                        value={h.fiyat}
+                        onChange={(e) => setTeklifForm((f) => {
+                          const hs = [...f.hizmetler]; hs[i] = { ...hs[i], fiyat: e.target.value }; return { ...f, hizmetler: hs };
+                        })}
+                        placeholder="₺"
+                        min="0"
+                      />
+                      {teklifForm.hizmetler.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => setTeklifForm((f) => ({ ...f, hizmetler: f.hizmetler.filter((_, idx) => idx !== i) }))}
+                          style={{ background: "none", border: "none", color: "#f87171", cursor: "pointer", fontSize: 16, lineHeight: 1, padding: 0 }}
+                        >×</button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {/* Auto-calculated total */}
+                {teklifForm.hizmetler.some(h => parseFloat(h.fiyat) > 0) && (
+                  <div style={{ textAlign: "right", fontSize: 12, fontWeight: 700, color: "#10b981", marginTop: 6 }}>
+                    Toplam: ₺{fmt(teklifForm.hizmetler.reduce((s, h) => s + (parseFloat(h.fiyat) || 0), 0))}
+                  </div>
+                )}
+              </div>
+
+              {/* Gönderim Tarihi */}
               <div>
                 <label style={LABEL}>Gönderim Tarihi</label>
                 <DatePicker
@@ -1530,10 +1596,13 @@ export function MusteriDetailClient({
                   placeholder="Gün Ay Yıl seçin"
                 />
               </div>
+
+              {/* Notlar */}
               <div>
-                <label style={LABEL}>Notlar</label>
-                <textarea style={{ ...INPUT, height: 70, resize: "vertical" }} value={teklifForm.notlar} onChange={(e) => setTeklifForm((f) => ({ ...f, notlar: e.target.value }))} placeholder="Teklif ile ilgili notlar..." />
+                <label style={LABEL}>Notlar (PDF&apos;de görünür)</label>
+                <textarea style={{ ...INPUT, height: 60, resize: "vertical" }} value={teklifForm.notlar} onChange={(e) => setTeklifForm((f) => ({ ...f, notlar: e.target.value }))} placeholder="Örn: *Teklif 3 ay geçerlidir." />
               </div>
+
               {teklifError && <div style={{ fontSize: 12, color: "#f87171", background: "rgba(248,113,113,0.08)", padding: "8px 12px", borderRadius: 8 }}>{teklifError}</div>}
               <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
                 <button type="button" onClick={() => setTeklifModal({ open: false })} style={{ padding: "9px 18px", borderRadius: 8, background: "transparent", border: "1px solid var(--c-border)", color: "var(--c-text2)", fontSize: 13, fontWeight: 500, cursor: "pointer" }}>İptal</button>
