@@ -69,19 +69,18 @@ function buildHTML(
     : "";
 
   const logoHtml = logoBase64
-    ? `<img src="${logoBase64}" alt="DOU Social" style="width:105px;display:block;margin-top:4px;" />`
-    : `<div style="color:#fff;font-size:18px;font-weight:900;margin-top:4px;letter-spacing:2px;">DOU</div>`;
+    ? `<img src="${logoBase64}" alt="DOU Social" style="width:120px;display:block;" />`
+    : `<div style="font-size:22px;font-weight:900;color:#111;letter-spacing:2px;">DOU Social</div>`;
 
   return `
 <div style="display:flex;width:794px;height:1123px;font-family:Arial,Helvetica,sans-serif;background:#fff;overflow:hidden;">
 
   <!-- Sol sidebar -->
-  <div style="width:175px;background:#111;flex-shrink:0;position:relative;display:flex;flex-direction:column;align-items:center;padding-top:28px;overflow:hidden;">
-    ${logoHtml}
+  <div style="width:175px;background:#111;flex-shrink:0;position:relative;overflow:hidden;">
     <div style="
       position:absolute;
       left:50%;
-      top:62%;
+      top:55%;
       transform:translate(-50%,-50%) rotate(-90deg);
       white-space:nowrap;
       color:#fff;
@@ -94,15 +93,18 @@ function buildHTML(
   </div>
 
   <!-- Sağ içerik -->
-  <div style="flex:1;padding:40px 44px 30px;display:flex;flex-direction:column;min-width:0;overflow:hidden;">
+  <div style="flex:1;padding:36px 44px 30px;display:flex;flex-direction:column;min-width:0;overflow:hidden;">
 
-    <!-- Müşteri + TEKLİF başlığı -->
-    <div style="text-align:right;margin-bottom:24px;">
-      <div style="font-size:34px;font-weight:900;color:#111;line-height:1.1;text-transform:uppercase;">${esc(musteriAd)}</div>
-      <div style="font-size:34px;font-weight:900;color:#111;text-transform:uppercase;">TEKLİF</div>
-      <div style="margin-top:10px;font-size:11px;color:#444;line-height:2.2;">
-        <div><strong>TEKLİF NO:</strong>&nbsp;${esc(teklifNo)}</div>
-        <div><strong>TARİH:</strong>&nbsp;${esc(tarih)}</div>
+    <!-- Logo sol üst + Müşteri/TEKLİF sağ üst -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;">
+      <div>${logoHtml}</div>
+      <div style="text-align:right;">
+        <div style="font-size:34px;font-weight:900;color:#111;line-height:1.1;text-transform:uppercase;">${esc(musteriAd)}</div>
+        <div style="font-size:34px;font-weight:900;color:#111;text-transform:uppercase;">TEKLİF</div>
+        <div style="margin-top:10px;font-size:11px;color:#444;line-height:2.2;">
+          <div><strong>TEKLİF NO:</strong>&nbsp;${esc(teklifNo)}</div>
+          <div><strong>TARİH:</strong>&nbsp;${esc(tarih)}</div>
+        </div>
       </div>
     </div>
 
