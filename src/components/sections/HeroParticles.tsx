@@ -65,8 +65,8 @@ export function HeroParticles() {
     function resize() {
       W = window.innerWidth;
       H = window.innerHeight;
-      canvas.width = W;
-      canvas.height = H;
+      canvas!.width = W;
+      canvas!.height = H;
     }
 
     function init() {
