@@ -196,4 +196,3 @@ export function RevealItem({
   );
 }
 
-export { useGsapReveal } from "@/hooks/useGsapReveal";

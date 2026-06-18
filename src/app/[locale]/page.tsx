@@ -1,6 +1,7 @@
 import { use } from "react";
 import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
+import { HeroParticles } from "@/components/sections/HeroParticles";
 import { MarqueeStrip } from "@/components/sections/MarqueeStrip";
 import { ClientLogos } from "@/components/sections/ClientLogos";
 import { Services } from "@/components/sections/Services";
@@ -20,6 +21,7 @@ export default function Home({ params }: PageProps<"/[locale]">) {
 
   return (
     <>
+      <HeroParticles />
       <Hero />
       <MarqueeStrip />
       <ClientLogos />

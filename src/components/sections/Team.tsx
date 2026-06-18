@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -61,13 +62,12 @@ function MemberCard({ member, index }: { member: typeof TEAM[number]; index: num
         {/* Fotoğraf alanı */}
         <div className="relative mb-6 h-32 w-32 shrink-0 overflow-hidden rounded-2xl border border-mute-200 bg-mute-100">
           {member.photo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <Image
               src={member.photo}
               alt={member.name}
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover transition-all duration-300 md:grayscale md:group-hover:grayscale-0"
+              fill
+              sizes="128px"
+              className="object-cover transition-all duration-300 md:grayscale md:group-hover:grayscale-0"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-mute-100 to-mute-200">

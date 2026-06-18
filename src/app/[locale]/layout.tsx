@@ -18,14 +18,14 @@ import "../globals.css";
 // Body text — Inter: neutral, highly legible, industry-standard for premium UIs
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600"],
 });
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   display: "swap",
   weight: ["500", "600", "700"],
 });
@@ -110,13 +110,6 @@ export default async function LocaleLayout({
             __html: `(function(){try{var s=localStorage.getItem('theme');var dark=s!=='light';document.documentElement.classList.toggle('dark',dark);document.cookie='theme='+(dark?'dark':'light')+';path=/;max-age=31536000;SameSite=Lax'}catch(e){}})();`,
           }}
         />
-        {/* Google Analytics 4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-K6YE41E5EC" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K6YE41E5EC',{send_page_view:true});`,
-          }}
-        />
       </head>
       <body className="min-h-full flex flex-col">
         <OrganizationSchema />
@@ -135,6 +128,17 @@ export default async function LocaleLayout({
             <ConsentManager />
           </SmoothScrollProvider>
         </NextIntlClientProvider>
+        {/* Google Analytics 4 — afterInteractive: yüklenmesi sayfa etkileşimine kadar ertelenir */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-K6YE41E5EC"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-config" strategy="afterInteractive">{`
+          window.dataLayer=window.dataLayer||[];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js',new Date());
+          gtag('config','G-K6YE41E5EC',{send_page_view:true});
+        `}</Script>
         {/* Google reCAPTCHA v3 */}
         <Script
           src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}

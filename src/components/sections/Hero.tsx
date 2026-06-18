@@ -120,9 +120,10 @@ export function Hero() {
           src="/videos/hero-bg-poster.jpg"
           alt=""
           aria-hidden
+          fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover md:hidden"
         />
-        {/* Desktop: actual video */}
+        {/* Desktop: actual video — poster shows immediately while video downloads */}
         <video
           autoPlay
           muted
@@ -130,6 +131,7 @@ export function Hero() {
           playsInline
           disablePictureInPicture
           tabIndex={-1}
+          poster="/videos/hero-bg-poster.jpg"
           className="absolute inset-0 h-full w-full object-cover hidden md:block"
           src="/videos/hero-bg.mp4"
           style={{ display: reduceMotion ? "none" : undefined, pointerEvents: "none" }}
