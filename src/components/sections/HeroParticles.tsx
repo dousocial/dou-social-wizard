@@ -53,7 +53,7 @@ export function HeroParticles() {
     if (window.innerWidth < 768) return;
 
     if (!canvasRef.current) return;
-    const canvas = canvasRef.current as HTMLCanvasElement;
+    const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
 
     let raf: number;
