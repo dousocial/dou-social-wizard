@@ -52,10 +52,9 @@ export function HeroParticles() {
     // Skip on mobile — saves battery and TBT budget
     if (window.innerWidth < 768) return;
 
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!canvasRef.current) return;
+    const canvas = canvasRef.current as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d")!;
 
     let raf: number;
     let particles: Particle[] = [];
@@ -65,8 +64,8 @@ export function HeroParticles() {
     function resize() {
       W = window.innerWidth;
       H = window.innerHeight;
-      canvas!.width = W;
-      canvas!.height = H;
+      canvas.width = W;
+      canvas.height = H;
     }
 
     function init() {
