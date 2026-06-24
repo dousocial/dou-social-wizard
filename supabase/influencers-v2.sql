@@ -1,7 +1,10 @@
 -- Influencer tablosundaki kategori alanını text (tek) → text[] (çoklu) yapıyoruz
 -- Supabase Dashboard → SQL Editor → Run
 
--- Önce mevcut veriyi dönüştür, sonra tipi değiştir
+-- 1. Önce varsayılan değeri kaldır
+ALTER TABLE influencers ALTER COLUMN kategori DROP DEFAULT;
+
+-- 2. Tipi dönüştür (mevcut veriler boş array'e çevrilir)
 ALTER TABLE influencers
   ALTER COLUMN kategori TYPE text[]
   USING CASE
@@ -9,5 +12,5 @@ ALTER TABLE influencers
     ELSE ARRAY[kategori]
   END;
 
--- Varsayılan değeri güncelle
+-- 3. Yeni varsayılan değeri ata
 ALTER TABLE influencers ALTER COLUMN kategori SET DEFAULT '{}';
