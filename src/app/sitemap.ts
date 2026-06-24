@@ -51,19 +51,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // Case studies
-  for (const slug of CASE_SLUGS) {
-    const path = `/projeler/${slug}`;
-    for (const locale of LOCALES) {
-      entries.push({
-        url: url(path, locale),
-        changeFrequency: "monthly",
-        priority: 0.75,
-        alternates: { languages: alternateLanguages(path) },
-      });
-    }
-  }
-
   // Blog posts (per locale, since slugs differ between locales)
   for (const locale of LOCALES) {
     const posts = await getAllPosts(locale);
