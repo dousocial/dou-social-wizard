@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
+import { requireSession } from "@/lib/session";
 
 function sb() {
   return createClient(
@@ -24,6 +25,7 @@ export type ActionResult = { error: string | null };
 
 export async function addContact(data: ContactInput): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb().from("crm_contacts").insert(data);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/firmalar");
@@ -35,6 +37,7 @@ export async function addContact(data: ContactInput): Promise<ActionResult> {
 
 export async function updateContact(id: string, data: Partial<ContactInput>): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb()
       .from("crm_contacts")
       .update({ ...data, updated_at: new Date().toISOString() })
@@ -49,6 +52,7 @@ export async function updateContact(id: string, data: Partial<ContactInput>): Pr
 
 export async function deleteContact(id: string): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb().from("crm_contacts").delete().eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/firmalar");

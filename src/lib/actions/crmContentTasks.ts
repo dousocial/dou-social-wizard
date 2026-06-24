@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
+import { requireSession } from "@/lib/session";
 
 function sb() {
   return createClient(
@@ -23,6 +24,7 @@ export type ActionResult = { error: string | null };
 
 export async function addContentTask(data: ContentTaskInput): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb().from("crm_content_tasks").insert(data);
     if (error) return { error: error.message };
     revalidatePath(`/yonetim/musteriler/${data.client_id}`);
@@ -34,6 +36,7 @@ export async function addContentTask(data: ContentTaskInput): Promise<ActionResu
 
 export async function updateContentTask(id: string, clientId: string, data: Partial<ContentTaskInput>): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb()
       .from("crm_content_tasks")
       .update({ ...data, updated_at: new Date().toISOString() })
@@ -48,6 +51,7 @@ export async function updateContentTask(id: string, clientId: string, data: Part
 
 export async function deleteContentTask(id: string, clientId: string): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb().from("crm_content_tasks").delete().eq("id", id);
     if (error) return { error: error.message };
     revalidatePath(`/yonetim/musteriler/${clientId}`);

@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
+import { requireSession } from "@/lib/session";
 
 function sb() {
   return createClient(
@@ -36,6 +37,7 @@ export type ActionResult = { error: string | null; id?: string };
 
 export async function addLead(data: LeadInput): Promise<ActionResult> {
   try {
+    await requireSession();
     const { data: newLead, error } = await sb().from("crm_leads").insert(data).select("id").single();
     if (error) return { error: error.message };
     revalidatePath("/yonetim/crm-leads");
@@ -47,6 +49,7 @@ export async function addLead(data: LeadInput): Promise<ActionResult> {
 
 export async function updateLead(id: string, data: Partial<LeadInput>): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb()
       .from("crm_leads")
       .update({ ...data, updated_at: new Date().toISOString() })
@@ -62,6 +65,7 @@ export async function updateLead(id: string, data: Partial<LeadInput>): Promise<
 
 export async function deleteLead(id: string): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb().from("crm_leads").delete().eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/crm-leads");
@@ -79,6 +83,7 @@ export async function convertLeadToClient(leadId: string, clientData: {
 }): Promise<ActionResult> {
   const supabase = sb();
   try {
+    await requireSession();
     // 1. Lead verisini oku
     const { data: lead, error: leadErr } = await supabase
       .from("crm_leads")
