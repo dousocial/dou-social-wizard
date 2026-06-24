@@ -22,7 +22,15 @@ export default function middleware(req: NextRequest) {
   }
 
   // ── Skip i18n for non-page routes ──────────────────────────────────────
-  if (pathname.startsWith("/api") || pathname.startsWith("/admin")) {
+  if (pathname.startsWith("/admin")) {
+    const legacyMap: Record<string, string> = {
+      "/admin/leads": "/yonetim/leads",
+      "/admin/contacts": "/yonetim/contacts",
+    };
+    return NextResponse.redirect(new URL(legacyMap[pathname] ?? "/yonetim", req.url));
+  }
+
+  if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
 

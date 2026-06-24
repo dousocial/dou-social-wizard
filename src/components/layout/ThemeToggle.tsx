@@ -39,7 +39,15 @@ function MoonIcon() {
   );
 }
 
-export function ThemeToggle({ className, forceLight }: { className?: string; forceLight?: boolean }) {
+export function ThemeToggle({
+  className,
+  forceLight,
+  onThemeChange,
+}: {
+  className?: string;
+  forceLight?: boolean;
+  onThemeChange?: (isDark: boolean) => void;
+}) {
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
@@ -51,6 +59,7 @@ export function ThemeToggle({ className, forceLight }: { className?: string; for
   const toggle = () => {
     const next = !isDark;
     setIsDark(next);
+    onThemeChange?.(next);
     const value = next ? "dark" : "light";
     document.documentElement.classList.toggle("dark", next);
     localStorage.setItem("theme", value);

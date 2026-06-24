@@ -27,10 +27,11 @@ const SCROLL_THRESHOLD = 24;
 // Koyu hero arka planı olan sayfalar — burada header şeffaf + beyaz metin doğru görünür
 const DARK_HERO_PAGES = new Set(["/"]);
 
-export function Header() {
+export function Header({ initialDarkTheme = false }: { initialDarkTheme?: boolean }) {
   const t = useTranslations("Nav");
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(initialDarkTheme);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +47,7 @@ export function Header() {
 
   // Sadece ana sayfada (koyu video hero) şeffaf+beyaz header kullan
   const hasDarkHero = DARK_HERO_PAGES.has(pathname);
-  const forceWhite  = !scrolled && hasDarkHero;
+  const forceWhite  = !scrolled && hasDarkHero && isDarkTheme;
 
   return (
     <header
@@ -142,7 +143,7 @@ export function Header() {
               className="hidden sm:flex"
               forceLight={forceWhite}
             />
-            <ThemeToggle forceLight={forceWhite} />
+            <ThemeToggle forceLight={forceWhite} onThemeChange={setIsDarkTheme} />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}

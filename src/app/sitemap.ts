@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL, STATIC_PATHS } from "@/lib/site";
+import { NOINDEX_PATHS, SITE_URL, STATIC_PATHS } from "@/lib/site";
 import { SERVICE_SLUGS } from "@/lib/services";
 import { CASE_SLUGS } from "@/lib/cases";
-import { getAllSlugs } from "@/lib/blog";
+import { getAllPosts } from "@/lib/blog";
 
 const LOCALES = ["tr", "en"] as const;
 
@@ -21,16 +21,16 @@ function alternateLanguages(path: string) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
-
   const entries: MetadataRoute.Sitemap = [];
+  const indexedStaticPaths = STATIC_PATHS.filter(
+    (path) => !(NOINDEX_PATHS as readonly string[]).includes(path)
+  );
 
   // Static paths
-  for (const path of STATIC_PATHS) {
+  for (const path of indexedStaticPaths) {
     for (const locale of LOCALES) {
       entries.push({
         url: url(path, locale),
-        lastModified: now,
         changeFrequency: path === "/" ? "weekly" : "monthly",
         priority: path === "/" ? 1.0 : 0.7,
         alternates: { languages: alternateLanguages(path) },
@@ -44,7 +44,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const locale of LOCALES) {
       entries.push({
         url: url(path, locale),
-        lastModified: now,
         changeFrequency: "monthly",
         priority: 0.8,
         alternates: { languages: alternateLanguages(path) },
@@ -58,7 +57,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const locale of LOCALES) {
       entries.push({
         url: url(path, locale),
-        lastModified: now,
         changeFrequency: "monthly",
         priority: 0.75,
         alternates: { languages: alternateLanguages(path) },
@@ -68,11 +66,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Blog posts (per locale, since slugs differ between locales)
   for (const locale of LOCALES) {
-    const slugs = await getAllSlugs(locale);
-    for (const slug of slugs) {
+    const posts = await getAllPosts(locale);
+    for (const post of posts) {
       entries.push({
-        url: url(`/blog/${slug}`, locale),
-        lastModified: now,
+        url: url(`/blog/${post.slug}`, locale),
+        lastModified: post.date,
         changeFrequency: "monthly",
         priority: 0.6,
       });

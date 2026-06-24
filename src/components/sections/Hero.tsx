@@ -7,6 +7,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Noise } from "@/components/ui/Noise";
 import { siteConfig } from "@/config/site";
+import { HeroParticles } from "./HeroParticles";
 
 // ─── Easing ──────────────────────────────────────────────────────────────────
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -121,6 +122,7 @@ export function Hero() {
           src="/videos/hero-bg-poster.jpg"
           alt=""
           aria-hidden
+          decoding="async"
           fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover md:hidden"
         />
@@ -132,6 +134,7 @@ export function Hero() {
           playsInline
           disablePictureInPicture
           tabIndex={-1}
+          preload="metadata"
           poster="/videos/hero-bg-poster.jpg"
           className="absolute inset-0 h-full w-full object-cover hidden md:block"
           src="/videos/hero-bg.mp4"
@@ -141,6 +144,7 @@ export function Hero() {
         {/* Karartma + marka rengi geçişi — her iki temada da güçlü kontrast */}
         <div className="absolute inset-0 bg-black/50 md:bg-black/60" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,_rgb(128_0_0_/_0.25)_0%,_transparent_65%)]" />
+        <HeroParticles />
 
         {/* Noise texture */}
         <Noise opacity={0.03} />
@@ -189,6 +193,7 @@ export function Hero() {
           {/* Subtitle */}
           <motion.p
             variants={subtleVariants}
+            data-geo-summary
             className="mt-7 max-w-2xl leading-relaxed text-white/65"
             style={{ fontSize: "var(--text-lg)" }}
           >

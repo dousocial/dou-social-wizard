@@ -44,6 +44,44 @@ export default function YonetimLayout({ children }: { children: React.ReactNode 
             --c-warm:     #fff5f5;
             --c-warm-b:   #fecaca;
           }
+          @media (max-width: 900px) {
+            .panel-shell {
+              display: block !important;
+            }
+            .panel-sidebar {
+              position: static !important;
+              width: 100% !important;
+              max-height: none !important;
+              border-right: 0 !important;
+              border-bottom: 1px solid var(--c-border) !important;
+            }
+            .panel-sidebar nav > div {
+              display: grid !important;
+              grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+            .panel-sidebar nav > div > div:first-child {
+              grid-column: 1 / -1 !important;
+            }
+            .panel-content {
+              margin-left: 0 !important;
+              min-height: auto !important;
+            }
+            .panel-topbar {
+              justify-content: flex-start !important;
+              overflow-x: auto !important;
+              padding: 0 20px !important;
+            }
+            .panel-main {
+              padding: 24px 20px !important;
+              max-width: 100% !important;
+              overflow-x: auto !important;
+            }
+          }
+          @media (max-width: 520px) {
+            .panel-sidebar nav > div {
+              grid-template-columns: 1fr !important;
+            }
+          }
         ` }} />
       </head>
       <body style={{

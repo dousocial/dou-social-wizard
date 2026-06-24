@@ -108,7 +108,7 @@ export default async function LocaleLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var s=localStorage.getItem('theme');var dark=s!=='light';document.documentElement.classList.toggle('dark',dark);document.cookie='theme='+(dark?'dark':'light')+';path=/;max-age=31536000;SameSite=Lax'}catch(e){}})();`,
+            __html: `(function(){try{var s=localStorage.getItem('theme');if(!s){var m=document.cookie.match(/(?:^|; )theme=(dark|light)/);s=m&&m[1]}var dark=s!=='light';document.documentElement.classList.toggle('dark',dark);document.cookie='theme='+(dark?'dark':'light')+';path=/;max-age=31536000;SameSite=Lax'}catch(e){}})();`,
           }}
         />
       </head>
@@ -119,7 +119,7 @@ export default async function LocaleLayout({
             <a href="#main-content" className="skip-to-content">
               {locale === "tr" ? "Ana içeriğe atla" : "Skip to content"}
             </a>
-            <Header />
+            <Header initialDarkTheme={isDarkMode} />
             <main id="main-content" className="flex-1">
               {children}
             </main>
@@ -129,17 +129,6 @@ export default async function LocaleLayout({
             <ConsentManager />
           </SmoothScrollProvider>
         </NextIntlClientProvider>
-        {/* Google Analytics 4 — afterInteractive: yüklenmesi sayfa etkileşimine kadar ertelenir */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics.ga4Id}`}
-          strategy="afterInteractive"
-        />
-        <Script id="ga4-config" strategy="afterInteractive">{`
-          window.dataLayer=window.dataLayer||[];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js',new Date());
-          gtag('config','${siteConfig.analytics.ga4Id}',{send_page_view:true});
-        `}</Script>
         {/* Google reCAPTCHA v3 */}
         <Script
           src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}

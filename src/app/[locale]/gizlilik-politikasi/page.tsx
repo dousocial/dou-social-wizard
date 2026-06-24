@@ -11,7 +11,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: alternatesFor("/gizlilik-politikasi"),
+    alternates: alternatesFor("/gizlilik-politikasi", locale as "tr" | "en"),
   };
 }
 

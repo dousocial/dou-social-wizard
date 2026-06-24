@@ -11,7 +11,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: alternatesFor("/kullanim-kosullari"),
+    alternates: alternatesFor("/kullanim-kosullari", locale as "tr" | "en"),
   };
 }
 

@@ -1,12 +1,13 @@
-import { SITE_URL } from "@/lib/site";
+import { localizedUrl, SITE_URL } from "@/lib/site";
 
 interface Props {
   name: string;
   description: string;
   slug: string;
+  locale: "tr" | "en";
 }
 
-export function ServiceSchema({ name, description, slug }: Props) {
+export function ServiceSchema({ name, description, slug, locale }: Props) {
   const data = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -17,7 +18,7 @@ export function ServiceSchema({ name, description, slug }: Props) {
       "@id": `${SITE_URL}#organization`,
       name: "DOU Social",
     },
-    url: `${SITE_URL}/hizmetler/${slug}`,
+    url: localizedUrl(`/hizmetler/${slug}`, locale),
     areaServed: { "@type": "Country", name: "Turkey" },
   };
 

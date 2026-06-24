@@ -2,7 +2,7 @@ import { use } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
@@ -19,7 +19,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FAQPageSchema } from "@/components/seo/FAQPageSchema";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { getAllSlugs, getAllPosts, getPostBySlug } from "@/lib/blog";
-import { SITE_URL } from "@/lib/site";
+import { localizedUrl, SITE_URL } from "@/lib/site";
 
 export async function generateStaticParams() {
   const all = await Promise.all(
@@ -37,10 +37,20 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const post = await getPostBySlug(locale, slug);
   if (!post) return {};
+  const currentLocale = locale === "en" ? "en" : "tr";
+  const url = localizedUrl(`/blog/${slug}`, currentLocale);
   return {
     title: post.seoTitle ?? post.title,
     description: post.description,
-    openGraph: post.cover ? { images: [{ url: post.cover }] } : undefined,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      url,
+      title: post.seoTitle ?? post.title,
+      description: post.description,
+      images: post.cover ? [{ url: post.cover }] : undefined,
+    },
   };
 }
 

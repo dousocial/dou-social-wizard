@@ -3,13 +3,13 @@
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 
-const COUNT = 60;
+const COUNT = 34;
 const MOUSE_RADIUS = 140;
-const MOUSE_FORCE = 0.4;
-const MAX_SPEED = 2.2;
-const LINK_DIST = 120;
+const MOUSE_FORCE = 0.12;
+const MAX_SPEED = 0.65;
+const LINK_DIST = 105;
 // Gentle autonomous drift — each particle gets a slow sine/cosine nudge
-const DRIFT = 0.012;
+const DRIFT = 0.006;
 
 const COLORS = [
   "200,35,35",
@@ -33,10 +33,10 @@ function make(w: number, h: number): Particle {
   return {
     x: Math.random() * w,
     y: Math.random() * h,
-    vx: (Math.random() - 0.5) * 1.2,
-    vy: (Math.random() - 0.5) * 1.2,
-    size: 1.2 + Math.random() * 2.2,
-    opacity: 0.25 + Math.random() * 0.45,
+    vx: (Math.random() - 0.5) * 0.45,
+    vy: (Math.random() - 0.5) * 0.45,
+    size: 0.8 + Math.random() * 1.5,
+    opacity: 0.08 + Math.random() * 0.18,
     color,
     phase: Math.random() * Math.PI * 2,
   };
@@ -51,21 +51,34 @@ export function HeroParticles() {
     if (reduceMotion) return;
     // Skip on mobile — saves battery and TBT budget
     if (window.innerWidth < 768) return;
+    const lowCoreDevice = navigator.hardwareConcurrency <= 4;
+    const lowMemoryDevice =
+      "deviceMemory" in navigator &&
+      typeof (navigator as Navigator & { deviceMemory?: number }).deviceMemory === "number" &&
+      (navigator as Navigator & { deviceMemory?: number }).deviceMemory! <= 4;
+    if (lowCoreDevice || lowMemoryDevice) return;
 
     if (!canvasRef.current) return;
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
 
     let raf: number;
+    let running = false;
     let particles: Particle[] = [];
     let W = 0, H = 0;
+    let dpr = 1;
     let tick_n = 0;
 
     function resize() {
-      W = window.innerWidth;
-      H = window.innerHeight;
-      canvas.width = W;
-      canvas.height = H;
+      const rect = canvas.getBoundingClientRect();
+      W = Math.max(1, Math.floor(rect.width));
+      H = Math.max(1, Math.floor(rect.height));
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.floor(W * dpr);
+      canvas.height = Math.floor(H * dpr);
+      canvas.style.width = `${W}px`;
+      canvas.style.height = `${H}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     function init() {
@@ -74,6 +87,7 @@ export function HeroParticles() {
     }
 
     function tick() {
+      if (!running) return;
       tick_n++;
       ctx.clearRect(0, 0, W, H);
 
@@ -125,12 +139,12 @@ export function HeroParticles() {
           const dx = a.x - b.x, dy = a.y - b.y;
           const d = Math.sqrt(dx * dx + dy * dy);
           if (d < LINK_DIST) {
-            const alpha = (1 - d / LINK_DIST) * 0.2;
+            const alpha = (1 - d / LINK_DIST) * 0.055;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
             ctx.strokeStyle = `rgba(200,35,35,${alpha})`;
-            ctx.lineWidth = 0.6;
+            ctx.lineWidth = 0.45;
             ctx.stroke();
           }
         }
@@ -139,7 +153,7 @@ export function HeroParticles() {
       // Particles
       for (const p of particles) {
         const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 4);
-        grad.addColorStop(0, `rgba(${p.color},${p.opacity * 0.6})`);
+        grad.addColorStop(0, `rgba(${p.color},${p.opacity * 0.35})`);
         grad.addColorStop(1, `rgba(${p.color},0)`);
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
@@ -148,7 +162,7 @@ export function HeroParticles() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color},${p.opacity})`;
+        ctx.fillStyle = `rgba(${p.color},${p.opacity * 0.65})`;
         ctx.fill();
       }
 
@@ -156,7 +170,17 @@ export function HeroParticles() {
     }
 
     init();
-    tick();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        running = entry.isIntersecting;
+        if (running) {
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
 
     const onResize = () => resize();
     const onMove = (e: MouseEvent) => {
@@ -169,7 +193,9 @@ export function HeroParticles() {
     window.addEventListener("mouseleave", onLeave);
 
     return () => {
+      running = false;
       cancelAnimationFrame(raf);
+      observer.disconnect();
       window.removeEventListener("resize", onResize);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseleave", onLeave);
@@ -182,7 +208,7 @@ export function HeroParticles() {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-[5]"
+      className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-60 [filter:blur(0.35px)]"
     />
   );
 }

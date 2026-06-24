@@ -11,7 +11,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: alternatesFor("/cerez-politikasi"),
+    alternates: alternatesFor("/cerez-politikasi", locale as "tr" | "en"),
   };
 }
 

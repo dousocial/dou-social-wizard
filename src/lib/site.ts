@@ -20,6 +20,8 @@ export const STATIC_PATHS = [
   "/cerez-politikasi",
 ] as const;
 
+export const NOINDEX_PATHS = ["/strateji-gorusmesi"] as const;
+
 /**
  * Build a fully-qualified URL from a path + locale.
  * `tr` (default) → no prefix. `en` → /en prefix.
@@ -30,10 +32,10 @@ export function localizedUrl(path: string, locale: "tr" | "en"): string {
   return `${SITE_URL}/en${cleanPath === "/" ? "" : cleanPath}`;
 }
 
-export function alternatesFor(path: string) {
+export function alternatesFor(path: string, locale: "tr" | "en") {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
   return {
-    canonical: localizedUrl(cleanPath, "tr"),
+    canonical: localizedUrl(cleanPath, locale),
     languages: {
       "tr-TR": localizedUrl(cleanPath, "tr"),
       "en-US": localizedUrl(cleanPath, "en"),

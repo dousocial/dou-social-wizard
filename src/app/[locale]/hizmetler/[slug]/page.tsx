@@ -32,7 +32,7 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("lead"),
-    alternates: alternatesFor(`/hizmetler/${slug}`),
+    alternates: alternatesFor(`/hizmetler/${slug}`, locale as "tr" | "en"),
   };
 }
 
@@ -62,6 +62,7 @@ export default async function ServiceDetailPage({
         name={serviceTitle}
         description={serviceDesc}
         slug={slug}
+        locale={locale as "tr" | "en"}
       />
       <FAQPageSchema items={faqItems} />
       <BreadcrumbSchema

@@ -21,10 +21,10 @@ export default async function PanelLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "var(--c-bg)" }}>
+    <div className="panel-shell" style={{ display: "flex", minHeight: "100vh", background: "var(--c-bg)" }}>
 
       {/* ── Sol Sidebar ─────────────────────────────────────────────── */}
-      <aside style={{
+      <aside className="panel-sidebar" style={{
         width: 240,
         flexShrink: 0,
         background: "var(--c-surface)",
@@ -132,10 +132,10 @@ export default async function PanelLayout({ children }: { children: React.ReactN
       </aside>
 
       {/* ── İçerik alanı ────────────────────────────────────────────── */}
-      <div style={{ flex: 1, marginLeft: 240, display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <div className="panel-content" style={{ flex: 1, marginLeft: 240, display: "flex", flexDirection: "column", minHeight: "100vh" }}>
 
         {/* Üst çubuk */}
-        <header style={{
+        <header className="panel-topbar" style={{
           background: "var(--c-surface)",
           borderBottom: "1px solid var(--c-border)",
           padding: "0 32px",
@@ -177,7 +177,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
           </a>
         </header>
 
-        <main style={{ flex: 1, padding: "32px 32px", maxWidth: 1300, width: "100%", boxSizing: "border-box" }}>
+        <main className="panel-main" style={{ flex: 1, padding: "32px 32px", maxWidth: 1300, width: "100%", boxSizing: "border-box" }}>
           {children}
         </main>
       </div>
