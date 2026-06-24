@@ -100,6 +100,19 @@ const CRM_LINKS = [
       </svg>
     ),
   },
+  {
+    href: "/yonetim/influencerlar",
+    label: "İnfluencerlar",
+    exact: false,
+    color: "#f472b6",
+    bg: "rgba(244,114,182,0.15)",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
+        <path d="M10 2l1.8 3.6 4 .6-2.9 2.8.7 4L10 11l-3.6 1.9.7-4L4.2 6.2l4-.6L10 2z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
+        <path d="M4 15c1.5-1 3.5-1.5 6-1.5s4.5.5 6 1.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
 ];
 
 const YONETICI_LINKS = [
