@@ -4,6 +4,15 @@ import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { addMusteri, updateMusteri, deleteMusteri } from "@/lib/actions/musteriler";
 import { addLead, updateLead, deleteLead } from "@/lib/actions/crmLeads";
+import {
+  cleanMultiline,
+  cleanText,
+  formatPhoneTR,
+  isValidPhoneTR,
+  isValidTaxNumber,
+  normalizeTaxNumber,
+  uniqueCleanOptions,
+} from "@/lib/crmValidation";
 import { DatePicker } from "./DatePicker";
 
 type Musteri = {
@@ -14,6 +23,7 @@ type Musteri = {
   website: string;
   email: string;
   telefon: string;
+  vergi_numarasi?: string;
   sorumlu: string;
   durum: "aktif" | "pasif" | "potansiyel";
   platformlar: string[];
@@ -137,19 +147,6 @@ function getSozlesmeTag(sozlesme_bitis_tarihi: string | null, hatirlatma: number
   return null;
 }
 
-function formatTelefon(raw: string) {
-  const digits = raw.replace(/\D/g, "").slice(0, 11);
-  if (digits.length <= 4) return digits;
-  if (digits.length <= 7) return `${digits.slice(0, 4)} ${digits.slice(4)}`;
-  if (digits.length <= 11) return `${digits.slice(0, 4)} ${digits.slice(4, 7)} ${digits.slice(7)}`;
-  return `${digits.slice(0, 4)} ${digits.slice(4, 7)} ${digits.slice(7, 11)}`;
-}
-
-function telefonValid(t: string) {
-  const digits = t.replace(/\D/g, "");
-  return digits.length === 11 && digits.startsWith("0");
-}
-
 const INPUT: React.CSSProperties = {
   width: "100%", padding: "9px 12px", borderRadius: 8,
   border: "1px solid var(--c-border)", background: "var(--c-input)",
@@ -172,7 +169,7 @@ type LeadModalState = { open: false } | { open: true; editing: Lead | null };
 
 const EMPTY_CUSTOMER_FORM = {
   ad: "", sektor: "", website: "", email: "", telefon: "",
-  sorumlu: "", durum: "aktif", aylik_ucret: "", baslangic_tarihi: "", notlar: "",
+  vergi_numarasi: "", sorumlu: "", durum: "aktif", aylik_ucret: "", baslangic_tarihi: "", notlar: "",
   platformlar: [] as string[],
   sozlesme_bitis_tarihi: "", yenileme_hatirlatma_gun: "30",
 };
@@ -186,14 +183,79 @@ const EMPTY_LEAD_FORM = {
 };
 
 function validateCustomer(form: typeof EMPTY_CUSTOMER_FORM) {
-  if (!form.ad.trim()) return "Müşteri adı zorunludur.";
-  if (!form.sektor.trim()) return "Sektör zorunludur.";
-  if (!form.sorumlu.trim()) return "Sorumlu kişi zorunludur.";
-  if (!form.telefon.trim()) return "Telefon zorunludur.";
-  if (!telefonValid(form.telefon)) return "Telefon formatı geçersiz. Örnek: 0555 555 5555";
+  if (!cleanText(form.ad)) return "Müşteri adı zorunludur.";
+  if (!cleanText(form.sektor)) return "Sektör zorunludur.";
+  if (!cleanText(form.sorumlu)) return "Sorumlu kişi zorunludur.";
+  if (!cleanText(form.telefon)) return "Telefon zorunludur.";
+  if (!isValidPhoneTR(form.telefon, true)) return "Telefon formatı geçersiz. Örnek: 0555 555 5555";
+  if (!isValidTaxNumber(form.vergi_numarasi)) return "Vergi numarası 10 veya 11 haneli olmalıdır.";
   if (!form.aylik_ucret || parseFloat(form.aylik_ucret) <= 0) return "Aylık ücret girilmelidir.";
   if (!form.baslangic_tarihi) return "Başlangıç tarihi zorunludur.";
   return null;
+}
+
+function escapeHtml(value: string | number | null | undefined) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function contractField(label: string, value: string | number | null | undefined) {
+  return `<div class="field"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value || "-")}</strong></div>`;
+}
+
+function buildContractSampleHtml(form: typeof EMPTY_CUSTOMER_FORM) {
+  const platforms = form.platformlar.length ? form.platformlar.join(", ") : "-";
+  return `
+    <div class="contract">
+      <style>
+        .contract { width: 794px; min-height: 1123px; padding: 54px; box-sizing: border-box; background: #fff; color: #111827; font-family: Arial, sans-serif; }
+        .eyebrow { color: #ef4444; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+        h1 { margin: 0 0 10px; font-size: 28px; line-height: 1.2; }
+        .muted { color: #6b7280; font-size: 12px; line-height: 1.55; margin: 0 0 22px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 18px 0 26px; }
+        .field { border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 12px; min-height: 48px; }
+        .field span { display: block; color: #6b7280; font-size: 10px; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+        .field strong { font-size: 13px; font-weight: 700; word-break: break-word; }
+        h2 { font-size: 16px; margin: 22px 0 8px; }
+        p, li { font-size: 12px; line-height: 1.62; }
+        ol { padding-left: 18px; margin: 0; }
+        .signature { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 54px; }
+        .signbox { border-top: 1px solid #111827; padding-top: 8px; font-size: 12px; color: #374151; min-height: 64px; }
+      </style>
+      <div class="eyebrow">Taslak örnek</div>
+      <h1>Hizmet Sözleşmesi Örneği</h1>
+      <p class="muted">Bu belge müşteri ekleme ekranındaki bilgilerle hazırlanan örnek bir taslaktır. Hukuki onay ve taraf bilgileri tamamlanmadan resmi sözleşme yerine geçmez.</p>
+      <div class="grid">
+        ${contractField("Müşteri", cleanText(form.ad))}
+        ${contractField("Sektör", cleanText(form.sektor))}
+        ${contractField("Vergi Numarası", normalizeTaxNumber(form.vergi_numarasi))}
+        ${contractField("Telefon", formatPhoneTR(form.telefon))}
+        ${contractField("E-posta", cleanText(form.email))}
+        ${contractField("Website", cleanText(form.website))}
+        ${contractField("Sorumlu", cleanText(form.sorumlu))}
+        ${contractField("Başlangıç Tarihi", form.baslangic_tarihi)}
+        ${contractField("Sözleşme Bitişi", form.sozlesme_bitis_tarihi)}
+        ${contractField("Aylık Yönetim Ücreti", `${fmt(parseFloat(form.aylik_ucret) || 0)} TL`)}
+        ${contractField("Platformlar", platforms)}
+        ${contractField("Yenileme Hatırlatması", `${parseInt(form.yenileme_hatirlatma_gun) || 30} gün`)}
+      </div>
+      <h2>Kapsam</h2>
+      <ol>
+        <li>Taraflar, sosyal medya ve dijital pazarlama yönetimi kapsamında karşılıklı görev ve sorumluluklarını ayrıca netleştirir.</li>
+        <li>Hizmet kapsamı, platform seçimi, teslim takvimi ve raporlama detayları onaylanan iş planına göre yürütülür.</li>
+        <li>Ücret, ödeme zamanı, iptal koşulları ve ek hizmetler nihai sözleşmede ayrıca düzenlenir.</li>
+      </ol>
+      <h2>Notlar</h2>
+      <p>${escapeHtml(cleanMultiline(form.notlar) || "-").replace(/\n/g, "<br />")}</p>
+      <div class="signature">
+        <div class="signbox">Hizmet Sağlayıcı<br />İmza / Kaşe</div>
+        <div class="signbox">${escapeHtml(cleanText(form.ad) || "Müşteri")}<br />İmza / Kaşe</div>
+      </div>
+    </div>
+  `;
 }
 
 const Icons = {
@@ -241,6 +303,7 @@ export function MusterilerClient({
   const [customerSearch, setCustomerSearch] = useState("");
   const [customerForm, setCustomerForm] = useState(EMPTY_CUSTOMER_FORM);
   const [custError, setCustError] = useState("");
+  const [contractLoading, setContractLoading] = useState(false);
 
   // Lead UI states
   const [leadModal, setLeadModal] = useState<LeadModalState>({ open: false });
@@ -352,6 +415,15 @@ export function MusterilerClient({
     leadForm.notes, scoreIsDirty, leadModal.open
   ]);
 
+  // Sector options from static CRM values and existing records
+  const sectorOptions = useMemo(() => {
+    return uniqueCleanOptions([
+      ...SECTORS,
+      ...initialMusteriler.map((m) => m.sektor),
+      ...leads.map((l) => l.sector),
+    ]);
+  }, [initialMusteriler, leads]);
+
   // Memoized stats
   const stats = useMemo(() => {
     const aktif = initialMusteriler.filter((m) => m.durum === "aktif");
@@ -419,6 +491,7 @@ export function MusterilerClient({
     setCustomerForm({
       ad: m.ad, sektor: m.sektor, website: m.website || "",
       email: m.email || "", telefon: m.telefon || "",
+      vergi_numarasi: m.vergi_numarasi || "",
       sorumlu: m.sorumlu || "", durum: m.durum,
       aylik_ucret: m.aylik_ucret ? String(m.aylik_ucret) : "",
       baslangic_tarihi: m.baslangic_tarihi || "", notlar: m.notlar || "",
@@ -445,13 +518,14 @@ export function MusterilerClient({
     if (err) { setCustError(err); return; }
 
     const data = {
-      ad: customerForm.ad.trim(), sektor: customerForm.sektor.trim(),
-      website: customerForm.website.trim(), email: customerForm.email.trim(),
-      telefon: customerForm.telefon.trim(), sorumlu: customerForm.sorumlu.trim(),
+      ad: cleanText(customerForm.ad), sektor: cleanText(customerForm.sektor),
+      website: cleanText(customerForm.website), email: cleanText(customerForm.email),
+      telefon: formatPhoneTR(customerForm.telefon), vergi_numarasi: normalizeTaxNumber(customerForm.vergi_numarasi),
+      sorumlu: cleanText(customerForm.sorumlu),
       durum: customerForm.durum, platformlar: customerForm.platformlar,
       aylik_ucret: parseFloat(customerForm.aylik_ucret) || 0,
       baslangic_tarihi: customerForm.baslangic_tarihi || null,
-      notlar: customerForm.notlar.trim(),
+      notlar: cleanMultiline(customerForm.notlar),
       sozlesme_bitis_tarihi: customerForm.sozlesme_bitis_tarihi || null,
       yenileme_hatirlatma_gun: parseInt(customerForm.yenileme_hatirlatma_gun) || 30,
     };
@@ -465,6 +539,48 @@ export function MusterilerClient({
     
     if (result.error) { setCustError(result.error); }
     else { setCustModal({ open: false }); router.refresh(); }
+  }
+
+  async function handleContractPdf() {
+    const err = validateCustomer(customerForm);
+    if (err) { setCustError(`Sözleşme PDF için: ${err}`); return; }
+
+    setCustError("");
+    setContractLoading(true);
+    let node: HTMLDivElement | null = null;
+    try {
+      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+        import("html2canvas"),
+        import("jspdf"),
+      ]);
+      node = document.createElement("div");
+      node.style.position = "fixed";
+      node.style.left = "-10000px";
+      node.style.top = "0";
+      node.style.width = "794px";
+      node.innerHTML = buildContractSampleHtml(customerForm);
+      document.body.appendChild(node);
+
+      const canvas = await html2canvas(node.firstElementChild as HTMLElement, {
+        scale: 2,
+        backgroundColor: "#ffffff",
+      });
+      node.remove();
+      node = null;
+
+      const pdf = new jsPDF({ orientation: "portrait", unit: "pt", format: "a4" });
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const imgData = canvas.toDataURL("image/png");
+      const imgHeight = (canvas.height * pageWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pageWidth, Math.min(imgHeight, pageHeight));
+      pdf.save(`${cleanText(customerForm.ad).replace(/\s+/g, "-").toLocaleLowerCase("tr-TR")}-sozlesme-ornegi.pdf`);
+    } catch (error) {
+      setCustError(`Sözleşme PDF oluşturulamadı: ${String(error)}`);
+    } finally {
+      node?.remove();
+      setContractLoading(false);
+    }
   }
 
   async function handleCustomerDelete() {
@@ -511,23 +627,27 @@ export function MusterilerClient({
 
   async function handleLeadSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!leadForm.title.trim()) { setLeadError("Aday Tanımı / Başlık zorunludur."); return; }
+    if (!cleanText(leadForm.title)) { setLeadError("Aday Tanımı / Başlık zorunludur."); return; }
+    if (leadForm.phone && !isValidPhoneTR(leadForm.phone, false)) {
+      setLeadError("Telefon formatı geçersiz. Örnek: 0555 555 5555");
+      return;
+    }
 
     const inputData = {
-      title: leadForm.title.trim(),
+      title: cleanText(leadForm.title),
       company_id: leadForm.company_id || null,
       contact_id: leadForm.contact_id || null,
-      company_name: leadForm.company_name.trim(),
-      contact_name: leadForm.contact_name.trim(),
-      phone: leadForm.phone.trim(),
-      email: leadForm.email.trim(),
-      instagram: leadForm.instagram.trim(),
-      website: leadForm.website.trim(),
-      sector: leadForm.sector,
+      company_name: cleanText(leadForm.company_name),
+      contact_name: cleanText(leadForm.contact_name),
+      phone: formatPhoneTR(leadForm.phone),
+      email: cleanText(leadForm.email),
+      instagram: cleanText(leadForm.instagram),
+      website: cleanText(leadForm.website),
+      sector: cleanText(leadForm.sector),
       source: leadForm.source as Lead["source"],
       status: leadForm.status as Lead["status"],
       score: parseInt(leadForm.score) || 0,
-      notes: leadForm.notes.trim(),
+      notes: cleanMultiline(leadForm.notes),
       assigned_user: leadForm.assigned_user,
       next_follow_up_date: leadForm.next_follow_up_date || null,
       audit_id: leadForm.audit_id || null,
@@ -631,6 +751,9 @@ export function MusterilerClient({
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <datalist id="crm-sector-options">
+        {sectorOptions.map((sector) => <option key={sector} value={sector} />)}
+      </datalist>
 
       {/* ── Header ── */}
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
@@ -800,7 +923,7 @@ export function MusterilerClient({
               </select>
               <select value={leadSectorFilter} onChange={e => setLeadSectorFilter(e.target.value)} style={INPUT}>
                 <option value="all">Tüm Sektörler</option>
-                {SECTORS.map(s => (
+                {sectorOptions.map(s => (
                   <option key={s} value={s}>{s}</option>
                 ))}
               </select>
@@ -1243,17 +1366,28 @@ export function MusterilerClient({
                 </div>
                 <div>
                   <label style={LABEL}>Sektör *</label>
-                  <input style={INPUT} value={customerForm.sektor} onChange={(e) => setCustomerForm((f) => ({ ...f, sektor: e.target.value }))} placeholder="ör. E-ticaret, Sağlık" required />
+                  <input list="crm-sector-options" style={INPUT} value={customerForm.sektor} onChange={(e) => setCustomerForm((f) => ({ ...f, sektor: e.target.value }))} placeholder="ör. E-ticaret, Sağlık" required />
                 </div>
                 <div>
                   <label style={LABEL}>Telefon * <span style={{ fontWeight: 400, textTransform: "none" }}>(0555 555 5555)</span></label>
                   <input
                     style={INPUT}
                     value={customerForm.telefon}
-                    onChange={(e) => setCustomerForm((f) => ({ ...f, telefon: formatTelefon(e.target.value) }))}
+                    onChange={(e) => setCustomerForm((f) => ({ ...f, telefon: formatPhoneTR(e.target.value) }))}
                     placeholder="0555 555 5555"
                     inputMode="numeric"
                     required
+                  />
+                </div>
+                <div>
+                  <label style={LABEL}>Vergi Numarası</label>
+                  <input
+                    style={INPUT}
+                    value={customerForm.vergi_numarasi}
+                    onChange={(e) => setCustomerForm((f) => ({ ...f, vergi_numarasi: normalizeTaxNumber(e.target.value) }))}
+                    placeholder="10 veya 11 hane"
+                    inputMode="numeric"
+                    maxLength={11}
                   />
                 </div>
                 <div>
@@ -1349,6 +1483,14 @@ export function MusterilerClient({
               )}
 
               <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, marginTop: 4 }}>
+                <button type="button" onClick={handleContractPdf} disabled={contractLoading} style={{
+                  padding: "9px 16px", borderRadius: 8, background: "transparent",
+                  border: "1px solid var(--c-border)", color: "var(--c-text2)",
+                  fontSize: 13, fontWeight: 500, cursor: contractLoading ? "wait" : "pointer",
+                  opacity: contractLoading ? 0.7 : 1,
+                }}>
+                  {contractLoading ? "PDF hazırlanıyor..." : "Sözleşme PDF Örneği"}
+                </button>
                 <button type="button" onClick={() => setCustModal({ open: false })} style={{
                   padding: "9px 20px", borderRadius: 8, background: "transparent",
                   border: "1px solid var(--c-border)", color: "var(--c-text2)",
@@ -1511,7 +1653,7 @@ export function MusterilerClient({
                   type="text"
                   placeholder="05..."
                   value={leadForm.phone}
-                  onChange={e => setLeadForm(f => ({ ...f, phone: e.target.value }))}
+                  onChange={e => setLeadForm(f => ({ ...f, phone: formatPhoneTR(e.target.value) }))}
                   style={INPUT}
                 />
               </div>
@@ -1557,7 +1699,7 @@ export function MusterilerClient({
                   style={INPUT}
                 >
                   <option value="">-- Seçiniz --</option>
-                  {SECTORS.map(s => (
+                  {sectorOptions.map(s => (
                     <option key={s} value={s}>{s}</option>
                   ))}
                 </select>

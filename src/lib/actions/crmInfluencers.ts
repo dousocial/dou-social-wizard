@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
+import { cleanMultiline, cleanText, formatPhoneTR, isValidPhoneTR } from "@/lib/crmValidation";
 
 function sb() {
   return createClient(
@@ -44,11 +45,58 @@ export type InfluencerInput = {
   sorumlu?: string;
 };
 
+function normalizeHesaplar(hesaplar: HesapEntry[] | undefined) {
+  return (hesaplar ?? [])
+    .map((hesap) => ({
+      ...hesap,
+      handle: cleanText(hesap.handle).replace(/^@+/, ""),
+      followers: Math.max(0, Number(hesap.followers) || 0),
+      engagement_rate: Math.max(0, Number(hesap.engagement_rate) || 0),
+    }))
+    .filter((hesap) => hesap.handle);
+}
+
+function normalizeInfluencerInput<T extends Partial<InfluencerInput>>(
+  data: T,
+  requireName: boolean
+): { data?: T; error?: string } {
+  const cleaned = {
+    ...data,
+    ad: data.ad !== undefined ? cleanText(data.ad) : data.ad,
+    soyad: data.soyad !== undefined ? cleanText(data.soyad) : data.soyad,
+    email: data.email !== undefined ? cleanText(data.email) : data.email,
+    telefon: data.telefon !== undefined ? formatPhoneTR(data.telefon) : data.telefon,
+    sehir: data.sehir !== undefined ? cleanText(data.sehir) : data.sehir,
+    ulke: data.ulke !== undefined ? cleanText(data.ulke) : data.ulke,
+    hesaplar: data.hesaplar !== undefined ? normalizeHesaplar(data.hesaplar) : data.hesaplar,
+    nis_etiketler: data.nis_etiketler !== undefined ? data.nis_etiketler.map(cleanText).filter(Boolean) : data.nis_etiketler,
+    kara_liste_nedeni: data.kara_liste_nedeni !== undefined ? cleanText(data.kara_liste_nedeni) : data.kara_liste_nedeni,
+    ajans_adi: data.ajans_adi !== undefined ? cleanText(data.ajans_adi) : data.ajans_adi,
+    temsilci_adi: data.temsilci_adi !== undefined ? cleanText(data.temsilci_adi) : data.temsilci_adi,
+    temsilci_telefon: data.temsilci_telefon !== undefined ? formatPhoneTR(data.temsilci_telefon) : data.temsilci_telefon,
+    notlar: data.notlar !== undefined ? cleanMultiline(data.notlar) : data.notlar,
+    ic_notlar: data.ic_notlar !== undefined ? cleanMultiline(data.ic_notlar) : data.ic_notlar,
+    sorumlu: data.sorumlu !== undefined ? cleanText(data.sorumlu) : data.sorumlu,
+  } as T;
+
+  if (requireName && !cleaned.ad) return { error: "Ad zorunludur." };
+  if (cleaned.telefon !== undefined && !isValidPhoneTR(cleaned.telefon, false)) {
+    return { error: "Telefon formatı geçersiz. Örnek: 0555 555 5555" };
+  }
+  if (cleaned.temsilci_telefon !== undefined && !isValidPhoneTR(cleaned.temsilci_telefon, false)) {
+    return { error: "Temsilci telefon formatı geçersiz. Örnek: 0555 555 5555" };
+  }
+
+  return { data: cleaned };
+}
+
 export async function addInfluencer(data: InfluencerInput): Promise<ActionResult> {
   try {
+    const normalized = normalizeInfluencerInput(data, true);
+    if (normalized.error || !normalized.data) return { error: normalized.error ?? "Geçersiz influencer verisi." };
     const { data: row, error } = await sb()
       .from("influencers")
-      .insert(data)
+      .insert(normalized.data)
       .select("id")
       .single();
     if (error) return { error: error.message };
@@ -64,9 +112,11 @@ export async function updateInfluencer(
   data: Partial<InfluencerInput>
 ): Promise<ActionResult> {
   try {
+    const normalized = normalizeInfluencerInput(data, false);
+    if (normalized.error || !normalized.data) return { error: normalized.error ?? "Geçersiz influencer verisi." };
     const { error } = await sb()
       .from("influencers")
-      .update({ ...data, updated_at: new Date().toISOString() })
+      .update({ ...normalized.data, updated_at: new Date().toISOString() })
       .eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/influencerlar");

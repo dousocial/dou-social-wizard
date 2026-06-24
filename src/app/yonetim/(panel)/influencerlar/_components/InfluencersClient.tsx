@@ -12,6 +12,7 @@ import {
   type CollaborationInput,
   type HesapEntry,
 } from "@/lib/actions/crmInfluencers";
+import { cleanMultiline, cleanText, formatPhoneTR, isValidPhoneTR } from "@/lib/crmValidation";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -232,8 +233,17 @@ function InfluencerFormModal({
   const [nisInput, setNisInput] = useState("");
 
   function addHesap() {
-    if (!newHesap.handle.trim()) return;
-    setForm(f => ({ ...f, hesaplar: [...(f.hesaplar ?? []), { ...newHesap }] }));
+    const handle = cleanText(newHesap.handle).replace(/^@+/, "");
+    if (!handle) return;
+    setForm(f => ({
+      ...f,
+      hesaplar: [...(f.hesaplar ?? []), {
+        ...newHesap,
+        handle,
+        followers: Math.max(0, Number(newHesap.followers) || 0),
+        engagement_rate: Math.max(0, Number(newHesap.engagement_rate) || 0),
+      }],
+    }));
     setNewHesap({ platform: "instagram", handle: "", followers: 0, engagement_rate: 0 });
   }
 
@@ -242,7 +252,7 @@ function InfluencerFormModal({
   }
 
   function addNis() {
-    const tag = nisInput.trim();
+    const tag = cleanText(nisInput);
     if (!tag) return;
     setForm(f => ({ ...f, nis_etiketler: [...(f.nis_etiketler ?? []), tag] }));
     setNisInput("");
@@ -254,12 +264,44 @@ function InfluencerFormModal({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.ad?.trim()) { setError("Ad zorunludur."); return; }
+    if (!cleanText(form.ad)) { setError("Ad zorunludur."); return; }
+    if (form.telefon && !isValidPhoneTR(form.telefon, false)) {
+      setError("Telefon formatı geçersiz. Örnek: 0555 555 5555");
+      return;
+    }
+    if (form.temsilci_telefon && !isValidPhoneTR(form.temsilci_telefon, false)) {
+      setError("Temsilci telefon formatı geçersiz. Örnek: 0555 555 5555");
+      return;
+    }
+
+    const cleanedForm: InfluencerInput = {
+      ...form,
+      ad: cleanText(form.ad),
+      soyad: cleanText(form.soyad),
+      email: cleanText(form.email),
+      telefon: formatPhoneTR(form.telefon),
+      sehir: cleanText(form.sehir),
+      hesaplar: (form.hesaplar ?? []).map((h) => ({
+        ...h,
+        handle: cleanText(h.handle).replace(/^@+/, ""),
+        followers: Math.max(0, Number(h.followers) || 0),
+        engagement_rate: Math.max(0, Number(h.engagement_rate) || 0),
+      })).filter((h) => h.handle),
+      nis_etiketler: (form.nis_etiketler ?? []).map(cleanText).filter(Boolean),
+      kara_liste_nedeni: cleanText(form.kara_liste_nedeni),
+      ajans_adi: cleanText(form.ajans_adi),
+      temsilci_adi: cleanText(form.temsilci_adi),
+      temsilci_telefon: formatPhoneTR(form.temsilci_telefon),
+      notlar: cleanMultiline(form.notlar),
+      ic_notlar: cleanMultiline(form.ic_notlar),
+      sorumlu: cleanText(form.sorumlu),
+    };
+
     setLoading(true);
     setError("");
     const result = isEdit
-      ? await updateInfluencer(influencer!.id, form)
-      : await addInfluencer(form);
+      ? await updateInfluencer(influencer!.id, cleanedForm)
+      : await addInfluencer(cleanedForm);
     setLoading(false);
     if (result.error) { setError(result.error); return; }
     onSave();
@@ -320,7 +362,7 @@ function InfluencerFormModal({
               </div>
               <div>
                 <label style={lbl}>Telefon</label>
-                <input style={inp} value={form.telefon} onChange={e => setForm(f => ({ ...f, telefon: e.target.value }))} placeholder="+90 5xx xxx xx xx" />
+                <input style={inp} value={form.telefon} onChange={e => setForm(f => ({ ...f, telefon: formatPhoneTR(e.target.value) }))} placeholder="0555 555 5555" />
               </div>
               <div>
                 <label style={lbl}>Şehir</label>
@@ -499,7 +541,7 @@ function InfluencerFormModal({
               </div>
               <div>
                 <label style={lbl}>Temsilci Telefon</label>
-                <input style={inp} value={form.temsilci_telefon} onChange={e => setForm(f => ({ ...f, temsilci_telefon: e.target.value }))} placeholder="+90..." />
+                <input style={inp} value={form.temsilci_telefon} onChange={e => setForm(f => ({ ...f, temsilci_telefon: formatPhoneTR(e.target.value) }))} placeholder="0555 555 5555" />
               </div>
               <div>
                 <label style={lbl}>Sorumlu</label>

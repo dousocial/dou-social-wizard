@@ -3,6 +3,14 @@
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { requireSession } from "@/lib/session";
+import {
+  cleanMultiline,
+  cleanText,
+  formatPhoneTR,
+  isValidPhoneTR,
+  isValidTaxNumber,
+  normalizeTaxNumber,
+} from "@/lib/crmValidation";
 
 function sb() {
   return createClient(
@@ -17,6 +25,7 @@ export type MusteriInput = {
   website?: string;
   email?: string;
   telefon?: string;
+  vergi_numarasi?: string;
   sorumlu?: string;
   durum?: string;
   platformlar?: string[];
@@ -29,10 +38,37 @@ export type MusteriInput = {
 
 export type ActionResult = { error: string | null };
 
+function normalizeMusteriInput(data: MusteriInput): { data?: MusteriInput; error?: string } {
+  const cleaned: MusteriInput = {
+    ...data,
+    ad: cleanText(data.ad),
+    sektor: cleanText(data.sektor),
+    website: cleanText(data.website),
+    email: cleanText(data.email),
+    telefon: formatPhoneTR(data.telefon),
+    vergi_numarasi: data.vergi_numarasi !== undefined ? normalizeTaxNumber(data.vergi_numarasi) : undefined,
+    sorumlu: cleanText(data.sorumlu),
+    notlar: cleanMultiline(data.notlar),
+    platformlar: data.platformlar ?? [],
+  };
+
+  if (!cleaned.ad) return { error: "Müşteri adı zorunludur." };
+  if (!cleaned.sektor) return { error: "Sektör zorunludur." };
+  if (!cleaned.sorumlu) return { error: "Sorumlu kişi zorunludur." };
+  if (!isValidPhoneTR(cleaned.telefon, true)) return { error: "Telefon formatı geçersiz. Örnek: 0555 555 5555" };
+  if (data.vergi_numarasi !== undefined && !isValidTaxNumber(cleaned.vergi_numarasi)) {
+    return { error: "Vergi numarası 10 veya 11 haneli olmalıdır." };
+  }
+
+  return { data: cleaned };
+}
+
 export async function addMusteri(data: MusteriInput): Promise<ActionResult> {
   try {
     await requireSession();
-    const { error } = await sb().from("musteriler").insert(data);
+    const normalized = normalizeMusteriInput(data);
+    if (normalized.error || !normalized.data) return { error: normalized.error ?? "Geçersiz müşteri verisi." };
+    const { error } = await sb().from("musteriler").insert(normalized.data);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/musteriler");
     return { error: null };
@@ -44,9 +80,11 @@ export async function addMusteri(data: MusteriInput): Promise<ActionResult> {
 export async function updateMusteri(id: string, data: MusteriInput): Promise<ActionResult> {
   try {
     await requireSession();
+    const normalized = normalizeMusteriInput(data);
+    if (normalized.error || !normalized.data) return { error: normalized.error ?? "Geçersiz müşteri verisi." };
     const { error } = await sb()
       .from("musteriler")
-      .update({ ...data, updated_at: new Date().toISOString() })
+      .update({ ...normalized.data, updated_at: new Date().toISOString() })
       .eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/musteriler");
