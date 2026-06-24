@@ -29,7 +29,7 @@ export type InfluencerInput = {
   sehir?: string;
   ulke?: string;
   hesaplar?: HesapEntry[];
-  kategori?: string;
+  kategori?: string[];
   nis_etiketler?: string[];
   durum?: "havuz" | "aktif" | "kara_liste";
   kara_liste_nedeni?: string;

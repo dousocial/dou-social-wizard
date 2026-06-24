@@ -26,7 +26,7 @@ type Influencer = {
   sehir: string;
   ulke: string;
   hesaplar: HesapEntry[];
-  kategori: string;
+  kategori: string[];
   nis_etiketler: string[];
   durum: "havuz" | "aktif" | "kara_liste";
   kara_liste_nedeni: string;
@@ -94,18 +94,33 @@ const PLATFORM_ICONS: Record<string, string> = {
   diger: "🌐",
 };
 const KATEGORILER = [
-  { value: "", label: "Seçin" },
-  { value: "moda", label: "Moda" },
-  { value: "yemek", label: "Yemek" },
-  { value: "teknoloji", label: "Teknoloji" },
-  { value: "spor", label: "Spor" },
-  { value: "seyahat", label: "Seyahat" },
-  { value: "guzellik", label: "Güzellik" },
-  { value: "eglence", label: "Eğlence" },
-  { value: "oyun", label: "Oyun" },
-  { value: "saglik", label: "Sağlık" },
-  { value: "egitim", label: "Eğitim" },
-  { value: "diger", label: "Diğer" },
+  { value: "moda", label: "👗 Moda" },
+  { value: "yemek", label: "🍽 Yemek" },
+  { value: "teknoloji", label: "💻 Teknoloji" },
+  { value: "spor", label: "⚽ Spor" },
+  { value: "seyahat", label: "✈️ Seyahat" },
+  { value: "guzellik", label: "💄 Güzellik" },
+  { value: "eglence", label: "🎭 Eğlence" },
+  { value: "oyun", label: "🎮 Oyun" },
+  { value: "saglik", label: "🏥 Sağlık" },
+  { value: "egitim", label: "📚 Eğitim" },
+  { value: "diger", label: "🔖 Diğer" },
+];
+
+const TURKIYE_SEHIRLER = [
+  "Denizli",
+  "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Aksaray", "Amasya", "Ankara",
+  "Antalya", "Ardahan", "Artvin", "Aydın", "Balıkesir", "Bartın", "Batman",
+  "Bayburt", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa",
+  "Çanakkale", "Çankırı", "Çorum", "Düzce", "Edirne", "Elazığ", "Erzincan",
+  "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari",
+  "Hatay", "Iğdır", "Isparta", "İstanbul", "İzmir", "Kahramanmaraş",
+  "Karabük", "Karaman", "Kars", "Kastamonu", "Kayseri", "Kilis", "Kırıkkale",
+  "Kırklareli", "Kırşehir", "Kocaeli", "Konya", "Kütahya", "Malatya",
+  "Manisa", "Mardin", "Mersin", "Muğla", "Muş", "Nevşehir", "Niğde",
+  "Ordu", "Osmaniye", "Rize", "Sakarya", "Samsun", "Şanlıurfa", "Siirt",
+  "Sinop", "Şırnak", "Sivas", "Tekirdağ", "Tokat", "Trabzon", "Tunceli",
+  "Uşak", "Van", "Yalova", "Yozgat", "Zonguldak",
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -195,7 +210,7 @@ function InfluencerFormModal({
     telefon: influencer?.telefon ?? "",
     sehir: influencer?.sehir ?? "",
     hesaplar: influencer?.hesaplar ?? [],
-    kategori: influencer?.kategori ?? "",
+    kategori: influencer?.kategori ?? [],
     nis_etiketler: influencer?.nis_etiketler ?? [],
     durum: influencer?.durum ?? "havuz",
     kara_liste_nedeni: influencer?.kara_liste_nedeni ?? "",
@@ -309,7 +324,12 @@ function InfluencerFormModal({
               </div>
               <div>
                 <label style={lbl}>Şehir</label>
-                <input style={inp} value={form.sehir} onChange={e => setForm(f => ({ ...f, sehir: e.target.value }))} placeholder="İstanbul" />
+                <select style={inp} value={form.sehir} onChange={e => setForm(f => ({ ...f, sehir: e.target.value }))}>
+                  <option value="" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>— Seçin —</option>
+                  {TURKIYE_SEHIRLER.map(s => (
+                    <option key={s} value={s} style={{ background: "#1a1a2e", color: "#e2e8f0" }}>{s}</option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label style={lbl}>Durum</label>
@@ -382,14 +402,35 @@ function InfluencerFormModal({
           {/* Kategori & Niş */}
           <div>
             <div style={{ fontSize: 12, fontWeight: 700, color: "#f59e0b", marginBottom: 10, textTransform: "uppercase", letterSpacing: "0.06em" }}>
-              Kategori & Niş
+              Kategoriler & Niş
             </div>
-            <div style={{ ...row, marginBottom: 12 }}>
-              <div>
-                <label style={lbl}>Ana Kategori</label>
-                <select style={inp} value={form.kategori} onChange={e => setForm(f => ({ ...f, kategori: e.target.value }))}>
-                  {KATEGORILER.map(k => <option key={k.value} value={k.value} style={{ background: "#1a1a2e", color: "#e2e8f0" }}>{k.label}</option>)}
-                </select>
+            <div style={{ marginBottom: 12 }}>
+              <label style={lbl}>Kategoriler (birden fazla seçilebilir)</label>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 4 }}>
+                {KATEGORILER.map(k => {
+                  const selected = (form.kategori as unknown as string[] ?? []).includes(k.value);
+                  return (
+                    <button
+                      key={k.value}
+                      type="button"
+                      onClick={() => {
+                        const current = (form.kategori as unknown as string[] ?? []);
+                        const next = selected
+                          ? current.filter(v => v !== k.value)
+                          : [...current, k.value];
+                        setForm(f => ({ ...f, kategori: next as any }));
+                      }}
+                      style={{
+                        padding: "6px 12px", borderRadius: 20, cursor: "pointer",
+                        fontSize: 12, fontWeight: selected ? 700 : 500,
+                        border: selected ? "1px solid rgba(245,158,11,0.6)" : "1px solid rgba(255,255,255,0.1)",
+                        background: selected ? "rgba(245,158,11,0.2)" : "rgba(255,255,255,0.04)",
+                        color: selected ? "#f59e0b" : "var(--c-dim)",
+                        transition: "all 0.15s",
+                      }}
+                    >{k.label}</button>
+                  );
+                })}
               </div>
             </div>
             <div>
@@ -766,7 +807,10 @@ function InfluencerDrawer({
             <div style={{ fontSize: 20, fontWeight: 700 }}>{influencer.ad} {influencer.soyad}</div>
             <div style={{ marginTop: 6, display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
               <Badge status={influencer.durum} map={DURUM_MAP} />
-              {influencer.kategori && <Tag text={influencer.kategori} />}
+              {(influencer.kategori?.length > 0) && (influencer.kategori as unknown as string[]).map(k => {
+                const found = KATEGORILER.find(x => x.value === k);
+                return <Tag key={k} text={found?.label ?? k} />;
+              })}
               {influencer.sehir && <span style={{ fontSize: 12, color: "var(--c-dim)" }}>📍 {influencer.sehir}</span>}
             </div>
           </div>
@@ -989,12 +1033,12 @@ export function InfluencersClient({
       list = list.filter(i =>
         `${i.ad} ${i.soyad}`.toLowerCase().includes(s) ||
         i.email.toLowerCase().includes(s) ||
-        i.kategori.toLowerCase().includes(s) ||
+        (i.kategori as unknown as string[])?.some(k => k.toLowerCase().includes(s)) ||
         i.nis_etiketler.some(t => t.toLowerCase().includes(s)) ||
         i.hesaplar.some(h => h.handle.toLowerCase().includes(s))
       );
     }
-    if (filterKategori) list = list.filter(i => i.kategori === filterKategori);
+    if (filterKategori) list = list.filter(i => (i.kategori as unknown as string[])?.includes(filterKategori));
     return list;
   }, [influencers, tab, search, filterKategori]);
 
@@ -1134,7 +1178,10 @@ export function InfluencersClient({
                     </div>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
                       <Badge status={inf.durum} map={DURUM_MAP} />
-                      {inf.kategori && <Tag text={inf.kategori} />}
+                      {(inf.kategori as unknown as string[])?.slice(0, 2).map(k => {
+                          const found = KATEGORILER.find(x => x.value === k);
+                          return <Tag key={k} text={found?.label ?? k} />;
+                        })}
                     </div>
                   </div>
                   {totalF > 0 && (
