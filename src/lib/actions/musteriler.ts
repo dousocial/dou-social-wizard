@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
+import { requireSession } from "@/lib/session";
 
 function sb() {
   return createClient(
@@ -30,6 +31,7 @@ export type ActionResult = { error: string | null };
 
 export async function addMusteri(data: MusteriInput): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb().from("musteriler").insert(data);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/musteriler");
@@ -41,6 +43,7 @@ export async function addMusteri(data: MusteriInput): Promise<ActionResult> {
 
 export async function updateMusteri(id: string, data: MusteriInput): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb()
       .from("musteriler")
       .update({ ...data, updated_at: new Date().toISOString() })
@@ -56,6 +59,7 @@ export async function updateMusteri(id: string, data: MusteriInput): Promise<Act
 
 export async function deleteMusteri(id: string): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb().from("musteriler").delete().eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/musteriler");
@@ -81,6 +85,7 @@ export type MetrikInput = {
 
 export async function addMetrik(data: MetrikInput): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb().from("musteri_metrikleri").insert(data);
     if (error) return { error: error.message };
     revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
@@ -96,6 +101,7 @@ export async function updateMetrik(
   data: Partial<Omit<MetrikInput, "musteri_id">>
 ): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb()
       .from("musteri_metrikleri")
       .update(data)
@@ -110,6 +116,7 @@ export async function updateMetrik(
 
 export async function deleteMetrik(id: string, musteriId: string): Promise<ActionResult> {
   try {
+    await requireSession();
     const { error } = await sb()
       .from("musteri_metrikleri")
       .delete()

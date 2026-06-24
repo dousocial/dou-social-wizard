@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { TextField, TextArea } from "./Field";
 import { Honeypot } from "./Honeypot";
 import { KVKKConsentField } from "./KVKKConsentField";
+import Script from "next/script";
 
 declare global {
   interface Window {
@@ -70,6 +71,12 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {SITE_KEY && (
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`}
+          strategy="lazyOnload"
+        />
+      )}
       <Honeypot />
 
       <div className="grid gap-6 md:grid-cols-2">

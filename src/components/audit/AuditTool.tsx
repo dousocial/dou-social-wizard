@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { getLenis } from "@/components/layout/SmoothScrollProvider";
+import Script from "next/script";
 
 declare global {
   interface Window {
@@ -700,6 +701,12 @@ export function AuditTool() {
 
   return (
     <div className="min-h-screen bg-paper">
+      {RECAPTCHA_SITE_KEY && (
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
+          strategy="lazyOnload"
+        />
+      )}
 
       {/* ── Hero ── */}
       <div className="border-b border-mute-100 px-6 py-16 md:px-10 md:py-20">

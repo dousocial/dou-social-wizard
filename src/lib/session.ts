@@ -40,3 +40,16 @@ export function verifyToken(token: string): SessionPayload | null {
     return null;
   }
 }
+
+export async function requireSession(): Promise<SessionPayload> {
+  const { cookies } = await import("next/headers");
+  const { redirect } = await import("next/navigation");
+  
+  const cookieStore = await cookies();
+  const token = cookieStore.get("dou_sid")?.value;
+  if (!token) redirect("/yonetim/giris");
+  const session = verifyToken(token!);
+  if (!session) redirect("/yonetim/giris");
+  return session!;
+}
+
