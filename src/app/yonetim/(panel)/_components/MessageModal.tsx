@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { markMessageRead } from "@/lib/actions/read";
 import { addMessageNote, deleteMessageNote } from "@/lib/actions/notes";
 
@@ -34,6 +35,7 @@ function fmtShort(ts: string) {
 }
 
 export function MessageModal({ id, table, data, onClose }: Props) {
+  const router = useRouter();
   const [detail, setDetail] = useState<DetailData | null>(null);
   const [noteText, setNoteText] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -118,7 +120,7 @@ export function MessageModal({ id, table, data, onClose }: Props) {
           flexShrink: 0,
         }}>
           <span style={{ fontSize: 15, fontWeight: 600, color: "var(--c-text)" }}>
-            {table === "contacts" ? "İletişim Mesajı" : "Audit Başvurusu"}
+            {table === "contacts" ? "İletişim Mesajı" : "Dijital Analiz Başvurusu"}
           </span>
           <button
             onClick={onClose}
@@ -133,13 +135,30 @@ export function MessageModal({ id, table, data, onClose }: Props) {
         <div style={{ overflowY: "auto", padding: "20px 24px", display: "flex", flexDirection: "column", gap: 24 }}>
 
           {/* ── Message content ── */}
-          <section>
+          <section style={{ display: "flex", flexDirection: "column" }}>
             <SectionLabel>Mesaj Bilgileri</SectionLabel>
             {table === "contacts" ? (
               <ContactDetail data={data} />
             ) : (
               <AuditDetail data={data} />
             )}
+            <button
+              onClick={() => {
+                onClose();
+                router.push(`/yonetim/crm-leads?convert_${table === 'contacts' ? 'contact' : 'audit'}=${id}`);
+              }}
+              style={{
+                marginTop: 14, alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: 8,
+                background: "linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)", color: "#fff", border: "none",
+                borderRadius: 8, padding: "9px 18px", fontSize: 13,
+                fontWeight: 600, cursor: "pointer", boxShadow: "0 4px 12px rgba(124,58,237,0.25)",
+                transition: "transform 0.2s, opacity 0.2s"
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.opacity = "0.95"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.opacity = "1"; }}
+            >
+              Müşteri Adayı Olarak Kaydet
+            </button>
           </section>
 
           {/* ── Read status ── */}

@@ -107,6 +107,7 @@ export default async function LocaleLayout({
       {/* Inline script runs before first paint — prevents dark-mode FOUC */}
       <head>
         <script
+          id="theme-fouc-prevent"
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var s=localStorage.getItem('theme');var dark=s!=='light';document.documentElement.classList.toggle('dark',dark);document.cookie='theme='+(dark?'dark':'light')+';path=/;max-age=31536000;SameSite=Lax'}catch(e){}})();`,
           }}

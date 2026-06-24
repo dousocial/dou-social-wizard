@@ -20,7 +20,7 @@ const BASE_LINKS = [
   },
   {
     href: "/yonetim/leads",
-    label: "Audit Başvuruları",
+    label: "Dijital Analiz Başvuruları",
     exact: false,
     color: "#f59e0b",
     bg: "rgba(245,158,11,0.15)",
@@ -73,6 +73,30 @@ const BASE_LINKS = [
 ];
 
 const CRM_LINKS = [
+  {
+    href: "/yonetim/crm-leads",
+    label: "Müşteri Adayları",
+    exact: false,
+    color: "#fb923c",
+    bg: "rgba(251,146,60,0.15)",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
+        <path d="M10 2v16M2 10h16M14 6l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    href: "/yonetim/firmalar",
+    label: "Firmalar & Rehber",
+    exact: false,
+    color: "#a78bfa",
+    bg: "rgba(167,139,250,0.15)",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
+        <path d="M3 18V5a2 2 0 012-2h10a2 2 0 012 2v13M3 18h14M8 7h4M8 11h4M8 15h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
   {
     href: "/yonetim/musteriler",
     label: "Müşteriler",

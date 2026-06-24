@@ -8,14 +8,21 @@ function sb() {
 }
 
 export type TeklifInput = {
-  musteri_id: string;
+  musteri_id?: string | null;
+  lead_id?: string | null;
+  company_id?: string | null;
   baslik: string;
   tutar?: number;
-  durum?: string;
+  durum?: "taslak" | "gonderildi" | "kabul_edildi" | "reddedildi" | "suresi_doldu" | "hazirlaniyor" | "gorusuluyor" | "kazanildi" | "kaybedildi";
   gonderim_tarihi?: string | null;
   notlar?: string;
   teklif_no?: string;
   hizmetler?: { ad: string; fiyat: number }[];
+  paket_adi?: string;
+  kurulum_ucreti?: number;
+  ek_hizmetler?: string;
+  teklif_tarihi?: string | null;
+  gecerlilik_tarihi?: string | null;
 };
 
 export type ActionResult = { error: string | null };
@@ -24,25 +31,34 @@ export async function addTeklif(data: TeklifInput): Promise<ActionResult> {
   try {
     const { error } = await sb().from("musteri_teklifler").insert(data);
     if (error) return { error: error.message };
-    revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
+    
+    if (data.musteri_id) revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
+    if (data.lead_id) revalidatePath(`/yonetim/crm-leads/${data.lead_id}`);
+    revalidatePath("/yonetim/crm-leads");
     return { error: null };
   } catch (e) { return { error: String(e) }; }
 }
 
-export async function updateTeklif(id: string, musteriId: string, data: Partial<TeklifInput>): Promise<ActionResult> {
+export async function updateTeklif(id: string, ids: { musteriId?: string | null; leadId?: string | null }, data: Partial<TeklifInput>): Promise<ActionResult> {
   try {
     const { error } = await sb().from("musteri_teklifler").update(data).eq("id", id);
     if (error) return { error: error.message };
-    revalidatePath(`/yonetim/musteriler/${musteriId}`);
+    
+    if (ids.musteriId) revalidatePath(`/yonetim/musteriler/${ids.musteriId}`);
+    if (ids.leadId) revalidatePath(`/yonetim/crm-leads/${ids.leadId}`);
+    revalidatePath("/yonetim/crm-leads");
     return { error: null };
   } catch (e) { return { error: String(e) }; }
 }
 
-export async function deleteTeklif(id: string, musteriId: string): Promise<ActionResult> {
+export async function deleteTeklif(id: string, ids: { musteriId?: string | null; leadId?: string | null }): Promise<ActionResult> {
   try {
     const { error } = await sb().from("musteri_teklifler").delete().eq("id", id);
     if (error) return { error: error.message };
-    revalidatePath(`/yonetim/musteriler/${musteriId}`);
+    
+    if (ids.musteriId) revalidatePath(`/yonetim/musteriler/${ids.musteriId}`);
+    if (ids.leadId) revalidatePath(`/yonetim/crm-leads/${ids.leadId}`);
+    revalidatePath("/yonetim/crm-leads");
     return { error: null };
   } catch (e) { return { error: String(e) }; }
 }

@@ -15,6 +15,8 @@ import { addGorev, updateGorev, deleteGorev } from "@/lib/actions/gorevler";
 import { addTeklif, updateTeklif, deleteTeklif } from "@/lib/actions/teklifler";
 import { TeklifPDFButton } from "@/components/admin/TeklifPDFButton";
 import { addIletisim, deleteIletisim } from "@/lib/actions/iletisimler";
+import { addContentTask, updateContentTask, deleteContentTask } from "@/lib/actions/crmContentTasks";
+import { addPayment, updatePaymentStatus, deletePayment } from "@/lib/actions/crmPayments";
 import { DatePicker } from "../../_components/DatePicker";
 
 type Musteri = {
@@ -84,7 +86,18 @@ type Iletisim = {
   created_at: string;
 };
 
-type Tab = "genel" | "gorevler" | "teklifler" | "iletisim";
+type ContentTask = {
+  id: string;
+  client_id: string;
+  title: string;
+  type: "reels" | "post" | "story" | "blog" | "reklam" | "cekim";
+  status: "fikir" | "cekilecek" | "cekildi" | "editte" | "onayda" | "yayinta";
+  assigned_person: string;
+  due_date: string | null;
+  created_at: string;
+};
+
+type Tab = "genel" | "gorevler" | "teklifler" | "iletisim" | "icerik" | "odemeler";
 
 const DURUM: Record<string, { label: string; color: string; bg: string }> = {
   aktif:      { label: "Aktif",      color: "#10b981", bg: "rgba(16,185,129,0.12)" },
@@ -115,12 +128,12 @@ const TEKLIF_DURUM: Record<string, { label: string; color: string; bg: string }>
   kaybedildi:   { label: "Kaybedildi",   color: "#ef4444", bg: "rgba(239,68,68,0.12)" },
 };
 
-const ILETISIM_TIP: Record<string, { label: string; color: string; icon: string }> = {
-  not:      { label: "Not",      color: "#64748b", icon: "📝" },
-  toplanti: { label: "Toplantı", color: "#8b5cf6", icon: "🤝" },
-  telefon:  { label: "Telefon",  color: "#10b981", icon: "📞" },
-  email:    { label: "E-posta",  color: "#3b82f6", icon: "✉️" },
-  diger:    { label: "Diğer",    color: "#94a3b8", icon: "💬" },
+const ILETISIM_TIP: Record<string, { label: string; color: string }> = {
+  not:      { label: "Not",      color: "#64748b" },
+  toplanti: { label: "Toplantı", color: "#8b5cf6" },
+  telefon:  { label: "Telefon",  color: "#10b981" },
+  email:    { label: "E-posta",  color: "#3b82f6" },
+  diger:    { label: "Diğer",    color: "#94a3b8" },
 };
 
 const ONCELIK: Record<string, { label: string; color: string; bg: string }> = {
@@ -246,16 +259,87 @@ export function MusteriDetailClient({
   gorevler,
   teklifler,
   iletisimler,
+  contentTasks = [],
+  payments = [],
 }: {
   musteri: Musteri;
   metriks: Metrik[];
   gorevler: Gorev[];
   teklifler: Teklif[];
   iletisimler: Iletisim[];
+  contentTasks?: ContentTask[];
+  payments?: any[];
 }) {
   const router = useRouter();
   const [isPending, setIsPending] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("genel");
+
+  // ── İçerik Görevleri States ──
+  const [contentModal, setContentModal] = useState<{ open: boolean; editing: ContentTask | null }>({ open: false, editing: null });
+  const [deleteTargetContent, setDeleteTargetContent] = useState<ContentTask | null>(null);
+  const [contentForm, setContentForm] = useState({
+    title: "",
+    type: "reels" as ContentTask["type"],
+    status: "fikir" as ContentTask["status"],
+    assigned_person: "",
+    due_date: "",
+  });
+
+  async function handleContentTaskSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!contentForm.title.trim()) return;
+
+    const inputData = {
+      client_id: musteri.id,
+      title: contentForm.title.trim(),
+      type: contentForm.type,
+      status: contentForm.status,
+      assigned_person: contentForm.assigned_person.trim(),
+      due_date: contentForm.due_date || null,
+    };
+
+    setIsPending(true);
+    const result = contentModal.open && contentModal.editing
+      ? await updateContentTask(contentModal.editing.id, musteri.id, inputData)
+      : await addContentTask(inputData);
+    setIsPending(false);
+
+    if (result.error) {
+      alert("İçerik görevi kaydedilemedi: " + result.error);
+    } else {
+      setContentModal({ open: false, editing: null });
+      router.refresh();
+    }
+  }
+
+  async function handleContentTaskDelete() {
+    if (!deleteTargetContent) return;
+    setIsPending(true);
+    const result = await deleteContentTask(deleteTargetContent.id, musteri.id);
+    setIsPending(false);
+    if (result.error) {
+      alert("Görev silinemedi: " + result.error);
+    } else {
+      setDeleteTargetContent(null);
+      router.refresh();
+    }
+  }
+
+  function openAddContentTask() {
+    setContentForm({ title: "", type: "reels", status: "fikir", assigned_person: "", due_date: todayISO() });
+    setContentModal({ open: true, editing: null });
+  }
+
+  function openEditContentTask(ct: ContentTask) {
+    setContentForm({
+      title: ct.title,
+      type: ct.type,
+      status: ct.status,
+      assigned_person: ct.assigned_person || "",
+      due_date: ct.due_date || "",
+    });
+    setContentModal({ open: true, editing: ct });
+  }
 
   // ── Müşteri Edit Modal ──
   const [editOpen, setEditOpen] = useState(false);
@@ -288,6 +372,105 @@ export function MusteriDetailClient({
   const [iletisimForm, setIletisimForm] = useState(EMPTY_ILETISIM);
   const [iletisimError, setIletisimError] = useState("");
   const [deleteIletisimId, setDeleteIletisimId] = useState<string | null>(null);
+
+  // ── Ödeme Takip Modalları ve State'leri ──
+  const [paymentModal, setPaymentModal] = useState<{ open: boolean; editing: any | null }>({ open: false, editing: null });
+  const [paymentError, setPaymentError] = useState("");
+  const [deletePaymentId, setDeletePaymentId] = useState<string | null>(null);
+  const [paymentForm, setPaymentForm] = useState({
+    period: "",
+    amount: "",
+    status: "bekliyor" as "bekliyor" | "odendi" | "gecikti" | "iptal",
+    payment_date: "",
+    notes: ""
+  });
+
+  function openAddPayment() {
+    const d = new Date();
+    const currentPeriod = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+    setPaymentForm({
+      period: currentPeriod,
+      amount: musteri.aylik_ucret ? String(musteri.aylik_ucret) : "",
+      status: "bekliyor",
+      payment_date: "",
+      notes: ""
+    });
+    setPaymentError("");
+    setPaymentModal({ open: true, editing: null });
+  }
+
+  function openEditPayment(p: any) {
+    setPaymentForm({
+      period: p.period || "",
+      amount: p.amount ? String(p.amount) : "",
+      status: p.status || "bekliyor",
+      payment_date: p.payment_date || "",
+      notes: p.notes || ""
+    });
+    setPaymentError("");
+    setPaymentModal({ open: true, editing: p });
+  }
+
+  async function handlePaymentSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!paymentForm.period.trim()) { setPaymentError("Dönem zorunludur."); return; }
+    const amountVal = parseFloat(paymentForm.amount);
+    if (isNaN(amountVal) || amountVal <= 0) { setPaymentError("Geçerli bir tutar giriniz."); return; }
+    
+    setPaymentError("");
+    setIsPending(true);
+    let result;
+    if (paymentModal.open && paymentModal.editing) {
+      result = await updatePaymentStatus(paymentModal.editing.id, musteri.id, {
+        status: paymentForm.status,
+        payment_date: paymentForm.payment_date || null,
+        notes: paymentForm.notes.trim()
+      });
+    } else {
+      result = await addPayment({
+        client_id: musteri.id,
+        period: paymentForm.period.trim(),
+        amount: amountVal,
+        status: paymentForm.status,
+        payment_date: paymentForm.payment_date || null,
+        notes: paymentForm.notes.trim()
+      });
+    }
+    setIsPending(false);
+    if (result.error) {
+      setPaymentError(result.error);
+    } else {
+      setPaymentModal({ open: false, editing: null });
+      router.refresh();
+    }
+  }
+
+  async function handleDeletePayment() {
+    if (!deletePaymentId) return;
+    setIsPending(true);
+    const result = await deletePayment(deletePaymentId, musteri.id);
+    setIsPending(false);
+    if (!result.error) {
+      setDeletePaymentId(null);
+      router.refresh();
+    } else {
+      alert("Ödeme silinemedi: " + result.error);
+    }
+  }
+
+  async function handleQuickStatusChange(paymentId: string, nextStatus: "bekliyor" | "odendi" | "gecikti" | "iptal") {
+    setIsPending(true);
+    const result = await updatePaymentStatus(paymentId, musteri.id, {
+      status: nextStatus,
+      payment_date: nextStatus === "odendi" ? todayISO() : null
+    });
+    setIsPending(false);
+    if (result.error) {
+      alert("Durum güncellenemedi: " + result.error);
+    } else {
+      router.refresh();
+    }
+  }
 
   const months = monthsActive(musteri.baslangic_tarihi);
   const totalEarned = (musteri.aylik_ucret || 0) * months;
@@ -515,9 +698,9 @@ export function MusteriDetailClient({
 
     let result;
     if (teklifModal.open && teklifModal.editing) {
-      result = await updateTeklif(teklifModal.editing.id, musteri.id, payload);
+      result = await updateTeklif(teklifModal.editing.id, { musteriId: musteri.id }, payload as any);
     } else {
-      result = await addTeklif({ musteri_id: musteri.id, ...payload });
+      result = await addTeklif({ musteri_id: musteri.id, ...payload } as any);
     }
     setIsPending(false);
     if (result.error) { setTeklifError(result.error); }
@@ -527,7 +710,7 @@ export function MusteriDetailClient({
   async function handleDeleteTeklif() {
     if (!deleteTeklifId) return;
     setIsPending(true);
-    const result = await deleteTeklif(deleteTeklifId, musteri.id);
+    const result = await deleteTeklif(deleteTeklifId, { musteriId: musteri.id });
     setIsPending(false);
     if (!result.error) { setDeleteTeklifId(null); router.refresh(); }
   }
@@ -568,8 +751,10 @@ export function MusteriDetailClient({
   const TABS: { key: Tab; label: string; count?: number }[] = [
     { key: "genel",    label: "Genel Bakış" },
     { key: "gorevler", label: "Görevler",   count: gorevler.length },
-    { key: "teklifler",label: "Teklifler",  count: teklifler.length },
+    { key: "teklifler",label: "Hizmet Teklifleri",  count: teklifler.length },
     { key: "iletisim", label: "İletişim",   count: iletisimler.length },
+    { key: "icerik",   label: "İçerik Takibi", count: contentTasks.length },
+    { key: "odemeler", label: "Aylık Ödeme Takibi", count: payments.length },
   ];
 
   return (
@@ -635,10 +820,14 @@ export function MusteriDetailClient({
           color: contractStatus.type === "expired" ? "#ef4444" : "#f59e0b",
           fontSize: 13, fontWeight: 600, display: "flex", alignItems: "center", gap: 8,
         }}>
-          <span>{contractStatus.type === "expired" ? "⚠️" : "🔔"}</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" style={{ width: 14, height: 14, marginRight: 4, flexShrink: 0 }}>
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
           {contractStatus.type === "expired"
-            ? `Sözleşme ${contractStatus.days} gün önce sona erdi!`
-            : `Sözleşme ${contractStatus.days} gün içinde yenilenmeli`}
+            ? `Sözleşme süresi ${contractStatus.days} gün önce doldu!`
+            : `Sözleşme süresi ${contractStatus.days} gün içinde doluyor, yenilenmesi gerekiyor`}
         </div>
       )}
 
@@ -1209,7 +1398,6 @@ export function MusteriDetailClient({
                       borderBottom: i < iletisimler.length - 1 ? "1px solid var(--c-border)" : "none",
                       borderLeft: `3px solid ${tipInfo.color}`,
                     }}>
-                      <div style={{ fontSize: 18, flexShrink: 0, marginTop: 1 }}>{tipInfo.icon}</div>
                       <div style={{ flex: 1 }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 3 }}>
                           <span style={{ fontSize: 13, fontWeight: 600, color: "var(--c-text)" }}>{il.baslik}</span>
@@ -1252,8 +1440,213 @@ export function MusteriDetailClient({
               background: "var(--c-surface)", border: "1px solid var(--c-border)",
               color: "var(--c-text2)", fontSize: 13, fontWeight: 600, textDecoration: "none",
             }}>
-              📄 Rapor Oluştur
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: 14, height: 14 }}>
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+                <polyline points="10 9 9 9 8 9" />
+              </svg>
+              Rapor Oluştur
             </a>
+          </div>
+        </div>
+      )}
+
+      {activeTab === "icerik" && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: 13, color: "var(--c-dim)" }}>
+              Sosyal medya içerik planlaması ve operasyon durum takibi.
+            </span>
+            <button onClick={openAddContentTask} style={{
+              padding: "7px 14px", borderRadius: 7, background: "#ef4444",
+              border: "none", color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer",
+              display: "flex", alignItems: "center", gap: 5,
+            }}>
+              + Görev Ekle
+            </button>
+          </div>
+
+          <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid var(--c-border)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13, background: "var(--c-surface)" }}>
+              <thead>
+                <tr style={{ background: "rgba(255,255,255,0.02)" }}>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "left", textTransform: "uppercase" }}>Yayın / Başlık</th>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "left", textTransform: "uppercase" }}>Tür</th>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "left", textTransform: "uppercase" }}>Durum</th>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "left", textTransform: "uppercase" }}>Sorumlu</th>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "left", textTransform: "uppercase" }}>Teslim Tarihi</th>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "right", textTransform: "uppercase" }}>İşlem</th>
+                </tr>
+              </thead>
+              <tbody>
+                {contentTasks.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} style={{ textAlign: "center", padding: "32px 0", color: "var(--c-dim)" }}>
+                      Henüz içerik veya operasyon görevi eklenmemiş.
+                    </td>
+                  </tr>
+                ) : (
+                  contentTasks.map((ct) => {
+                    const statusLabels: Record<string, string> = {
+                      fikir: "Fikir", cekilecek: "Çekilecek", cekildi: "Çekildi",
+                      editte: "Editte", onayda: "Onayda", yayinta: "Yayında"
+                    };
+                    const statusColors: Record<string, string> = {
+                      fikir: "gray", cekilecek: "#60a5fa", cekildi: "#c084fc",
+                      editte: "#fb923c", onayda: "#fb7185", yayinta: "#4ade80"
+                    };
+                    return (
+                      <tr key={ct.id} style={{ borderTop: "1px solid var(--c-border)" }}>
+                        <td style={{ padding: "12px 14px", fontWeight: 600, color: "var(--c-text)" }}>{ct.title}</td>
+                        <td style={{ padding: "12px 14px", textTransform: "capitalize", color: "var(--c-text2)" }}>{ct.type}</td>
+                        <td style={{ padding: "12px 14px" }}>
+                          <span style={{
+                            fontSize: 11, fontWeight: 600, padding: "2px 8px", borderRadius: 20,
+                            color: statusColors[ct.status], background: `${statusColors[ct.status]}15`,
+                            border: `1px solid ${statusColors[ct.status]}30`
+                          }}>
+                            {statusLabels[ct.status] || ct.status}
+                          </span>
+                        </td>
+                        <td style={{ padding: "12px 14px", color: "var(--c-text3)" }}>{ct.assigned_person || "—"}</td>
+                        <td style={{ padding: "12px 14px", color: "var(--c-text2)" }}>
+                          {ct.due_date ? new Date(ct.due_date).toLocaleDateString("tr-TR") : "—"}
+                        </td>
+                        <td style={{ padding: "12px 14px", textAlign: "right" }}>
+                          <div style={{ display: "flex", justifyContent: "flex-end", gap: 6 }}>
+                            <button onClick={() => openEditContentTask(ct)} style={{
+                              background: "transparent", border: "1px solid var(--c-border)",
+                              color: "var(--c-text)", padding: "4px 8px", borderRadius: 6, fontSize: 11, cursor: "pointer"
+                            }}>Düzenle</button>
+                            <button onClick={() => setDeleteTargetContent(ct)} style={{
+                              background: "rgba(248,113,113,0.06)", border: "1px solid rgba(248,113,113,0.2)",
+                              color: "#f87171", padding: "4px 8px", borderRadius: 6, fontSize: 11, cursor: "pointer"
+                            }}>Sil</button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {activeTab === "odemeler" && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {/* Ödeme Metrik Özetleri */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+            <div style={{ ...CARD, padding: "14px 18px" }}>
+              <div style={{ fontSize: 10, color: "var(--c-dim)", fontWeight: 600, textTransform: "uppercase" }}>Toplam Ödenen</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: "#4ade80", marginTop: 4 }}>
+                ₺{fmt(payments.filter(p => p.status === "odendi").reduce((sum, p) => sum + (Number(p.amount) || 0), 0))}
+              </div>
+            </div>
+            <div style={{ ...CARD, padding: "14px 18px" }}>
+              <div style={{ fontSize: 10, color: "var(--c-dim)", fontWeight: 600, textTransform: "uppercase" }}>Bekleyen Tahsilat</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: "#fb923c", marginTop: 4 }}>
+                ₺{fmt(payments.filter(p => p.status === "bekliyor").reduce((sum, p) => sum + (Number(p.amount) || 0), 0))}
+              </div>
+            </div>
+            <div style={{ ...CARD, padding: "14px 18px" }}>
+              <div style={{ fontSize: 10, color: "var(--c-dim)", fontWeight: 600, textTransform: "uppercase" }}>Geciken Ödemeler</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: "#f87171", marginTop: 4 }}>
+                ₺{fmt(payments.filter(p => p.status === "gecikti").reduce((sum, p) => sum + (Number(p.amount) || 0), 0))}
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: 13, color: "var(--c-dim)" }}>
+              Abonelik ve retainer aylık ödeme durum takibi.
+            </span>
+            <button onClick={openAddPayment} style={{
+              padding: "7px 14px", borderRadius: 7, background: "#ef4444",
+              border: "none", color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer",
+              display: "flex", alignItems: "center", gap: 5,
+            }}>
+              + Ödeme Kaydı Ekle
+            </button>
+          </div>
+
+          <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid var(--c-border)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13, background: "var(--c-surface)" }}>
+              <thead>
+                <tr style={{ background: "rgba(255,255,255,0.02)" }}>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "left", textTransform: "uppercase" }}>Dönem</th>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "left", textTransform: "uppercase" }}>Tutar</th>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "left", textTransform: "uppercase" }}>Durum</th>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "left", textTransform: "uppercase" }}>Ödeme Tarihi</th>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "left", textTransform: "uppercase" }}>Notlar</th>
+                  <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--c-dim)", textAlign: "right", textTransform: "uppercase" }}>İşlem</th>
+                </tr>
+              </thead>
+              <tbody>
+                {payments.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} style={{ textAlign: "center", padding: "32px 0", color: "var(--c-dim)" }}>
+                      Henüz ödeme kaydı bulunmamaktadır.
+                    </td>
+                  </tr>
+                ) : (
+                  payments.map((p) => {
+                    const statusLabels: Record<string, string> = {
+                      bekliyor: "Bekliyor", odendi: "Ödendi", gecikti: "Gecikti", iptal: "İptal"
+                    };
+                    const statusColors: Record<string, string> = {
+                      bekliyor: "#fb923c", odendi: "#4ade80", gecikti: "#f87171", iptal: "gray"
+                    };
+                    return (
+                      <tr key={p.id} style={{ borderTop: "1px solid var(--c-border)" }}>
+                        <td style={{ padding: "12px 14px", fontWeight: 600, color: "var(--c-text)" }}>
+                          {formatAy(p.period)}
+                        </td>
+                        <td style={{ padding: "12px 14px", fontWeight: 650, color: "var(--c-text2)" }}>
+                          ₺{fmt(p.amount)}
+                        </td>
+                        <td style={{ padding: "12px 14px" }}>
+                          <select
+                            value={p.status}
+                            onChange={(e) => handleQuickStatusChange(p.id, e.target.value as any)}
+                            style={{
+                              fontSize: 11, fontWeight: 600, padding: "3px 8px", borderRadius: 20,
+                              color: statusColors[p.status], background: `${statusColors[p.status]}15`,
+                              border: `1px solid ${statusColors[p.status]}30`, outline: "none", cursor: "pointer"
+                            }}
+                          >
+                            {Object.entries(statusLabels).map(([k, v]) => (
+                              <option key={k} value={k} style={{ background: "var(--c-surface)", color: "var(--c-text)" }}>{v}</option>
+                            ))}
+                          </select>
+                        </td>
+                        <td style={{ padding: "12px 14px", color: "var(--c-text3)" }}>
+                          {p.payment_date ? fmtDateShort(p.payment_date) : "—"}
+                        </td>
+                        <td style={{ padding: "12px 14px", color: "var(--c-text3)", maxWidth: 200, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={p.notes || ""}>
+                          {p.notes || "—"}
+                        </td>
+                        <td style={{ padding: "12px 14px", textAlign: "right" }}>
+                          <div style={{ display: "flex", justifyContent: "flex-end", gap: 6 }}>
+                            <button onClick={() => openEditPayment(p)} style={{
+                              background: "transparent", border: "1px solid var(--c-border)",
+                              color: "var(--c-text)", padding: "4px 8px", borderRadius: 6, fontSize: 11, cursor: "pointer"
+                            }}>Düzenle</button>
+                            <button onClick={() => setDeletePaymentId(p.id)} style={{
+                              background: "rgba(248,113,113,0.06)", border: "1px solid rgba(248,113,113,0.2)",
+                              color: "#f87171", padding: "4px 8px", borderRadius: 6, fontSize: 11, cursor: "pointer"
+                            }}>Sil</button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       )}
@@ -1743,6 +2136,145 @@ export function MusteriDetailClient({
             <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
               <button onClick={() => setDeleteIletisimId(null)} style={{ padding: "8px 16px", borderRadius: 8, background: "transparent", border: "1px solid var(--c-border)", color: "var(--c-text2)", fontSize: 13, fontWeight: 500, cursor: "pointer" }}>İptal</button>
               <button onClick={handleDeleteIletisim} disabled={isPending} style={{ padding: "8px 16px", borderRadius: 8, background: "#ef4444", border: "none", color: "#fff", fontSize: 13, fontWeight: 600, cursor: isPending ? "not-allowed" : "pointer", opacity: isPending ? 0.7 : 1 }}>
+                {isPending ? "Siliniyor..." : "Evet, Sil"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── İçerik Ekle/Düzenle Modal ── */}
+      {contentModal.open && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50, padding: 20 }}>
+          <form onSubmit={handleContentTaskSubmit} style={{ background: "var(--c-surface)", border: "1px solid var(--c-border)", borderRadius: 14, padding: 28, width: "100%", maxWidth: 400, display: "flex", flexDirection: "column", gap: 16 }}>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "var(--c-text)" }}>
+              {contentModal.editing ? "Görevi Düzenle" : "Yeni İçerik Görevi Ekle"}
+            </div>
+            
+            <div>
+              <label style={LABEL}>Başlık / İçerik Tanımı *</label>
+              <input type="text" placeholder="Örn: 3 Adet Reels Videosu" value={contentForm.title} onChange={e => setContentForm(f => ({ ...f, title: e.target.value }))} style={INPUT} required />
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <div>
+                <label style={LABEL}>Görev Türü</label>
+                <select value={contentForm.type} onChange={e => setContentForm(f => ({ ...f, type: e.target.value as any }))} style={INPUT}>
+                  <option value="reels">Reels</option>
+                  <option value="post">Post</option>
+                  <option value="story">Story</option>
+                  <option value="blog">Blog</option>
+                  <option value="reklam">Reklam</option>
+                  <option value="cekim">Çekim</option>
+                </select>
+              </div>
+
+              <div>
+                <label style={LABEL}>Durum</label>
+                <select value={contentForm.status} onChange={e => setContentForm(f => ({ ...f, status: e.target.value as any }))} style={INPUT}>
+                  <option value="fikir">Fikir</option>
+                  <option value="cekilecek">Çekilecek</option>
+                  <option value="cekildi">Çekildi</option>
+                  <option value="editte">Editte</option>
+                  <option value="onayda">Onayda</option>
+                  <option value="yayinta">Yayında</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label style={LABEL}>Sorumlu Kişi</label>
+              <input type="text" placeholder="Sorumlu adı" value={contentForm.assigned_person} onChange={e => setContentForm(f => ({ ...f, assigned_person: e.target.value }))} style={INPUT} />
+            </div>
+
+            <div>
+              <label style={LABEL}>Teslim / Yayın Tarihi</label>
+              <DatePicker value={contentForm.due_date} onChange={val => setContentForm(f => ({ ...f, due_date: val }))} />
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, marginTop: 10 }}>
+              <button type="button" onClick={() => setContentModal({ open: false, editing: null })} style={{ padding: "8px 16px", borderRadius: 8, background: "transparent", border: "1px solid var(--c-border)", color: "var(--c-text2)", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>İptal</button>
+              <button type="submit" disabled={isPending} style={{ padding: "8px 18px", borderRadius: 8, background: "#ef4444", border: "none", color: "#fff", fontSize: 12, fontWeight: 600, cursor: isPending ? "wait" : "pointer" }}>Kaydet</button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* ── İçerik Sil Onayı ── */}
+      {deleteTargetContent && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50 }}>
+          <div style={{ background: "var(--c-surface)", border: "1px solid var(--c-border)", borderRadius: 14, padding: 28, width: "100%", maxWidth: 360 }}>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "var(--c-text)", marginBottom: 10 }}>Görevi Sil</div>
+            <p style={{ fontSize: 13, color: "var(--c-text2)", margin: "0 0 20px" }}>Bu içerik görevini kalıcı olarak silmek istediğinizden emin misiniz?</p>
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
+              <button onClick={() => setDeleteTargetContent(null)} style={{ padding: "8px 16px", borderRadius: 8, background: "transparent", border: "1px solid var(--c-border)", color: "var(--c-text2)", fontSize: 13, fontWeight: 500, cursor: "pointer" }}>İptal</button>
+              <button onClick={handleContentTaskDelete} disabled={isPending} style={{ padding: "8px 16px", borderRadius: 8, background: "#ef4444", border: "none", color: "#fff", fontSize: 13, fontWeight: 600, cursor: isPending ? "not-allowed" : "pointer", opacity: isPending ? 0.7 : 1 }}>
+                {isPending ? "Siliniyor..." : "Evet, Sil"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Ödeme Ekle / Düzenle Modal ── */}
+      {paymentModal.open && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50, padding: 20 }}>
+          <form onSubmit={handlePaymentSubmit} style={{ background: "var(--c-surface)", border: "1px solid var(--c-border)", borderRadius: 14, padding: 28, width: "100%", maxWidth: 400, display: "flex", flexDirection: "column", gap: 16 }}>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "var(--c-text)" }}>
+              {paymentModal.editing ? "Ödeme Kaydını Düzenle" : "Yeni Ödeme Kaydı Ekle"}
+            </div>
+            
+            <div>
+              <label style={LABEL}>Dönem (YYYY-MM) *</label>
+              <input type="text" placeholder="Örn: 2026-06" value={paymentForm.period} onChange={e => setPaymentForm(f => ({ ...f, period: e.target.value }))} style={INPUT} required disabled={!!paymentModal.editing} />
+            </div>
+
+            <div>
+              <label style={LABEL}>Tutar (TL) *</label>
+              <input type="number" placeholder="Tutar girin" value={paymentForm.amount} onChange={e => setPaymentForm(f => ({ ...f, amount: e.target.value }))} style={INPUT} required disabled={!!paymentModal.editing} />
+            </div>
+
+            <div>
+              <label style={LABEL}>Durum</label>
+              <select value={paymentForm.status} onChange={e => setPaymentForm(f => ({ ...f, status: e.target.value as any }))} style={INPUT}>
+                <option value="bekliyor">Bekliyor</option>
+                <option value="odendi">Ödendi</option>
+                <option value="gecikti">Gecikti</option>
+                <option value="iptal">İptal</option>
+              </select>
+            </div>
+
+            {paymentForm.status === "odendi" && (
+              <div>
+                <label style={LABEL}>Ödeme Tarihi</label>
+                <DatePicker value={paymentForm.payment_date} onChange={val => setPaymentForm(f => ({ ...f, payment_date: val }))} />
+              </div>
+            )}
+
+            <div>
+              <label style={LABEL}>Notlar</label>
+              <textarea placeholder="Örn: Havale yoluyla ödendi..." value={paymentForm.notes} onChange={e => setPaymentForm(f => ({ ...f, notes: e.target.value }))} style={{ ...INPUT, height: 60, resize: "none" }} />
+            </div>
+
+            {paymentError && <div style={{ fontSize: 12, color: "#f87171", background: "rgba(248,113,113,0.08)", padding: "8px 12px", borderRadius: 8 }}>{paymentError}</div>}
+
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, marginTop: 10 }}>
+              <button type="button" onClick={() => setPaymentModal({ open: false, editing: null })} style={{ padding: "8px 16px", borderRadius: 8, background: "transparent", border: "1px solid var(--c-border)", color: "var(--c-text2)", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>İptal</button>
+              <button type="submit" disabled={isPending} style={{ padding: "8px 18px", borderRadius: 8, background: "#ef4444", border: "none", color: "#fff", fontSize: 12, fontWeight: 600, cursor: isPending ? "wait" : "pointer" }}>Kaydet</button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* ── Ödeme Sil Onayı ── */}
+      {deletePaymentId && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50 }}>
+          <div style={{ background: "var(--c-surface)", border: "1px solid var(--c-border)", borderRadius: 14, padding: 28, width: "100%", maxWidth: 360 }}>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "var(--c-text)", marginBottom: 10 }}>Ödeme Kaydını Sil</div>
+            <p style={{ fontSize: 13, color: "var(--c-text2)", margin: "0 0 20px" }}>Bu ödeme kaydını kalıcı olarak silmek istediğinizden emin misiniz?</p>
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
+              <button onClick={() => setDeletePaymentId(null)} style={{ padding: "8px 16px", borderRadius: 8, background: "transparent", border: "1px solid var(--c-border)", color: "var(--c-text2)", fontSize: 13, fontWeight: 500, cursor: "pointer" }}>İptal</button>
+              <button onClick={handleDeletePayment} disabled={isPending} style={{ padding: "8px 16px", borderRadius: 8, background: "#ef4444", border: "none", color: "#fff", fontSize: 13, fontWeight: 600, cursor: isPending ? "not-allowed" : "pointer", opacity: isPending ? 0.7 : 1 }}>
                 {isPending ? "Siliniyor..." : "Evet, Sil"}
               </button>
             </div>

@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import { createClient } from "@supabase/supabase-js";
+import { DashboardFollowUps } from "./_components/DashboardFollowUps";
 
 // ─── Google Auth helper ──────────────────────────────────────────────────────
 
@@ -133,18 +134,30 @@ async function getDashboardData() {
     return d.toISOString().split("T")[0];
   });
 
+  const todayStr = new Date().toISOString().split("T")[0];
+
   const [
     { data: contacts },
     { data: audits },
     { data: blogs },
     { data: projects },
     { data: users },
+    { data: followUps },
+    { data: crmLeads },
+    { data: teklifler }
   ] = await Promise.all([
     supabase.from("contacts").select("id,name,message,created_at,is_read").order("created_at", { ascending: false }),
     supabase.from("audits").select("id,business_name,email,score_overall,created_at,is_read").order("created_at", { ascending: false }),
     supabase.from("blog_posts").select("id,is_published"),
     supabase.from("projects").select("id,is_published"),
     supabase.from("admin_users").select("id,username,role"),
+    supabase
+      .from("crm_follow_ups")
+      .select("id,type,note,follow_up_date,completed,lead_id,crm_leads(id,title)")
+      .eq("follow_up_date", todayStr)
+      .eq("completed", false),
+    supabase.from("crm_leads").select("id, status, source"),
+    supabase.from("musteri_teklifler").select("tutar, durum")
   ]);
 
   const C = contacts ?? [];
@@ -152,6 +165,38 @@ async function getDashboardData() {
   const B = blogs    ?? [];
   const P = projects ?? [];
   const U = users    ?? [];
+  const F = (followUps ?? []) as any[];
+  const L = crmLeads ?? [];
+  const T = teklifler ?? [];
+
+  // Pipeline değeri: durum in ['taslak', 'gonderildi', 'hazirlaniyor', 'gorusuluyor']
+  const pipelineValue = T
+    .filter(t => ['taslak', 'gonderildi', 'hazirlaniyor', 'gorusuluyor'].includes(t.durum))
+    .reduce((sum, t) => sum + (Number(t.tutar) || 0), 0);
+
+  // Fırsat istatistikleri
+  const totalLeads = L.length;
+  const wonLeads = L.filter(l => l.status === "kazanildi").length;
+  const lostLeads = L.filter(l => l.status === "kaybedildi").length;
+  const activeLeads = L.filter(l => !["kazanildi", "kaybedildi"].includes(l.status)).length;
+  const wonRate = totalLeads ? Math.round((wonLeads / totalLeads) * 100) : 0;
+
+  // Kaynak dağılımı
+  const sourceCounts = {
+    referans: 0,
+    instagram: 0,
+    google_maps: 0,
+    inbound: 0,
+    manuel: 0,
+    diger: 0
+  };
+  L.forEach(l => {
+    if (l.source in sourceCounts) {
+      sourceCounts[l.source as keyof typeof sourceCounts]++;
+    } else {
+      sourceCounts.diger++;
+    }
+  });
 
   const chartData = days.map((day) => ({
     label: day.slice(5).replace("-", "/"), // MM/DD
@@ -174,6 +219,14 @@ async function getDashboardData() {
     chartData,
     recentContacts: C.slice(0, 6),
     recentAudits:   A.slice(0, 6),
+    followUps: F,
+    pipelineValue,
+    totalLeads,
+    wonLeads,
+    lostLeads,
+    activeLeads,
+    wonRate,
+    sourceCounts
   };
 }
 
@@ -317,7 +370,25 @@ function excerpt(text: string, len = 60) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function DashboardPage() {
-  const [{ stats, chartData, recentContacts, recentAudits }, gbiz, ga4, gsc] = await Promise.all([
+  const [
+    {
+      stats,
+      chartData,
+      recentContacts,
+      recentAudits,
+      followUps,
+      pipelineValue,
+      totalLeads,
+      wonLeads,
+      lostLeads,
+      activeLeads,
+      wonRate,
+      sourceCounts
+    },
+    gbiz,
+    ga4,
+    gsc
+  ] = await Promise.all([
     getDashboardData(),
     getGoogleBusiness(),
     getGA4Data(),
@@ -429,6 +500,9 @@ export default async function DashboardPage() {
         </p>
       </div>
 
+      {/* ── Bugün Takip Edilecekler ── */}
+      <DashboardFollowUps initialFollowUps={followUps} />
+
       {/* ── Stat cards ── */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 14 }}>
         {statCards.map((s) => (
@@ -490,6 +564,130 @@ export default async function DashboardPage() {
             </div>
           </a>
         ))}
+      </div>
+
+      {/* ── Satış & CRM Boru Hattı Analitiği ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 14 }}>
+        {/* Sol Panel: Pipeline Değeri ve Dönüşüm */}
+        <div style={{
+          ...card,
+          background: "linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(99,102,241,0.02) 100%)",
+          border: "1px solid rgba(99,102,241,0.2)",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between"
+        }}>
+          <div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: "#a5b4fc", textTransform: "uppercase", letterSpacing: "0.05em" }}>Satış Süreci</span>
+              <span style={{ fontSize: 11, color: "var(--c-dim)" }}>Aktif Müşteri Adayları</span>
+            </div>
+            <div style={{ fontSize: 32, fontWeight: 800, color: "var(--c-text)", letterSpacing: "-0.04em", margin: "10px 0" }}>
+              ₺{new Intl.NumberFormat("tr-TR").format(pipelineValue)}
+            </div>
+            <div style={{ fontSize: 13, color: "var(--c-text2)", marginBottom: 16 }}>
+              Beklenen satışların toplam tahmini geliri
+            </div>
+          </div>
+          
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 16 }}>
+            <div>
+              <div style={{ fontSize: 10, color: "var(--c-dim)", fontWeight: 600 }}>Aktif Aday</div>
+              <div style={{ fontSize: 18, fontWeight: 700, color: "#fb923c", marginTop: 4 }}>{activeLeads} Aday</div>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, color: "var(--c-dim)", fontWeight: 600 }}>Kazanılan Aday</div>
+              <div style={{ fontSize: 18, fontWeight: 700, color: "#4ade80", marginTop: 4 }}>{wonLeads} Aday</div>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, color: "var(--c-dim)", fontWeight: 600 }}>Başarı Oranı</div>
+              <div style={{ fontSize: 18, fontWeight: 700, color: "#60a5fa", marginTop: 4 }}>%{wonRate}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Sağ Panel: Kaynak Dağılımı (SVG Donut Grafiği) */}
+        <div style={card}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>Aday Kaynak Dağılımı</div>
+              <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 2 }}>Müşteri adaylarının geldiği kanallar</div>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+            {/* SVG Donut Chart */}
+            <div style={{ position: "relative", width: 120, height: 120, flexShrink: 0 }}>
+              <svg viewBox="0 0 42 42" style={{ transform: "rotate(-90deg)", width: "100%", height: "100%" }}>
+                {/* Background ring */}
+                <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="var(--c-border2)" strokeWidth="4.5" />
+                {(() => {
+                  let accumulated = 0;
+                  const colors = {
+                    referans: "#ef4444",
+                    instagram: "#ec4899",
+                    google_maps: "#fbbf24",
+                    inbound: "#3b82f6",
+                    manuel: "#a78bfa",
+                    diger: "#94a3b8"
+                  };
+                  return Object.entries(sourceCounts).map(([key, count]) => {
+                    if (!totalLeads || !count) return null;
+                    const percent = (count / totalLeads) * 100;
+                    const offset = 100 - accumulated;
+                    accumulated += percent;
+                    return (
+                      <circle
+                        key={key}
+                        cx="21"
+                        cy="21"
+                        r="15.91549430918954"
+                        fill="transparent"
+                        stroke={colors[key as keyof typeof colors] || colors.diger}
+                        strokeWidth="4.5"
+                        strokeDasharray={`${percent} ${100 - percent}`}
+                        strokeDashoffset={offset}
+                        style={{ transition: "stroke-dashoffset 0.3s" }}
+                      />
+                    );
+                  });
+                })()}
+              </svg>
+              {/* Central Text */}
+              <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"
+              }}>
+                <span style={{ fontSize: 18, fontWeight: 800, color: "var(--c-text)", lineHeight: 1.1 }}>{totalLeads}</span>
+                <span style={{ fontSize: 9, color: "var(--c-dim)" }}>Toplam</span>
+              </div>
+            </div>
+
+            {/* Legend */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 20px", flex: 1 }}>
+              {[
+                { label: "Referans", key: "referans", color: "#ef4444" },
+                { label: "Instagram", key: "instagram", color: "#ec4899" },
+                { label: "Google Maps", key: "google_maps", color: "#fbbf24" },
+                { label: "Arama/Web", key: "inbound", color: "#3b82f6" },
+                { label: "Manuel", key: "manuel", color: "#a78bfa" },
+                { label: "Diğer", key: "diger", color: "#94a3b8" }
+              ].map(item => {
+                const count = sourceCounts[item.key as keyof typeof sourceCounts] || 0;
+                const percent = totalLeads ? Math.round((count / totalLeads) * 100) : 0;
+                return (
+                  <div key={item.key} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: item.color, flexShrink: 0 }} />
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <span style={{ fontSize: 12, color: "var(--c-text2)", fontWeight: 500 }}>{item.label}</span>
+                      <span style={{ fontSize: 10, color: "var(--c-dim)" }}>{count} (%{percent})</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* ── Google Business ── */}
@@ -578,8 +776,8 @@ export default async function DashboardPage() {
         {gbiz.error && (
           <div style={{ fontSize: 12, color: "var(--c-dim)", padding: "0 8px" }}>
             {gbiz.error === "credentials missing"
-              ? "⚠️ GOOGLE_MAPS_API_KEY veya GOOGLE_PLACE_ID eksik"
-              : "⚠️ Google verisi alınamadı"}
+              ? "Google Business entegrasyonu yapılandırılmamış"
+              : "Google Business verileri alınamadı"}
           </div>
         )}
       </div>
@@ -718,7 +916,7 @@ export default async function DashboardPage() {
       {/* ── Recent audits table ── */}
       <div style={card}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>Son Audit Başvuruları</div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>Son Dijital Analiz Raporu Başvuruları</div>
           <a href="/yonetim/leads" style={{ fontSize: 11, color: "#fca5a5", textDecoration: "none", fontWeight: 600 }}>
             Tümü →
           </a>
