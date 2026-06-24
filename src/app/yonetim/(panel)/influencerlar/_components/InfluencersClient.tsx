@@ -369,7 +369,7 @@ function InfluencerFormModal({
                 <input style={inp} type="number" value={newHesap.followers || ""} onChange={e => setNewHesap(h => ({ ...h, followers: +e.target.value }))} placeholder="50000" />
               </div>
               <div>
-                <label style={lbl}>Eng. %</label>
+                <label style={lbl}>Etkileşim Oranı (%)</label>
                 <input style={inp} type="number" step="0.1" value={newHesap.engagement_rate || ""} onChange={e => setNewHesap(h => ({ ...h, engagement_rate: +e.target.value }))} placeholder="3.5" />
               </div>
               <button type="button" onClick={addHesap} style={{
@@ -388,7 +388,7 @@ function InfluencerFormModal({
               <div>
                 <label style={lbl}>Ana Kategori</label>
                 <select style={inp} value={form.kategori} onChange={e => setForm(f => ({ ...f, kategori: e.target.value }))}>
-                  {KATEGORILER.map(k => <option key={k.value} value={k.value}>{k.label}</option>)}
+                  {KATEGORILER.map(k => <option key={k.value} value={k.value} style={{ background: "#1a1a2e", color: "#e2e8f0" }}>{k.label}</option>)}
                 </select>
               </div>
             </div>
@@ -1094,8 +1094,8 @@ export function InfluencersClient({
             padding: "8px 12px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.1)",
             background: "rgba(255,255,255,0.05)", color: "var(--c-text1)", fontSize: 12, outline: "none",
           }}>
-            <option value="">Tüm Kategoriler</option>
-            {KATEGORILER.filter(k => k.value).map(k => <option key={k.value} value={k.value}>{k.label}</option>)}
+            <option value="" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>Tüm Kategoriler</option>
+            {KATEGORILER.filter(k => k.value).map(k => <option key={k.value} value={k.value} style={{ background: "#1a1a2e", color: "#e2e8f0" }}>{k.label}</option>)}
           </select>
         </div>
       </div>
