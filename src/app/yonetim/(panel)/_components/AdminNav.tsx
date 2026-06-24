@@ -74,18 +74,6 @@ const BASE_LINKS = [
 
 const CRM_LINKS = [
   {
-    href: "/yonetim/crm-leads",
-    label: "Müşteri Adayları",
-    exact: false,
-    color: "#fb923c",
-    bg: "rgba(251,146,60,0.15)",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
-        <path d="M10 2v16M2 10h16M14 6l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
-  {
     href: "/yonetim/firmalar",
     label: "Firmalar & Rehber",
     exact: false,

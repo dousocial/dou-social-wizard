@@ -38,7 +38,7 @@ export async function addLead(data: LeadInput): Promise<ActionResult> {
   try {
     const { data: newLead, error } = await sb().from("crm_leads").insert(data).select("id").single();
     if (error) return { error: error.message };
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     return { error: null, id: newLead.id };
   } catch (e) {
     return { error: String(e) };
@@ -52,7 +52,7 @@ export async function updateLead(id: string, data: Partial<LeadInput>): Promise<
       .update({ ...data, updated_at: new Date().toISOString() })
       .eq("id", id);
     if (error) return { error: error.message };
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${id}`);
     return { error: null };
   } catch (e) {
@@ -64,7 +64,7 @@ export async function deleteLead(id: string): Promise<ActionResult> {
   try {
     const { error } = await sb().from("crm_leads").delete().eq("id", id);
     if (error) return { error: error.message };
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     return { error: null };
   } catch (e) {
     return { error: String(e) };
@@ -155,7 +155,7 @@ export async function convertLeadToClient(leadId: string, clientData: {
       console.error("Teklifler güncellenirken hata oluştu (kritik değil, devam ediliyor):", updateOffersErr.message);
     }
 
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${leadId}`);
     revalidatePath("/yonetim/musteriler");
     

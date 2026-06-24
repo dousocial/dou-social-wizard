@@ -145,7 +145,7 @@ export function MessageModal({ id, table, data, onClose }: Props) {
             <button
               onClick={() => {
                 onClose();
-                router.push(`/yonetim/crm-leads?convert_${table === 'contacts' ? 'contact' : 'audit'}=${id}`);
+                router.push(`/yonetim/musteriler?tab=adaylar&convert_${table === 'contacts' ? 'contact' : 'audit'}=${id}`);
               }}
               style={{
                 marginTop: 14, alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: 8,

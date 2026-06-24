@@ -34,7 +34,7 @@ export async function addTeklif(data: TeklifInput): Promise<ActionResult> {
     
     if (data.musteri_id) revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
     if (data.lead_id) revalidatePath(`/yonetim/crm-leads/${data.lead_id}`);
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     return { error: null };
   } catch (e) { return { error: String(e) }; }
 }
@@ -46,7 +46,7 @@ export async function updateTeklif(id: string, ids: { musteriId?: string | null;
     
     if (ids.musteriId) revalidatePath(`/yonetim/musteriler/${ids.musteriId}`);
     if (ids.leadId) revalidatePath(`/yonetim/crm-leads/${ids.leadId}`);
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     return { error: null };
   } catch (e) { return { error: String(e) }; }
 }
@@ -58,7 +58,7 @@ export async function deleteTeklif(id: string, ids: { musteriId?: string | null;
     
     if (ids.musteriId) revalidatePath(`/yonetim/musteriler/${ids.musteriId}`);
     if (ids.leadId) revalidatePath(`/yonetim/crm-leads/${ids.leadId}`);
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     return { error: null };
   } catch (e) { return { error: String(e) }; }
 }

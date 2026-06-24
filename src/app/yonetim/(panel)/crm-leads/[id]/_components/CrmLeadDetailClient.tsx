@@ -480,7 +480,7 @@ export function CrmLeadDetailClient({
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
       {/* ── Üst Bar & Geri Butonu ── */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <button onClick={() => router.push("/yonetim/crm-leads")} style={{
+        <button onClick={() => router.push("/yonetim/musteriler?tab=adaylar")} style={{
           background: "transparent", border: "1px solid var(--c-border)",
           color: "var(--c-text)", padding: "7px 14px", borderRadius: 8,
           fontSize: 12, fontWeight: 600, cursor: "pointer", display: "flex",

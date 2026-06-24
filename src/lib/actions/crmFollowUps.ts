@@ -39,7 +39,7 @@ export async function addFollowUp(data: FollowUpInput): Promise<ActionResult> {
     if (leadErr) console.error("Fırsat takip tarihi güncellenemedi:", leadErr.message);
 
     revalidatePath("/yonetim");
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${data.lead_id}`);
     return { error: null };
   } catch (e) {
@@ -52,7 +52,7 @@ export async function updateFollowUp(id: string, leadId: string, data: Partial<F
     const { error } = await sb().from("crm_follow_ups").update(data).eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim");
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${leadId}`);
     return { error: null };
   } catch (e) {
@@ -68,7 +68,7 @@ export async function toggleFollowUpCompleted(id: string, leadId: string, comple
       .eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim");
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${leadId}`);
     return { error: null };
   } catch (e) {
@@ -81,7 +81,7 @@ export async function deleteFollowUp(id: string, leadId: string): Promise<Action
     const { error } = await sb().from("crm_follow_ups").delete().eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim");
-    revalidatePath("/yonetim/crm-leads");
+    revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${leadId}`);
     return { error: null };
   } catch (e) {
