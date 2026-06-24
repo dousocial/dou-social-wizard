@@ -314,9 +314,9 @@ function InfluencerFormModal({
               <div>
                 <label style={lbl}>Durum</label>
                 <select style={inp} value={form.durum} onChange={e => setForm(f => ({ ...f, durum: e.target.value as any }))}>
-                  <option value="havuz">Havuz</option>
-                  <option value="aktif">Aktif</option>
-                  <option value="kara_liste">Kara Liste</option>
+                  <option value="havuz" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>Havuz</option>
+                  <option value="aktif" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>Aktif</option>
+                  <option value="kara_liste" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>Kara Liste</option>
                 </select>
               </div>
             </div>
@@ -357,7 +357,7 @@ function InfluencerFormModal({
               <div>
                 <label style={lbl}>Platform</label>
                 <select style={inp} value={newHesap.platform} onChange={e => setNewHesap(h => ({ ...h, platform: e.target.value as any }))}>
-                  {PLATFORMS.map(p => <option key={p} value={p}>{PLATFORM_ICONS[p]} {p}</option>)}
+                  {PLATFORMS.map(p => <option key={p} value={p} style={{ background: "#1a1a2e", color: "#e2e8f0" }}>{PLATFORM_ICONS[p]} {p}</option>)}
                 </select>
               </div>
               <div>
@@ -434,9 +434,9 @@ function InfluencerFormModal({
               <div>
                 <label style={lbl}>Para Birimi</label>
                 <select style={inp} value={form.para_birimi} onChange={e => setForm(f => ({ ...f, para_birimi: e.target.value }))}>
-                  <option value="TRY">TRY ₺</option>
-                  <option value="USD">USD $</option>
-                  <option value="EUR">EUR €</option>
+                  <option value="TRY" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>TRY ₺</option>
+                  <option value="USD" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>USD $</option>
+                  <option value="EUR" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>EUR €</option>
                 </select>
               </div>
             </div>
@@ -603,8 +603,8 @@ function CollaborationModal({
                 const m = musteriler.find(m => m.id === val);
                 setForm(f => ({ ...f, musteri_id: val || null, musteri_adi: m?.ad ?? f.musteri_adi }));
               }}>
-                <option value="">— Seçilmedi —</option>
-                {musteriler.map(m => <option key={m.id} value={m.id}>{m.ad}</option>)}
+                <option value="" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>— Seçilmedi —</option>
+                {musteriler.map(m => <option key={m.id} value={m.id} style={{ background: "#1a1a2e", color: "#e2e8f0" }}>{m.ad}</option>)}
               </select>
             </div>
             <div>
@@ -614,16 +614,16 @@ function CollaborationModal({
             <div>
               <label style={lbl}>Platform</label>
               <select style={inp} value={form.platform} onChange={e => setForm(f => ({ ...f, platform: e.target.value }))}>
-                <option value="">— Seçin —</option>
-                {PLATFORMS.map(p => <option key={p} value={p}>{PLATFORM_ICONS[p]} {p}</option>)}
+                <option value="" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>— Seçin —</option>
+                {PLATFORMS.map(p => <option key={p} value={p} style={{ background: "#1a1a2e", color: "#e2e8f0" }}>{PLATFORM_ICONS[p]} {p}</option>)}
               </select>
             </div>
             <div>
               <label style={lbl}>İçerik Tipi</label>
               <select style={inp} value={form.icerik_tipi} onChange={e => setForm(f => ({ ...f, icerik_tipi: e.target.value }))}>
-                <option value="">— Seçin —</option>
+                <option value="" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>— Seçin —</option>
                 {["reels", "post", "story", "youtube", "tiktok", "podcast", "etkinlik", "diger"].map(t => (
-                  <option key={t} value={t}>{t}</option>
+                  <option key={t} value={t} style={{ background: "#1a1a2e", color: "#e2e8f0" }}>{t}</option>
                 ))}
               </select>
             </div>
@@ -638,11 +638,11 @@ function CollaborationModal({
             <div>
               <label style={lbl}>Durum</label>
               <select style={inp} value={form.durum} onChange={e => setForm(f => ({ ...f, durum: e.target.value as any }))}>
-                <option value="planlandi">Planlandı</option>
-                <option value="uretimde">Üretimde</option>
-                <option value="yayinda">Yayında</option>
-                <option value="tamamlandi">Tamamlandı</option>
-                <option value="iptal">İptal</option>
+                <option value="planlandi" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>Planlandı</option>
+                <option value="uretimde" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>Üretimde</option>
+                <option value="yayinda" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>Yayında</option>
+                <option value="tamamlandi" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>Tamamlandı</option>
+                <option value="iptal" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>İptal</option>
               </select>
             </div>
           </div>
@@ -659,9 +659,9 @@ function CollaborationModal({
             <div>
               <label style={lbl}>Para Birimi</label>
               <select style={inp} value={form.para_birimi} onChange={e => setForm(f => ({ ...f, para_birimi: e.target.value }))}>
-                <option value="TRY">TRY ₺</option>
-                <option value="USD">USD $</option>
-                <option value="EUR">EUR €</option>
+                <option value="TRY" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>TRY ₺</option>
+                <option value="USD" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>USD $</option>
+                <option value="EUR" style={{ background: "#1a1a2e", color: "#e2e8f0" }}>EUR €</option>
               </select>
             </div>
           </div>
