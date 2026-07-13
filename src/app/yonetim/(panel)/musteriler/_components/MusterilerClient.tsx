@@ -42,13 +42,23 @@ type Lead = {
   contact_id: string | null;
   company_name: string;
   contact_name: string;
+  first_name: string;
+  last_name: string;
   phone: string;
   email: string;
   instagram: string;
   website: string;
   sector: string;
+  city: string;
+  district: string;
+  interested_service: string;
+  referral_source: string;
+  estimated_budget: number | null;
+  company_size: string;
+  first_contact_date: string;
+  lost_reason: string;
   source: "referans" | "instagram" | "google_maps" | "inbound" | "manuel" | "diger";
-  status: "yeni" | "gorusuldu" | "teklif_istendi" | "teklif_gonderildi" | "takipte" | "kazanildi" | "kaybedildi";
+  status: "yeni" | "ilk_arama" | "gorusuldu" | "bilgi_bekleniyor" | "gorusme_planlanacak" | "teklif_istendi" | "teklif_gonderildi" | "donus_bekleniyor" | "teklif_kabul" | "teklif_reddedildi" | "takipte" | "daha_sonra" | "kazanildi" | "kaybedildi";
   score: number;
   last_contact_date: string | null;
   next_follow_up_date: string | null;
@@ -84,10 +94,17 @@ const DURUM: Record<string, { label: string; color: string; bg: string; border: 
 
 const LEAD_STATUS_MAP: Record<Lead["status"], { label: string; color: string; bg: string; border: string }> = {
   yeni:              { label: "Yeni",             color: "#60a5fa", bg: "rgba(96,165,250,0.12)",  border: "rgba(96,165,250,0.3)" },
+  ilk_arama:         { label: "İlk Arama Yapılacak", color: "#38bdf8", bg: "rgba(56,189,248,0.12)", border: "rgba(56,189,248,0.3)" },
   gorusuldu:         { label: "Görüşüldü",        color: "#c084fc", bg: "rgba(192,132,252,0.12)", border: "rgba(192,132,252,0.3)" },
+  bilgi_bekleniyor:  { label: "Bilgi Bekleniyor", color: "#a78bfa", bg: "rgba(167,139,250,0.12)", border: "rgba(167,139,250,0.3)" },
+  gorusme_planlanacak: { label: "Görüşme Planlanacak", color: "#e879f9", bg: "rgba(232,121,249,0.12)", border: "rgba(232,121,249,0.3)" },
   teklif_istendi:    { label: "Teklif İstendi",   color: "#fb7185", bg: "rgba(251,113,133,0.12)", border: "rgba(251,113,133,0.3)" },
   teklif_gonderildi: { label: "Teklif İletildi",  color: "#2dd4bf", bg: "rgba(45,212,191,0.12)",  border: "rgba(45,212,191,0.3)" },
+  donus_bekleniyor:  { label: "Müşteri Dönüşü Bekleniyor", color: "#fbbf24", bg: "rgba(251,191,36,0.12)", border: "rgba(251,191,36,0.3)" },
+  teklif_kabul:      { label: "Teklif Kabul Edildi", color: "#34d399", bg: "rgba(52,211,153,0.12)", border: "rgba(52,211,153,0.3)" },
+  teklif_reddedildi: { label: "Teklif Reddedildi", color: "#fb7185", bg: "rgba(251,113,133,0.12)", border: "rgba(251,113,133,0.3)" },
   takipte:           { label: "Takipte",          color: "#fb923c", bg: "rgba(251,146,60,0.12)",  border: "rgba(251,146,60,0.3)" },
+  daha_sonra:        { label: "Daha Sonra Görüşülecek", color: "#94a3b8", bg: "rgba(148,163,184,0.12)", border: "rgba(148,163,184,0.3)" },
   kazanildi:         { label: "Kazanıldı",        color: "#4ade80", bg: "rgba(74,222,128,0.12)",  border: "rgba(74,222,128,0.3)" },
   kaybedildi:        { label: "Kaybedildi",       color: "#f87171", bg: "rgba(248,113,113,0.12)", border: "rgba(248,113,113,0.3)" },
 };
@@ -176,9 +193,11 @@ const EMPTY_CUSTOMER_FORM = {
 
 const EMPTY_LEAD_FORM = {
   title: "", company_id: "", contact_id: "", company_name: "",
-  contact_name: "", phone: "", email: "", instagram: "",
+  contact_name: "", first_name: "", last_name: "", phone: "", email: "", instagram: "",
   website: "", sector: "", source: "manuel", status: "yeni",
   score: "50", notes: "", assigned_user: "", next_follow_up_date: "",
+  city: "", district: "", interested_service: "", referral_source: "",
+  estimated_budget: "", company_size: "", first_contact_date: new Date().toISOString().slice(0, 10), lost_reason: "",
   audit_id: "", source_contact_id: "",
 };
 
@@ -357,11 +376,21 @@ export function MusterilerClient({
         contact_id: "",
         company_name: prefill.company_name || "",
         contact_name: prefill.contact_name || "",
+        first_name: prefill.contact_name?.split(" ")[0] || "",
+        last_name: prefill.contact_name?.split(" ").slice(1).join(" ") || "",
         phone: prefill.phone || "",
         email: prefill.email || "",
         instagram: "",
         website: "",
         sector: prefill.sector || "",
+        city: "",
+        district: "",
+        interested_service: "",
+        referral_source: "",
+        estimated_budget: "",
+        company_size: "",
+        first_contact_date: new Date().toISOString().slice(0, 10),
+        lost_reason: "",
         source: prefill.source || "inbound",
         status: "yeni",
         score: "50",
@@ -606,11 +635,21 @@ export function MusterilerClient({
       contact_id: l.contact_id || "",
       company_name: l.company_name || "",
       contact_name: l.contact_name || "",
+      first_name: l.first_name || "",
+      last_name: l.last_name || "",
       phone: l.phone || "",
       email: l.email || "",
       instagram: l.instagram || "",
       website: l.website || "",
       sector: l.sector || "",
+      city: l.city || "",
+      district: l.district || "",
+      interested_service: l.interested_service || "",
+      referral_source: l.referral_source || "",
+      estimated_budget: l.estimated_budget == null ? "" : String(l.estimated_budget),
+      company_size: l.company_size || "",
+      first_contact_date: l.first_contact_date || "",
+      lost_reason: l.lost_reason || "",
       source: l.source,
       status: l.status,
       score: String(l.score ?? 50),
@@ -628,9 +667,17 @@ export function MusterilerClient({
   async function handleLeadSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!cleanText(leadForm.title)) { setLeadError("Aday Tanımı / Başlık zorunludur."); return; }
-    if (leadForm.phone && !isValidPhoneTR(leadForm.phone, false)) {
+    if (!cleanText(leadForm.first_name) || !cleanText(leadForm.last_name)) { setLeadError("Ad ve soyad zorunludur."); return; }
+    if (!cleanText(leadForm.company_name) && !leadForm.company_id) { setLeadError("Firma adı zorunludur."); return; }
+    if (!cleanText(leadForm.phone) || !isValidPhoneTR(leadForm.phone, true)) {
       setLeadError("Telefon formatı geçersiz. Örnek: 0555 555 5555");
       return;
+    }
+    if (!cleanText(leadForm.sector) || !cleanText(leadForm.interested_service) || !leadForm.assigned_user) {
+      setLeadError("Sektör, ilgilenilen hizmet ve sorumlu ekip üyesi zorunludur."); return;
+    }
+    if (!leadForm.first_contact_date || !leadForm.next_follow_up_date) {
+      setLeadError("İlk iletişim ve sonraki işlem tarihleri zorunludur."); return;
     }
 
     const inputData = {
@@ -639,11 +686,21 @@ export function MusterilerClient({
       contact_id: leadForm.contact_id || null,
       company_name: cleanText(leadForm.company_name),
       contact_name: cleanText(leadForm.contact_name),
+      first_name: cleanText(leadForm.first_name),
+      last_name: cleanText(leadForm.last_name),
       phone: formatPhoneTR(leadForm.phone),
       email: cleanText(leadForm.email),
       instagram: cleanText(leadForm.instagram),
       website: cleanText(leadForm.website),
       sector: cleanText(leadForm.sector),
+      city: cleanText(leadForm.city),
+      district: cleanText(leadForm.district),
+      interested_service: cleanText(leadForm.interested_service),
+      referral_source: cleanText(leadForm.referral_source),
+      estimated_budget: leadForm.estimated_budget ? Number(leadForm.estimated_budget) : null,
+      company_size: cleanText(leadForm.company_size),
+      first_contact_date: leadForm.first_contact_date,
+      lost_reason: cleanText(leadForm.lost_reason),
       source: leadForm.source as Lead["source"],
       status: leadForm.status as Lead["status"],
       score: parseInt(leadForm.score) || 0,
@@ -1594,6 +1651,16 @@ export function MusterilerClient({
               </div>
 
               <div>
+                <label style={LABEL}>Ad *</label>
+                <input value={leadForm.first_name} onChange={e => setLeadForm(f => ({ ...f, first_name: e.target.value }))} style={INPUT} required />
+              </div>
+
+              <div>
+                <label style={LABEL}>Soyad *</label>
+                <input value={leadForm.last_name} onChange={e => setLeadForm(f => ({ ...f, last_name: e.target.value }))} style={INPUT} required />
+              </div>
+
+              <div>
                 <label style={LABEL}>Kayıtlı Firma</label>
                 <select
                   value={leadForm.company_id}
@@ -1625,13 +1692,14 @@ export function MusterilerClient({
               {!leadForm.company_id && (
                 <>
                   <div>
-                    <label style={LABEL}>Firma Adı (Serbest Yazım)</label>
+                    <label style={LABEL}>Firma Adı *</label>
                     <input
                       type="text"
                       placeholder="Firma Adı"
                       value={leadForm.company_name}
                       onChange={e => setLeadForm(f => ({ ...f, company_name: e.target.value }))}
                       style={INPUT}
+                      required
                     />
                   </div>
                   <div>
@@ -1648,13 +1716,14 @@ export function MusterilerClient({
               )}
 
               <div>
-                <label style={LABEL}>Telefon</label>
+                <label style={LABEL}>Telefon *</label>
                 <input
                   type="text"
                   placeholder="05..."
                   value={leadForm.phone}
                   onChange={e => setLeadForm(f => ({ ...f, phone: formatPhoneTR(e.target.value) }))}
                   style={INPUT}
+                  required
                 />
               </div>
 
@@ -1706,6 +1775,37 @@ export function MusterilerClient({
               </div>
 
               <div>
+                <label style={LABEL}>İlgilendiği Hizmet *</label>
+                <input value={leadForm.interested_service} onChange={e => setLeadForm(f => ({ ...f, interested_service: e.target.value }))} placeholder="Sosyal medya, çekim, reklam..." style={INPUT} required />
+              </div>
+
+              <div>
+                <label style={LABEL}>Şehir</label>
+                <input value={leadForm.city} onChange={e => setLeadForm(f => ({ ...f, city: e.target.value }))} style={INPUT} />
+              </div>
+
+              <div>
+                <label style={LABEL}>İlçe</label>
+                <input value={leadForm.district} onChange={e => setLeadForm(f => ({ ...f, district: e.target.value }))} style={INPUT} />
+              </div>
+
+              <div>
+                <label style={LABEL}>Yaklaşık Bütçe (₺)</label>
+                <input type="number" min="0" value={leadForm.estimated_budget} onChange={e => setLeadForm(f => ({ ...f, estimated_budget: e.target.value }))} style={INPUT} />
+              </div>
+
+              <div>
+                <label style={LABEL}>İşletme Büyüklüğü</label>
+                <select value={leadForm.company_size} onChange={e => setLeadForm(f => ({ ...f, company_size: e.target.value }))} style={INPUT}>
+                  <option value="">-- Seçiniz --</option>
+                  <option value="mikro">Mikro (1-9)</option>
+                  <option value="kucuk">Küçük (10-49)</option>
+                  <option value="orta">Orta (50-249)</option>
+                  <option value="buyuk">Büyük (250+)</option>
+                </select>
+              </div>
+
+              <div>
                 <label style={LABEL}>Sorumlu Kullanıcı</label>
                 <select
                   value={leadForm.assigned_user}
@@ -1731,6 +1831,13 @@ export function MusterilerClient({
                   ))}
                 </select>
               </div>
+
+              {leadForm.source === "referans" && (
+                <div>
+                  <label style={LABEL}>Referans Kişi / Firma</label>
+                  <input value={leadForm.referral_source} onChange={e => setLeadForm(f => ({ ...f, referral_source: e.target.value }))} style={INPUT} />
+                </div>
+              )}
 
               <div>
                 <label style={LABEL}>Durum / Aşama</label>
@@ -1775,12 +1882,34 @@ export function MusterilerClient({
               </div>
 
               <div>
-                <label style={LABEL}>Sonraki Takip Tarihi</label>
+                <label style={LABEL}>İlk İletişim Tarihi *</label>
+                <DatePicker value={leadForm.first_contact_date} onChange={val => setLeadForm(f => ({ ...f, first_contact_date: val }))} required />
+              </div>
+
+              <div>
+                <label style={LABEL}>Sonraki İşlem Tarihi *</label>
                 <DatePicker
                   value={leadForm.next_follow_up_date}
                   onChange={val => setLeadForm(f => ({ ...f, next_follow_up_date: val }))}
+                  required
                 />
               </div>
+
+              {["teklif_reddedildi", "kaybedildi"].includes(leadForm.status) && (
+                <div style={{ gridColumn: "span 2" }}>
+                  <label style={LABEL}>Kaybetme / Ret Nedeni *</label>
+                  <select value={leadForm.lost_reason} onChange={e => setLeadForm(f => ({ ...f, lost_reason: e.target.value }))} style={INPUT} required>
+                    <option value="">-- Seçiniz --</option>
+                    <option value="fiyat_yuksek">Fiyat yüksek bulundu</option>
+                    <option value="baska_ajans">Başka ajansla anlaşıldı</option>
+                    <option value="hizmet_ertelendi">Hizmet ertelendi</option>
+                    <option value="karar_verici">Karar verici onaylamadı</option>
+                    <option value="ihtiyac_yok">İhtiyaç ortadan kalktı</option>
+                    <option value="ulasilamadi">Müşteriye ulaşılamadı</option>
+                    <option value="diger">Diğer</option>
+                  </select>
+                </div>
+              )}
 
               <div style={{ gridColumn: "span 2" }}>
                 <label style={LABEL}>Notlar</label>

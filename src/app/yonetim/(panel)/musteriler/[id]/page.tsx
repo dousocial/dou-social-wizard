@@ -17,7 +17,8 @@ async function getData(id: string) {
     { data: teklifler },
     { data: iletisimler },
     { data: contentTasks },
-    { data: payments }
+    { data: payments },
+    { data: contracts }
   ] = await Promise.all([
     supabase.from("musteriler").select("*").eq("id", id).single(),
     supabase.from("musteri_metrikleri").select("*").eq("musteri_id", id).order("ay", { ascending: false }),
@@ -26,6 +27,7 @@ async function getData(id: string) {
     supabase.from("musteri_iletisimler").select("*").eq("musteri_id", id).order("tarih", { ascending: false }),
     supabase.from("crm_content_tasks").select("*").eq("client_id", id).order("due_date", { ascending: true }),
     supabase.from("crm_payments").select("*").eq("client_id", id).order("period", { ascending: false }),
+    supabase.from("crm_contracts").select("*").eq("client_id", id).order("created_at", { ascending: false }),
   ]);
 
   if (error || !musteri) return null;
@@ -37,6 +39,7 @@ async function getData(id: string) {
     iletisimler: iletisimler ?? [],
     contentTasks: contentTasks ?? [],
     payments: payments ?? [],
+    contracts: contracts ?? [],
   };
 }
 
@@ -57,6 +60,7 @@ export default async function MusteriDetailPage({
       iletisimler={data.iletisimler}
       contentTasks={data.contentTasks}
       payments={data.payments}
+      contracts={data.contracts}
     />
   );
 }

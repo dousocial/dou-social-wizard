@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { supabase } from "@/lib/supabase";
-import { signToken, verifyToken } from "@/lib/session";
+import { isUserRole, requirePermission, signToken, verifyToken } from "@/lib/session";
 
 export type ActionState = { error?: string; success?: boolean } | null;
 
@@ -19,16 +19,6 @@ function isNextRedirect(err: unknown): boolean {
     typeof (err as { digest: unknown }).digest === "string" &&
     (err as { digest: string }).digest.startsWith("NEXT_REDIRECT")
   );
-}
-
-async function requireRole(role: "yonetici" | "izleyici") {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("dou_sid")?.value;
-  if (!token) redirect("/yonetim/giris");
-  const session = verifyToken(token);
-  if (!session) redirect("/yonetim/giris");
-  if (role === "yonetici" && session.role !== "yonetici") redirect("/yonetim/leads");
-  return session;
 }
 
 export async function loginAction(_prev: ActionState, formData: FormData): Promise<ActionState> {
@@ -48,6 +38,7 @@ export async function loginAction(_prev: ActionState, formData: FormData): Promi
       return { error: "Kullanıcı adı veya şifre hatalı" };
     }
 
+    if (!isUserRole(user.role)) return { error: "Kullanıcı rolü geçersiz" };
     const token = signToken(user.id, user.role);
     const cookieStore = await cookies();
     cookieStore.set("dou_sid", token, {
@@ -100,7 +91,7 @@ export async function addUserAction(
   formData: FormData,
 ): Promise<ActionState> {
   try {
-    await requireRole("yonetici");
+    await requirePermission("users.manage");
 
     const username = String(formData.get("username") ?? "").trim();
     const password = String(formData.get("password") ?? "");
@@ -108,7 +99,7 @@ export async function addUserAction(
 
     if (!username) return { error: "Kullanıcı adı gerekli" };
     if (password.length < 8) return { error: "Şifre en az 8 karakter olmalı" };
-    if (!["yonetici", "izleyici"].includes(role)) return { error: "Geçersiz rol" };
+    if (!isUserRole(role)) return { error: "Geçersiz rol" };
 
     const salt = crypto.randomBytes(16).toString("hex");
     const password_hash = hashPassword(password, salt);
@@ -132,7 +123,7 @@ export async function deleteUserAction(
   formData: FormData,
 ): Promise<ActionState> {
   try {
-    await requireRole("yonetici");
+    await requirePermission("users.manage");
 
     const id = String(formData.get("id") ?? "");
 
@@ -165,7 +156,9 @@ export async function changePasswordAction(
   formData: FormData,
 ): Promise<ActionState> {
   try {
-    const session = await requireRole("izleyici");
+    const token = (await cookies()).get("dou_sid")?.value;
+    const session = token ? verifyToken(token) : null;
+    if (!session) redirect("/yonetim/giris");
 
     const current = String(formData.get("current") ?? "");
     const next    = String(formData.get("next")    ?? "");

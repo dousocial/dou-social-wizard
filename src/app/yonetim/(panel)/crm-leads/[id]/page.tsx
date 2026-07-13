@@ -22,6 +22,7 @@ async function getData(id: string) {
     { data: companies },
     { data: contacts },
     { data: followUps },
+    { data: meetings },
     { data: teklifler },
     { data: users },
     auditRes
@@ -29,6 +30,7 @@ async function getData(id: string) {
     supabase.from("crm_companies").select("id, name").order("name"),
     supabase.from("crm_contacts").select("id, name, company_id").order("name"),
     supabase.from("crm_follow_ups").select("*").eq("lead_id", id).order("follow_up_date", { ascending: false }),
+    supabase.from("crm_meetings").select("*").eq("lead_id", id).order("meeting_at", { ascending: false }),
     supabase.from("musteri_teklifler").select("*").eq("lead_id", id).order("created_at", { ascending: false }),
     supabase.from("admin_users").select("id, username, role").order("username"),
     lead.audit_id
@@ -41,6 +43,7 @@ async function getData(id: string) {
     companies: companies ?? [],
     contacts: contacts ?? [],
     followUps: followUps ?? [],
+    meetings: meetings ?? [],
     teklifler: teklifler ?? [],
     users: users ?? [],
     audit: auditRes?.data ?? null
@@ -63,6 +66,7 @@ export default async function CrmLeadDetailPage({
       companies={data.companies}
       contacts={data.contacts}
       followUps={data.followUps}
+      meetings={data.meetings}
       teklifler={data.teklifler}
       users={data.users}
       audit={data.audit}

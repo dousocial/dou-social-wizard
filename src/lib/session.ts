@@ -6,10 +6,46 @@ function secret() {
   return s;
 }
 
-export type SessionPayload = { userId: string; role: string };
+export const USER_ROLES = [
+  "yonetici",
+  "koordinator",
+  "editor",
+  "tasarimci",
+  "cekim_ekibi",
+  "reklam_sorumlusu",
+  "izleyici",
+] as const;
+
+export type UserRole = (typeof USER_ROLES)[number];
+export type Permission =
+  | "users.manage"
+  | "crm.write"
+  | "content.write"
+  | "publishing.write"
+  | "advertising.write";
+
+export type SessionPayload = { userId: string; role: UserRole };
+
+const ROLE_PERMISSIONS: Record<UserRole, readonly Permission[]> = {
+  yonetici: ["users.manage", "crm.write", "content.write", "publishing.write", "advertising.write"],
+  koordinator: ["crm.write", "content.write", "publishing.write", "advertising.write"],
+  editor: ["content.write"],
+  tasarimci: ["content.write"],
+  cekim_ekibi: ["content.write"],
+  reklam_sorumlusu: ["advertising.write"],
+  izleyici: [],
+};
+
+export function isUserRole(value: string): value is UserRole {
+  return USER_ROLES.includes(value as UserRole);
+}
+
+export function hasPermission(role: UserRole, permission: Permission) {
+  return ROLE_PERMISSIONS[role].includes(permission);
+}
 
 // Token format: userId:role.timestamp.hmac
-export function signToken(userId: string, role: string): string {
+export function signToken(userId: string, role: UserRole): string {
   const ts = Date.now();
   const payload = `${userId}:${role}.${ts}`;
   const sig = crypto.createHmac("sha256", secret()).update(payload).digest("base64url");
@@ -34,7 +70,7 @@ export function verifyToken(token: string): SessionPayload | null {
     const colonIdx = userPart.indexOf(":");
     const userId = userPart.slice(0, colonIdx);
     const role = userPart.slice(colonIdx + 1);
-    if (!userId || !role) return null;
+    if (!userId || !isUserRole(role)) return null;
     return { userId, role };
   } catch {
     return null;
@@ -53,3 +89,10 @@ export async function requireSession(): Promise<SessionPayload> {
   return session!;
 }
 
+export async function requirePermission(permission: Permission): Promise<SessionPayload> {
+  const session = await requireSession();
+  if (!hasPermission(session.role, permission)) {
+    throw new Error("Bu işlem için yetkiniz bulunmuyor.");
+  }
+  return session;
+}

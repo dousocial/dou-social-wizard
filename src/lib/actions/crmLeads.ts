@@ -2,7 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
-import { requireSession } from "@/lib/session";
+import { requirePermission } from "@/lib/session";
 
 function sb() {
   return createClient(
@@ -17,13 +17,23 @@ export type LeadInput = {
   contact_id?: string | null;
   company_name?: string;
   contact_name?: string;
+  first_name?: string;
+  last_name?: string;
   phone?: string;
   email?: string;
   instagram?: string;
   website?: string;
   sector?: string;
+  city?: string;
+  district?: string;
+  interested_service?: string;
+  referral_source?: string;
+  estimated_budget?: number | null;
+  company_size?: string;
+  first_contact_date?: string;
+  lost_reason?: string;
   source?: "referans" | "instagram" | "google_maps" | "inbound" | "manuel" | "diger";
-  status?: "yeni" | "gorusuldu" | "teklif_istendi" | "teklif_gonderildi" | "takipte" | "kazanildi" | "kaybedildi";
+  status?: "yeni" | "ilk_arama" | "gorusuldu" | "bilgi_bekleniyor" | "gorusme_planlanacak" | "teklif_istendi" | "teklif_gonderildi" | "donus_bekleniyor" | "teklif_kabul" | "teklif_reddedildi" | "takipte" | "daha_sonra" | "kazanildi" | "kaybedildi";
   score?: number;
   last_contact_date?: string | null;
   next_follow_up_date?: string | null;
@@ -37,7 +47,7 @@ export type ActionResult = { error: string | null; id?: string };
 
 export async function addLead(data: LeadInput): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { data: newLead, error } = await sb().from("crm_leads").insert(data).select("id").single();
     if (error) return { error: error.message };
     revalidatePath("/yonetim/musteriler");
@@ -49,7 +59,7 @@ export async function addLead(data: LeadInput): Promise<ActionResult> {
 
 export async function updateLead(id: string, data: Partial<LeadInput>): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb()
       .from("crm_leads")
       .update({ ...data, updated_at: new Date().toISOString() })
@@ -65,7 +75,7 @@ export async function updateLead(id: string, data: Partial<LeadInput>): Promise<
 
 export async function deleteLead(id: string): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb().from("crm_leads").delete().eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/musteriler");
@@ -83,88 +93,22 @@ export async function convertLeadToClient(leadId: string, clientData: {
 }): Promise<ActionResult> {
   const supabase = sb();
   try {
-    await requireSession();
-    // 1. Lead verisini oku
-    const { data: lead, error: leadErr } = await supabase
-      .from("crm_leads")
-      .select("*")
-      .eq("id", leadId)
-      .single();
+    const session = await requirePermission("crm.write");
+    const { data: clientId, error } = await supabase.rpc("convert_crm_lead_to_client", {
+      p_lead_id: leadId,
+      p_monthly_fee: clientData.aylik_ucret,
+      p_start_date: clientData.baslangic_tarihi,
+      p_platforms: clientData.platformlar,
+      p_actor_id: session.userId,
+    });
 
-    if (leadErr || !lead) {
-      return { error: leadErr ? leadErr.message : "Fırsat kaydı bulunamadı." };
-    }
-
-    // 2. Müşteri bilgilerini derle
-    // Eğer firma bağlantısı varsa firma adını, yoksa standalone lead firma adını kullan
-    let musteriAdi = lead.company_name || lead.title;
-    if (lead.company_id) {
-      const { data: comp } = await supabase.from("crm_companies").select("name").eq("id", lead.company_id).single();
-      if (comp) musteriAdi = comp.name;
-    }
-
-    let yetkiliAdi = lead.contact_name || "";
-    if (lead.contact_id) {
-      const { data: cont } = await supabase.from("crm_contacts").select("name").eq("id", lead.contact_id).single();
-      if (cont) yetkiliAdi = cont.name;
-    }
-
-    const musteriInsert = {
-      ad: musteriAdi,
-      sektor: lead.sector || "Diğer",
-      website: lead.website || "",
-      email: lead.email || "",
-      telefon: lead.phone || "",
-      sorumlu: lead.assigned_user || "",
-      durum: "aktif",
-      platformlar: clientData.platformlar,
-      aylik_ucret: clientData.aylik_ucret,
-      baslangic_tarihi: clientData.baslangic_tarihi,
-      notlar: `[Fırsat Dönüşümü] Yetkili: ${yetkiliAdi}. Lead Notları: ${lead.notes || ""}`
-    };
-
-    // 3. musteriler tablosuna ekle
-    const { data: client, error: clientErr } = await supabase
-      .from("musteriler")
-      .insert(musteriInsert)
-      .select("id")
-      .single();
-
-    if (clientErr || !client) {
-      return { error: `Müşteri kaydı oluşturulurken hata: ${clientErr?.message}` };
-    }
-
-    const clientId = client.id;
-
-    // 4. crm_leads tablosunda converted_client_id alanını ve status'ü güncelle
-    const { error: updateLeadErr } = await supabase
-      .from("crm_leads")
-      .update({
-        converted_client_id: clientId,
-        status: "kazanildi",
-        updated_at: new Date().toISOString()
-      })
-      .eq("id", leadId);
-
-    if (updateLeadErr) {
-      return { error: `Fırsat güncellemesi başarısız: ${updateLeadErr.message}` };
-    }
-
-    // 5. Bu lead'e bağlı olan teklifleri (teklifler tablosunda) yeni musteri_id ile ilişkilendir
-    const { error: updateOffersErr } = await supabase
-      .from("musteri_teklifler")
-      .update({ musteri_id: clientId, durum: "kabul_edildi" })
-      .eq("lead_id", leadId);
-
-    if (updateOffersErr) {
-      console.error("Teklifler güncellenirken hata oluştu (kritik değil, devam ediliyor):", updateOffersErr.message);
-    }
+    if (error || !clientId) return { error: error?.message ?? "Müşteri dönüşümü tamamlanamadı." };
 
     revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${leadId}`);
     revalidatePath("/yonetim/musteriler");
     
-    return { error: null, id: clientId };
+    return { error: null, id: String(clientId) };
   } catch (e) {
     return { error: String(e) };
   }

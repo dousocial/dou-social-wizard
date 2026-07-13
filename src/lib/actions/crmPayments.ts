@@ -2,7 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
-import { requireSession } from "@/lib/session";
+import { requirePermission } from "@/lib/session";
 
 function sb() {
   return createClient(
@@ -24,7 +24,7 @@ export type ActionResult = { error: string | null };
 
 export async function addPayment(data: PaymentInput): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb().from("crm_payments").insert(data);
     if (error) return { error: error.message };
     revalidatePath(`/yonetim/musteriler/${data.client_id}`);
@@ -44,7 +44,7 @@ export async function updatePaymentStatus(
   }
 ): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb()
       .from("crm_payments")
       .update(data)
@@ -59,7 +59,7 @@ export async function updatePaymentStatus(
 
 export async function deletePayment(id: string, clientId: string): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb().from("crm_payments").delete().eq("id", id);
     if (error) return { error: error.message };
     revalidatePath(`/yonetim/musteriler/${clientId}`);
@@ -72,7 +72,7 @@ export async function deletePayment(id: string, clientId: string): Promise<Actio
 // Belirtilen dönem (örn: "2026-06") için tüm aktif müşterilere toplu ödeme kaydı oluşturur
 export async function generateNextPeriodPayments(period: string): Promise<{ error: string | null; count?: number }> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const supabase = sb();
     
     // 1. Tüm aktif müşterileri çek

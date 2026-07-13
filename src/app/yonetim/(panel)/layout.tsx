@@ -8,6 +8,11 @@ import { ThemeToggle } from "./_components/ThemeToggle";
 
 const ROLE_LABEL: Record<string, string> = {
   yonetici: "Yönetici",
+  koordinator: "Koordinatör",
+  editor: "Editör",
+  tasarimci: "Tasarımcı",
+  cekim_ekibi: "Çekim Ekibi",
+  reklam_sorumlusu: "Reklam Sorumlusu",
   izleyici: "İzleyici",
 };
 

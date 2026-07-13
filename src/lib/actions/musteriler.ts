@@ -2,7 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
-import { requireSession } from "@/lib/session";
+import { requirePermission } from "@/lib/session";
 import {
   cleanMultiline,
   cleanText,
@@ -65,7 +65,7 @@ function normalizeMusteriInput(data: MusteriInput): { data?: MusteriInput; error
 
 export async function addMusteri(data: MusteriInput): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const normalized = normalizeMusteriInput(data);
     if (normalized.error || !normalized.data) return { error: normalized.error ?? "Geçersiz müşteri verisi." };
     const { error } = await sb().from("musteriler").insert(normalized.data);
@@ -79,7 +79,7 @@ export async function addMusteri(data: MusteriInput): Promise<ActionResult> {
 
 export async function updateMusteri(id: string, data: MusteriInput): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const normalized = normalizeMusteriInput(data);
     if (normalized.error || !normalized.data) return { error: normalized.error ?? "Geçersiz müşteri verisi." };
     const { error } = await sb()
@@ -97,7 +97,7 @@ export async function updateMusteri(id: string, data: MusteriInput): Promise<Act
 
 export async function deleteMusteri(id: string): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb().from("musteriler").delete().eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/musteriler");
@@ -123,7 +123,7 @@ export type MetrikInput = {
 
 export async function addMetrik(data: MetrikInput): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb().from("musteri_metrikleri").insert(data);
     if (error) return { error: error.message };
     revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
@@ -139,7 +139,7 @@ export async function updateMetrik(
   data: Partial<Omit<MetrikInput, "musteri_id">>
 ): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb()
       .from("musteri_metrikleri")
       .update(data)
@@ -154,7 +154,7 @@ export async function updateMetrik(
 
 export async function deleteMetrik(id: string, musteriId: string): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb()
       .from("musteri_metrikleri")
       .delete()

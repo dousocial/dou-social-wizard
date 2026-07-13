@@ -2,7 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
-import { requireSession } from "@/lib/session";
+import { requirePermission } from "@/lib/session";
 
 function sb() {
   return createClient(
@@ -26,7 +26,7 @@ export type ActionResult = { error: string | null; id?: string };
 
 export async function addCompany(data: CompanyInput): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { data: newComp, error } = await sb().from("crm_companies").insert(data).select("id").single();
     if (error) return { error: error.message };
     revalidatePath("/yonetim/firmalar");
@@ -38,7 +38,7 @@ export async function addCompany(data: CompanyInput): Promise<ActionResult> {
 
 export async function updateCompany(id: string, data: Partial<CompanyInput>): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb()
       .from("crm_companies")
       .update({ ...data, updated_at: new Date().toISOString() })
@@ -53,7 +53,7 @@ export async function updateCompany(id: string, data: Partial<CompanyInput>): Pr
 
 export async function deleteCompany(id: string): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb().from("crm_companies").delete().eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim/firmalar");

@@ -17,6 +17,7 @@ import { TeklifPDFButton } from "@/components/admin/TeklifPDFButton";
 import { addIletisim, deleteIletisim } from "@/lib/actions/iletisimler";
 import { addContentTask, updateContentTask, deleteContentTask } from "@/lib/actions/crmContentTasks";
 import { addPayment, updatePaymentStatus, deletePayment } from "@/lib/actions/crmPayments";
+import { addContract, updateContract, deleteContract } from "@/lib/actions/crmContracts";
 import { DatePicker } from "../../_components/DatePicker";
 
 type Musteri = {
@@ -97,7 +98,27 @@ type ContentTask = {
   created_at: string;
 };
 
-type Tab = "genel" | "gorevler" | "teklifler" | "iletisim" | "icerik" | "odemeler";
+type Contract = {
+  id: string;
+  client_id: string;
+  start_date: string;
+  end_date: string | null;
+  monthly_fee: number;
+  payment_day: number | null;
+  duration_months: number | null;
+  auto_renew: boolean;
+  monthly_post_count: number;
+  monthly_video_count: number;
+  monthly_shoot_days: number;
+  story_service: boolean;
+  advertising_management: boolean;
+  services: string[];
+  extra_services: string;
+  signed_contract_url: string;
+  notes: string;
+};
+
+type Tab = "genel" | "sozlesmeler" | "gorevler" | "teklifler" | "iletisim" | "icerik" | "odemeler";
 
 const DURUM: Record<string, { label: string; color: string; bg: string }> = {
   aktif:      { label: "Aktif",      color: "#10b981", bg: "rgba(16,185,129,0.12)" },
@@ -261,6 +282,7 @@ export function MusteriDetailClient({
   iletisimler,
   contentTasks = [],
   payments = [],
+  contracts = [],
 }: {
   musteri: Musteri;
   metriks: Metrik[];
@@ -269,10 +291,72 @@ export function MusteriDetailClient({
   iletisimler: Iletisim[];
   contentTasks?: ContentTask[];
   payments?: any[];
+  contracts?: Contract[];
 }) {
   const router = useRouter();
   const [isPending, setIsPending] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("genel");
+
+  const [contractModal, setContractModal] = useState<{ open: boolean; editing: Contract | null }>({ open: false, editing: null });
+  const [contractError, setContractError] = useState("");
+  const [contractForm, setContractForm] = useState({
+    start_date: musteri.baslangic_tarihi || todayISO(), end_date: musteri.sozlesme_bitis_tarihi || "",
+    monthly_fee: musteri.aylik_ucret ? String(musteri.aylik_ucret) : "", payment_day: "",
+    duration_months: "12", auto_renew: false, monthly_post_count: "0", monthly_video_count: "0",
+    monthly_shoot_days: "0", story_service: false, advertising_management: false,
+    services: "", extra_services: "", signed_contract_url: "", notes: "",
+  });
+
+  function openContractModal(contract?: Contract) {
+    setContractError("");
+    setContractForm(contract ? {
+      start_date: contract.start_date, end_date: contract.end_date || "", monthly_fee: String(contract.monthly_fee || ""),
+      payment_day: contract.payment_day ? String(contract.payment_day) : "", duration_months: contract.duration_months ? String(contract.duration_months) : "",
+      auto_renew: contract.auto_renew, monthly_post_count: String(contract.monthly_post_count || 0),
+      monthly_video_count: String(contract.monthly_video_count || 0), monthly_shoot_days: String(contract.monthly_shoot_days || 0),
+      story_service: contract.story_service, advertising_management: contract.advertising_management,
+      services: (contract.services || []).join(", "), extra_services: contract.extra_services || "",
+      signed_contract_url: contract.signed_contract_url || "", notes: contract.notes || "",
+    } : {
+      start_date: musteri.baslangic_tarihi || todayISO(), end_date: musteri.sozlesme_bitis_tarihi || "",
+      monthly_fee: musteri.aylik_ucret ? String(musteri.aylik_ucret) : "", payment_day: "",
+      duration_months: "12", auto_renew: false, monthly_post_count: "0", monthly_video_count: "0",
+      monthly_shoot_days: "0", story_service: false, advertising_management: false,
+      services: "", extra_services: "", signed_contract_url: "", notes: "",
+    });
+    setContractModal({ open: true, editing: contract || null });
+  }
+
+  async function handleContractSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const monthlyFee = Number(contractForm.monthly_fee);
+    if (!contractForm.start_date || !Number.isFinite(monthlyFee) || monthlyFee < 0) {
+      setContractError("Başlangıç tarihi ve geçerli aylık ücret zorunludur."); return;
+    }
+    const payload = {
+      client_id: musteri.id, start_date: contractForm.start_date, end_date: contractForm.end_date || null,
+      monthly_fee: monthlyFee, payment_day: contractForm.payment_day ? Number(contractForm.payment_day) : null,
+      duration_months: contractForm.duration_months ? Number(contractForm.duration_months) : null,
+      auto_renew: contractForm.auto_renew, monthly_post_count: Number(contractForm.monthly_post_count) || 0,
+      monthly_video_count: Number(contractForm.monthly_video_count) || 0, monthly_shoot_days: Number(contractForm.monthly_shoot_days) || 0,
+      story_service: contractForm.story_service, advertising_management: contractForm.advertising_management,
+      services: contractForm.services.split(","), extra_services: contractForm.extra_services,
+      signed_contract_url: contractForm.signed_contract_url, notes: contractForm.notes,
+    };
+    setIsPending(true);
+    const result = contractModal.editing
+      ? await updateContract(contractModal.editing.id, payload)
+      : await addContract(payload);
+    setIsPending(false);
+    if (result.error) setContractError(result.error);
+    else { setContractModal({ open: false, editing: null }); router.refresh(); }
+  }
+
+  async function handleContractDelete(contract: Contract) {
+    if (!confirm("Bu sözleşme kaydı silinsin mi?")) return;
+    const result = await deleteContract(contract.id, musteri.id);
+    if (result.error) setContractError(result.error); else router.refresh();
+  }
 
   // ── İçerik Görevleri States ──
   const [contentModal, setContentModal] = useState<{ open: boolean; editing: ContentTask | null }>({ open: false, editing: null });
@@ -750,6 +834,7 @@ export function MusteriDetailClient({
 
   const TABS: { key: Tab; label: string; count?: number }[] = [
     { key: "genel",    label: "Genel Bakış" },
+    { key: "sozlesmeler", label: "Sözleşme & Paket", count: contracts.length },
     { key: "gorevler", label: "Görevler",   count: gorevler.length },
     { key: "teklifler",label: "Hizmet Teklifleri",  count: teklifler.length },
     { key: "iletisim", label: "İletişim",   count: iletisimler.length },
@@ -1111,7 +1196,63 @@ export function MusteriDetailClient({
       )}
 
       {/* ══════════════════════════════════════════
-          TAB 2: GÖREVLER
+          SÖZLEŞME & HİZMET PAKETİ
+      ══════════════════════════════════════════ */}
+      {activeTab === "sozlesmeler" && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div>
+              <h2 style={{ margin: 0, fontSize: 15, color: "var(--c-text)" }}>Sözleşmeler ve Hizmet Hakları</h2>
+              <p style={{ margin: "4px 0 0", fontSize: 12, color: "var(--c-dim)" }}>Aylık içerik ve çekim haklarının kaynağı.</p>
+            </div>
+            <button onClick={() => openContractModal()} style={{ padding: "8px 14px", borderRadius: 8, border: "none", background: "#8b5cf6", color: "#fff", fontWeight: 600, cursor: "pointer" }}>+ Sözleşme Ekle</button>
+          </div>
+
+          {contracts.length === 0 ? (
+            <div style={{ ...CARD, padding: "50px 20px", textAlign: "center", color: "var(--c-dim)", fontSize: 13 }}>Henüz sözleşme kaydı bulunmuyor.</div>
+          ) : contracts.map(contract => (
+            <article key={contract.id} style={{ ...CARD, padding: 20, borderLeft: "4px solid #8b5cf6" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", gap: 16 }}>
+                <div>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: "var(--c-text)" }}>
+                    {fmtDateShort(contract.start_date)} — {contract.end_date ? fmtDateShort(contract.end_date) : "Süresiz"}
+                  </div>
+                  <div style={{ fontSize: 12, color: "var(--c-dim)", marginTop: 3 }}>
+                    {contract.duration_months ? `${contract.duration_months} ay` : "Süre belirtilmedi"} · Ödeme günü: {contract.payment_day || "—"} · {contract.auto_renew ? "Otomatik yenilenir" : "Otomatik yenilenmez"}
+                  </div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: 18, fontWeight: 800, color: "#34d399" }}>₺{fmt(Number(contract.monthly_fee))}/ay</div>
+                  <div style={{ display: "flex", gap: 6, marginTop: 7 }}>
+                    <button onClick={() => openContractModal(contract)} style={{ border: "1px solid var(--c-border)", background: "transparent", color: "var(--c-text2)", padding: "4px 8px", borderRadius: 6, cursor: "pointer" }}>Düzenle</button>
+                    <button onClick={() => handleContractDelete(contract)} style={{ border: "1px solid rgba(248,113,113,.25)", background: "transparent", color: "#f87171", padding: "4px 8px", borderRadius: 6, cursor: "pointer" }}>Sil</button>
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginTop: 16 }}>
+                {[
+                  ["Aylık Post", contract.monthly_post_count], ["Aylık Video", contract.monthly_video_count], ["Çekim Günü", contract.monthly_shoot_days],
+                ].map(([label, value]) => (
+                  <div key={String(label)} style={{ background: "var(--c-surface2)", border: "1px solid var(--c-border)", borderRadius: 9, padding: 12 }}>
+                    <div style={{ fontSize: 10, color: "var(--c-dim)", textTransform: "uppercase" }}>{label}</div>
+                    <div style={{ fontSize: 22, fontWeight: 800, color: "var(--c-text)", marginTop: 3 }}>{value}</div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginTop: 12 }}>
+                {contract.story_service && <span style={{ fontSize: 11, color: "#60a5fa", background: "rgba(96,165,250,.1)", padding: "4px 8px", borderRadius: 6 }}>Story hizmeti</span>}
+                {contract.advertising_management && <span style={{ fontSize: 11, color: "#fb923c", background: "rgba(251,146,60,.1)", padding: "4px 8px", borderRadius: 6 }}>Reklam yönetimi</span>}
+                {(contract.services || []).map(service => <span key={service} style={{ fontSize: 11, color: "var(--c-text2)", background: "var(--c-surface2)", padding: "4px 8px", borderRadius: 6 }}>{service}</span>)}
+              </div>
+              {contract.signed_contract_url && <a href={contract.signed_contract_url} target="_blank" rel="noreferrer" style={{ display: "inline-block", marginTop: 12, fontSize: 12, color: "#60a5fa" }}>İmzalı sözleşmeyi aç ↗</a>}
+              {contract.notes && <p style={{ fontSize: 12, color: "var(--c-text2)", whiteSpace: "pre-wrap", margin: "12px 0 0" }}>{contract.notes}</p>}
+            </article>
+          ))}
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════
+          GÖREVLER
       ══════════════════════════════════════════ */}
       {activeTab === "gorevler" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -1654,6 +1795,39 @@ export function MusteriDetailClient({
       {/* ══════════════════════════════════════════
           MODALS
       ══════════════════════════════════════════ */}
+
+      {/* ── Sözleşme Modalı ── */}
+      {contractModal.open && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.72)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 120, padding: 20, backdropFilter: "blur(4px)" }}>
+          <form onSubmit={handleContractSubmit} style={{ background: "var(--c-surface)", border: "1px solid var(--c-border)", borderRadius: 16, width: "100%", maxWidth: 760, maxHeight: "92vh", overflowY: "auto", padding: 26, display: "flex", flexDirection: "column", gap: 14 }}>
+            <h2 style={{ margin: 0, fontSize: 16, color: "var(--c-text)" }}>{contractModal.editing ? "Sözleşmeyi Düzenle" : "Yeni Sözleşme"}</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12 }}>
+              <div><label style={LABEL}>Başlangıç *</label><DatePicker value={contractForm.start_date} onChange={v => setContractForm(f => ({ ...f, start_date: v }))} required /></div>
+              <div><label style={LABEL}>Bitiş</label><DatePicker value={contractForm.end_date} onChange={v => setContractForm(f => ({ ...f, end_date: v }))} /></div>
+              <div><label style={LABEL}>Aylık Hizmet Bedeli (₺) *</label><input type="number" min="0" value={contractForm.monthly_fee} onChange={e => setContractForm(f => ({ ...f, monthly_fee: e.target.value }))} style={INPUT} required /></div>
+              <div><label style={LABEL}>Ödeme Günü</label><input type="number" min="1" max="31" value={contractForm.payment_day} onChange={e => setContractForm(f => ({ ...f, payment_day: e.target.value }))} style={INPUT} /></div>
+              <div><label style={LABEL}>Sözleşme Süresi (Ay)</label><input type="number" min="1" value={contractForm.duration_months} onChange={e => setContractForm(f => ({ ...f, duration_months: e.target.value }))} style={INPUT} /></div>
+              <div><label style={LABEL}>İmzalı Sözleşme Bağlantısı</label><input type="url" value={contractForm.signed_contract_url} onChange={e => setContractForm(f => ({ ...f, signed_contract_url: e.target.value }))} style={INPUT} placeholder="Drive veya güvenli dosya bağlantısı" /></div>
+              <div><label style={LABEL}>Aylık Post</label><input type="number" min="0" value={contractForm.monthly_post_count} onChange={e => setContractForm(f => ({ ...f, monthly_post_count: e.target.value }))} style={INPUT} /></div>
+              <div><label style={LABEL}>Aylık Video</label><input type="number" min="0" value={contractForm.monthly_video_count} onChange={e => setContractForm(f => ({ ...f, monthly_video_count: e.target.value }))} style={INPUT} /></div>
+              <div><label style={LABEL}>Aylık Çekim Günü</label><input type="number" min="0" value={contractForm.monthly_shoot_days} onChange={e => setContractForm(f => ({ ...f, monthly_shoot_days: e.target.value }))} style={INPUT} /></div>
+              <div><label style={LABEL}>Anlaşılan Hizmetler</label><input value={contractForm.services} onChange={e => setContractForm(f => ({ ...f, services: e.target.value }))} style={INPUT} placeholder="Virgülle ayırın" /></div>
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+              <label style={{ fontSize: 12, color: "var(--c-text2)" }}><input type="checkbox" checked={contractForm.auto_renew} onChange={e => setContractForm(f => ({ ...f, auto_renew: e.target.checked }))} /> Otomatik yenilenir</label>
+              <label style={{ fontSize: 12, color: "var(--c-text2)" }}><input type="checkbox" checked={contractForm.story_service} onChange={e => setContractForm(f => ({ ...f, story_service: e.target.checked }))} /> Story hizmeti</label>
+              <label style={{ fontSize: 12, color: "var(--c-text2)" }}><input type="checkbox" checked={contractForm.advertising_management} onChange={e => setContractForm(f => ({ ...f, advertising_management: e.target.checked }))} /> Reklam yönetimi</label>
+            </div>
+            <div><label style={LABEL}>Ek Hizmetler</label><textarea value={contractForm.extra_services} onChange={e => setContractForm(f => ({ ...f, extra_services: e.target.value }))} style={{ ...INPUT, height: 70, resize: "vertical" }} /></div>
+            <div><label style={LABEL}>Sözleşme Notları</label><textarea value={contractForm.notes} onChange={e => setContractForm(f => ({ ...f, notes: e.target.value }))} style={{ ...INPUT, height: 80, resize: "vertical" }} /></div>
+            {contractError && <div style={{ fontSize: 12, color: "#f87171", background: "rgba(248,113,113,.08)", padding: 10, borderRadius: 8 }}>{contractError}</div>}
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
+              <button type="button" onClick={() => setContractModal({ open: false, editing: null })} style={{ border: "1px solid var(--c-border)", background: "transparent", color: "var(--c-text)", padding: "9px 16px", borderRadius: 8, cursor: "pointer" }}>Vazgeç</button>
+              <button type="submit" disabled={isPending} style={{ border: "none", background: "#8b5cf6", color: "#fff", padding: "9px 18px", borderRadius: 8, cursor: isPending ? "wait" : "pointer", fontWeight: 600 }}>{isPending ? "Kaydediliyor..." : "Sözleşmeyi Kaydet"}</button>
+            </div>
+          </form>
+        </div>
+      )}
 
       {/* ── Müşteri Düzenle Modal ── */}
       {editOpen && (

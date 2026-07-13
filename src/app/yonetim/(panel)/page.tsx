@@ -144,7 +144,10 @@ async function getDashboardData() {
     { data: users },
     { data: followUps },
     { data: crmLeads },
-    { data: teklifler }
+    { data: teklifler },
+    { data: activeClients },
+    { data: contracts },
+    { data: overdueTasks }
   ] = await Promise.all([
     supabase.from("contacts").select("id,name,message,created_at,is_read").order("created_at", { ascending: false }),
     supabase.from("audits").select("id,business_name,email,score_overall,created_at,is_read").order("created_at", { ascending: false }),
@@ -156,8 +159,11 @@ async function getDashboardData() {
       .select("id,type,note,follow_up_date,completed,lead_id,crm_leads(id,title)")
       .eq("follow_up_date", todayStr)
       .eq("completed", false),
-    supabase.from("crm_leads").select("id, status, source"),
-    supabase.from("musteri_teklifler").select("tutar, durum")
+    supabase.from("crm_leads").select("id, title, status, source, next_follow_up_date"),
+    supabase.from("musteri_teklifler").select("id, lead_id, tutar, durum, created_at, paket_adi"),
+    supabase.from("musteriler").select("id, ad, sozlesme_bitis_tarihi").eq("durum", "aktif"),
+    supabase.from("crm_contracts").select("id, client_id, end_date"),
+    supabase.from("musteri_gorevler").select("id, musteri_id, baslik, bitis_tarihi, musteriler(ad)").eq("tamamlandi", false).lt("bitis_tarihi", todayStr)
   ]);
 
   const C = contacts ?? [];
@@ -168,6 +174,36 @@ async function getDashboardData() {
   const F = (followUps ?? []) as any[];
   const L = crmLeads ?? [];
   const T = teklifler ?? [];
+  const clients = activeClients ?? [];
+  const contractRows = contracts ?? [];
+  const contractedClientIds = new Set(contractRows.map(c => c.client_id));
+  const fourteenDaysAgo = new Date();
+  fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
+  const thirtyDaysLater = new Date();
+  thirtyDaysLater.setDate(thirtyDaysLater.getDate() + 30);
+
+  const crmAlerts = [
+    ...L.filter(l => l.next_follow_up_date && l.next_follow_up_date < todayStr && !["kazanildi", "kaybedildi"].includes(l.status)).map(l => ({
+      id: `lead-${l.id}`, level: "danger" as const, title: "Gecikmiş aday takibi", detail: l.title,
+      href: `/yonetim/crm-leads/${l.id}`,
+    })),
+    ...T.filter(t => ["gonderildi", "gorusuluyor"].includes(t.durum) && new Date(t.created_at) < fourteenDaysAgo).map(t => ({
+      id: `offer-${t.id}`, level: "warning" as const, title: "Uzun süredir bekleyen teklif", detail: t.paket_adi || "Teklif",
+      href: t.lead_id ? `/yonetim/crm-leads/${t.lead_id}` : "/yonetim/musteriler",
+    })),
+    ...clients.filter(c => !contractedClientIds.has(c.id)).map(c => ({
+      id: `contract-${c.id}`, level: "warning" as const, title: "Sözleşme kaydı eksik", detail: c.ad,
+      href: `/yonetim/musteriler/${c.id}`,
+    })),
+    ...contractRows.filter(c => c.end_date && new Date(c.end_date) >= new Date(todayStr) && new Date(c.end_date) <= thirtyDaysLater).map(c => {
+      const client = clients.find(item => item.id === c.client_id);
+      return { id: `renew-${c.id}`, level: "info" as const, title: "Sözleşme bitişi yaklaşıyor", detail: client?.ad || "Müşteri", href: `/yonetim/musteriler/${c.client_id}` };
+    }),
+    ...(overdueTasks ?? []).map(task => {
+      const related = Array.isArray(task.musteriler) ? task.musteriler[0] : task.musteriler;
+      return { id: `task-${task.id}`, level: "danger" as const, title: "Geciken müşteri görevi", detail: `${related?.ad || "Müşteri"}: ${task.baslik}`, href: `/yonetim/musteriler/${task.musteri_id}` };
+    }),
+  ].slice(0, 12);
 
   // Pipeline değeri: durum in ['taslak', 'gonderildi', 'hazirlaniyor', 'gorusuluyor']
   const pipelineValue = T
@@ -227,6 +263,7 @@ async function getDashboardData() {
     activeLeads,
     wonRate,
     sourceCounts
+    ,crmAlerts
   };
 }
 
@@ -384,6 +421,7 @@ export default async function DashboardPage() {
       activeLeads,
       wonRate,
       sourceCounts
+      ,crmAlerts
     },
     gbiz,
     ga4,
@@ -502,6 +540,29 @@ export default async function DashboardPage() {
 
       {/* ── Bugün Takip Edilecekler ── */}
       <DashboardFollowUps initialFollowUps={followUps} />
+
+      {crmAlerts.length > 0 && (
+        <section style={{ ...card, marginBottom: 20, padding: 0, overflow: "hidden" }}>
+          <div style={{ padding: "14px 18px", borderBottom: "1px solid var(--c-border)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>CRM Uyarı Merkezi</div>
+            <span style={{ fontSize: 11, color: "#f59e0b", fontWeight: 700 }}>{crmAlerts.length} açık uyarı</span>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))" }}>
+            {crmAlerts.map((alert, index) => {
+              const color = alert.level === "danger" ? "#f87171" : alert.level === "warning" ? "#fbbf24" : "#60a5fa";
+              return (
+                <a key={alert.id} href={alert.href} style={{ padding: "13px 18px", textDecoration: "none", borderBottom: "1px solid var(--c-border)", borderRight: index % 2 === 0 ? "1px solid var(--c-border)" : "none", display: "flex", gap: 10, alignItems: "flex-start" }}>
+                  <span style={{ width: 8, height: 8, borderRadius: "50%", background: color, marginTop: 5, flexShrink: 0 }} />
+                  <span>
+                    <span style={{ display: "block", fontSize: 12, fontWeight: 700, color }}>{alert.title}</span>
+                    <span style={{ display: "block", fontSize: 11, color: "var(--c-text2)", marginTop: 2 }}>{alert.detail}</span>
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* ── Stat cards ── */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 14 }}>

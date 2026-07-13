@@ -4,7 +4,8 @@ import { useState, useMemo, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { updateLead, convertLeadToClient, type LeadInput } from "@/lib/actions/crmLeads";
 import { addFollowUp, toggleFollowUpCompleted, deleteFollowUp } from "@/lib/actions/crmFollowUps";
-import { addTeklif, updateTeklif, deleteTeklif } from "@/lib/actions/teklifler";
+import { addMeeting, deleteMeeting } from "@/lib/actions/crmMeetings";
+import { addTeklif, updateTeklif, deleteTeklif, createThreePackageOffers } from "@/lib/actions/teklifler";
 import { DatePicker } from "../../../musteriler/_components/DatePicker";
 import { TeklifPDFButton } from "@/components/admin/TeklifPDFButton";
 import { AuditPDFButton } from "@/components/admin/AuditPDFButton";
@@ -46,6 +47,21 @@ type FollowUp = {
   completed: boolean;
 };
 
+type Meeting = {
+  id: string;
+  lead_id: string;
+  meeting_at: string;
+  location: string;
+  participants: string[];
+  purpose: string;
+  current_problems: string;
+  expectations: string;
+  current_accounts: string;
+  requested_services: string[];
+  estimated_monthly_budget: number | null;
+  notes: string;
+};
+
 type Teklif = {
   id: string;
   lead_id: string | null;
@@ -53,7 +69,7 @@ type Teklif = {
   musteri_id: string | null;
   baslik: string;
   tutar: number;
-  durum: "taslak" | "gonderildi" | "kabul_edildi" | "reddedildi" | "suresi_doldu" | "hazirlaniyor" | "gorusuluyor" | "kazanildi" | "kaybedildi";
+  durum: "taslak" | "hazirlaniyor" | "kontrol_bekliyor" | "gonderildi" | "goruldu" | "degerlendiriliyor" | "revize_istendi" | "kabul_edildi" | "reddedildi" | "suresi_doldu" | "gorusuluyor" | "kazanildi" | "kaybedildi";
   gonderim_tarihi: string | null;
   notlar: string;
   created_at: string;
@@ -64,6 +80,28 @@ type Teklif = {
   ek_hizmetler?: string;
   teklif_tarihi?: string | null;
   gecerlilik_tarihi?: string | null;
+  package_level?: "baslangic" | "orta" | "ileri" | null;
+  rejection_reason?: string;
+  revision_reason?: string;
+  package_details?: PackageDetails;
+};
+
+type PackageDetails = {
+  post_count: number;
+  video_count: number;
+  shoot_day_count: number;
+  story_service: boolean;
+  advertising_management: boolean;
+  account_management: boolean;
+  content_copy: boolean;
+  design_service: boolean;
+  video_editing: boolean;
+};
+
+const EMPTY_PACKAGE_DETAILS: PackageDetails = {
+  post_count: 0, video_count: 0, shoot_day_count: 0,
+  story_service: false, advertising_management: false, account_management: true,
+  content_copy: true, design_service: true, video_editing: true,
 };
 
 type User = { id: string; username: string; role: string };
@@ -98,6 +136,10 @@ const FOLLOW_UP_TYPES: Record<FollowUp["type"], { label: string; color: string }
 const TEKLIF_STATUS_MAP: Record<Teklif["durum"], { label: string; color: string; bg: string }> = {
   taslak:       { label: "Taslak",       color: "#94a3b8", bg: "rgba(148,163,184,0.12)" },
   gonderildi:   { label: "Gönderildi",   color: "#3b82f6", bg: "rgba(59,130,246,0.12)" },
+  kontrol_bekliyor: { label: "Kontrol Bekliyor", color: "#a78bfa", bg: "rgba(167,139,250,0.12)" },
+  goruldu: { label: "Görüldü", color: "#22d3ee", bg: "rgba(34,211,238,0.12)" },
+  degerlendiriliyor: { label: "Değerlendiriliyor", color: "#fbbf24", bg: "rgba(251,191,36,0.12)" },
+  revize_istendi: { label: "Revize İstendi", color: "#fb923c", bg: "rgba(251,146,60,0.12)" },
   kabul_edildi: { label: "Kabul Edildi", color: "#10b981", bg: "rgba(16,185,129,0.12)" },
   reddedildi:   { label: "Reddedildi",   color: "#ef4444", bg: "rgba(239,68,68,0.12)" },
   suresi_doldu: { label: "Süresi Doldu", color: "#f59e0b", bg: "rgba(245,158,11,0.12)" },
@@ -183,13 +225,13 @@ function scoreColor(s: number) {
 }
 
 export function CrmLeadDetailClient({
-  lead, companies, contacts, followUps, teklifler, users, audit
+  lead, companies, contacts, followUps, meetings, teklifler, users, audit
 }: {
-  lead: Lead; companies: Company[]; contacts: Contact[]; followUps: FollowUp[]; teklifler: Teklif[]; users: User[]; audit?: any;
+  lead: Lead; companies: Company[]; contacts: Contact[]; followUps: FollowUp[]; meetings: Meeting[]; teklifler: Teklif[]; users: User[]; audit?: any;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [activeTab, setActiveTab] = useState<"takipler" | "teklifler">("takipler");
+  const [activeTab, setActiveTab] = useState<"takipler" | "toplantilar" | "teklifler">("takipler");
   const [isPending, setIsPending] = useState(false);
   const [generalError, setGeneralError] = useState("");
 
@@ -197,6 +239,7 @@ export function CrmLeadDetailClient({
   const [editModal, setEditModal] = useState(false);
   const [convertModal, setConvertModal] = useState(false);
   const [followUpModal, setFollowUpModal] = useState(false);
+  const [meetingModal, setMeetingModal] = useState(false);
   const [teklifModal, setTeklifModal] = useState<{ open: boolean; editing: Teklif | null }>({ open: false, editing: null });
   const [deleteTargetTeklif, setDeleteTargetTeklif] = useState<Teklif | null>(null);
 
@@ -245,8 +288,15 @@ export function CrmLeadDetailClient({
     note: "",
   });
 
+  const [meetingForm, setMeetingForm] = useState({
+    meeting_at: `${todayISO()}T10:00`, location: "", participants: "", purpose: "",
+    current_problems: "", expectations: "", current_accounts: "",
+    requested_services: "", estimated_monthly_budget: "", notes: "",
+  });
+
   // Teklif Form State
   const [teklifForm, setTeklifForm] = useState({
+    package_level: "baslangic" as "baslangic" | "orta" | "ileri",
     paket_adi: "",
     baslik: "",
     tutar: "",
@@ -256,7 +306,8 @@ export function CrmLeadDetailClient({
     teklif_tarihi: todayISO(),
     gecerlilik_tarihi: "",
     notlar: "",
-    hizmetler: [] as { ad: string; fiyat: number }[]
+    hizmetler: [] as { ad: string; fiyat: number }[], rejection_reason: "", revision_reason: "",
+    package_details: { ...EMPTY_PACKAGE_DETAILS },
   });
 
   const compObj = companies.find(c => c.id === lead.company_id);
@@ -264,6 +315,9 @@ export function CrmLeadDetailClient({
   const compName = compObj?.name || lead.company_name || "Bireysel";
   const contName = contObj?.name || lead.contact_name || "";
   const stat = STATUS_MAP[lead.status];
+  const comparisonOffers = (["baslangic", "orta", "ileri"] as const)
+    .map(level => teklifler.find(item => item.package_level === level))
+    .filter((item): item is Teklif => Boolean(item));
 
   // Seçilen firmaya göre yetkili kişileri süz (Fırsat düzenleme modalı için)
   const filteredContactsForEdit = useMemo(() => {
@@ -364,6 +418,40 @@ export function CrmLeadDetailClient({
     else router.refresh();
   }
 
+  async function handleMeetingSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!meetingForm.meeting_at || !meetingForm.purpose.trim()) {
+      setGeneralError("Görüşme tarihi ve amacı zorunludur."); return;
+    }
+    setIsPending(true);
+    const result = await addMeeting({
+      lead_id: lead.id,
+      meeting_at: new Date(meetingForm.meeting_at).toISOString(),
+      location: meetingForm.location,
+      participants: meetingForm.participants.split(","),
+      purpose: meetingForm.purpose,
+      current_problems: meetingForm.current_problems,
+      expectations: meetingForm.expectations,
+      current_accounts: meetingForm.current_accounts,
+      requested_services: meetingForm.requested_services.split(","),
+      estimated_monthly_budget: meetingForm.estimated_monthly_budget ? Number(meetingForm.estimated_monthly_budget) : null,
+      notes: meetingForm.notes,
+    });
+    setIsPending(false);
+    if (result.error) setGeneralError(result.error);
+    else {
+      setMeetingModal(false);
+      setMeetingForm(f => ({ ...f, purpose: "", current_problems: "", expectations: "", notes: "" }));
+      router.refresh();
+    }
+  }
+
+  async function handleDeleteMeeting(id: string) {
+    if (!confirm("Bu görüşme kaydı silinsin mi?")) return;
+    const result = await deleteMeeting(id, lead.id);
+    if (result.error) setGeneralError(result.error); else router.refresh();
+  }
+
   // Teklif Formu Hizmet Satırı İşlemleri
   function addHizmetRow() {
     setTeklifForm(f => ({
@@ -404,6 +492,7 @@ export function CrmLeadDetailClient({
       lead_id: lead.id,
       company_id: lead.company_id || null,
       paket_adi: teklifForm.paket_adi.trim(),
+      package_level: teklifForm.package_level,
       baslik: teklifForm.baslik.trim() || teklifForm.paket_adi.trim(),
       tutar: toplamTutar,
       kurulum_ucreti: setup,
@@ -413,6 +502,9 @@ export function CrmLeadDetailClient({
       gecerlilik_tarihi: teklifForm.gecerlilik_tarihi || null,
       notlar: teklifForm.notlar.trim(),
       hizmetler: teklifForm.hizmetler,
+      rejection_reason: teklifForm.rejection_reason,
+      revision_reason: teklifForm.revision_reason,
+      package_details: teklifForm.package_details,
       durum: (teklifModal.editing ? teklifModal.editing.durum : "taslak") as any,
     };
 
@@ -432,7 +524,19 @@ export function CrmLeadDetailClient({
 
   // Teklif Durumunu Değiştir
   async function handleTeklifStatusChange(id: string, newStatus: Teklif["durum"]) {
-    const result = await updateTeklif(id, { leadId: lead.id }, { durum: newStatus });
+    const extra: { rejection_reason?: string; revision_reason?: string; viewed_at?: string } = {};
+    if (newStatus === "reddedildi") {
+      const reason = window.prompt("Ret nedeni: fiyat yüksek, başka ajans, ertelendi, karar verici onaylamadı, ihtiyaç yok, ulaşılamadı veya diğer");
+      if (!reason) return;
+      extra.rejection_reason = reason.trim();
+    }
+    if (newStatus === "revize_istendi") {
+      const reason = window.prompt("Revize talebini kısaca açıklayın:");
+      if (!reason) return;
+      extra.revision_reason = reason.trim();
+    }
+    if (newStatus === "goruldu") extra.viewed_at = new Date().toISOString();
+    const result = await updateTeklif(id, { leadId: lead.id }, { durum: newStatus, ...extra });
     if (result.error) alert("Teklif durumu güncellenemedi: " + result.error);
     else router.refresh();
   }
@@ -451,17 +555,28 @@ export function CrmLeadDetailClient({
     }
   }
 
+  async function handleCreatePackageBundle() {
+    setIsPending(true);
+    const result = await createThreePackageOffers(lead.id, lead.company_id);
+    setIsPending(false);
+    if (result.error) setGeneralError(result.error);
+    else router.refresh();
+  }
+
   function openAddTeklif() {
     setTeklifForm({
+      package_level: "baslangic",
       paket_adi: "", baslik: "", tutar: "", kurulum_ucreti: "", ek_hizmetler: "",
       teklif_no: `TKF-${Math.floor(100000 + Math.random() * 900000)}`,
-      teklif_tarihi: todayISO(), gecerlilik_tarihi: "", notlar: "", hizmetler: []
+      teklif_tarihi: todayISO(), gecerlilik_tarihi: "", notlar: "", hizmetler: [], rejection_reason: "", revision_reason: "",
+      package_details: { ...EMPTY_PACKAGE_DETAILS },
     });
     setTeklifModal({ open: true, editing: null });
   }
 
   function openEditTeklif(t: Teklif) {
     setTeklifForm({
+      package_level: t.package_level || "baslangic",
       paket_adi: t.paket_adi || "",
       baslik: t.baslik,
       tutar: t.tutar ? String(t.tutar) : "", // monthly will be derived from calculations
@@ -471,7 +586,10 @@ export function CrmLeadDetailClient({
       teklif_tarihi: t.teklif_tarihi || todayISO(),
       gecerlilik_tarihi: t.gecerlilik_tarihi || "",
       notlar: t.notlar || "",
-      hizmetler: t.hizmetler || []
+      hizmetler: t.hizmetler || [],
+      rejection_reason: t.rejection_reason || "",
+      revision_reason: t.revision_reason || ""
+      ,package_details: { ...EMPTY_PACKAGE_DETAILS, ...(t.package_details || {}) }
     });
     setTeklifModal({ open: true, editing: t });
   }
@@ -743,6 +861,16 @@ export function CrmLeadDetailClient({
               Görüşme Geçmişi ({followUps.length})
             </button>
             <button
+              onClick={() => setActiveTab("toplantilar")}
+              style={{
+                background: "transparent", border: "none", color: activeTab === "toplantilar" ? "#a78bfa" : "var(--c-dim)",
+                padding: "10px 16px", fontSize: 14, fontWeight: 600, cursor: "pointer",
+                borderBottom: activeTab === "toplantilar" ? "2px solid #a78bfa" : "none",
+              }}
+            >
+              Ön Görüşmeler ({meetings.length})
+            </button>
+            <button
               onClick={() => setActiveTab("teklifler")}
               style={{
                 background: "transparent", border: "none", color: activeTab === "teklifler" ? "#6366f1" : "var(--c-dim)",
@@ -839,7 +967,54 @@ export function CrmLeadDetailClient({
             </div>
           )}
 
-          {/* TAB 2: TEKLİFLER */}
+          {/* TAB 2: ÖN GÖRÜŞMELER */}
+          {activeTab === "toplantilar" && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontSize: 13, color: "var(--c-dim)" }}>
+                  Yüz yüze veya çevrim içi ihtiyaç analizi görüşmeleri.
+                </span>
+                {!lead.converted_client_id && (
+                  <button onClick={() => setMeetingModal(true)} style={{
+                    background: "rgba(167,139,250,0.1)", border: "1px solid rgba(167,139,250,0.25)",
+                    color: "#a78bfa", padding: "6px 12px", borderRadius: 6, fontSize: 12,
+                    fontWeight: 600, cursor: "pointer",
+                  }}>
+                    + Ön Görüşme Planla
+                  </button>
+                )}
+              </div>
+
+              {meetings.length === 0 ? (
+                <div style={{ ...CARD, textAlign: "center", padding: "48px 0", color: "var(--c-dim)", fontSize: 13 }}>
+                  Henüz ön görüşme kaydı oluşturulmamış.
+                </div>
+              ) : meetings.map(meeting => (
+                <article key={meeting.id} style={{ ...CARD, padding: "18px 20px", borderLeft: "4px solid #a78bfa" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", gap: 16 }}>
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: "var(--c-text)" }}>{meeting.purpose || "Ön Görüşme"}</div>
+                      <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 4 }}>
+                        {new Date(meeting.meeting_at).toLocaleString("tr-TR", { dateStyle: "long", timeStyle: "short" })}
+                        {meeting.location ? ` · ${meeting.location}` : ""}
+                      </div>
+                    </div>
+                    {!lead.converted_client_id && (
+                      <button onClick={() => handleDeleteMeeting(meeting.id)} style={{ background: "transparent", border: "none", color: "#f87171", cursor: "pointer", fontSize: 11 }}>Sil</button>
+                    )}
+                  </div>
+                  {meeting.participants?.length > 0 && <p style={{ fontSize: 12, color: "var(--c-text2)", margin: "12px 0 0" }}><strong>Katılımcılar:</strong> {meeting.participants.join(", ")}</p>}
+                  {meeting.requested_services?.length > 0 && <p style={{ fontSize: 12, color: "var(--c-text2)", margin: "6px 0 0" }}><strong>Talep edilen hizmetler:</strong> {meeting.requested_services.join(", ")}</p>}
+                  {meeting.current_problems && <p style={{ fontSize: 12, color: "var(--c-text2)", margin: "6px 0 0", whiteSpace: "pre-wrap" }}><strong>Mevcut sorunlar:</strong> {meeting.current_problems}</p>}
+                  {meeting.expectations && <p style={{ fontSize: 12, color: "var(--c-text2)", margin: "6px 0 0", whiteSpace: "pre-wrap" }}><strong>Beklentiler:</strong> {meeting.expectations}</p>}
+                  {meeting.estimated_monthly_budget != null && <div style={{ marginTop: 10, fontSize: 12, color: "#34d399", fontWeight: 700 }}>Tahmini aylık bütçe: ₺{fmt(Number(meeting.estimated_monthly_budget))}</div>}
+                  {meeting.notes && <p style={{ fontSize: 12, color: "var(--c-dim)", margin: "10px 0 0", paddingTop: 10, borderTop: "1px solid var(--c-border)" }}>{meeting.notes}</p>}
+                </article>
+              ))}
+            </div>
+          )}
+
+          {/* TAB 3: TEKLİFLER */}
           {activeTab === "teklifler" && (
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -847,15 +1022,58 @@ export function CrmLeadDetailClient({
                   Adaya özel hazırlanan hizmet ve fiyatlandırma teklifleri.
                 </span>
                 {!lead.converted_client_id && (
-                  <button onClick={openAddTeklif} style={{
-                    background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)",
-                    color: "#6366f1", padding: "6px 12px", borderRadius: 6, fontSize: 12,
-                    fontWeight: 600, cursor: "pointer",
-                  }}>
-                    + Yeni Teklif Oluştur
-                  </button>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <button onClick={handleCreatePackageBundle} disabled={isPending} style={{
+                      background: "rgba(167,139,250,0.1)", border: "1px solid rgba(167,139,250,0.25)",
+                      color: "#a78bfa", padding: "6px 12px", borderRadius: 6, fontSize: 12,
+                      fontWeight: 600, cursor: isPending ? "wait" : "pointer",
+                    }}>
+                      Üç Paket Şablonu Oluştur
+                    </button>
+                    <button onClick={openAddTeklif} style={{
+                      background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)",
+                      color: "#6366f1", padding: "6px 12px", borderRadius: 6, fontSize: 12,
+                      fontWeight: 600, cursor: "pointer",
+                    }}>
+                      + Teklif Oluştur
+                    </button>
+                  </div>
                 )}
               </div>
+
+              {comparisonOffers.length >= 2 && (
+                <div style={{ ...CARD, padding: 0, overflow: "hidden" }}>
+                  <div style={{ padding: "12px 16px", borderBottom: "1px solid var(--c-border)", fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>Paket Karşılaştırması</div>
+                  <div style={{ display: "grid", gridTemplateColumns: `150px repeat(${comparisonOffers.length}, minmax(150px, 1fr))` }}>
+                    <div style={{ padding: 12, background: "var(--c-surface2)" }} />
+                    {comparisonOffers.map(item => (
+                      <div key={item.id} style={{ padding: 12, background: item.package_level === "orta" ? "rgba(139,92,246,.08)" : "var(--c-surface2)", borderLeft: "1px solid var(--c-border)" }}>
+                        <div style={{ fontSize: 12, fontWeight: 800, color: item.package_level === "orta" ? "#a78bfa" : "var(--c-text)" }}>{item.paket_adi}</div>
+                        <div style={{ fontSize: 16, fontWeight: 800, color: "#34d399", marginTop: 4 }}>₺{fmt(item.tutar)}</div>
+                      </div>
+                    ))}
+                    {[
+                      { key: "post_count", label: "Aylık Post" },
+                      { key: "video_count", label: "Aylık Video" },
+                      { key: "shoot_day_count", label: "Çekim Günü" },
+                      { key: "story_service", label: "Story Hizmeti" },
+                      { key: "advertising_management", label: "Reklam Yönetimi" },
+                      { key: "account_management", label: "Hesap Yönetimi" },
+                      { key: "content_copy", label: "İçerik Metinleri" },
+                      { key: "design_service", label: "Tasarım" },
+                      { key: "video_editing", label: "Video Kurgu" },
+                    ].map(row => (
+                      <div key={row.key} style={{ display: "contents" }}>
+                        <div style={{ padding: "9px 12px", fontSize: 11, color: "var(--c-text2)", borderTop: "1px solid var(--c-border)" }}>{row.label}</div>
+                        {comparisonOffers.map(item => {
+                          const value = item.package_details?.[row.key as keyof PackageDetails];
+                          return <div key={`${item.id}-${row.key}`} style={{ padding: "9px 12px", fontSize: 12, textAlign: "center", color: typeof value === "boolean" ? (value ? "#34d399" : "var(--c-dim)") : "var(--c-text)", borderLeft: "1px solid var(--c-border)", borderTop: "1px solid var(--c-border)" }}>{typeof value === "boolean" ? (value ? "✓" : "—") : value ?? 0}</div>;
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {teklifler.length === 0 ? (
                 <div style={{ ...CARD, textAlign: "center", padding: "48px 0", color: "var(--c-dim)", fontSize: 13 }}>
@@ -885,6 +1103,11 @@ export function CrmLeadDetailClient({
                             <h4 style={{ margin: "6px 0 0", fontSize: 14, fontWeight: 700, color: "var(--c-text)" }}>
                               {t.paket_adi || t.baslik}
                             </h4>
+                            {t.package_level && (
+                              <div style={{ fontSize: 10, color: "#a78bfa", marginTop: 3, textTransform: "uppercase", fontWeight: 700 }}>
+                                {t.package_level === "baslangic" ? "Başlangıç" : t.package_level === "orta" ? "Orta Seviye" : "İleri Seviye"}
+                              </div>
+                            )}
                             <div style={{ fontSize: 11, color: "var(--c-dim)", marginTop: 2 }}>
                               Teklif Tarihi: {t.teklif_tarihi ? new Date(t.teklif_tarihi).toLocaleDateString("tr-TR") : "Belirtilmemiş"}
                             </div>
@@ -900,6 +1123,8 @@ export function CrmLeadDetailClient({
                             Not: {t.notlar}
                           </p>
                         )}
+                        {t.rejection_reason && <p style={{ margin: 0, fontSize: 12, color: "#f87171" }}><strong>Ret nedeni:</strong> {t.rejection_reason}</p>}
+                        {t.revision_reason && <p style={{ margin: 0, fontSize: 12, color: "#fb923c" }}><strong>Revize talebi:</strong> {t.revision_reason}</p>}
 
                         <div style={{ borderTop: "1px solid var(--c-border2)", paddingTop: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                           {/* Durum Güncelleme */}
@@ -910,7 +1135,12 @@ export function CrmLeadDetailClient({
                               style={{ ...INPUT, width: 140, padding: "4px 8px", fontSize: 11 }}
                             >
                               <option value="taslak">Taslak</option>
+                              <option value="hazirlaniyor">Hazırlanıyor</option>
+                              <option value="kontrol_bekliyor">Kontrol Bekliyor</option>
                               <option value="gonderildi">Gönderildi</option>
+                              <option value="goruldu">Görüldü</option>
+                              <option value="degerlendiriliyor">Değerlendiriliyor</option>
+                              <option value="revize_istendi">Revize Teklif İstendi</option>
                               <option value="kabul_edildi">Kabul Edildi</option>
                               <option value="reddedildi">Reddedildi</option>
                               <option value="suresi_doldu">Süresi Doldu</option>
@@ -1117,7 +1347,69 @@ export function CrmLeadDetailClient({
         </div>
       )}
 
-      {/* ── 3. Teklif Ekleme/Düzenleme Modalı ── */}
+      {/* ── 3. Ön Görüşme Modalı ── */}
+      {meetingModal && (
+        <div style={{
+          position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex",
+          alignItems: "center", justifyContent: "center", zIndex: 110, backdropFilter: "blur(4px)", padding: 20,
+        }}>
+          <form onSubmit={handleMeetingSubmit} style={{
+            background: "var(--c-surface)", border: "1px solid var(--c-border)", borderRadius: 16,
+            width: "100%", maxWidth: 720, padding: 26, maxHeight: "92vh", overflowY: "auto",
+            display: "flex", flexDirection: "column", gap: 14,
+          }}>
+            <h3 style={{ margin: 0, fontSize: 16, color: "var(--c-text)" }}>Yeni Ön Görüşme</h3>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              <div>
+                <label style={LABEL}>Tarih ve Saat *</label>
+                <input type="datetime-local" value={meetingForm.meeting_at} onChange={e => setMeetingForm(f => ({ ...f, meeting_at: e.target.value }))} style={INPUT} required />
+              </div>
+              <div>
+                <label style={LABEL}>Konum / Görüşme Bağlantısı</label>
+                <input value={meetingForm.location} onChange={e => setMeetingForm(f => ({ ...f, location: e.target.value }))} style={INPUT} placeholder="Ofis, müşteri adresi veya Meet bağlantısı" />
+              </div>
+              <div style={{ gridColumn: "span 2" }}>
+                <label style={LABEL}>Görüşmenin Amacı *</label>
+                <input value={meetingForm.purpose} onChange={e => setMeetingForm(f => ({ ...f, purpose: e.target.value }))} style={INPUT} required />
+              </div>
+              <div>
+                <label style={LABEL}>Katılımcılar</label>
+                <input value={meetingForm.participants} onChange={e => setMeetingForm(f => ({ ...f, participants: e.target.value }))} style={INPUT} placeholder="Virgülle ayırın" />
+              </div>
+              <div>
+                <label style={LABEL}>Talep Edilen Hizmetler</label>
+                <input value={meetingForm.requested_services} onChange={e => setMeetingForm(f => ({ ...f, requested_services: e.target.value }))} style={INPUT} placeholder="Virgülle ayırın" />
+              </div>
+              <div>
+                <label style={LABEL}>Tahmini Aylık Bütçe (₺)</label>
+                <input type="number" min="0" value={meetingForm.estimated_monthly_budget} onChange={e => setMeetingForm(f => ({ ...f, estimated_monthly_budget: e.target.value }))} style={INPUT} />
+              </div>
+              <div>
+                <label style={LABEL}>Mevcut Sosyal Medya Hesapları</label>
+                <input value={meetingForm.current_accounts} onChange={e => setMeetingForm(f => ({ ...f, current_accounts: e.target.value }))} style={INPUT} />
+              </div>
+              <div>
+                <label style={LABEL}>Mevcut Sorunlar</label>
+                <textarea value={meetingForm.current_problems} onChange={e => setMeetingForm(f => ({ ...f, current_problems: e.target.value }))} style={{ ...INPUT, height: 90, resize: "vertical" }} />
+              </div>
+              <div>
+                <label style={LABEL}>Beklentiler</label>
+                <textarea value={meetingForm.expectations} onChange={e => setMeetingForm(f => ({ ...f, expectations: e.target.value }))} style={{ ...INPUT, height: 90, resize: "vertical" }} />
+              </div>
+              <div style={{ gridColumn: "span 2" }}>
+                <label style={LABEL}>Görüşme Notları</label>
+                <textarea value={meetingForm.notes} onChange={e => setMeetingForm(f => ({ ...f, notes: e.target.value }))} style={{ ...INPUT, height: 90, resize: "vertical" }} />
+              </div>
+            </div>
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
+              <button type="button" onClick={() => setMeetingModal(false)} style={{ background: "transparent", border: "1px solid var(--c-border)", color: "var(--c-text)", padding: "9px 16px", borderRadius: 8, cursor: "pointer" }}>Vazgeç</button>
+              <button type="submit" disabled={isPending} style={{ background: "#8b5cf6", border: "none", color: "#fff", padding: "9px 18px", borderRadius: 8, cursor: isPending ? "wait" : "pointer", fontWeight: 600 }}>{isPending ? "Kaydediliyor..." : "Görüşmeyi Kaydet"}</button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* ── 4. Teklif Ekleme/Düzenleme Modalı ── */}
       {teklifModal.open && (
         <div style={{
           position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
@@ -1156,6 +1448,39 @@ export function CrmLeadDetailClient({
                   style={INPUT}
                   required
                 />
+              </div>
+
+              <div style={{ gridColumn: "span 2" }}>
+                <label style={LABEL}>Paket Seviyesi *</label>
+                <select value={teklifForm.package_level} onChange={e => setTeklifForm(f => ({ ...f, package_level: e.target.value as "baslangic" | "orta" | "ileri" }))} style={INPUT}>
+                  <option value="baslangic">Başlangıç Paketi</option>
+                  <option value="orta">Orta Seviye Paket</option>
+                  <option value="ileri">İleri Seviye Paket</option>
+                </select>
+              </div>
+
+              <div>
+                <label style={LABEL}>Aylık Post</label>
+                <input type="number" min="0" value={teklifForm.package_details.post_count} onChange={e => setTeklifForm(f => ({ ...f, package_details: { ...f.package_details, post_count: Number(e.target.value) || 0 } }))} style={INPUT} />
+              </div>
+              <div>
+                <label style={LABEL}>Aylık Video</label>
+                <input type="number" min="0" value={teklifForm.package_details.video_count} onChange={e => setTeklifForm(f => ({ ...f, package_details: { ...f.package_details, video_count: Number(e.target.value) || 0 } }))} style={INPUT} />
+              </div>
+              <div>
+                <label style={LABEL}>Aylık Çekim Günü</label>
+                <input type="number" min="0" value={teklifForm.package_details.shoot_day_count} onChange={e => setTeklifForm(f => ({ ...f, package_details: { ...f.package_details, shoot_day_count: Number(e.target.value) || 0 } }))} style={INPUT} />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {[
+                  ["story_service", "Story hizmeti"], ["advertising_management", "Reklam yönetimi"],
+                  ["account_management", "Hesap yönetimi"], ["content_copy", "İçerik metinleri"],
+                  ["design_service", "Tasarım hizmeti"], ["video_editing", "Video kurgu"],
+                ].map(([key, label]) => (
+                  <label key={key} style={{ fontSize: 11, color: "var(--c-text2)" }}>
+                    <input type="checkbox" checked={Boolean(teklifForm.package_details[key as keyof PackageDetails])} onChange={e => setTeklifForm(f => ({ ...f, package_details: { ...f.package_details, [key]: e.target.checked } }))} /> {label}
+                  </label>
+                ))}
               </div>
 
               <div style={{ gridColumn: "span 2" }}>

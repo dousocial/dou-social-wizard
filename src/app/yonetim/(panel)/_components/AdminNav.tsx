@@ -74,6 +74,66 @@ const BASE_LINKS = [
 
 const CRM_LINKS = [
   {
+    href: "/yonetim/operasyon",
+    label: "Operasyon Merkezi",
+    exact: false,
+    color: "#f59e0b",
+    bg: "rgba(245,158,11,0.15)",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
+        <path d="M3 4h14v12H3zM6 2v4M14 2v4M3 8h14M7 11h2M11 11h2M7 14h2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    href: "/yonetim/uretim",
+    label: "Üretim Merkezi",
+    exact: false,
+    color: "#f472b6",
+    bg: "rgba(244,114,182,0.15)",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
+        <path d="M3 5h14v10H3zM7 2v3M13 2v3M7 9l2 2 4-4M6 18h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    href: "/yonetim/yayin",
+    label: "Yayın & Reklam",
+    exact: false,
+    color: "#818cf8",
+    bg: "rgba(129,140,248,0.15)",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
+        <path d="M3 4h14v12H3zM7 8l6 3-6 3V8zM15 2v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    href: "/yonetim/raporlar",
+    label: "CRM Raporları",
+    exact: false,
+    color: "#34d399",
+    bg: "rgba(52,211,153,0.15)",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
+        <path d="M3 17V9M8 17V4M13 17v-6M18 17V2M2 17h17" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    href: "/yonetim/otomasyon",
+    label: "Otomatik Görevler",
+    exact: false,
+    color: "#38bdf8",
+    bg: "rgba(56,189,248,0.15)",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
+        <path d="M10 3a7 7 0 107 7M10 6v4l3 2M14 2h4v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
     href: "/yonetim/firmalar",
     label: "Firmalar & Rehber",
     exact: false,

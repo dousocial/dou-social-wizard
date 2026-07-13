@@ -75,6 +75,11 @@ export function AddUserForm() {
           <label style={labelStyle}>Rol</label>
           <select name="role" style={{ ...inputStyle, cursor: "pointer" }}>
             <option value="izleyici">İzleyici — sadece görüntüleyebilir</option>
+            <option value="koordinator">Koordinatör — müşteri ve operasyon yönetimi</option>
+            <option value="editor">Editör — video ve revize işleri</option>
+            <option value="tasarimci">Tasarımcı — tasarım ve revize işleri</option>
+            <option value="cekim_ekibi">Çekim Ekibi — çekim ve medya işlemleri</option>
+            <option value="reklam_sorumlusu">Reklam Sorumlusu — reklam görevleri</option>
             <option value="yonetici">Yönetici — tam erişim</option>
           </select>
         </div>

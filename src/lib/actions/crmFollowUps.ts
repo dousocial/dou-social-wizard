@@ -2,7 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
-import { requireSession } from "@/lib/session";
+import { requirePermission } from "@/lib/session";
 
 function sb() {
   return createClient(
@@ -24,7 +24,7 @@ export type ActionResult = { error: string | null };
 export async function addFollowUp(data: FollowUpInput): Promise<ActionResult> {
   const supabase = sb();
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await supabase.from("crm_follow_ups").insert(data);
     if (error) return { error: error.message };
 
@@ -51,7 +51,7 @@ export async function addFollowUp(data: FollowUpInput): Promise<ActionResult> {
 
 export async function updateFollowUp(id: string, leadId: string, data: Partial<FollowUpInput>): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb().from("crm_follow_ups").update(data).eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim");
@@ -65,7 +65,7 @@ export async function updateFollowUp(id: string, leadId: string, data: Partial<F
 
 export async function toggleFollowUpCompleted(id: string, leadId: string, completed: boolean): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb()
       .from("crm_follow_ups")
       .update({ completed })
@@ -82,7 +82,7 @@ export async function toggleFollowUpCompleted(id: string, leadId: string, comple
 
 export async function deleteFollowUp(id: string, leadId: string): Promise<ActionResult> {
   try {
-    await requireSession();
+    await requirePermission("crm.write");
     const { error } = await sb().from("crm_follow_ups").delete().eq("id", id);
     if (error) return { error: error.message };
     revalidatePath("/yonetim");
