@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DOU Social — Pazarlama Sitesi
 
-## Getting Started
+Ajansın herkese açık pazarlama sitesi (`dousocial.com`). `dou-social-crm` reposundan tamamen ayrı, bağımsız bir Next.js uygulamasıdır — CRM/admin paneli (`/yonetim`) burada YOKTUR (o `dou-social-crm` reposunda ve `crm.dousocial.com`'da yaşar).
 
-First, run the development server:
+## Kurulum
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+# .env.local oluştur — bkz. aşağıdaki "Gerekli ortam değişkenleri"
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Dağıtım
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Bu repo **GitHub'a bağlı otomatik deploy kullanmaz** — Vercel projesi (`dou-social-wizard`) doğrudan CLI ile deploy edilir:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+vercel --prod --yes
+```
 
-## Learn More
+`main` branch'e push etmek tek başına canlıya yansımaz.
 
-To learn more about Next.js, take a look at the following resources:
+## Gerekli ortam değişkenleri
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `NEXT_PUBLIC_SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` — `dou-social-crm` ile AYNI Supabase projesi (veritabanı paylaşılıyor: iletişim formu, dijital checkup, blog, projeler, influencer başvuruları CRM tarafında görünür)
+- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` / reCAPTCHA server key — form spam koruması
+- Google/analytics ile ilgili anahtarlar — bkz. `.env.local` mevcut değerler
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notlar
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `supabase/` klasöründeki `.sql` dosyaları yalnızca bu sitenin kendi tablolarına ait (blog, projeler, influencer başvuru formu, genel şema referansı). CRM'in kendi şema migration'ları `dou-social-crm` reposundadır.
+- Eski (CRM ayrılmadan önceki) `/yonetim` admin paneli kalıntısı bu repodan tamamen kaldırıldı — daha önce yanlışlıkla canlıda hâlâ erişilebilir durumdaydı, artık yok.
