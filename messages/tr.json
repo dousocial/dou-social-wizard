@@ -1,0 +1,2375 @@
+{
+  "Hero": {
+    "titleBefore": "Karşınıza çıkan reklamları",
+    "titleHighlight": "biz",
+    "titleAfter": "tasarlıyoruz.",
+    "subtitle": "Meta Ads, sosyal medya yönetimi, içerik üretimi ve marka stratejisi. Reklam bütçenizi daha verimli, markanızı daha görünür hale getiriyoruz.",
+    "ctaPrimary": "Ücretsiz analiz al",
+    "ctaSecondary": "Projelerimizi inceleyin"
+  },
+  "Meta": {
+    "siteTitle": "DOU Social — Markanızı büyüten dijital ekip",
+    "siteDescription": "Meta Ads, sosyal medya ve içerik yönetimi. Denizli merkezli, Türkiye geneli dijital büyüme ajansı. Ölçülebilir sonuç, şeffaf süreç."
+  },
+  "Nav": {
+    "services": "Hizmetler",
+    "projects": "Projeler",
+    "about": "Hakkımızda",
+    "blog": "Blog",
+    "contact": "İletişim",
+    "faq": "SSS",
+    "cta": "Ücretsiz analiz",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat"
+  },
+  "ClientLogos": {
+    "eyebrow": "Referanslarımız",
+    "title": "Güvenen Markalar."
+  },
+  "Services": {
+    "eyebrow": "Hizmetler",
+    "title": "Büyümeniz için ihtiyacınız olan her şey.",
+    "subtitle": "Reklamdan içeriğe, web tasarımından marka stratejisine — tüm dijital kanalları tek operasyonla yönetiyoruz.",
+    "more": "Detaylı bak",
+    "allServices": "Tüm hizmetleri gör",
+    "sosyal-medya-marka": {
+      "title": "Sosyal Medya ve Marka Yönetimi",
+      "description": "Markanızın dijital görünürlüğünü güçlendiren stratejik içerik planlama, topluluk yönetimi ve marka iletişimi çözümleri."
+    },
+    "meta-reklamlari": {
+      "title": "Meta Reklam Yönetimi",
+      "description": "Instagram ve Facebook reklamlarında doğru hedefleme, optimize bütçe kullanımı ve ölçülebilir sonuçlar."
+    },
+    "icerik-video": {
+      "title": "İçerik Üretimi ve Video Prodüksiyon",
+      "description": "Markanıza özel fotoğraf, video ve yaratıcı içeriklerle dikkat çeken dijital deneyimler oluşturuyoruz."
+    },
+    "performans-pazarlama": {
+      "title": "Performans Pazarlaması",
+      "description": "Veri odaklı reklam stratejileriyle daha fazla dönüşüm, daha yüksek yatırım getirisi ve sürdürülebilir büyüme sağlıyoruz."
+    }
+  },
+  "HowWeWork": {
+    "eyebrow": "ÇALIŞMA SİSTEMİ",
+    "title": "Stratejik planlama, ölçülebilir büyüme.",
+    "discover": {
+      "title": "Analiz",
+      "description": "Markanızı, sektörünüzü ve rakiplerinizi detaylı şekilde inceliyoruz. Dijital varlıklarınızı analiz ederek büyüme fırsatlarını ve geliştirilmesi gereken alanları belirliyoruz."
+    },
+    "strategy": {
+      "title": "Strateji",
+      "description": "Hedeflerinize uygun içerik, reklam ve büyüme planı oluşturuyoruz. Her kanal için net KPI'lar belirliyor, yol haritasını birlikte şekillendiriyoruz."
+    },
+    "execute": {
+      "title": "Üretim & Yayın",
+      "description": "Profesyonel çekimler, yaratıcı tasarımlar ve performans odaklı reklam kampanyaları hazırlıyoruz. Tüm süreçler onay mekanizmasıyla ilerler ve düzenli olarak raporlanır."
+    },
+    "scale": {
+      "title": "Optimizasyon & Ölçeklendirme",
+      "description": "Verileri analiz ediyor, yüksek performans gösteren stratejileri büyütüyor ve bütçenizi en verimli şekilde yönetiyoruz. Amaç; daha fazla görünürlük, daha fazla müşteri ve sürdürülebilir büyüme."
+    }
+  },
+  "Metrics": {
+    "roas": "Yönetilen reklam bütçesi",
+    "cpl": "Kampanya başına düşen lead maliyeti tasarrufu",
+    "engagement": "Dijital pazarlama deneyimi",
+    "brands": "Birlikte çalıştığımız marka"
+  },
+  "CaseStudies": {
+    "eyebrow": "Projeler",
+    "title": "Sonuçlar kendisi konuşur.",
+    "viewAll": "Tüm projeler",
+    "case1": {
+      "industry": "E-ticaret",
+      "title": "E-ticaret dönüşüm oranı 3.4× arttı",
+      "metric": "Meta Ads + landing optimizasyonu"
+    },
+    "case2": {
+      "industry": "B2B Hizmet",
+      "title": "Lead başına maliyet %58 azaldı",
+      "metric": "LinkedIn + Google Ads stratejisi"
+    },
+    "case3": {
+      "industry": "Restoran",
+      "title": "Şube ziyaret sayısı 2 katına çıktı",
+      "metric": "Yerel SEO + Instagram içerik"
+    }
+  },
+  "LeadMagnet": {
+    "eyebrow": "Ücretsiz",
+    "title": "Dijital varlığınızın ücretsiz analizi.",
+    "subtitle": "Reklam hesabınız, Instagram profiliniz ve LinkedIn varlığınızda iyileştirme fırsatları var mı? 15 dakikada değerlendirin.",
+    "cta": "Check-Up'ımı al",
+    "note": "Yalnızca e-posta yeterli. Kayıt gerekmez, PDF anında iletilir.",
+    "instagram": {
+      "title": "Instagram analizi",
+      "description": "Bio, içerik mix'i, etkileşim oranı ve hashtag stratejisi — hızlı kazanım fırsatları."
+    },
+    "ads": {
+      "title": "Reklam hata tarama",
+      "description": "Ortalama bütçenin %30'u yanlış kuruluş yüzünden boşa gidiyor. Sende hangi kalemler riskli?"
+    },
+    "linkedin": {
+      "title": "LinkedIn fırsatları",
+      "description": "Şirket sayfası, kişisel profil ve içerik takvimi için hızlı düzeltmeler."
+    }
+  },
+  "FinalCTA": {
+    "title": "Birlikte büyüyelim.",
+    "subtitle": "30 dakikalık ücretsiz strateji görüşmesinde markanızı dinliyor, somut bir büyüme planı sunuyoruz. Bağlayıcı bir taahhüt yok.",
+    "ctaPrimary": "Görüşme planlayın",
+    "ctaSecondary": "WhatsApp'tan yaz"
+  },
+  "About": {
+    "metaTitle": "Hakkımızda",
+    "metaDescription": "DOU Social, dijital reklamcılık, içerik üretimi ve marka stratejisi alanında tam kapsamlı büyüme ortaklığı sunan Denizli merkezli bir ajandır.",
+    "eyebrow": "Hakkımızda",
+    "heroTitle": "Sadece Bir Ajans Değil, Büyüme Ortağıyız.",
+    "heroLead": "DOU Social, kreatif içerik üretimi, performans reklamları, otomasyon ve marka stratejisini tek çatı altında bir araya getiren tam kapsamlı bir dijital büyüme ajansıdır.",
+    "legalNote": "DOU Social, Yapımedya Reklamcılık A.Ş.'nin tescilli markasıdır.",
+    "story": {
+      "eyebrow": "Misyon & Vizyon",
+      "title": "Neden varız, nereye gidiyoruz.",
+      "p1": "DOU Social olarak her marka için özel büyüme sistemleri kuruyoruz. Reklam, içerik, web ve otomasyon süreçlerini bütünleşik bir stratejiyle yönetiyor; ölçülebilir ve sürdürülebilir sonuçlar üretiyoruz.",
+      "p2": "Hedefimiz her zaman aynı: markanızın dijital varlığını güçlendirmek ve bunu somut verilerle kanıtlamak.",
+      "mission": {
+        "label": "Misyonumuz",
+        "description": "Markaların dijital dünyada ölçülebilir, sürdürülebilir ve etkili bir büyüme elde etmesini sağlamak."
+      },
+      "vision": {
+        "label": "Vizyonumuz",
+        "description": "Türkiye'nin en yenilikçi, en sonuç odaklı ve en güvenilir dijital büyüme ajansı olmak."
+      }
+    },
+    "process": {
+      "eyebrow": "Nasıl Çalışıyoruz?",
+      "title": "Sistemli süreç, ölçülebilir sonuç.",
+      "analyze": {
+        "title": "Analiz",
+        "description": "Markanızı, hedef kitlenizi ve rekabet ortamını derinlemesine analiz eder; büyüme fırsatlarını belirleriz."
+      },
+      "strategy": {
+        "title": "Strateji",
+        "description": "Veriye dayalı büyüme hedefleri ve dijital yol haritası oluştururuz. Her kanal için özel taktikler geliştiririz."
+      },
+      "produce": {
+        "title": "Üretim",
+        "description": "Fotoğraf, video, tasarım ve içerik üretimini kurumsal kalite standartlarıyla gerçekleştiririz."
+      },
+      "optimize": {
+        "title": "Optimize",
+        "description": "Reklam performansı, raporlama ve otomasyon süreçleriyle kampanyalarınızı sürekli iyileştiririz."
+      }
+    },
+    "values": {
+      "eyebrow": "Rakamlarla DOU Social",
+      "title": "Güvenin temeli sayılardır.",
+      "projects": {
+        "value": "1000+",
+        "label": "Tamamlanan Proje"
+      },
+      "brands": {
+        "value": "5+",
+        "label": "Aktif Marka"
+      },
+      "satisfaction": {
+        "value": "%100",
+        "label": "Müşteri Memnuniyeti"
+      }
+    }
+  },
+  "Contact": {
+    "metaTitle": "İletişim",
+    "metaDescription": "DOU Social ile iletişime geç. Denizli merkezli dijital ajans, telefon, WhatsApp, e-posta veya form üzerinden 24 saat içinde yanıt.",
+    "eyebrow": "İletişim",
+    "heroTitle": "Projeniz için konuşalım.",
+    "heroLead": "Markanız için neler yapabileceğimizi 30 dakikada değerlendirelim. Formu doldurun ya da doğrudan ulaşın — 24 saat içinde geri döneceğiz.",
+    "methods": {
+      "whatsapp": {
+        "label": "WhatsApp",
+        "cta": "Sohbet başlat"
+      },
+      "phone": {
+        "label": "Telefon",
+        "cta": "Hemen ara"
+      },
+      "email": {
+        "label": "E-posta",
+        "cta": "Mail gönder"
+      },
+      "address": {
+        "label": "Ofis",
+        "cta": "Yol tarifi al"
+      }
+    },
+    "form": {
+      "eyebrow": "Form",
+      "title": "Markanızı kısaca anlatın.",
+      "subtitle": "Hedefinizi ve mevcut durumunuzu paylaşın — gerisini birlikte planlayalım.",
+      "name": "İsim",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "message": "Mesaj",
+      "consent": "Kişisel verilerimin form içeriği kapsamında işlenmesini kabul ediyorum (KVKK).",
+      "submit": "Gönder",
+      "sending": "Gönderiliyor...",
+      "successTitle": "Aldık!",
+      "successBody": "Mesajın bize ulaştı. 24 saat içinde dönüş yapıyoruz.",
+      "errors": {
+        "missing-fields": "Lütfen zorunlu alanları doldur.",
+        "invalid-email": "Geçerli bir e-posta gir.",
+        "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
+        "consent-required": "KVKK onayı vermeden gönderemiyoruz.",
+        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene.",
+        "recaptcha-failed": "Bot doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar dene."
+      },
+      "optional": "opsiyonel",
+      "consentPrefix": "Kişisel verilerimin işlenmesine ilişkin",
+      "consentLinkText": "Kişisel Verilerin Korunması Politikası'nı",
+      "consentSuffix": "okudum ve form kapsamında kişisel verilerimin işlenmesini kabul ediyorum."
+    },
+    "visit": {
+      "eyebrow": "Bizi ziyaret et",
+      "title": "Ofisimizde buluşalım.",
+      "hoursLabel": "Çalışma saatleri",
+      "hours": "Pazartesi – Cuma · 09:00 – 18:00"
+    }
+  },
+  "ServicesHub": {
+    "metaTitle": "Hizmetler",
+    "metaDescription": "Sosyal medya, Meta reklam, içerik üretimi, performans pazarlaması ve daha fazlası — DOU Social ile dijital büyüme operasyonu.",
+    "eyebrow": "Hizmetler",
+    "heroTitle": "Dijital büyümenin tüm boyutları, tek elden.",
+    "heroLead": "Sosyal medyadan reklamlara, içerik üretiminden web çözümlerine — on temel hizmetle bütünleşik bir büyüme operasyonu sunuyoruz.",
+    "more": "Detaylı bak",
+    "items": {
+      "sosyal-medya-marka": {
+        "title": "Sosyal Medya ve Marka Yönetimi",
+        "summary": "Markanızın dijital görünürlüğünü güçlendiren stratejik içerik planlama, topluluk yönetimi ve marka iletişimi çözümleri."
+      },
+      "meta-reklamlari": {
+        "title": "Meta Reklam Yönetimi",
+        "summary": "Instagram ve Facebook reklamlarında doğru hedefleme, optimize bütçe kullanımı ve ölçülebilir sonuçlar."
+      },
+      "icerik-video": {
+        "title": "İçerik Üretimi ve Video Prodüksiyon",
+        "summary": "Markanıza özel fotoğraf, video ve yaratıcı içeriklerle dikkat çeken dijital deneyimler oluşturuyoruz."
+      },
+      "performans-pazarlama": {
+        "title": "Performans Pazarlaması",
+        "summary": "Veri odaklı reklam stratejileriyle daha fazla dönüşüm, daha yüksek yatırım getirisi ve sürdürülebilir büyüme."
+      },
+      "google-seo": {
+        "title": "Google Haritalar ve Yerel SEO",
+        "summary": "İşletmenizin Google Haritalar ve yerel aramalarda daha görünür olmasını sağlayan optimizasyon çalışmaları."
+      },
+      "web-yazilim": {
+        "title": "Web Tasarım & Yazılım Çözümleri",
+        "summary": "Hızlı, kullanıcı dostu ve dönüşüm odaklı web siteleri ile dijital altyapınızı güçlendiriyoruz."
+      },
+      "kurumsal-kimlik": {
+        "title": "Kurumsal Kimlik ve Tasarım",
+        "summary": "Markanızın karakterini yansıtan profesyonel logo, kurumsal kimlik ve tasarım sistemleri geliştiriyoruz."
+      },
+      "influencer-marketing": {
+        "title": "Influencer Marketing",
+        "summary": "Markanız için en doğru içerik üreticilerini bir araya getirerek etkili iş birlikleri oluşturuyoruz."
+      },
+      "eticaret-buyume": {
+        "title": "E-Ticaret Büyüme Stratejileri",
+        "summary": "Satış odaklı reklam, analiz ve optimizasyon çalışmalarıyla e-ticaret performansınızı artırıyoruz."
+      },
+      "crm-dijital": {
+        "title": "CRM ve Dijital Dönüşüm Çözümleri",
+        "summary": "İş süreçlerinizi dijitalleştirerek müşteri yönetimini daha verimli ve sürdürülebilir hale getiriyoruz."
+      }
+    }
+  },
+  "ServicesDetail": {
+    "_shared": {
+      "back": "Tüm hizmetler",
+      "ctaPrimary": "Teklif al",
+      "ctaSecondary": "Bizi ara",
+      "problemEyebrow": "Problem",
+      "processEyebrow": "Süreç",
+      "deliverablesEyebrow": "Teslim edilenler",
+      "faqEyebrow": "Sıkça sorulanlar"
+    },
+    "sosyal-medya-marka": {
+      "eyebrow": "Sosyal Medya",
+      "title": "Markanın dijital sesi, stratejik ve tutarlı.",
+      "lead": "İçerik planlaması, topluluk yönetimi ve marka iletişimiyle sosyal medya varlığınızı güçlendiriyor, takipçi kitlenizi sadık bir topluluğa dönüştürüyoruz.",
+      "problem": {
+        "title": "Markaların sosyal medyada sık karşılaştığı sorunlar",
+        "points": [
+          "İçerik takvimi yok, postlar son dakika panikle üretiliyor.",
+          "Her platformda farklı ses tonu, marka tutarsız algılanıyor.",
+          "Etkileşim düşük, takipçi büyümüyor, neden olduğu belirsiz."
+        ]
+      },
+      "process": {
+        "title": "Strateji oluşturmadan yayına 5 adım.",
+        "steps": [
+          {
+            "title": "Marka & Rakip Analizi",
+            "description": "Mevcut hesap, rakip içerik ve hedef kitle analizi. Markanın dijital fotoğrafı çıkarılır."
+          },
+          {
+            "title": "İçerik Stratejisi",
+            "description": "Aylık temalar, konu pillarları, format dağılımı ve büyüme hedefleri belirlenir."
+          },
+          {
+            "title": "İçerik Takvimi",
+            "description": "Copy, görsel brief, hashtag ve zamanlama — onaya hazır aylık plan."
+          },
+          {
+            "title": "Üretim & Yayın",
+            "description": "Tasarım, kurgu ve zamanlama. Onaylı içerikler zamanında yayında."
+          },
+          {
+            "title": "Topluluk & Raporlama",
+            "description": "Yorum ve DM yönetimi, aylık performans raporu ve strateji revizyonu."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "Her ay neler dahil?",
+        "items": [
+          "Aylık içerik takvimi (12-20 post + 8-12 story)",
+          "4-8 reels / short-form video",
+          "Copy + hashtag + alt metin",
+          "Görsel tasarım & kurgu",
+          "Yorum & DM yönetimi (mesai saatleri)",
+          "Aylık performans raporu"
+        ]
+      },
+      "faq": {
+        "title": "Aklındakiler.",
+        "items": [
+          {
+            "q": "Hangi platformları yönetiyorsunuz?",
+            "a": "Instagram, TikTok, LinkedIn, Facebook ve X. Sektörüne göre 2-4 platforma odaklanmanı öneriyoruz."
+          },
+          {
+            "q": "İçeriği kim onaylıyor?",
+            "a": "Aylık takvim seninle paylaşılır, birlikte onaylarız. Acil postlarda 24 saat içinde dönüş yeterli."
+          },
+          {
+            "q": "Çekim için sahaya geliyor musunuz?",
+            "a": "Evet, ayda bir tam günlük saha çekimi paket içinde. Ek ihtiyaçlar için ayrı paket sunulur."
+          },
+          {
+            "q": "Topluluk yönetimi 7/24 mü?",
+            "a": "Mesai saatleri (09:00-18:00) içinde aktif. Kriz iletişimi için özel protokol oluşturulur."
+          }
+        ]
+      }
+    },
+    "meta-reklamlari": {
+      "eyebrow": "Reklam Yönetimi",
+      "title": "Reklam bütçeni harcama, sonuca dönüştür.",
+      "lead": "Instagram ve Facebook'ta doğru hedefleme, optimize bütçe kullanımı ve sürekli A/B test ile ölçülebilir sonuçlar elde ediyoruz.",
+      "problem": {
+        "title": "Reklam hesaplarında sık karşılaştığımız durumlar",
+        "points": [
+          "Bütçe geniş kitlelere dağılıyor, kimsede karşılık bulmuyor.",
+          "Aynı kreatif aylardır dönüyor, etki tükendiği halde fark edilmiyor.",
+          "Raporlar var ama hangi kararı vermek gerektiği belli değil."
+        ]
+      },
+      "process": {
+        "title": "Hesap auditinden ölçeklendirmeye 5 adım.",
+        "steps": [
+          {
+            "title": "Hesap Audit",
+            "description": "Mevcut kampanya, hedef kitle ve kreatif datası incelenir. Hızlı iyileştirme fırsatları belirlenir."
+          },
+          {
+            "title": "Strateji & Funnel",
+            "description": "Farkındalık, değerlendirme ve dönüşüm için ayrı kampanya yapısı ve net KPI'lar kurulur."
+          },
+          {
+            "title": "Kreatif Paketi",
+            "description": "Statik, video, story ve reel formatlarında minimum 3 hipotez ile A/B test varyasyonları hazırlanır."
+          },
+          {
+            "title": "Yayın & Test",
+            "description": "Kontrollü launch, ilk hafta agresif test, kazanan kreatiflerin otomatik ölçeklenmesi."
+          },
+          {
+            "title": "Optimizasyon & Rapor",
+            "description": "Haftalık dashboard takibi, aylık strateji görüşmesi ve sürekli optimizasyon."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "Her ay neler dahil?",
+        "items": [
+          "Hesap & rakip audit raporu",
+          "Aylık strateji + kreatif brief",
+          "Minimum 6 kreatif varyasyonu",
+          "Haftalık performans dashboard",
+          "Sürekli A/B test ve optimizasyon",
+          "Aylık strateji görüşmesi"
+        ]
+      },
+      "faq": {
+        "title": "Aklındakiler.",
+        "items": [
+          {
+            "q": "Minimum reklam bütçesi nedir?",
+            "a": "Aylık 15.000 TL'den başlamanı öneriyoruz. Daha düşük bütçelerde anlamlı veri toplamak ve test yapmak zorlaşır."
+          },
+          {
+            "q": "Sonuçları ne zaman görürüm?",
+            "a": "İlk 2 hafta öğrenme dönemi. 4. haftada kazanan kreatiflerin netleşmesi, 8. haftada CPL/ROAS'ın oturması beklenir."
+          },
+          {
+            "q": "Kreatifleri kim üretiyor?",
+            "a": "Biz üretiyoruz. İçerik üretimi hizmetiyle birlikte alındığında özel paket fiyatı uygulanır."
+          },
+          {
+            "q": "Raporu nasıl görüyorum?",
+            "a": "Looker Studio dashboard'una 7/24 erişimin olur. Haftalık özet ayrıca e-posta ile iletilir."
+          }
+        ]
+      }
+    },
+    "icerik-video": {
+      "eyebrow": "İçerik Üretimi",
+      "title": "Sahada hızlı, kurguda güçlüyüz.",
+      "lead": "Markanıza özel fotoğraf, video ve yaratıcı içeriklerle dikkat çeken, hatırda kalan dijital deneyimler oluşturuyoruz.",
+      "problem": {
+        "title": "İçerik üretiminde yaşanan tipik tıkanıklıklar",
+        "points": [
+          "Çekim günü kaotik, brief belirsiz, çekilmesi gerekenler atlanıyor.",
+          "Post-prodüksiyon haftalar sürüyor, sosyal medyada gündem kaçıyor.",
+          "Marka tonuna uymayan, kullanılamayan çekim asset'leri birikmiş."
+        ]
+      },
+      "process": {
+        "title": "Brief'ten teslime 6 adım.",
+        "steps": [
+          {
+            "title": "Brief & Moodboard",
+            "description": "Hedef, format, ton ve referanslar tek belgede netleştirilir."
+          },
+          {
+            "title": "Pre-Production",
+            "description": "Çekim listesi, mekan, ekipman ve casting planlanır. Çekim günü sürpriz olmaz."
+          },
+          {
+            "title": "Çekim",
+            "description": "Profesyonel ekipman ve yönetimle brief'e bağlı saha çekimi gerçekleştirilir."
+          },
+          {
+            "title": "Kurgu & Post-Prodüksiyon",
+            "description": "Hızlı first cut, revizyon, ses tasarımı, altyazı ve renk düzenlemesi."
+          },
+          {
+            "title": "Onay",
+            "description": "Net revizyon hakları ve hızlı geri dönüş döngüsüyle onay süreci tamamlanır."
+          },
+          {
+            "title": "Teslim & Adaptasyon",
+            "description": "9:16, 1:1 ve 16:9 format adaptasyonları, tüm asset paketinin teslimi."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "Tipik bir paketle ne alırsınız?",
+        "items": [
+          "Tam günlük çekim (1-2 set)",
+          "Profesyonel ekipman (kamera, ışık, ses)",
+          "10-20 adet düzenlenmiş fotoğraf",
+          "4-6 reels / short-form video",
+          "Format adaptasyonları (9:16, 1:1, 16:9)",
+          "Ham + işlenmiş asset paketi"
+        ]
+      },
+      "faq": {
+        "title": "Aklındakiler.",
+        "items": [
+          {
+            "q": "Çekim nerede yapılıyor?",
+            "a": "Senin mekanında, stüdyoda veya kiralık mekanda — brief'e göre kararlaştırılır."
+          },
+          {
+            "q": "Kaç set çekim yapılıyor?",
+            "a": "Standart pakette günde 1-2 set. Daha fazlası için çoklu çekim günü planlanabilir."
+          },
+          {
+            "q": "Müzik lisansı dahil mi?",
+            "a": "Evet, ticari kullanım hakkı olan platformlardan (Artlist, Epidemic) lisanslı kullanım yapılıyor."
+          },
+          {
+            "q": "Revizyon hakkı kaç?",
+            "a": "Her çıktıda 2 büyük revizyon dahil. Sonraki revizyonlar saatlik ücrete tabidir."
+          }
+        ]
+      }
+    },
+    "performans-pazarlama": {
+      "eyebrow": "Performans",
+      "title": "Daha fazla dönüşüm, daha yüksek yatırım getirisi.",
+      "lead": "Veri odaklı reklam stratejileriyle her bütçe biriminden maksimum verim elde ediyor, sürdürülebilir büyüme sağlıyoruz.",
+      "problem": {
+        "title": "Performans kampanyalarındaki yaygın sorunlar",
+        "points": [
+          "Reklam harcaması artıyor ama dönüşüm oranları sabit ya da düşüyor.",
+          "Hangi kanalın gerçekten satışa katkı sağladığı bilinmiyor.",
+          "Kampanyalar birbiriyle entegre çalışmıyor, bütçe verimsiz dağılıyor."
+        ]
+      },
+      "process": {
+        "title": "Veriden büyümeye 5 adım.",
+        "steps": [
+          {
+            "title": "Analiz & Tanı",
+            "description": "Mevcut kampanya, kanal ve attribution verisi incelenir. Kayıplar ve fırsatlar belirlenir."
+          },
+          {
+            "title": "Kanal Stratejisi",
+            "description": "En yüksek ROI sağlayan kanallar önceliklendirilir, bütçe dağılımı optimize edilir."
+          },
+          {
+            "title": "Kampanya Mimarisi",
+            "description": "Full-funnel yapı: farkındalık, ilgi, dönüşüm ve yeniden hedefleme katmanları kurulur."
+          },
+          {
+            "title": "Test & Optimizasyon",
+            "description": "Kreatif, hedef kitle ve teklif stratejileri sürekli test edilir ve optimize edilir."
+          },
+          {
+            "title": "Ölçüm & Raporlama",
+            "description": "Haftalık KPI takibi, attribution analizi ve büyüme önerileriyle şeffaf raporlama."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "Her ay neler dahil?",
+        "items": [
+          "Multi-kanal kampanya yönetimi",
+          "Attribution & dönüşüm analizi",
+          "Haftalık performans raporu",
+          "A/B test sonuçları ve öneriler",
+          "Bütçe optimizasyonu planı",
+          "Aylık büyüme görüşmesi"
+        ]
+      },
+      "faq": {
+        "title": "Aklındakiler.",
+        "items": [
+          {
+            "q": "Hangi kanalları kapsıyorsunuz?",
+            "a": "Meta (Instagram & Facebook), Google, TikTok ve diğer dijital kanallar. Sektörüne göre en verimli mix belirlenir."
+          },
+          {
+            "q": "Performans garantisi veriyor musunuz?",
+            "a": "Belirli bir KPI'ya ulaşma garantisi vermiyoruz — pazar koşulları değişkendir. Ancak şeffaf hedefler koyarak sürekli optimize ediyoruz."
+          },
+          {
+            "q": "Ne kadar bütçeyle başlayabilirim?",
+            "a": "Minimum aylık 25.000 TL reklam bütçesi öneriyoruz. Multi-kanal stratejide anlamlı sonuç için bu eşik önemli."
+          },
+          {
+            "q": "Mevcut kampanyalarımı devrediyor musunuz?",
+            "a": "Evet, hesap audit'iyle başlıyoruz. Mevcut performansı analiz ederek devir alıyoruz."
+          }
+        ]
+      }
+    },
+    "google-seo": {
+      "eyebrow": "Yerel SEO",
+      "title": "Yakınınızdaki müşteriler sizi bulsun.",
+      "lead": "Google Haritalar ve yerel aramalarda işletmenizi öne çıkaran optimizasyon çalışmalarıyla organik görünürlüğünüzü artırıyoruz.",
+      "problem": {
+        "title": "Yerel SEO'da sık karşılaşılan sorunlar",
+        "points": [
+          "Google'da işletme adı arandığında üst sıralarda çıkmıyor.",
+          "Google İşletme Profili eksik veya hatalı bilgilerle dolu.",
+          "Rakipler haritada hep üstte, organik müşteri ulaşmıyor."
+        ]
+      },
+      "process": {
+        "title": "Görünürlük artışı için 5 adım.",
+        "steps": [
+          {
+            "title": "Profil Audit",
+            "description": "Google İşletme Profili, NAP tutarlılığı ve mevcut sıralama pozisyonları analiz edilir."
+          },
+          {
+            "title": "Profil Optimizasyonu",
+            "description": "Bilgiler güncellenir, görseller eklenir, hizmetler ve kategoriler optimize edilir."
+          },
+          {
+            "title": "İçerik & Anahtar Kelime",
+            "description": "Yerel arama niyetine uygun içerik ve anahtar kelime stratejisi oluşturulur."
+          },
+          {
+            "title": "Yorum & İtibar Yönetimi",
+            "description": "Olumlu yorum stratejisi kurulur, olumsuz yorumlara profesyonel yanıt verilir."
+          },
+          {
+            "title": "Takip & Raporlama",
+            "description": "Aylık sıralama takibi, görünürlük raporu ve optimizasyon önerileri sunulur."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "Neler dahil?",
+        "items": [
+          "Google İşletme Profili tam optimizasyonu",
+          "NAP tutarlılık düzenlemeleri",
+          "Yerel anahtar kelime araştırması",
+          "Yorum yönetimi ve yanıt stratejisi",
+          "Aylık görünürlük raporu",
+          "Rakip analizi ve konum karşılaştırması"
+        ]
+      },
+      "faq": {
+        "title": "Aklındakiler.",
+        "items": [
+          {
+            "q": "Sonuçlar ne zaman görünür?",
+            "a": "İlk 4-6 haftada profil optimizasyonu tamamlanır. Sıralama iyileştirmeleri genellikle 2-3 ayda gözlemlenir."
+          },
+          {
+            "q": "Birden fazla şube için yapıyor musunuz?",
+            "a": "Evet, her şube için ayrı optimizasyon yapıyoruz. Çoklu lokasyon paketlerimiz mevcut."
+          },
+          {
+            "q": "Web sitesi olmadan işe yarıyor mu?",
+            "a": "Kısmen evet. Ancak web sitesi ile desteklenen yerel SEO çok daha güçlü sonuç verir."
+          },
+          {
+            "q": "Yorum almak için ne yapıyorsunuz?",
+            "a": "Müşterilerinize yorum bırakmaları için sistematik bir süreç kuruyoruz — e-posta, QR kod veya mesaj yoluyla."
+          }
+        ]
+      }
+    },
+    "web-yazilim": {
+      "eyebrow": "Web & Yazılım",
+      "title": "Hızlı, kullanıcı dostu, dönüşüm odaklı.",
+      "lead": "Modern teknolojilerle geliştirilen web siteleri ve dijital altyapılarla markanızın online varlığını güçlendiriyoruz.",
+      "problem": {
+        "title": "Çoğu kurumsal sitede gördüklerimiz",
+        "points": [
+          "Sayfa 4+ saniyede açılıyor, mobil kullanıcıların büyük kısmı ayrılıyor.",
+          "İçerik güncellemek için ajansa bağımlılık, küçük değişiklikler haftalar alıyor.",
+          "SEO altyapısı zayıf, organic trafik neredeyse yok, sadece reklama bağımlılık."
+        ]
+      },
+      "process": {
+        "title": "Discovery'den lansmana 5 adım.",
+        "steps": [
+          {
+            "title": "Discovery",
+            "description": "Hedef, kullanıcı yolculuğu ve mevcut analytics analizi. Sitenin neye hizmet edeceği netleşir."
+          },
+          {
+            "title": "Wireframe & Strateji",
+            "description": "Sayfa yapısı, içerik akışı, dönüşüm noktaları ve SEO mimarisi planlanır."
+          },
+          {
+            "title": "Tasarım",
+            "description": "Marka kimliğine uygun, mobile-first, modern görsel dil oluşturulur."
+          },
+          {
+            "title": "Geliştirme",
+            "description": "Next.js + TypeScript + Tailwind stack'iyle performans, erişilebilirlik ve SEO testli build."
+          },
+          {
+            "title": "Lansman & Destek",
+            "description": "DNS, analytics, Search Console kurulumu, dokümantasyon. İlk 30 gün ücretsiz destek."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "Tam pakette neler var?",
+        "items": [
+          "Discovery + içerik stratejisi belgesi",
+          "Tüm sayfaların wireframe + tasarımı",
+          "Production-grade Next.js build",
+          "İçerik yönetim sistemi (CMS)",
+          "SEO altyapısı (sitemap, schema, hreflang)",
+          "Analytics + Search Console kurulumu",
+          "Hosting kurulumu (Vercel)",
+          "Dokümantasyon + 30 gün destek"
+        ]
+      },
+      "faq": {
+        "title": "Aklındakiler.",
+        "items": [
+          {
+            "q": "Proje ne kadar sürer?",
+            "a": "Standart kurumsal site 6-8 hafta. E-ticaret veya özel geliştirme gerektiren projeler 10-12 haftadır."
+          },
+          {
+            "q": "Hangi teknolojileri kullanıyorsunuz?",
+            "a": "Next.js + TypeScript + Tailwind + Vercel deploy. CMS için Sanity, Payload veya MDX kullanılır."
+          },
+          {
+            "q": "İçerikleri kim yazıyor?",
+            "a": "Sen yazarsın, biz copy editing yaparız. İstersen copywriting paketi ekleyebiliriz."
+          },
+          {
+            "q": "Site sahibi kim olacak?",
+            "a": "Sen. Tüm kod, domain ve hosting hesapları tamamen senin adına. Biz sadece geliştiriyoruz."
+          }
+        ]
+      }
+    },
+    "kurumsal-kimlik": {
+      "eyebrow": "Marka Kimliği",
+      "title": "Markanızın karakterini tasarıma dönüştürün.",
+      "lead": "Profesyonel logo, kurumsal kimlik ve tasarım sistemleriyle markanızın güçlü ve tutarlı bir görsel dilini oluşturuyoruz.",
+      "problem": {
+        "title": "Kurumsal kimlik sorunları nasıl görünür?",
+        "points": [
+          "Logo her yerde farklı kullanılıyor, marka tutarsız algılanıyor.",
+          "Yeni içerik veya kampanya yapılırken sıfırdan brief gerekiyor.",
+          "Rakipler benzer görünüyor, fark yaratacak görsel kimlik yok."
+        ]
+      },
+      "process": {
+        "title": "Keşiften brand book'a 5 adım.",
+        "steps": [
+          {
+            "title": "Discovery",
+            "description": "Marka değerleri, hedef kitle, rakip analizi ve pazar araştırması yapılır."
+          },
+          {
+            "title": "Konumlama & Mesaj",
+            "description": "Markanın pazardaki yeri, değer önerisi ve temel iletişim çerçevesi belirlenir."
+          },
+          {
+            "title": "Görsel Kimlik",
+            "description": "Logo, renk paleti, tipografi ve görsel sistem tasarlanır. Minimum 3 konsept sunulur."
+          },
+          {
+            "title": "Tasarım Sistemi",
+            "description": "Tüm temas noktaları için tutarlı şablonlar ve kullanım kılavuzları hazırlanır."
+          },
+          {
+            "title": "Brand Book Teslimi",
+            "description": "Tüm kuralları, varlıkları ve kılavuzları içeren kapsamlı brand book teslim edilir."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "Pakette neler yer alır?",
+        "items": [
+          "Logo (çeşitli formatlar ve varyasyonlar)",
+          "Renk paleti & tipografi rehberi",
+          "Kurumsal kimlik şablonları",
+          "Sosyal medya şablonları",
+          "Kullanım kılavuzu (brand book)",
+          "Tüm tasarım dosyaları (AI, PDF, PNG)"
+        ]
+      },
+      "faq": {
+        "title": "Aklındakiler.",
+        "items": [
+          {
+            "q": "Kaç logo konsepti sunuyorsunuz?",
+            "a": "Standart süreçte 3 farklı yön sunulur. Her biri birbirinden farklı yaklaşımlar içerir."
+          },
+          {
+            "q": "Süreç ne kadar sürer?",
+            "a": "Temel logo ve kimlik paketi 3-4 hafta. Kapsamlı brand book 6-8 haftadır."
+          },
+          {
+            "q": "Sadece logo alabilir miyim?",
+            "a": "Evet, sadece logo paketi sunuyoruz. Ancak kimlik sistemi olmadan logo tek başına eksik kalır."
+          },
+          {
+            "q": "Tüm dosyalar bize mi ait?",
+            "a": "Evet, tüm tasarım dosyaları ve hakları teslimatta sana devredilir."
+          }
+        ]
+      }
+    },
+    "influencer-marketing": {
+      "eyebrow": "Influencer",
+      "title": "Doğru içerik üreticisiyle güçlü iş birlikleri.",
+      "lead": "Markanız için en uygun influencer'ları seçerek gerçek kitlelerle bağ kuran, satışa ve farkındalığa dönüşen kampanyalar yönetiyoruz.",
+      "problem": {
+        "title": "Influencer iş birliklerinde sık karşılaşılan sorunlar",
+        "points": [
+          "Takipçi sayısı yüksek ama gerçek etkileşim çok düşük influencer'lar seçiliyor.",
+          "İçerik brief'i yok, ortaya çıkan içerik marka tonuyla uyumsuz.",
+          "Kampanya sonuçları ölçülemiyor, yatırım geri dönüşü belirsiz."
+        ]
+      },
+      "process": {
+        "title": "İş birliğinden ölçüme 5 adım.",
+        "steps": [
+          {
+            "title": "Hedef & Kitle Belirleme",
+            "description": "Kampanya hedefi, hedef kitle profili ve bütçe belirlenir."
+          },
+          {
+            "title": "Influencer Araştırma & Seçim",
+            "description": "Sahte takipçi ve düşük etkileşim filtrelemesiyle markayla uyumlu içerik üreticiler listelenir."
+          },
+          {
+            "title": "Brief & Anlaşma",
+            "description": "Detaylı içerik brief'i hazırlanır, sözleşme ve izin yönetimi yapılır."
+          },
+          {
+            "title": "İçerik Üretimi & Yayın",
+            "description": "İçerikler onaylanır, platformlara uygun formatlarla zamanında yayına girer."
+          },
+          {
+            "title": "Ölçüm & Raporlama",
+            "description": "Kampanya performansı analiz edilir, ROI hesaplanır ve gelecek için öneriler sunulur."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "Her kampanyada neler dahil?",
+        "items": [
+          "Influencer araştırma & seçim raporu",
+          "İçerik brief ve onay süreci",
+          "Sözleşme yönetimi",
+          "Kampanya takibi ve yönetimi",
+          "Post-kampanya performans raporu",
+          "ROI analizi ve öneriler"
+        ]
+      },
+      "faq": {
+        "title": "Aklındakiler.",
+        "items": [
+          {
+            "q": "Nano, micro yoksa macro influencer mı?",
+            "a": "Hedefine göre belirlenir. Nano ve micro influencer'lar genellikle daha yüksek etkileşim ve daha uygun maliyet sunar."
+          },
+          {
+            "q": "Influencer'larla bağlantıyı siz mi kuruyorsunuz?",
+            "a": "Evet, tüm iletişim, müzakere ve anlaşma süreçlerini biz yönetiyoruz."
+          },
+          {
+            "q": "İçerik haklarına sahip miyiz?",
+            "a": "Yeniden kullanım hakları brief'te belirlenir. Ücretli tanıtım içerikleri için ayrı bir anlaşma yapılır."
+          },
+          {
+            "q": "Kaç influencer ile çalışabiliriz?",
+            "a": "Bütçe ve hedefe göre 1 makro veya 5-10 mikro influencer kombinasyonu öneriyoruz."
+          }
+        ]
+      }
+    },
+    "eticaret-buyume": {
+      "eyebrow": "E-Ticaret",
+      "title": "Daha fazla satış, daha düşük maliyet.",
+      "lead": "Satış odaklı reklam, analiz ve optimizasyon çalışmalarıyla e-ticaret mağazanızın büyümesini hızlandırıyoruz.",
+      "problem": {
+        "title": "E-ticaret mağazalarında sık karşılaştığımız sorunlar",
+        "points": [
+          "Trafik var ama dönüşüm oranları çok düşük, sepet terk oranı yüksek.",
+          "Reklam harcaması artıyor ama ROAS düşüyor, bütçe verimli kullanılmıyor.",
+          "Hangi ürün veya kategorinin reklama değer olduğu bilinmiyor."
+        ]
+      },
+      "process": {
+        "title": "Analizden büyümeye 5 adım.",
+        "steps": [
+          {
+            "title": "Mağaza & Analytics Audit",
+            "description": "Dönüşüm hunisi, kullanıcı davranışı ve reklam performansı analiz edilir."
+          },
+          {
+            "title": "Büyüme Stratejisi",
+            "description": "En yüksek potansiyelli ürünler, hedef kitleler ve büyüme kanalları belirlenir."
+          },
+          {
+            "title": "Kampanya Yapısı",
+            "description": "Prospecting, retargeting ve sepet takibi kampanyaları kurulur."
+          },
+          {
+            "title": "CRO & UX Önerileri",
+            "description": "Dönüşüm oranını artıracak sayfa ve kullanıcı deneyimi iyileştirmeleri önerilir."
+          },
+          {
+            "title": "Optimizasyon & Ölçeklendirme",
+            "description": "Kazanan ürünler ve kampanyalar ölçeklenir, düşük performanslılar optimize edilir."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "Her ay neler dahil?",
+        "items": [
+          "E-ticaret analytics raporu",
+          "Ürün & kategori performans analizi",
+          "Reklam kampanya yönetimi (Meta + Google)",
+          "Retargeting & sepet terk stratejisi",
+          "CRO önerileri",
+          "Aylık büyüme görüşmesi"
+        ]
+      },
+      "faq": {
+        "title": "Aklındakiler.",
+        "items": [
+          {
+            "q": "Hangi e-ticaret platformlarıyla çalışıyorsunuz?",
+            "a": "Shopify, Ticimax, İdeaSoft, WooCommerce ve özel geliştirmeler dahil tüm major platformlarla çalışıyoruz."
+          },
+          {
+            "q": "Minimum bütçe şartı var mı?",
+            "a": "Aylık minimum 20.000 TL reklam bütçesiyle çalışıyoruz. Ürün çeşidi ve hedeflere göre değişebilir."
+          },
+          {
+            "q": "Mağaza tasarımını da yapıyor musunuz?",
+            "a": "Evet, web tasarım hizmetimizle birlikte tam çözüm sunuyoruz. CRO odaklı iyileştirmeler de yapabiliyoruz."
+          },
+          {
+            "q": "Google Ads da dahil mi?",
+            "a": "Evet, Meta ve Google Ads birlikte yönetildiğinde en yüksek ROAS sağlanır. Paket olarak sunuyoruz."
+          }
+        ]
+      }
+    },
+    "crm-dijital": {
+      "eyebrow": "Dijital Dönüşüm",
+      "title": "İş süreçlerinizi dijitalleştirin.",
+      "lead": "CRM kurulumu, süreç otomasyonu ve dijital dönüşüm danışmanlığıyla müşteri yönetimini daha verimli ve ölçeklenebilir hale getiriyoruz.",
+      "problem": {
+        "title": "Dijital dönüşümde karşılaşılan yaygın engeller",
+        "points": [
+          "Müşteri takibi Excel veya notlarda yapılıyor, bilgiler kaybolup gidiyor.",
+          "Satış süreci standart değil, her ekip üyesi farklı yöntemler kullanıyor.",
+          "Pazarlama ve satış ekipleri birbirinden kopuk çalışıyor, lead'ler kayboluyor."
+        ]
+      },
+      "process": {
+        "title": "İhtiyaç analizinden devreye almaya 5 adım.",
+        "steps": [
+          {
+            "title": "Süreç Analizi",
+            "description": "Mevcut iş akışları, araçlar ve ekip yapısı incelenir. İyileştirme noktaları belirlenir."
+          },
+          {
+            "title": "CRM Seçimi & Kurulum",
+            "description": "İşletmenize uygun CRM platformu seçilir (HubSpot, Salesforce, vb.) ve kurulur."
+          },
+          {
+            "title": "Özelleştirme & Entegrasyon",
+            "description": "Satış hunisi, lead takibi ve raporlama modülleri işletmenize özel yapılandırılır."
+          },
+          {
+            "title": "Otomasyon Kurulumu",
+            "description": "E-posta dizileri, bildirimler ve satış süreçleri otomatize edilir."
+          },
+          {
+            "title": "Eğitim & Destek",
+            "description": "Ekip eğitimi verilir, kullanım kılavuzu hazırlanır ve ilk 30 gün destek sağlanır."
+          }
+        ]
+      },
+      "deliverables": {
+        "title": "Neler dahil?",
+        "items": [
+          "Süreç analizi belgesi",
+          "CRM platformu kurulum ve yapılandırması",
+          "Satış hunisi ve pipeline tasarımı",
+          "Otomasyon senaryoları",
+          "Ekip eğitimi",
+          "Kullanım kılavuzu + 30 gün destek"
+        ]
+      },
+      "faq": {
+        "title": "Aklındakiler.",
+        "items": [
+          {
+            "q": "Hangi CRM platformlarıyla çalışıyorsunuz?",
+            "a": "HubSpot, Salesforce, Zoho CRM ve Pipedrive başta olmak üzere major platformlarla çalışıyoruz."
+          },
+          {
+            "q": "Mevcut CRM'imizi mi kullanacaksınız?",
+            "a": "Evet, mevcut sisteminizi optimize edebilir veya gerekirse migrasyon yapabiliriz."
+          },
+          {
+            "q": "Süreç ne kadar sürer?",
+            "a": "Temel CRM kurulumu 2-4 hafta. Entegrasyon ve özelleştirme gerektiren projeler 6-8 haftadır."
+          },
+          {
+            "q": "Ekip adaptasyonu nasıl sağlanıyor?",
+            "a": "Uygulamalı eğitim, video kılavuzlar ve ilk ay sürekli destek ile adaptasyon sürecini kolaylaştırıyoruz."
+          }
+        ]
+      }
+    }
+  },
+  "Cases": {
+    "metaTitle": "Projeler",
+    "metaDescription": "DOU Social ile çalışan markaların ölçülebilir sonuçları. Meta Ads, sosyal medya, web ve marka stratejisinde gerçek case study'ler.",
+    "eyebrow": "Projeler",
+    "heroTitle": "Sayılarla konuşan işler.",
+    "heroLead": "Beğeni değil dönüşüm. Görüntülenme değil satış. Birlikte çalıştığımız markaların ölçülebilir sonuçları.",
+    "_shared": {
+      "back": "Tüm projeler",
+      "viewAll": "Tüm projeler",
+      "relatedTitle": "Diğer projeler.",
+      "challengeEyebrow": "Problem",
+      "approachEyebrow": "Yaklaşım",
+      "resultsEyebrow": "Sonuç",
+      "galleryEyebrow": "Görseller",
+      "galleryNote": "Çalışma gerçek müşteri verisidir; görseller demo amaçlı placeholder.",
+      "ctaProject": "Projeyi İncele",
+      "ctaContact": "İletişim"
+    },
+    "items": {
+      "en20-spor-merkezi": {
+        "industry": "Spor Salonu / Fitness",
+        "duration": "8+ Ay",
+        "title": "EN20 Spor Merkezi'nde sosyal medyayı üyelik kaynağına çevirdik.",
+        "summary": "Denizli'nin köklü spor merkezlerinden EN20 Spor Merkezi ile 8 aydır sosyal medya yönetimi ve Meta reklamları üzerine kesintisiz çalışıyoruz.",
+        "coverMetric": "8 Ay",
+        "coverMetricLabel": "aralıksız iş birliği",
+        "challenge": {
+          "title": "Yerel spor salonları için asıl mücadele: doğru kişiye ulaşmak.",
+          "intro": "Spor salonu sektöründe rekabet yalnızca fiyat üzerinden değil, doğru zamanda doğru kitleye görünür olmak üzerinden yürüyor. EN20 Spor Merkezi, büyüyen üye tabanını sosyal medyada tutarlı ve profesyonel bir şekilde temsil edecek bir ortak arıyordu.",
+          "points": [
+            "Denizli'de spor salonu rekabeti yoğun; onlarca işletme aynı kitleye reklam veriyor.",
+            "Üyelik kampanyalarının sosyal medyada düzenli ve profesyonel şekilde duyurulması gerekiyordu.",
+            "Meta reklamlarının doğru hedef kitleye, doğru bütçeyle ulaşması önceliklerin başındaydı."
+          ]
+        },
+        "approach": {
+          "title": "Sosyal medya yönetimi ve Meta reklamlarını tek çatı altında topladık.",
+          "steps": [
+            {
+              "title": "Sosyal Medya ve Marka Yönetimi",
+              "description": "Aylık içerik takvimi ve düzenli paylaşım akışıyla @en20spormerkezi hesabında tutarlı bir marka dili kuruldu."
+            },
+            {
+              "title": "Meta Reklam Yönetimi",
+              "description": "Üyelik kampanyaları için hedef kitle segmentasyonu ve bütçe yönetimiyle Meta reklamları uçtan uca yürütülüyor."
+            },
+            {
+              "title": "İçerik Üretimi",
+              "description": "Salon içi çekimler ve antrenman anlarıyla organik erişimi güçlendiren içerikler düzenli olarak üretiliyor."
+            },
+            {
+              "title": "Performans Takibi",
+              "description": "Kampanya ve içerik performansı aylık olarak değerlendirilip bir sonraki dönemin planı buna göre şekillendiriliyor."
+            }
+          ]
+        },
+        "results": {
+          "title": "8 ayın sonunda EN20 nerede?",
+          "summary": "Sosyal medya, EN20 Spor Merkezi'nin marka iletişiminin ve üyelik kampanyalarının düzenli işleyen, sürdürülebilir bir parçası haline geldi.",
+          "metrics": [
+            {
+              "value": "8 Ay",
+              "label": "kesintisiz iş birliği"
+            },
+            {
+              "value": "2",
+              "label": "aktif yönetilen hizmet kalemi"
+            },
+            {
+              "value": "Aylık",
+              "label": "içerik takvimi ve kampanya takibi"
+            },
+            {
+              "value": "Denizli",
+              "label": "yerel pazarda düzenli görünürlük"
+            }
+          ]
+        },
+        "galleryTitle": "Salondan kareler."
+      },
+      "fitlife-kitchen": {
+        "industry": "Sağlıklı Yaşam / Beslenme",
+        "duration": "7+ Ay",
+        "title": "FitLife Kitchen'ın hikayesini influencer işbirlikleriyle büyüttük.",
+        "summary": "Sağlıklı beslenme markası FitLife Kitchen ile 7 aydır sosyal medya yönetimi, Meta reklamları ve influencer marketing üzerine çalışıyoruz.",
+        "coverMetric": "7 Ay",
+        "coverMetricLabel": "aralıksız iş birliği",
+        "challenge": {
+          "title": "Sağlıklı beslenme markaları için güven, içerikle inşa edilir.",
+          "intro": "Sağlıklı yaşam ve beslenme kategorisinde tüketici, satın almadan önce markanın gerçekliğine ve tutarlılığına ikna olmak istiyor. FitLife Kitchen da bu güveni sosyal medyada sistemli bir şekilde inşa edecek bir ortak arıyordu.",
+          "points": [
+            "Sağlıklı beslenme kategorisi görsel açıdan yoğun rekabetli; fark edilmek için tutarlı bir estetik dil gerekiyordu.",
+            "Influencer iş birliklerinin markayla uyumlu, güven verici isimlerle yürütülmesi gerekiyordu.",
+            "Meta reklamlarının doğru ilgi alanı ve konum hedeflemesiyle çalışması önceliklerin başındaydı."
+          ]
+        },
+        "approach": {
+          "title": "İçerik, reklam ve influencer marketing'i aynı stratejide birleştirdik.",
+          "steps": [
+            {
+              "title": "Sosyal Medya ve Marka Yönetimi",
+              "description": "@fitlifekitchentr hesabı için tutarlı görsel dil ve düzenli paylaşım akışıyla marka kimliği güçlendirildi."
+            },
+            {
+              "title": "Meta Reklam Yönetimi",
+              "description": "İlgi alanı ve konum bazlı hedeflemeyle sağlıklı yaşam kitlesine yönelik Meta reklam kampanyaları yürütülüyor."
+            },
+            {
+              "title": "Influencer Marketing",
+              "description": "Markanın değerleriyle örtüşen yerel ve niş influencer'larla iş birlikleri planlanıp yürütülüyor."
+            },
+            {
+              "title": "İçerik Üretimi",
+              "description": "Ürün ve yaşam tarzı odaklı fotoğraf/video içerikleri düzenli olarak üretiliyor."
+            }
+          ]
+        },
+        "results": {
+          "title": "7 ayın sonunda FitLife Kitchen nerede?",
+          "summary": "Sosyal medya, reklam ve influencer marketing artık FitLife Kitchen'ın büyüme stratejisinin birlikte işleyen üç ayağı.",
+          "metrics": [
+            {
+              "value": "7 Ay",
+              "label": "kesintisiz iş birliği"
+            },
+            {
+              "value": "3",
+              "label": "aktif yönetilen hizmet kalemi"
+            },
+            {
+              "value": "Influencer",
+              "label": "iş birlikleriyle desteklenen büyüme"
+            },
+            {
+              "value": "Aylık",
+              "label": "içerik ve kampanya takibi"
+            }
+          ]
+        },
+        "galleryTitle": "Üretimden kareler."
+      },
+      "yapigranit-mermer": {
+        "industry": "İnşaat / Mermer & Doğal Taş",
+        "duration": "6+ Ay",
+        "title": "YapıGranit Mermer'in dijital varlığını sıfırdan kurduk.",
+        "summary": "Mermer ve doğal taş üreticisi YapıGranit Mermer için 6 aydır sosyal medya, Meta reklamları, web sitesi ve CRM'i tek çatı altında yönetiyoruz.",
+        "coverMetric": "4 Hizmet",
+        "coverMetricLabel": "tek çatı altında yönetiliyor",
+        "challenge": {
+          "title": "Üretici bir markanın en büyük eksiği: dijitalde görünmemek.",
+          "intro": "YapıGranit Mermer, sektöründe köklü bir üretici olmasına rağmen dijital varlığı bu güce eşlik etmiyordu. Web sitesi, sosyal medya ve müşteri süreçleri birbirinden kopuk ilerliyordu.",
+          "points": [
+            "Kurumsal web sitesi ve sosyal medya, markanın gerçek üretim kapasitesini yansıtmıyordu.",
+            "Müşteri taleplerinin takibi düzenli bir sisteme bağlı değildi.",
+            "Meta reklamlarıyla doğru B2B ve B2C kitlelere ulaşmak gerekiyordu."
+          ]
+        },
+        "approach": {
+          "title": "Sosyal medyadan CRM'e, uçtan uca dijital altyapı kurduk.",
+          "steps": [
+            {
+              "title": "Sosyal Medya ve Marka Yönetimi",
+              "description": "@yapigranitmermer hesabı için üretim sürecini ve ürün kalitesini öne çıkaran bir içerik dili kuruldu."
+            },
+            {
+              "title": "Meta Reklam Yönetimi",
+              "description": "Hem bireysel hem de proje bazlı müşterilere ulaşan segmentli Meta reklam kampanyaları yürütülüyor."
+            },
+            {
+              "title": "Web Tasarım & Yazılım",
+              "description": "yapigranit.com kurumsal kimliğe uygun şekilde yeniden tasarlandı ve teknik olarak güçlendirildi."
+            },
+            {
+              "title": "CRM ve Dijital Dönüşüm",
+              "description": "Müşteri talepleri ve süreçleri tek bir CRM sistemi üzerinden takip edilmeye başlandı."
+            }
+          ]
+        },
+        "results": {
+          "title": "6 ayın sonunda YapıGranit Mermer nerede?",
+          "summary": "Marka artık sosyal medyadan web sitesine, reklamdan müşteri takibine kadar tek bir dijital ekosistem üzerinden yönetiliyor.",
+          "metrics": [
+            {
+              "value": "6 Ay",
+              "label": "kesintisiz iş birliği"
+            },
+            {
+              "value": "4",
+              "label": "aktif yönetilen hizmet kalemi"
+            },
+            {
+              "value": "Web + CRM",
+              "label": "uçtan uca dijital altyapı"
+            },
+            {
+              "value": "Aylık",
+              "label": "kampanya ve içerik takibi"
+            }
+          ]
+        },
+        "galleryTitle": "Üretimden ve markadan kareler."
+      },
+      "bkare-mimarlik-insaat": {
+        "industry": "İnşaat / Mimarlık",
+        "duration": "5+ Ay",
+        "title": "BKARE Mimarlık'ı Denizli'de yerel aramada görünür kıldık.",
+        "summary": "Mimarlık ve inşaat firması BKARE Mimarlık ile 5 aydır sosyal medya, Meta reklamları, web sitesi ve yerel SEO üzerine çalışıyoruz.",
+        "coverMetric": "4 Hizmet",
+        "coverMetricLabel": "tek çatı altında yönetiliyor",
+        "challenge": {
+          "title": "Mimarlıkta güven, portföyün doğru anlatılmasıyla kurulur.",
+          "intro": "BKARE Mimarlık ve İnşaat, tamamladığı projelerin kalitesini dijitalde yeterince yansıtamıyordu. Hem sosyal medyada hem de Google'da yerel aramalarda görünürlüğü sınırlıydı.",
+          "points": [
+            "Tamamlanan projeler sosyal medyada sistemli bir şekilde sergilenmiyordu.",
+            "Web sitesi, portföyü ve uzmanlık alanlarını yeterince öne çıkarmıyordu.",
+            "\"Denizli mimarlık ofisi\" gibi yerel aramalarda görünürlük yetersizdi."
+          ]
+        },
+        "approach": {
+          "title": "Portföyü sosyal medyada, web sitesinde ve Google'da eşzamanlı büyüttük.",
+          "steps": [
+            {
+              "title": "Sosyal Medya ve Marka Yönetimi",
+              "description": "@bkaremimarlik.tr hesabında proje bazlı içerik akışıyla portföy sistemli şekilde sergilenmeye başlandı."
+            },
+            {
+              "title": "Meta Reklam Yönetimi",
+              "description": "Konut ve ticari proje hedef kitlelerine yönelik Meta reklam kampanyaları yürütülüyor."
+            },
+            {
+              "title": "Web Tasarım & Yazılım",
+              "description": "bkare-mimarlik.com, portföyü öne çıkaran modern bir yapıyla yeniden tasarlandı."
+            },
+            {
+              "title": "Google Haritalar ve Yerel SEO",
+              "description": "Google İşletme Profili ve yerel SEO çalışmalarıyla Denizli'deki aramalarda görünürlük artırıldı."
+            }
+          ]
+        },
+        "results": {
+          "title": "5 ayın sonunda BKARE Mimarlık nerede?",
+          "summary": "Marka artık tamamladığı her projeyi sosyal medyada, web sitesinde ve yerel aramada tutarlı bir şekilde sergiliyor.",
+          "metrics": [
+            {
+              "value": "5 Ay",
+              "label": "kesintisiz iş birliği"
+            },
+            {
+              "value": "4",
+              "label": "aktif yönetilen hizmet kalemi"
+            },
+            {
+              "value": "Yerel SEO",
+              "label": "Google Haritalar görünürlüğü"
+            },
+            {
+              "value": "Aylık",
+              "label": "kampanya ve içerik takibi"
+            }
+          ]
+        },
+        "galleryTitle": "Projelerden kareler."
+      },
+      "kayra-designer-store": {
+        "industry": "Mobilya / Dekorasyon",
+        "duration": "3+ Ay",
+        "title": "Kayra Designer Store'un vitrini sosyal medyaya taşıdık.",
+        "summary": "Mobilya ve dekorasyon mağazası Kayra Designer Store ile 3 aydır sosyal medya ve marka yönetimi üzerine çalışıyoruz.",
+        "coverMetric": "3 Ay",
+        "coverMetricLabel": "aralıksız iş birliği",
+        "challenge": {
+          "title": "Dekorasyonda ürün, doğru çerçevede anlatılınca satar.",
+          "intro": "Kayra Designer Store, mağazasındaki ürün çeşitliliğini sosyal medyada yeterince yansıtamıyor, potansiyel müşteriler ürünleri keşfetmeden önce markayı tanıma fırsatı bulamıyordu.",
+          "points": [
+            "Mağaza vitrinindeki ürün çeşitliliği sosyal medyada sistemli bir şekilde tanıtılmıyordu.",
+            "Paylaşım sıklığı düzensizdi, marka algısı dağınık kalıyordu.",
+            "Dekorasyon kategorisinde görsel kalitenin çok yüksek olması gerekiyordu."
+          ]
+        },
+        "approach": {
+          "title": "Vitrini düzenli ve estetik bir içerik akışına dönüştürdük.",
+          "steps": [
+            {
+              "title": "İçerik Planlama",
+              "description": "@kayramim hesabı için aylık içerik takvimi ve tutarlı bir görsel dil oluşturuldu."
+            },
+            {
+              "title": "Ürün Odaklı Çekimler",
+              "description": "Mağazadaki öne çıkan ürünler düzenli olarak profesyonel içeriklerle sosyal medyaya taşınıyor."
+            },
+            {
+              "title": "Topluluk Yönetimi",
+              "description": "Yorum ve mesajların düzenli takibiyle marka-müşteri etkileşimi güçlendirildi."
+            },
+            {
+              "title": "Marka Dili",
+              "description": "Paylaşımlarda tutarlı bir ton ve görsel kimlik oluşturularak marka algısı netleştirildi."
+            }
+          ]
+        },
+        "results": {
+          "title": "3 ayın sonunda Kayra Designer Store nerede?",
+          "summary": "Mağaza vitrini artık düzenli, tutarlı ve estetik bir sosyal medya akışıyla dijitalde de yaşıyor.",
+          "metrics": [
+            {
+              "value": "3 Ay",
+              "label": "kesintisiz iş birliği"
+            },
+            {
+              "value": "1",
+              "label": "aktif yönetilen hizmet kalemi"
+            },
+            {
+              "value": "Aylık",
+              "label": "içerik takvimi"
+            },
+            {
+              "value": "Denizli",
+              "label": "yerel mağaza görünürlüğü"
+            }
+          ]
+        },
+        "galleryTitle": "Mağazadan kareler."
+      }
+    }
+  },
+  "Quote": {
+    "metaTitle": "Teklif Al",
+    "metaDescription": "DOU Social ile dijital büyüme planı için ücretsiz teklif al. Sektör, hedef ve bütçeni bildir, 24 saat içinde size özel teklifle dönelim.",
+    "eyebrow": "Teklif Al",
+    "heroTitle": "Markana özel teklif.",
+    "heroLead": "5 dakikada formu doldur, 24 saat içinde sektörüne özel teklifle dönelim. Genel fiyat değil — sana özel plan.",
+    "perks": {
+      "p1": "İlk konuşma ücretsiz, yükümlülük yok.",
+      "p2": "Senin sektörüne benzer 2-3 case study paylaşılır.",
+      "p3": "Bütçen ne olursa olsun gerçekçi öneri."
+    },
+    "form": {
+      "step1": {
+        "title": "01 — Markan hangi sektörde?",
+        "description": "Sektörel benchmark'ları doğru konuşabilelim."
+      },
+      "step2": {
+        "title": "02 — Hangi hizmetler ilgini çekiyor?",
+        "description": "Birden fazla seçebilirsin. Bundle teklifi de yapıyoruz."
+      },
+      "step3": {
+        "title": "03 — Aylık dijital pazarlama bütçen?",
+        "description": "Reklam bütçesi + ajans dahil tahmini aralık. Net olmasa da olur."
+      },
+      "step4": {
+        "title": "04 — Sen kimsin?",
+        "description": "Tanışalım. Hızlı dönüş için iletişim bilgilerine ihtiyacımız var."
+      },
+      "industry": {
+        "label": "Sektör",
+        "options": {
+          "ecommerce": "E-ticaret",
+          "b2b": "B2B / SaaS",
+          "restaurant": "Restoran / Cafe",
+          "education": "Eğitim",
+          "healthcare": "Sağlık",
+          "other": "Diğer"
+        }
+      },
+      "services": {
+        "label": "İlgilendiğin hizmetler",
+        "options": {
+          "meta-ads": "Meta Ads Yönetimi",
+          "social": "Sosyal Medya Yönetimi",
+          "content": "İçerik Üretimi",
+          "web": "Web Tasarım",
+          "strategy": "Marka Stratejisi"
+        }
+      },
+      "budget": {
+        "label": "Aylık bütçe",
+        "options": {
+          "lt25k": "25.000 TL altı",
+          "25-50k": "25.000 – 50.000 TL",
+          "50-100k": "50.000 – 100.000 TL",
+          "gt100k": "100.000 TL üzeri"
+        }
+      },
+      "name": "İsim",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "company": "Şirket / Marka adı",
+      "message": "Eklemek istediğin bir şey var mı?",
+      "messagePlaceholder": "Hedeflerin, mevcut durum, takvim — kısaca yaz.",
+      "optional": "opsiyonel",
+      "consent": "Kişisel verilerimin form içeriği kapsamında işlenmesini kabul ediyorum (KVKK).",
+      "submit": "Teklif iste",
+      "sending": "Gönderiliyor...",
+      "successTitle": "Aldık!",
+      "successBody": "Talebin bize ulaştı. 24 saat içinde sektörüne özel teklif ve birkaç case study ile dönüyoruz.",
+      "errors": {
+        "missing-fields": "Lütfen zorunlu alanları doldur.",
+        "invalid-email": "Geçerli bir e-posta gir.",
+        "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
+        "consent-required": "KVKK onayı vermeden gönderemiyoruz.",
+        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene."
+      }
+    }
+  },
+  "Checkup": {
+    "metaTitle": "Ücretsiz Sosyal Medya Analizi — DOU Social",
+    "metaDescription": "Instagram, reklam hesabın ve LinkedIn sayfan ne durumda? Formu doldur, sana özel PDF rapor 5 dakikada e-postanda olsun.",
+    "eyebrow": "Ücretsiz Analiz",
+    "heroTitle": "Sosyal medyan gerçekten çalışıyor mu?",
+    "heroLead": "Instagram hesabını, reklam bütçeni ve diğer platformları ücretsiz analiz ediyoruz. Formu doldur, sana özel rapor 5 dakikada e-postanda olsun.",
+    "points": {
+      "analysis": {
+        "title": "Sana özel bakış",
+        "description": "Genel tavsiye değil. Kendi hesaplarına bakıp ne iyi gidiyor, ne gitmediğini dürüstçe yazıyoruz."
+      },
+      "actionable": {
+        "title": "Somut adımlar",
+        "description": "Her sorunun yanında 'şunu yap' notu var. Hemen bu hafta deneyebileceğin şeyler."
+      },
+      "free": {
+        "title": "Tamamen ücretsiz",
+        "description": "Sadece e-posta yeterli. Toplantı yok, satış çağrısı yok. Beğenirsen biz konuşuruz."
+      }
+    },
+    "formEyebrow": "Analiz Formu",
+    "formTitle": "Hangi hesaplarına bakalım?",
+    "formNote": "Hesaplarına şifre veya erişim istemiyoruz. Paylaştığın bilgiler ve ekran görüntülerinden raporu hazırlıyoruz.",
+    "form": {
+      "platforms": {
+        "label": "Hangi platformlarda hesabın var?",
+        "hint": "Birden fazla seçebilirsin",
+        "options": {
+          "instagram": "Instagram",
+          "meta-ads": "Meta Reklam (Facebook / Instagram)",
+          "tiktok": "TikTok",
+          "youtube": "YouTube",
+          "google": "Google İşletme Profili",
+          "linkedin": "LinkedIn"
+        }
+      },
+      "handles": {
+        "instagram": "Instagram kullanıcı adın nedir?",
+        "meta-ads": "Facebook Sayfa veya reklam hesabının adı nedir?",
+        "tiktok": "TikTok kullanıcı adın nedir?",
+        "youtube": "YouTube kanalının adı nedir?",
+        "google": "Google'da işletmen nasıl görünüyor?",
+        "linkedin": "LinkedIn şirket sayfanın adı nedir?"
+      },
+      "handlePlaceholders": {
+        "instagram": "@hesabim",
+        "meta-ads": "Sayfa veya hesap adı",
+        "tiktok": "@hesabim",
+        "youtube": "Kanal adı",
+        "google": "İşletme adı",
+        "linkedin": "Şirket sayfası adı"
+      },
+      "screenshots": {
+        "label": "Ekran görüntüsü ekle",
+        "hint": "isteğe bağlı — eklersen daha detaylı bakabiliriz",
+        "guides": {
+          "instagram": "Instagram uygulamasında profiline git → Profesyonel gösterge tablosu → İstatistikler ekranını aç ve ekran görüntüsü al",
+          "meta-ads": "business.facebook.com adresini aç → Reklam Yöneticisi → Kampanyalar sayfasını seç, son 30 günü seç ve ekran görüntüsü al",
+          "tiktok": "TikTok uygulamasında profiline git → İçerik Analizleri ekranını aç ve ekran görüntüsü al",
+          "youtube": "YouTube Studio'ya gir → sol menüden Analitikler → Genel Bakış ekranının görüntüsünü al",
+          "google": "Google'da işletmeni ara → Performansı gör ekranını aç ve ekran görüntüsü al",
+          "linkedin": "LinkedIn şirket sayfana gir → Analitikler → Ziyaretçiler sekmesinin görüntüsünü al"
+        }
+      },
+      "sector": {
+        "label": "Hangi sektördesiniz?",
+        "placeholder": "Sektörünüzü seçin",
+        "options": {
+          "ecommerce": "E-ticaret / Online Satış",
+          "food": "Restoran / Kafe / Yemek",
+          "beauty": "Güzellik / Estetik / Kuaför",
+          "health": "Sağlık / Klinik / Diş",
+          "education": "Eğitim / Kurs / Koçluk",
+          "hospitality": "Otel / Konaklama / Turizm",
+          "retail": "Perakende / Mağaza",
+          "realestate": "İnşaat / Emlak / Mimarlık",
+          "legal": "Hukuk / Mali Müşavirlik",
+          "tech": "Teknoloji / Yazılım",
+          "other": "Diğer"
+        }
+      },
+      "website": {
+        "label": "Markanın bir websitesi var mı?",
+        "options": {
+          "yes": "Evet, var",
+          "no": "Hayır, yok",
+          "renewal": "Var ama yenilemek istiyorum"
+        }
+      },
+      "name": "Adın",
+      "phone": "Telefon numarası",
+      "phonePlaceholder": "0555 555 5555",
+      "email": "E-posta adresin",
+      "submit": "Analiz raporumu gönder",
+      "sending": "Gönderiliyor...",
+      "successTitle": "Rapor yolda!",
+      "successBody": "Analiz raporun en geç 5 dakika içinde e-posta kutuna düşüyor. Spam klasörünü de kontrol etmeyi unutma.",
+      "errors": {
+        "missing-fields": "Lütfen zorunlu alanları doldurun.",
+        "invalid-email": "Geçerli bir e-posta adresi girin.",
+        "invalid-phone": "Geçerli bir telefon numarası girin (örn: 0555 555 5555).",
+        "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
+        "consent-required": "Devam etmek için onay vermelisiniz.",
+        "rate-limited": "Çok hızlı gönderdiniz. Birkaç dakika sonra tekrar deneyin."
+      }
+    }
+  },
+  "Meeting": {
+    "metaTitle": "Strateji Görüşmesi",
+    "metaDescription": "30 dakikalık ücretsiz strateji görüşmesi. Markanı dinleyip dijitalde ne yapabileceğimizi söyleriz. Satış konuşması yok.",
+    "eyebrow": "Strateji Görüşmesi",
+    "heroTitle": "30 dakika, somut plan.",
+    "heroLead": "Markanı dinleyip ne yapabileceğimizi söyleyeceğiz. Satış konuşması yok, anlaşma yapma baskısı yok.",
+    "info": {
+      "duration": {
+        "label": "Süre",
+        "value": "30 dakika"
+      },
+      "format": {
+        "label": "Format",
+        "value": "Online (Google Meet) veya ofiste"
+      },
+      "cost": {
+        "label": "Ücret",
+        "value": "Ücretsiz"
+      }
+    },
+    "form": {
+      "name": "İsim",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "optional": "opsiyonel",
+      "topic": {
+        "label": "Konuşmak istediğin konu",
+        "placeholder": "Hangi sorunu çözmek istiyorsun, neyi büyütmek istiyorsun? Kısaca yaz."
+      },
+      "slots": {
+        "label": "Hangi saat dilimleri sana uyar?",
+        "options": {
+          "morning": "Sabah (09:00 – 12:00)",
+          "afternoon": "Öğle (12:00 – 16:00)",
+          "evening": "Akşam (16:00 – 19:00)"
+        }
+      },
+      "consent": "Kişisel verilerimin form içeriği kapsamında işlenmesini kabul ediyorum (KVKK).",
+      "submit": "Görüşme planla",
+      "sending": "Gönderiliyor...",
+      "successTitle": "Görüşmeyi alıyoruz!",
+      "successBody": "Talebin bize ulaştı. 24 saat içinde sana uygun bir saat önerisiyle dönüyoruz.",
+      "errors": {
+        "missing-fields": "Lütfen zorunlu alanları doldur.",
+        "invalid-email": "Geçerli bir e-posta gir.",
+        "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
+        "consent-required": "KVKK onayı vermeden gönderemiyoruz.",
+        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene."
+      }
+    }
+  },
+  "Influencer": {
+    "metaTitle": "Influencer Başvurusu",
+    "metaDescription": "DOU Social ile içerik üretimi ve iş birliği yapmak isteyen influencer'lar için başvuru formu.",
+    "eyebrow": "Influencer Başvurusu",
+    "heroTitle": "Bizimle çalışmak ister misin?",
+    "heroLead": "Kısa bir form dolduruyorsun, biz sektörüne ve içeriğine uygun projeler çıktığında sana ulaşıyoruz.",
+    "info": {
+      "sure": {
+        "label": "Süre",
+        "value": "2 dakika"
+      },
+      "donus": {
+        "label": "Dönüş",
+        "value": "Uygun proje çıktığında iletişime geçiyoruz"
+      }
+    },
+    "form": {
+      "name": "Ad Soyad",
+      "phone": "Telefon",
+      "email": "E-posta",
+      "social": "Sosyal medya hesabı (Instagram/TikTok vb.)",
+      "price": "Kalem fiyatın",
+      "pricePlaceholder": "Ör. gönderi başına 2.000₺, pazarlığa açık vb.",
+      "interests": "İlgi alanların",
+      "interestsPlaceholder": "Ör. spor, seyahat, moda...",
+      "sectors": {
+        "label": "İlgilendiğin sektörler",
+        "options": {
+          "spor-fitness": "Spor & Fitness",
+          "guzellik-estetik": "Güzellik & Estetik",
+          "moda": "Moda",
+          "yiyecek-icecek": "Yiyecek & İçecek",
+          "egitim": "Eğitim",
+          "e-ticaret": "E-ticaret",
+          "teknoloji": "Teknoloji",
+          "saglik": "Sağlık",
+          "diger": "Diğer"
+        }
+      },
+      "contentUrl": "En beğendiğin içeriğinin linki",
+      "declaration": "Bu formu kendi bilgilerimle ve kendi rızamla doldurduğumu beyan ederim.",
+      "optional": "opsiyonel",
+      "submit": "Başvuruyu gönder",
+      "sending": "Gönderiliyor...",
+      "successTitle": "Başvurun bize ulaştı!",
+      "successBody": "Profiline uygun bir proje çıktığında seninle iletişime geçeceğiz.",
+      "errors": {
+        "missing-fields": "Lütfen zorunlu alanları doldur.",
+        "invalid-email": "Geçerli bir e-posta gir.",
+        "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
+        "consent-required": "Onay kutularını işaretlemeden gönderemiyoruz.",
+        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene."
+      }
+    }
+  },
+  "SeoLanding": {
+    "_shared": {
+      "ctaPrimary": "Ücretsiz teklif al",
+      "ctaSecondary": "Görüşme planla",
+      "problemEyebrow": "Sorun",
+      "processEyebrow": "Çalışma sistemi",
+      "casesEyebrow": "Sonuçlar",
+      "faqEyebrow": "Sıkça sorulanlar"
+    },
+    "denizli-sosyal-medya-ajansi": {
+      "metaTitle": "Denizli Sosyal Medya Ajansı — DOU Social",
+      "metaDescription": "Denizli'de sosyal medya ajansı arıyorsan: Instagram, TikTok ve Meta Ads yönetiminde ölçülebilir sonuç üreten yerel ajans. Ücretsiz teklif.",
+      "eyebrow": "Denizli · Sosyal Medya Ajansı",
+      "title": "Denizli'nin sosyal medya ajansı.",
+      "lead": "Denizli merkezli marka ve işletmelere Instagram, TikTok ve Meta Ads yönetimi. Yerel pazarı tanıyan, ölçülebilir sonuç üreten bir ekip.",
+      "proof": [
+        {
+          "value": "30+",
+          "label": "Birlikte çalıştığımız Denizli markası"
+        },
+        {
+          "value": "3.2x",
+          "label": "Ortalama ROAS"
+        },
+        {
+          "value": "%41",
+          "label": "Lead maliyeti tasarrufu"
+        }
+      ],
+      "problemsTitle": "Denizli'de sosyal medya yönetiminde sıkça karşılaştığımız.",
+      "problems": [
+        {
+          "title": "İçerik düzensiz",
+          "description": "Haftada 1-2 post, story yok, marka sesi belirsiz. Takipçi büyümüyor."
+        },
+        {
+          "title": "Yerel hedefleme zayıf",
+          "description": "Reklamlar Türkiye geneline atılıyor, Denizli müşterisine ulaşmak pahalı."
+        },
+        {
+          "title": "Ölçüm yok",
+          "description": "Hangi içerik etki üretiyor, hangi reklam dönüyor — net görünmüyor."
+        }
+      ],
+      "processTitle": "Markana özel sosyal medya operasyonu, 4 adım.",
+      "process": [
+        {
+          "title": "Audit & strateji",
+          "description": "Hesap, rakip ve yerel pazar analizi. Aylık tema ve içerik takvimi."
+        },
+        {
+          "title": "Saha çekim",
+          "description": "Ayda 1-2 günlük çekim, Denizli ekibimizle. Reels + statik içerik üretimi."
+        },
+        {
+          "title": "Yayın & topluluk",
+          "description": "İçerik takvimi yayında, yorum/DM yönetimi, hashtag stratejisi."
+        },
+        {
+          "title": "Reklam & ölçüm",
+          "description": "Yerel hedefli Meta Ads, haftalık dashboard, aylık optimizasyon görüşmesi."
+        }
+      ],
+      "casesTitle": "Yerel sonuçlar.",
+      "cases": [
+        {
+          "slug": "restoran-yerel-buyume",
+          "metric": "2x",
+          "industry": "Restoran · Denizli",
+          "title": "Şube ziyareti 2 katına çıktı"
+        },
+        {
+          "slug": "e-ticaret-3x-donusum",
+          "metric": "3.4x",
+          "industry": "E-ticaret",
+          "title": "Mağaza dönüşümü 3.4x"
+        },
+        {
+          "slug": "saglik-klinigi-marka-yenileme",
+          "metric": "4x",
+          "industry": "Sağlık",
+          "title": "Organik trafik 4x"
+        }
+      ],
+      "faqTitle": "Aklındakiler.",
+      "faq": [
+        {
+          "q": "Denizli'de fiziksel ofisiniz var mı?",
+          "a": "Evet, Merkezefendi'de Zafer Caddesi'ndeyiz. Sahaya çıkıp markanı görmeye geliyoruz, bizi ziyaret edebilirsin."
+        },
+        {
+          "q": "Sadece Denizli'deki müşterilerle mi çalışıyorsunuz?",
+          "a": "Hayır, Türkiye genelinde marka ve İngilizce konuşulan global müşterilerle de çalışıyoruz. Ama Denizli'de fiziksel olarak burada olmamız avantaj."
+        },
+        {
+          "q": "Çekim için sahaya geliyor musunuz?",
+          "a": "Evet, ayda 1-2 günlük çekim paket içinde. Denizli içi ek ücret yok."
+        },
+        {
+          "q": "Asgari sözleşme süresi?",
+          "a": "3 ay. Sosyal medyada anlamlı veri görmek için minimum 3 ay gerekli, daha kısası tarafımıza da sana da haksızlık olur."
+        }
+      ]
+    },
+    "meta-ads-ajansi": {
+      "metaTitle": "Meta Ads Ajansı — Facebook & Instagram Reklam Yönetimi",
+      "metaDescription": "Meta Ads ajansı arıyorsan: Facebook ve Instagram reklamlarında ölçülebilir ROAS. Hesap audit'inden ölçeklendirmeye, tek elden yönetim.",
+      "eyebrow": "Meta Ads Ajansı",
+      "title": "Reklam bütçeni harcama, sonuca dönüştür.",
+      "lead": "Facebook ve Instagram reklamlarında doğru hedefleme, sürekli A/B test, sıkı bütçe disiplini. Tahmin değil, ölçülebilir ROAS.",
+      "proof": [
+        {
+          "value": "3.2x",
+          "label": "Ortalama ROAS artışı"
+        },
+        {
+          "value": "%41",
+          "label": "CPL düşüşü"
+        },
+        {
+          "value": "100+",
+          "label": "Yönetilen kampanya"
+        }
+      ],
+      "problemsTitle": "Meta Ads hesabında sıkça gördüğümüz.",
+      "problems": [
+        {
+          "title": "Bütçe sızıntısı",
+          "description": "Geniş kitle, tek tip kreatif, fatigue ölçülmüyor. Ortalama bütçenin %30'u boşa."
+        },
+        {
+          "title": "Yanlış funnel",
+          "description": "Tek kampanyada awareness ile conversion karışık. Performans verisi anlamsız."
+        },
+        {
+          "title": "Karar verilmiyor",
+          "description": "Raporlar var ama hangi kararı alacağı belli değil. Aynı kampanya aylarca duruyor."
+        }
+      ],
+      "processTitle": "Hesap audit'inden ölçeklendirmeye 4 adım.",
+      "process": [
+        {
+          "title": "Hesap audit",
+          "description": "Mevcut hesap, kreatif, hedef kitle ve performans datasının sıkı taraması. Hızlı kazanım fırsatları çıkarılır."
+        },
+        {
+          "title": "Funnel kurulumu",
+          "description": "Awareness → consideration → conversion için ayrı kampanya yapısı, retargeting katmanları."
+        },
+        {
+          "title": "Kreatif & test",
+          "description": "Minimum 6 kreatif varyasyonu, kontrollü A/B test, kazananları otomatik ölçekleme."
+        },
+        {
+          "title": "Optimize & rapor",
+          "description": "Haftalık dashboard, ay sonu strateji görüşmesi. Karar verirken net görünürlük."
+        }
+      ],
+      "casesTitle": "Performans hikâyeleri.",
+      "cases": [
+        {
+          "slug": "e-ticaret-3x-donusum",
+          "metric": "3.4x",
+          "industry": "E-ticaret",
+          "title": "ROAS 1.2 → 4.1"
+        },
+        {
+          "slug": "online-egitim-lansmani",
+          "metric": "5.8x",
+          "industry": "Online Eğitim",
+          "title": "Lansman ROAS 5.8x"
+        },
+        {
+          "slug": "b2b-yazilim-lead-jenerasyonu",
+          "metric": "−58%",
+          "industry": "B2B SaaS",
+          "title": "CPL %58 düştü"
+        }
+      ],
+      "faqTitle": "Aklındakiler.",
+      "faq": [
+        {
+          "q": "Minimum reklam bütçesi nedir?",
+          "a": "Aylık 15.000 TL'den başlamanı öneriyoruz. Daha düşük bütçelerde anlamlı veri toplamak ve test yapmak zor olur."
+        },
+        {
+          "q": "Hesabımı sıfırdan mı kuruyorsunuz?",
+          "a": "Mevcut hesap üzerinde audit yapıp gerekli temizliği uyguluyoruz. Yapı ciddi sorunluysa ve ölçüm geçmişi temizse yeniden kurulum öneriyoruz."
+        },
+        {
+          "q": "Kreatifleri kim üretiyor?",
+          "a": "Biz üretiyoruz. İçerik üretimi paketimiz Meta Ads ile birlikte alındığında özel fiyat var."
+        },
+        {
+          "q": "Sözleşme süresi?",
+          "a": "Asgari 3 ay. Meta'nın öğrenme dönemi + ilk optimizasyon için bu süre minimum."
+        }
+      ]
+    },
+    "instagram-reklam-yonetimi": {
+      "metaTitle": "Instagram Reklam Yönetimi — DOU Social",
+      "metaDescription": "Instagram reklam yönetiminde uzman ajans: doğru hedefleme, etkili kreatif, sürekli optimizasyon. Reklam bütçeni daha verimli kullan.",
+      "eyebrow": "Instagram Reklam Yönetimi",
+      "title": "Instagram'da görünmek değil, satmak.",
+      "lead": "Instagram reklamlarında doğru kreatif, doğru kitle, doğru bütçe. Beğeni değil dönüşüm. Görüntülenme değil satış.",
+      "proof": [
+        {
+          "value": "%41",
+          "label": "Ortalama CPL düşüşü"
+        },
+        {
+          "value": "2.8x",
+          "label": "Etkileşim artışı"
+        },
+        {
+          "value": "100+",
+          "label": "Yönetilen kampanya"
+        }
+      ],
+      "problemsTitle": "Instagram reklamlarında karşılaştığımız.",
+      "problems": [
+        {
+          "title": "Reels ile statik karışık",
+          "description": "Format başına ayrı kampanya yok, Instagram'ın algoritması karışıyor."
+        },
+        {
+          "title": "Mobile-first tasarım yok",
+          "description": "Landing page mobile'da çöküyor, reklam tıklayan kullanıcı kaçıyor."
+        },
+        {
+          "title": "Story ads kullanılmıyor",
+          "description": "Story format etkin maliyetli ama atlanıyor; tüm bütçe feed reklamına gidiyor."
+        }
+      ],
+      "processTitle": "Instagram reklam yönetiminde 4 adım.",
+      "process": [
+        {
+          "title": "Format stratejisi",
+          "description": "Story, reel, feed, explore — her format için ayrı kampanya, ayrı kreatif yaklaşımı."
+        },
+        {
+          "title": "Kreatif paketi",
+          "description": "9:16 dikey video, 1:1 kare, native Instagram tasarım dili. Marka sesinde."
+        },
+        {
+          "title": "Hedefleme & test",
+          "description": "Lookalike, ilgi alanı, retargeting katmanları. A/B test ile kazananı belirle."
+        },
+        {
+          "title": "Landing optimizasyonu",
+          "description": "Reklam → mobile-first landing → checkout. Sızıntıyı kapat, dönüşümü ölçeklendir."
+        }
+      ],
+      "casesTitle": "Instagram reklam sonuçları.",
+      "cases": [
+        {
+          "slug": "e-ticaret-3x-donusum",
+          "metric": "3.4x",
+          "industry": "E-ticaret",
+          "title": "Mağaza dönüşümü 3.4x"
+        },
+        {
+          "slug": "online-egitim-lansmani",
+          "metric": "940",
+          "industry": "Online Eğitim",
+          "title": "Lansmanda 940 satış"
+        },
+        {
+          "slug": "restoran-yerel-buyume",
+          "metric": "8.3K",
+          "industry": "Restoran",
+          "title": "Yeni takipçi + 2x ziyaret"
+        }
+      ],
+      "faqTitle": "Aklındakiler.",
+      "faq": [
+        {
+          "q": "Sadece Instagram'a mı odaklanıyorsunuz?",
+          "a": "Instagram reklam yönetimi tek başına alınabilir, ancak Meta Business Suite üzerinden Facebook reklamı da otomatik açılabilir. Önerilenler: Instagram + Facebook combo."
+        },
+        {
+          "q": "Reels reklamı için video gerekiyor — nereden?",
+          "a": "İçerik üretimi paketimizle birlikte alabilir veya kendi videolarını sağlayabilirsin. Her ikisi için de kreatif strateji üretiyoruz."
+        },
+        {
+          "q": "Ne kadar bütçeyle başlamalıyım?",
+          "a": "Aylık 15.000 TL'den başlamanı öneriyoruz. Daha düşük bütçelerde anlamlı test yapmak zor."
+        },
+        {
+          "q": "Story ads gerçekten işe yarıyor mu?",
+          "a": "Doğru kullanıldığında. Native Story tasarım dili (full-bleed, hızlı tempo, açık CTA) ile feed reklamlarından %20-30 daha düşük CPL gördük."
+        }
+      ]
+    },
+    "dijital-pazarlama-ajansi": {
+      "metaTitle": "Dijital Pazarlama Ajansı — DOU Social",
+      "metaDescription": "Reklam, içerik, sosyal medya, web ve marka stratejisi — markanın dijital büyümesini tek elden yöneten ajans. Türkiye + global.",
+      "eyebrow": "Dijital Pazarlama Ajansı",
+      "title": "Markanın dijital büyüme operasyonu.",
+      "lead": "Reklam, içerik, sosyal medya, web ve marka stratejisi — beş hizmet, tek operasyon. Tutarlı marka, ölçülebilir sonuç.",
+      "proof": [
+        {
+          "value": "30+",
+          "label": "Birlikte çalıştığımız marka"
+        },
+        {
+          "value": "5",
+          "label": "Tek elden yönetilen hizmet"
+        },
+        {
+          "value": "%41",
+          "label": "Ortalama CPL tasarrufu"
+        }
+      ],
+      "problemsTitle": "Markanın dijitalde dağınık olmasının bedeli.",
+      "problems": [
+        {
+          "title": "Birden fazla ajans, birden fazla mesaj",
+          "description": "Reklam ajansı bir şey diyor, içerik ajansı başka, web ajansı başka. Marka tutarsız algılanıyor."
+        },
+        {
+          "title": "Veri her yere dağılmış",
+          "description": "Hangi kanal değer üretiyor net değil. Bütçe optimize etmek için resmin tamamı görünmüyor."
+        },
+        {
+          "title": "Karar yavaş, uygulama daha yavaş",
+          "description": "Üç ajans + iç ekip arasında karar geçiyor, brief gidip geliyor, hız düşüyor."
+        }
+      ],
+      "processTitle": "Tek operasyonda 4 katman.",
+      "process": [
+        {
+          "title": "Strateji",
+          "description": "Markanın konumlaması, hedef kitle, kanal mix'i, KPI'lar. Tek bir plan."
+        },
+        {
+          "title": "Üretim",
+          "description": "İçerik, reklam kreatifi, web — aynı tasarım dilinde, aynı sesle."
+        },
+        {
+          "title": "Yayın",
+          "description": "Reklam ve organik kanallar koordineli yayında. Aynı mesaj, farklı format."
+        },
+        {
+          "title": "Ölçüm & optimize",
+          "description": "Tek dashboard, haftalık karar, aylık strateji görüşmesi. Resim her zaman net."
+        }
+      ],
+      "casesTitle": "Tek elden yönetilen sonuçlar.",
+      "cases": [
+        {
+          "slug": "saglik-klinigi-marka-yenileme",
+          "metric": "4x",
+          "industry": "Sağlık",
+          "title": "Marka + web + içerik + SEO"
+        },
+        {
+          "slug": "online-egitim-lansmani",
+          "metric": "940",
+          "industry": "Online Eğitim",
+          "title": "İçerik + email + reklam"
+        },
+        {
+          "slug": "b2b-yazilim-lead-jenerasyonu",
+          "metric": "−58%",
+          "industry": "B2B SaaS",
+          "title": "LinkedIn + Google + içerik"
+        }
+      ],
+      "faqTitle": "Aklındakiler.",
+      "faq": [
+        {
+          "q": "Tek hizmet alabilir miyim?",
+          "a": "Evet. Sadece Meta Ads, sadece sosyal medya, sadece web — her hizmet ayrı paket olarak alınabilir."
+        },
+        {
+          "q": "Bundle paketler avantajlı mı?",
+          "a": "Evet. 2+ hizmet birlikte alındığında %15-25 paket fiyatı uygulanıyor. Daha önemlisi: aynı ekiple çalıştığın için brief karmaşası yok."
+        },
+        {
+          "q": "Mevcut ajansımdan geçiş zor mu?",
+          "a": "Standart geçiş süresi 30 gün. Hesap erişimleri, asset transferi, history dökümanları — checklist üzerinden götürüyoruz."
+        },
+        {
+          "q": "Sözleşme nasıl?",
+          "a": "Asgari 3 ay, sonrası aylık. İlk 30 gün içinde memnun değilsen sözleşme sonlanır, ödenen ay iadelidir."
+        }
+      ]
+    }
+  },
+  "Blog": {
+    "metaTitle": "Blog",
+    "metaDescription": "Reklam, içerik, marka stratejisi üzerine sahadan notlar. DOU Social ekibinden taktik, framework ve case analizleri.",
+    "eyebrow": "Blog",
+    "heroTitle": "Sahadan notlar.",
+    "heroLead": "Reklam, içerik, sosyal medya ve marka stratejisi üzerine taktik düzeyde, kullanılabilir yazılar.",
+    "empty": "Henüz blog yazısı yok. Yakında.",
+    "read": "Yazıyı oku",
+    "back": "Tüm yazılar",
+    "relatedTitle": "İlgili yazılar.",
+    "readingTime": "{minutes} dk okuma"
+  },
+  "Privacy": {
+    "metaTitle": "Gizlilik Politikası",
+    "metaDescription": "DOU Social Gizlilik Politikası. KVKK ve GDPR kapsamında topladığımız, işlediğimiz ve sakladığımız kişisel veriler hakkında bilgi.",
+    "title": "Gizlilik Politikası",
+    "lastUpdated": "Son güncelleme: 6 Mayıs 2026",
+    "sections": [
+      {
+        "heading": "1. Veri Sorumlusu",
+        "paragraphs": [
+          "Bu site (dousocial.com) DOU Social tarafından işletilmektedir. Kişisel verilerinizin işlenmesi açısından KVKK 6698 sayılı kanun kapsamında veri sorumlusu sıfatıyla DOU Social hareket eder.",
+          "İletişim: info@dousocial.com · Zafer Mah. Zafer Cd. No: 60/1, Merkezefendi / Denizli."
+        ]
+      },
+      {
+        "heading": "2. Toplanan Veriler",
+        "paragraphs": [
+          "Sitemiz üzerinden, sizden gönüllü olarak ilettiğiniz aşağıdaki verileri topluyoruz: ad, soyad, e-posta adresi, telefon numarası, şirket bilgisi ve form içerikleri (mesaj/talep). Bu veriler sadece formları kendi rızanızla doldurduğunuz durumlarda toplanır.",
+          "Otomatik olarak: IP adresi, tarayıcı tipi, ziyaret edilen sayfalar, oturum süresi gibi teknik veriler. Bu veriler analitik amaçla, çerez onayınız doğrultusunda işlenir."
+        ]
+      },
+      {
+        "heading": "3. Veri İşleme Amacı",
+        "paragraphs": [
+          "Kişisel verileriniz aşağıdaki amaçlarla işlenir: (a) talep ve formlarınıza yanıt vermek, (b) hizmetlerimiz hakkında bilgi sunmak, (c) sözleşme öncesi görüşmeleri yürütmek, (d) site performansını ölçmek ve iyileştirmek.",
+          "Verileriniz, açık rızanız olmadan pazarlama amaçlı üçüncü taraflarla paylaşılmaz."
+        ]
+      },
+      {
+        "heading": "4. Veri Saklama Süresi",
+        "paragraphs": [
+          "Form üzerinden iletilen veriler, talebin sonuçlanmasını takiben 24 ay saklanır. Sözleşmeli müşteri ilişkisi başladığında ilgili yasal saklama süreleri (vergi mevzuatı vb.) geçerlidir.",
+          "Çerez verileri, çerez politikamızda belirtilen süreler boyunca saklanır."
+        ]
+      },
+      {
+        "heading": "5. Veri Aktarımı",
+        "paragraphs": [
+          "Verileriniz, hizmet sağlayıcılarımız (e-posta gönderimi: Resend; web hosting: Vercel; analitik: Google Analytics) ile paylaşılabilir. Bu sağlayıcılar, kendi gizlilik politikaları kapsamında verileri işler.",
+          "Yurtdışına veri aktarımı söz konusu olduğunda, aktarım sadece yeterli koruma sağlayan ülkelere veya standart sözleşme maddeleri çerçevesinde gerçekleştirilir."
+        ]
+      },
+      {
+        "heading": "6. Haklarınız (KVKK Madde 11)",
+        "paragraphs": [
+          "Kişisel verilerinizle ilgili olarak: (a) işlenip işlenmediğini öğrenme, (b) işleniyorsa bilgi talep etme, (c) işlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme, (d) düzeltme/silme/yok etme talep etme, (e) işlemeye itiraz etme haklarına sahipsiniz.",
+          "Talepleriniz için info@dousocial.com adresine yazabilirsiniz. Talepleriniz en geç 30 gün içinde yanıtlanır."
+        ]
+      },
+      {
+        "heading": "7. Veri Güvenliği",
+        "paragraphs": [
+          "Kişisel verilerinizin güvenliğini sağlamak için teknik ve idari tedbirler alıyoruz: HTTPS şifreleme, erişim kontrolü, güvenli veri tabanı, düzenli güvenlik güncellemeleri.",
+          "Yine de, internet üzerinden veri iletiminin %100 güvenli olamayacağını belirtmek isteriz."
+        ]
+      },
+      {
+        "heading": "8. Değişiklikler",
+        "paragraphs": [
+          "Bu gizlilik politikası, gerektiğinde güncellenebilir. Önemli değişiklikler bu sayfada yayınlanır ve gerektiğinde e-posta ile bilgilendirilirsiniz."
+        ]
+      }
+    ]
+  },
+  "Terms": {
+    "metaTitle": "Kullanım Koşulları",
+    "metaDescription": "DOU Social websitesi kullanım koşulları. Site içeriğine erişim, fikri mülkiyet ve sorumluluk sınırlamaları.",
+    "title": "Kullanım Koşulları",
+    "lastUpdated": "Son güncelleme: 6 Mayıs 2026",
+    "sections": [
+      {
+        "heading": "1. Kabul",
+        "paragraphs": [
+          "Bu siteyi (dousocial.com) ziyaret ederek aşağıdaki koşulları kabul etmiş sayılırsınız. Koşulları kabul etmiyorsanız siteyi kullanmamanız gerekir."
+        ]
+      },
+      {
+        "heading": "2. Hizmet Tanımı",
+        "paragraphs": [
+          "Bu site, DOU Social'ın hizmetleri (Meta Ads yönetimi, sosyal medya yönetimi, içerik üretimi, web tasarım, marka stratejisi) hakkında bilgi sunan bir tanıtım sitesidir.",
+          "Sitede sunulan içerikler bilgilendirme amaçlıdır; hukuki, finansal veya profesyonel tavsiye niteliği taşımaz."
+        ]
+      },
+      {
+        "heading": "3. Fikri Mülkiyet",
+        "paragraphs": [
+          "Sitede yer alan tüm içerik (metin, görsel, logo, tasarım, kod) DOU Social'a aittir veya kullanım izni alınmıştır. Yazılı izin olmadan kopyalanamaz, çoğaltılamaz veya ticari amaçla kullanılamaz.",
+          "Blog yazıları kişisel okuma için paylaşılabilir, kaynak gösterilerek alıntı yapılabilir."
+        ]
+      },
+      {
+        "heading": "4. Kullanıcı Yükümlülükleri",
+        "paragraphs": [
+          "Site kullanırken: (a) yasalara aykırı içerik göndermemek, (b) site güvenliğini zedeleyecek girişimlerde bulunmamak, (c) başkalarının haklarını ihlal etmemek, (d) doğru ve güncel bilgi sağlamak yükümlülüğündesiniz."
+        ]
+      },
+      {
+        "heading": "5. Sorumluluk Sınırlaması",
+        "paragraphs": [
+          "Site içeriğinin doğruluğu için makul gayret göstermekle birlikte, içerikteki olası hatalardan veya site kullanımından doğan zararlardan DOU Social sorumlu tutulamaz.",
+          "Sözleşmeli müşteri hizmetlerimize ilişkin yükümlülükler, ayrıca imzalanan sözleşme metinlerinde belirtilir."
+        ]
+      },
+      {
+        "heading": "6. Üçüncü Taraf Bağlantılar",
+        "paragraphs": [
+          "Sitede üçüncü taraf sitelerine bağlantılar yer alabilir. Bu sitelerin içeriğinden ve gizlilik uygulamalarından DOU Social sorumlu değildir."
+        ]
+      },
+      {
+        "heading": "7. Değişiklikler",
+        "paragraphs": [
+          "Bu kullanım koşulları zaman zaman güncellenebilir. Güncel versiyon her zaman bu sayfada yayınlanır."
+        ]
+      },
+      {
+        "heading": "8. Uygulanacak Hukuk",
+        "paragraphs": [
+          "Bu koşullar Türkiye Cumhuriyeti yasalarına tabidir. Doğacak uyuşmazlıklarda Denizli mahkemeleri ve icra daireleri yetkilidir."
+        ]
+      }
+    ]
+  },
+  "Cookies": {
+    "metaTitle": "Çerez Politikası",
+    "metaDescription": "DOU Social websitesi çerez politikası. Hangi çerezleri kullandığımız, ne kadar sakladığımız ve nasıl kontrol edebileceğiniz.",
+    "title": "Çerez Politikası",
+    "lastUpdated": "Son güncelleme: 6 Mayıs 2026",
+    "sections": [
+      {
+        "heading": "1. Çerez Nedir?",
+        "paragraphs": [
+          "Çerezler, ziyaret ettiğiniz web sitelerinin tarayıcınıza yerleştirdiği küçük metin dosyalarıdır. Sitenin sizi tanımasını, tercihlerinizi hatırlamasını ve nasıl kullanıldığını anlamasını sağlarlar."
+        ]
+      },
+      {
+        "heading": "2. Hangi Çerezleri Kullanıyoruz?",
+        "paragraphs": [
+          "Zorunlu çerezler: Sitenin temel işlevleri için gerekli (örn. dil tercihi, çerez onayı). Bu çerezler kapatılamaz.",
+          "Analitik çerezler: Google Analytics 4 ve Google Tag Manager üzerinden anonim ziyaret istatistikleri. Bu çerezler sadece açık onay verdiğinizde yüklenir.",
+          "Pazarlama çerezleri: Meta Pixel (Facebook/Instagram reklam optimizasyonu için). Bu çerezler de sadece açık onay verdiğinizde yüklenir."
+        ]
+      },
+      {
+        "heading": "3. Çerez Onayı",
+        "paragraphs": [
+          "Siteye ilk girişinizde çerez onay banner'ı görünür. \"Kabul ediyorum\" derseniz analitik ve pazarlama çerezleri yüklenir. \"Sadece zorunlu\" derseniz sadece zorunlu çerezler yüklenir.",
+          "Onayınızı her zaman geri alabilirsiniz: tarayıcınızın çerez ayarlarından dou_consent_v1 isimli localStorage anahtarını silmek, veya tarayıcınızın çerez ayarlarından siteye ait verileri temizlemek yeterlidir."
+        ]
+      },
+      {
+        "heading": "4. Üçüncü Taraf Çerezler",
+        "paragraphs": [
+          "Google (Analytics + Tag Manager) ve Meta (Facebook Pixel) bu site üzerinden kendi çerezlerini yerleştirebilir. Bu çerezler kendi gizlilik politikalarına tabidir.",
+          "Google: policies.google.com/privacy · Meta: facebook.com/privacy"
+        ]
+      },
+      {
+        "heading": "5. Saklama Süresi",
+        "paragraphs": [
+          "Zorunlu çerezler oturum süresi veya 12 ay. Analitik çerezler 14 ay. Pazarlama çerezleri 90 gün."
+        ]
+      },
+      {
+        "heading": "6. Tarayıcı Ayarları",
+        "paragraphs": [
+          "Tarayıcınızdan çerezleri yönetebilirsiniz. Tüm çerezleri reddederseniz sitenin bazı işlevleri çalışmayabilir."
+        ]
+      }
+    ]
+  },
+  "Consent": {
+    "title": "Çerezler.",
+    "body": "Site deneyimini iyileştirmek ve performansı ölçmek için çerez kullanıyoruz. Onayını ne zaman istersen geri alabilirsin.",
+    "policyLink": "Çerez politikamız",
+    "accept": "Kabul ediyorum",
+    "reject": "Sadece zorunlu"
+  },
+  "NotFound": {
+    "title": "Sayfa bulunamadı.",
+    "body": "Aradığın sayfa taşınmış veya hiç olmamış olabilir. Aşağıdan devam edebilirsin.",
+    "home": "Anasayfaya dön",
+    "contact": "İletişime geç",
+    "seeWork": "Veya projelerimize göz at"
+  },
+  "Error": {
+    "title": "Bir şeyler ters gitti.",
+    "body": "Beklenmedik bir hata oluştu. Tekrar denemek için yenile, ya da anasayfaya dön.",
+    "ref": "Hata kodu: {digest}",
+    "retry": "Tekrar dene",
+    "home": "Anasayfaya dön"
+  },
+  "Testimonials": {
+    "eyebrow": "Müşteri Yorumları",
+    "title": "Markaların bize güvenmesinin nedeni.",
+    "items": [
+      {
+        "name": "Gülsüm Aydın",
+        "role": "Kurucu",
+        "company": "E-Ticaret",
+        "text": "DOU Social ile çalışmaya başladığımızdan beri reklam maliyetlerimiz %40 düştü, satışlarımız üç katına çıktı. Haftalık raporlarla her şeyi anlık takip edebiliyoruz."
+      },
+      {
+        "name": "Mehmet Yıldız",
+        "role": "CEO",
+        "company": "B2B Yazılım",
+        "text": "Sadece reklam verip beklemiyorlar. Her hafta rapor, her ay strateji güncellemesi. Gerçek bir iş ortağı gibi davranıyorlar."
+      },
+      {
+        "name": "Serap Kaya",
+        "role": "Müdür",
+        "company": "Restoran Grubu",
+        "text": "Instagram'da görünürlüğümüz inanılmaz arttı. Özellikle reels içerikleri çok profesyonel çıkıyor. Müşteri geri bildirimleri de belirgin şekilde arttı."
+      },
+      {
+        "name": "Berkay Özdemir",
+        "role": "Co-Founder",
+        "company": "SaaS Girişimi",
+        "text": "Teklif isteyince 24 saat içinde dönüyorlar ve ne yapacaklarını net söylüyorlar. Bu sektörde nadir bir özellik. Şeffaflıkları çok değerli."
+      },
+      {
+        "name": "Ayşe Çelik",
+        "role": "Klinik Yöneticisi",
+        "company": "Sağlık",
+        "text": "Web sitesi yenilememiz tam istediğimiz gibi çıktı. SEO çalışmalarından sonra organik trafik %80 arttı ve yeni hasta başvuruları belirgin şekilde arttı."
+      },
+      {
+        "name": "Deniz Karabaş",
+        "role": "Pazarlama Direktörü",
+        "company": "Eğitim Teknolojileri",
+        "text": "Ajans değiştirirken çekincelerimiz vardı ama geçiş süreci tamamen sorunsuzdu. Ekip her şeyi devraldı, biz sadece büyümeye odaklandık."
+      }
+    ]
+  },
+  "FAQ": {
+    "metaTitle": "Sık Sorulan Sorular",
+    "metaDescription": "DOU Social hakkında merak edilenlerin cevapları. Hizmetler, fiyatlandırma, süreç ve iletişim hakkında bilgi alın.",
+    "eyebrow": "SSS",
+    "heroTitle": "Aklınızdaki soruların cevapları.",
+    "heroLead": "En çok sorulan sorular burada. Cevabını bulamazsanız bize ulaşın — 24 saat içinde yanıt veriyoruz.",
+    "ctaLabel": "Hâlâ sorunuz var mı?",
+    "ctaText": "Ücretsiz analiz görüşmesi için bize ulaşın.",
+    "ctaButton": "İletişime Geç",
+    "items": [
+      {
+        "question": "DOU Social hangi hizmetleri sunuyor?",
+        "answer": "Meta Ads (Facebook & Instagram reklamları), sosyal medya yönetimi, içerik üretimi (fotoğraf, video, tasarım), web tasarımı ve marka stratejisi hizmetleri sunuyoruz. Tüm hizmetler bütünleşik bir stratejiyle yönetilir; ihtiyacınıza göre modülleri birleştirebilirsiniz."
+      },
+      {
+        "question": "Fiyatlandırma nasıl işliyor? Sabit paketleriniz var mı?",
+        "answer": "Her marka farklı ihtiyaçlarla geliyor, bu yüzden standart bir fiyat listemiz yok. Ücretsiz analiz görüşmesinde markanızı ve hedefinizi anladıktan sonra size özel bir teklif hazırlıyoruz. Starter, Growth ve Scale olmak üzere üç kademede paketlerimiz bulunmaktadır."
+      },
+      {
+        "question": "Denizli dışındaki markalara da hizmet veriyor musunuz?",
+        "answer": "Evet, Türkiye genelinde ve yurt dışındaki markalara da hizmet veriyoruz. Tüm süreç ve raporlamalar online yürütülüyor; konum bir kısıt değil."
+      },
+      {
+        "question": "Meta reklam yönetimi için minimum bütçe nedir?",
+        "answer": "Minimum reklam harcaması bütçesi aylık 5.000 TL'dir. Buna ek olarak ajans yönetim ücreti eklenir. Küçük bütçelerle de verimliliği maksimize etmek için özel optimizasyon stratejileri geliştiriyoruz."
+      },
+      {
+        "question": "Raporlama nasıl işliyor, şeffaf mı?",
+        "answer": "Aylık kapsamlı raporların yanı sıra canlı dashboard erişimi sunuyoruz. Reklam harcaması, dönüşüm oranları, maliyet per lead ve diğer KPI'lar anlık takip edilebilir. Sürpriz yok, her karar veriye dayalı."
+      },
+      {
+        "question": "Sosyal medya içerikleri kim tarafından üretiliyor?",
+        "answer": "Tüm içerikler DOU Social bünyesindeki içerik ekibi tarafından üretiliyor. Fotoğraf, video, reels, grafik tasarım ve metin yazarlığı dahil. Aylık içerik takvimi önceden onayınıza sunulur."
+      },
+      {
+        "question": "Sözleşme süresi ne kadar? Kolayca çıkabilir miyim?",
+        "answer": "Hizmet türüne göre 3 ila 12 aylık sözleşme seçeneklerimiz var. 30 gün önceden yazılı bildirimle sözleşme sona erdirilebilir. Minimum süre taahhüdü, vaat edilen sonuçları gerçekleştirebilmemiz için gerekli çalışma süresini güvence altına alır."
+      },
+      {
+        "question": "Mevcut ajansımdan geçiş yapabilir miyim?",
+        "answer": "Evet. Geçiş sürecini tamamen biz yönetiyoruz: reklam hesaplarının devri, içerik arşivleri, sayfa erişimleri ve strateji aktarımı dahil. Süreç ortalama 5-7 iş gününde tamamlanır."
+      },
+      {
+        "question": "Çalışmaya başlamak için ilk adım ne?",
+        "answer": "Ücretsiz analiz formumuzu doldurun ya da direkt WhatsApp veya telefon ile ulaşın. 24 saat içinde sizinle iletişime geçip kısa bir keşif görüşmesi planlıyoruz. Görüşme yaklaşık 30 dakika sürer ve tamamen ücretsizdir."
+      }
+    ]
+  },
+  "Footer": {
+    "tagline": "Reklam bütçeni daha verimli, markanı daha görünür hale getiren Denizli merkezli dijital ajans.",
+    "services": "Hizmetler",
+    "company": "Şirket",
+    "contact": "İletişim",
+    "metaAds": "Meta Ads Yönetimi",
+    "social": "Sosyal Medya",
+    "content": "İçerik Üretimi",
+    "web": "Web Tasarım",
+    "strategy": "Marka Stratejisi",
+    "rights": "Tüm hakları saklıdır.",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Koşulları"
+  },
+  "Status": {
+    "wip": "v0.1 — geliştirme aşamasında"
+  },
+  "KVKK": {
+    "eyebrow": "6698 Sayılı KVKK",
+    "title": "Kişisel Verilerin Korunması ve İşlenmesi Politikası",
+    "lastUpdated": "Son güncelleme: Haziran 2026",
+    "close": "Anladım, kapat",
+    "sections": [
+      {
+        "heading": "",
+        "body": "Dou Social olarak, 6698 sayılı Kişisel Verilerin Korunması Kanunu (\"KVKK\") kapsamında kişisel verilerinizin gizliliğini ve güvenliğini sağlamak temel önceliklerimiz arasındadır. Bu politika, www.dousocial.com adresli internet sitemiz ve sunduğumuz dijital/sosyal medya hizmetleri aracılığıyla elde edilen kişisel verilerin hangi amaçlarla işlendiğini, nasıl saklandığını ve nasıl korunduğunu açıklamak amacıyla hazırlanmıştır."
+      },
+      {
+        "heading": "1. Veri Sorumlusu",
+        "body": "Veri Sorumlusu: Dou Social\nAdres: Zafer, Zafer Cd. No: 60, 20020 Denizli Merkezefendi/Denizli\nTelefon: +90 530 084 5468\nE-posta: info@dousocial.com"
+      },
+      {
+        "heading": "2. İşlenen Kişisel Veriler",
+        "body": "Kimlik bilgileri (isim-soyisim), iletişim bilgileri (e-posta, telefon), müşteri işlem bilgileri (platform kullanım detayları, etkileşim verileri), finansal bilgiler (varsa hizmet satın alımları), kurumsal bilgiler ve internet kullanım bilgileri (IP adresi, çerez kayıtları), şikayet ve destek talepleri."
+      },
+      {
+        "heading": "3. Kişisel Verilerin İşlenme Amaçları",
+        "body": "Hizmet sunumu (sosyal medya ve dijital platform hizmetlerine erişim), hesap ve kampanya yönetimi, faturalandırma, müşteri iletişimi, kullanıcı etkileşim ve performans analizi ile hukuki yükümlülüklerin yerine getirilmesi."
+      },
+      {
+        "heading": "4. Kişisel Verilerin Toplanma Yöntemleri ve Hukuki Sebepler",
+        "body": "Kişisel verileriniz; web sitemiz, e-posta iletişimleri, sosyal medya hesaplarımız (@dousocial vb.), analiz araçları ve entegre çalışılan dijital platformlar (Meta, Google vb.) aracılığıyla toplanmaktadır."
+      },
+      {
+        "heading": "5. Kişisel Verilerin Aktarımı",
+        "body": "Verileriniz; muhasebe işlemleri için mali müşavirler, bankalar ve ödeme kuruluşlarına, sunucu hizmeti alınan teknik altyapı sağlayıcılarına (AWS, Google Cloud, Meta, Google Analytics vb.) ve yasal zorunluluk hallerinde yetkili kamu kurumlarına aktarılabilir."
+      },
+      {
+        "heading": "6. Kişisel Verilerin Saklanması ve Korunması",
+        "body": "Kişisel verileriniz, işlenme amaçlarının gerektirdiği süre boyunca ve ilgili mevzuatta öngörülen zamanaşımı süreleri dikkate alınarak muhafaza edilmektedir. İşlenme amacının ortadan kalkması halinde veriler, Dou Social tarafından silinir veya anonim hale getirilir.\nDijital ortamlarda şifreleme ve güncel güvenlik duvarları kullanılmaktadır.\nErişimler yalnızca yetkili personel ve yöneticiler ile sınırlandırılmıştır."
+      },
+      {
+        "heading": "7. İlgili Kişinin Hakları",
+        "body": "KVKK'nın 11. maddesi uyarınca; verilerinizin işlenip işlenmediğini öğrenme, düzeltme talep etme ve silinmesini isteme haklarına sahipsiniz. Taleplerinizi info@dousocial.com adresine iletebilirsiniz. Başvurularınız yasal süre olan en geç 30 gün içinde sonuçlandırılır."
+      },
+      {
+        "heading": "8. Çerez (Cookie) Politikası",
+        "body": "www.dousocial.com, kullanıcı deneyiminizi geliştirmek, site üzerindeki tercihlerinizi hatırlamak ve site trafiğini analiz etmek (performans ve analitik çerezleri) amacıyla çerezler kullanır. Kullanıcılar tarayıcı ayarlarından çerezleri diledikleri zaman yönetebilir veya devre dışı bırakabilir."
+      },
+      {
+        "heading": "9. Politika Güncellemeleri",
+        "body": "Bu politika, bilişim ve dijital medya sektörü mevzuat değişiklikleri ile şirket uygulamaları doğrultusunda güncellenebilir. Güncel metin her zaman www.dousocial.com adresinde yayımlanır."
+      },
+      {
+        "heading": "10. Yürürlük",
+        "body": "İşbu politika yayımlandığı tarihte yürürlüğe girer ve Dou Social tarafından yürütülen tüm veri işleme faaliyetleri için bağlayıcıdır."
+      }
+    ]
+  }
+}

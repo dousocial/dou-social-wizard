@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DOU Social – Audit PDF Örneği</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #e8e8e8; font-family: Arial, Helvetica, sans-serif; padding: 40px 20px 80px; }
+
+  #controls {
+    position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    display: flex; gap: 10px; align-items: center;
+  }
+  #controls button {
+    background: #800000; color: #fff; border: none;
+    padding: 14px 28px; border-radius: 999px; font-size: 15px;
+    font-weight: bold; cursor: pointer; font-family: Arial, sans-serif;
+    box-shadow: 0 4px 20px rgba(128,0,0,0.4);
+    transition: background 0.2s;
+  }
+  #controls button:hover { background: #600000; }
+  #controls button:disabled { opacity: 0.6; cursor: not-allowed; }
+  #status { font-size: 13px; color: #555; }
+
+  /* ── Report styles ────────────────────────────────── */
+  #report {
+    width: 794px; margin: 0 auto; background: #fff;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.18);
+  }
+
+  .r-header {
+    background: #800000; padding: 20px 30px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .r-header-left {}
+  .r-header-name { color: #fff; font-size: 20px; font-weight: bold; letter-spacing: -0.3px; }
+  .r-header-sub { color: rgba(255,190,190,0.9); font-size: 9px; margin-top: 4px; }
+  .r-header-date { color: rgba(255,210,210,0.85); font-size: 9px; }
+
+  .r-body { padding: 26px 30px; }
+  .r-report-title { font-size: 21px; font-weight: bold; color: #111; margin-bottom: 20px; }
+
+  /* Client box */
+  .r-client {
+    background: #fafafa; border: 1px solid #e5e5e5;
+    border-radius: 8px; padding: 14px 16px; margin-bottom: 20px;
+  }
+  .r-client-label {
+    font-size: 8px; font-weight: bold; color: #800000;
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .r-client-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 16px; }
+  .r-client-item { font-size: 11px; color: #444; }
+  .r-client-item b { color: #1a1a1a; }
+
+  /* Scores */
+  .r-scores-title { font-size: 12px; font-weight: bold; color: #1a1a1a; margin-bottom: 8px; }
+  .r-scores-box {
+    background: #fafafa; border: 1px solid #e5e5e5;
+    border-radius: 8px; padding: 14px 20px;
+    display: flex; gap: 0; margin-bottom: 14px;
+  }
+  .r-score { text-align: center; flex: 1; padding: 0 10px; }
+  .r-score + .r-score { border-left: 1px solid #e5e5e5; }
+  .r-score-num { font-size: 28px; font-weight: bold; color: #dc2626; line-height: 1; }
+  .r-score-label { font-size: 9px; color: #888; margin-top: 4px; }
+  .r-score-badge {
+    display: inline-block; font-size: 8px; font-weight: bold;
+    color: #dc2626; background: #fee2e2; border-radius: 4px;
+    padding: 2px 6px; margin-top: 4px;
+  }
+
+  /* Warning */
+  .r-warning {
+    background: #fff3f3; border: 1px solid #fca5a5;
+    border-left: 3px solid #dc2626;
+    border-radius: 6px; padding: 10px 14px; margin-bottom: 20px;
+  }
+  .r-warning-title { font-size: 9.5px; font-weight: bold; color: #b91c1c; margin-bottom: 3px; }
+  .r-warning-text { font-size: 8.5px; color: #b91c1c; line-height: 1.5; }
+
+  /* Analysis */
+  .r-analysis-title { font-size: 12px; font-weight: bold; color: #1a1a1a; margin-bottom: 6px; }
+  .r-divider { height: 1.5px; background: #800000; margin-bottom: 14px; border-radius: 2px; }
+
+  .r-section-title {
+    font-size: 10.5px; font-weight: bold; color: #111;
+    margin-top: 16px; margin-bottom: 6px;
+    padding-left: 8px; border-left: 2px solid #800000;
+  }
+  .r-paragraph { font-size: 9px; color: #333; line-height: 1.75; margin-bottom: 6px; }
+  .r-list { margin-bottom: 8px; }
+  .r-list-item {
+    font-size: 9px; color: #333; line-height: 1.7;
+    padding-left: 12px; position: relative; margin-bottom: 2px;
+  }
+  .r-list-item::before {
+    content: "–"; position: absolute; left: 0; color: #800000; font-weight: bold;
+  }
+  .r-list-item b { color: #111; }
+
+  .r-critical-item {
+    background: #fafafa; border: 1px solid #e5e5e5;
+    border-radius: 6px; padding: 10px 12px; margin-bottom: 8px;
+  }
+  .r-critical-num { font-size: 8px; font-weight: bold; color: #800000; margin-bottom: 3px; }
+  .r-critical-title { font-size: 10px; font-weight: bold; color: #111; margin-bottom: 4px; }
+  .r-critical-text { font-size: 8.5px; color: #444; line-height: 1.65; }
+  .r-critical-text .consequence { color: #b91c1c; font-style: italic; }
+
+  /* Footer */
+  .r-footer {
+    background: #f5f5f5; border-top: 1px solid #e0e0e0;
+    padding: 9px 30px; margin-top: 30px;
+    text-align: center; font-size: 7.5px; color: #888; line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<div id="controls">
+  <span id="status"></span>
+  <button onclick="generatePDF()">↓ PDF İndir</button>
+</div>
+
+<div id="report">
+  <!-- ── Header ── -->
+  <div class="r-header">
+    <div class="r-header-left">
+      <div class="r-header-name">DOU Social</div>
+      <div class="r-header-sub">Dijital Pazarlama Ajansı &nbsp;|&nbsp; dousocial.com &nbsp;|&nbsp; +90 530 084 54 68</div>
+    </div>
+    <div class="r-header-date">12 Haziran 2026</div>
+  </div>
+
+  <!-- ── Body ── -->
+  <div class="r-body">
+    <div class="r-report-title">Sosyal Medya Audit Raporu</div>
+
+    <!-- Müşteri bilgileri -->
+    <div class="r-client">
+      <div class="r-client-label">Müşteri Bilgileri</div>
+      <div class="r-client-grid">
+        <div class="r-client-item"><b>İşletme:</b> DOU Social</div>
+        <div class="r-client-item"><b>Telefon:</b> +90 530 084 54 68</div>
+        <div class="r-client-item"><b>Sektör:</b> Reklam &amp; Dijital Pazarlama</div>
+        <div class="r-client-item"><b>E-posta:</b> info@dousocial.com</div>
+      </div>
+    </div>
+
+    <!-- Skorlar -->
+    <div class="r-scores-title">Platform Skorları</div>
+    <div class="r-scores-box">
+      <div class="r-score">
+        <div class="r-score-num">28</div>
+        <div class="r-score-label">Genel</div>
+        <div class="r-score-badge">Kritik Eksik</div>
+      </div>
+      <div class="r-score">
+        <div class="r-score-num">28</div>
+        <div class="r-score-label">Instagram</div>
+        <div class="r-score-badge">Kritik Eksik</div>
+      </div>
+    </div>
+
+    <!-- Uyarı bandı -->
+    <div class="r-warning">
+      <div class="r-warning-title">⚠ Kritik Eksik — Sektör ortalamasının %70 altında</div>
+      <div class="r-warning-text">
+        Mevcut dijital varlık, Reklam sektöründe faaliyet gösteren bir ajans için son derece yetersizdir.
+        Bu eksiklikler giderilmezse organik büyüme tamamen durabilir; potansiyel müşteriler ajana ulaşmadan rakipleri tercih edecektir.
+      </div>
+    </div>
+
+    <!-- Analiz raporu -->
+    <div class="r-analysis-title">Analiz Raporu</div>
+    <div class="r-divider"></div>
+
+    <!-- 1. Genel -->
+    <div class="r-section-title">1) Genel Değerlendirme</div>
+    <p class="r-paragraph">
+      DOU Social'ın Instagram varlığı, Reklam &amp; Dijital Pazarlama sektöründe faaliyet gösteren bir ajans için ciddi biçimde yetersiz kalmaktadır.
+      1.200 takipçi, potansiyel müşterilere güven verme eşiğinin çok altındadır; sektördeki rakip ajanslar genellikle 8.000–25.000 takipçi bandında konumlanmaktadır.
+      Hesap, büyüme odaklı stratejik bir yönetimle değil yalnızca "var olmak" refleksiyle idare edilmektedir.
+    </p>
+
+    <!-- 2. Platform -->
+    <div class="r-section-title">2) Platform Bazlı Analiz — Instagram</div>
+    <div class="r-list">
+      <div class="r-list-item"><b>Takipçi: 1.200</b> → Sektör ortalaması 9.500+. Fark: %87 altında. Güven eşiği aşılamıyor.</div>
+      <div class="r-list-item"><b>Etkileşim oranı:</b> (150 beğeni + 20 yorum) / 1.200 × 100 = %14,2 — Oran yüksek görünse de mutlak sayılar son derece düşük; geniş kitleye erişim yok.</div>
+      <div class="r-list-item"><b>Haftalık 4 post:</b> Yeterli sıklık ancak içerik kalitesi ve Keşfet erişimi bilinmiyor. Takipçi artışı durağan seyrediyor.</div>
+      <div class="r-list-item"><b>Haftalık 15 story:</b> Tek olumlu sinyal. Ancak story izlenme oranları, çıkış oranı ve CTA etkisi ölçülmüyor; optimizasyon yapılmıyor.</div>
+      <div class="r-list-item"><b>Reel içerik:</b> Mevcut paylaşım karmasında Reel formatı görünmüyor. 2024 algoritmasında Reel'ler statik içeriklerin 3 katı erişim üretiyor — kritik bir boşluk.</div>
+    </div>
+
+    <!-- 3. Sektör -->
+    <div class="r-section-title">3) Sektör Karşılaştırması</div>
+    <p class="r-paragraph">
+      Denizli ve çevre illerdeki benzer ölçekli reklam ajanslarının Instagram verileri karşılaştırıldığında:
+    </p>
+    <div class="r-list">
+      <div class="r-list-item">Ortalama takipçi: <b>7.000 – 15.000</b> (DOU Social: 1.200 — %83 altında)</div>
+      <div class="r-list-item">Aylık organik erişim: <b>50.000 – 120.000</b></div>
+      <div class="r-list-item">Gönderi başına ortalama beğeni: <b>400 – 1.200</b> (DOU Social: 150 — %63 altında)</div>
+      <div class="r-list-item">Reel içerik oranı: <b>%60+</b> (DOU Social: %0 — tamamen eksik)</div>
+      <div class="r-list-item">Verified/Blue badge veya "ajans" biyografisi: rakiplerin <b>%70'inde</b> mevcut</div>
+    </div>
+    <p class="r-paragraph">
+      DOU Social bu göstergelerden tümünde sektör ortalamasının belirgin biçimde altındadır.
+      Özellikle takipçi tabanı, doğrudan rakiplerin yalnızca %9–16'sı düzeyinde kalmaktadır.
+    </p>
+
+    <!-- 4. Kritik eksikler -->
+    <div class="r-section-title">4) Kritik Eksikler ve Çözüm Gerektiren Alanlar</div>
+
+    <div class="r-critical-item">
+      <div class="r-critical-num">EKSİK #1</div>
+      <div class="r-critical-title">Yetersiz Takipçi Kitlesi — Sosyal Kanıt Yok</div>
+      <div class="r-critical-text">
+        1.200 takipçiyle satış hunisi oluşturmak mümkün değildir. Bir reklam ajansının kendi hesabı bu düzeydeyse,
+        potansiyel müşteriler "bu ajans benim markamı büyütebilir mi?" sorusuna olumsuz yanıt verir.
+        <span class="consequence"> → Destek alınmazsa: Potansiyel müşteriler ajana ulaşmadan rakipleri tercih eder; "sosyal kanıtsız ajans" algısı kalıcı hale gelir.</span>
+      </div>
+    </div>
+
+    <div class="r-critical-item">
+      <div class="r-critical-num">EKSİK #2</div>
+      <div class="r-critical-title">Reel &amp; Video İçerik Tamamen Eksik</div>
+      <div class="r-critical-text">
+        Instagram algoritması Reel formatını statik içeriklere kıyasla 3 kat daha fazla dağıtmaktadır.
+        Reel üretilmeden Keşfet'e erişmek, dolayısıyla yeni takipçi kazanmak neredeyse imkânsızdır.
+        <span class="consequence"> → Destek alınmazsa: Organik erişim giderek daralacak, hesap yalnızca mevcut 1.200 kişiye konuşmaya devam edecektir.</span>
+      </div>
+    </div>
+
+    <div class="r-critical-item">
+      <div class="r-critical-num">EKSİK #3</div>
+      <div class="r-critical-title">Keşfet Optimizasyonu Yapılmıyor</div>
+      <div class="r-critical-text">
+        Hashtag stratejisi, konum etiketleme ve içerik takvimi eksik. Hesap yalnızca mevcut takipçilere ulaşıyor;
+        yeni kullanıcılar hesabı organik olarak bulamıyor.
+        <span class="consequence"> → Destek alınmazsa: Yeni takipçi kazanımı sıfıra yaklaşacak, reklam harcaması olmadan büyüme mümkün olmayacaktır.</span>
+      </div>
+    </div>
+
+    <div class="r-critical-item">
+      <div class="r-critical-num">EKSİK #4</div>
+      <div class="r-critical-title">Uzmanlık Sergileyen İçerik Stratejisi Yok</div>
+      <div class="r-critical-text">
+        "Biz ne yapabiliriz?" sorusunu cevaplayan vaka çalışması, sonuç paylaşımı ve eğitici içerik bulunmuyor.
+        Rakip ajanslar bu tür içeriklerle "uzman" konumlamasını ele geçiriyor.
+        <span class="consequence"> → Destek alınmazsa: DOU Social fiyat rekabetine sıkışacak, marka bilinirliği oluşturulamayacaktır.</span>
+      </div>
+    </div>
+
+    <div class="r-critical-item">
+      <div class="r-critical-num">EKSİK #5</div>
+      <div class="r-critical-title">Dönüşüm Odaklı CTA Eksikliği</div>
+      <div class="r-critical-text">
+        Biyografi ve gönderi açıklamalarında "teklif al", "ücretsiz analiz", "DM at" gibi aksiyona yönlendiren
+        çağrılar tespit edilmemektedir.
+        <span class="consequence"> → Destek alınmazsa: Mevcut az sayıdaki organik ziyaretçi bile müşteriye dönüşmeden profili terk etmekte; trafik boşa gitmektedir.</span>
+      </div>
+    </div>
+
+  </div><!-- /r-body -->
+
+  <!-- ── Footer ── -->
+  <div class="r-footer">
+    DOU Social (Yapımedya Reklamcılık A.Ş.) &nbsp;|&nbsp;
+    Zafer Mah. Zafer Cd. No:60/1 Merkezefendi / Denizli &nbsp;|&nbsp;
+    +90 530 084 54 68 &nbsp;|&nbsp; info@dousocial.com
+  </div>
+</div><!-- /report -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+async function generatePDF() {
+  const btn = document.querySelector('#controls button');
+  const status = document.getElementById('status');
+  btn.disabled = true;
+  btn.textContent = 'Hazırlanıyor…';
+  status.textContent = 'Sayfa render ediliyor…';
+
+  const report = document.getElementById('report');
+
+  const canvas = await html2canvas(report, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: '#ffffff',
+    logging: false,
+    windowWidth: 794,
+  });
+
+  status.textContent = 'PDF oluşturuluyor…';
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+  const pageW = doc.internal.pageSize.getWidth();   // 210
+  const pageH = doc.internal.pageSize.getHeight();  // 297
+
+  const imgW  = pageW;
+  const ratio = canvas.width / pageW;
+  const imgH  = canvas.height / ratio;
+
+  let pos = 0;
+  let page = 0;
+
+  while (pos < imgH) {
+    if (page > 0) doc.addPage();
+    doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, -pos, imgW, imgH);
+    pos  += pageH;
+    page++;
+  }
+
+  doc.save('DOU-Social-Audit-Ornegi.pdf');
+
+  btn.disabled = false;
+  btn.textContent = '↓ PDF İndir';
+  status.textContent = '✓ İndirildi';
+  setTimeout(() => { status.textContent = ''; }, 3000);
+}
+</script>
+</body>
+</html>

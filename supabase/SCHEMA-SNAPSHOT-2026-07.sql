@@ -1,0 +1,715 @@
+-- ============================================================================
+-- REFERANS AMAÇLI ANLIK GÖRÜNTÜ — ÇALIŞTIRMAYIN
+-- ============================================================================
+-- Bu dosya bir migration DEĞİLDİR. Hiçbir CREATE/ALTER ifadesi içermez,
+-- sadece 2026-07-14 tarihinde canlı Supabase projesine PostgREST OpenAPI
+-- introspection (`GET /rest/v1/` ile service-role anahtarı) yapılarak
+-- alınan GERÇEK şemanın (tablo + kolon + tip) düz metin dökümüdür.
+--
+-- NEDEN BU DOSYA VAR:
+-- Depodaki `crm.sql`den `crm-v19-campaign-platform.sql`e kadar olan 24 ayrı
+-- migration dosyası canlı veritabanının GERÇEK halini yansıtmıyor. Örnek:
+-- `deleted_at` kolonu canlıda ~15 tabloda mevcut ama bu kolonu ekleyen bir
+-- ALTER TABLE ifadesi hiçbir SQL dosyasında yok — muhtemelen doğrudan
+-- Supabase Dashboard üzerinden elle eklenmiş. `RUN-THIS-COMBINED-MIGRATION.sql`
+-- dosyasının kendi başlığı da benzer bir tutarsızlığı belgeliyor.
+--
+-- Bu dosya "depodaki SQL dosyaları = gerçek şema" yanılgısını önlemek için
+-- bir referans noktası olarak eklendi. Yeni bir migration yazmadan önce
+-- gerçek şemayı buradan (veya taze bir introspection ile) kontrol edin —
+-- eski `crm-v*.sql` dosyalarından değil.
+--
+-- GÜNCELLEME: Bu dosya otomatik güncellenmez. Yeni bir anlık görüntü almak
+-- için: `curl https://<proje>.supabase.co/rest/v1/ -H "apikey: <service_role>"
+-- -H "Authorization: Bearer <service_role>"` çıktısındaki `definitions`
+-- bloğunu okuyun.
+-- ============================================================================
+
+-- admin_users
+--   id: uuid
+--   created_at: timestamp with time zone
+--   username: text
+--   password_hash: text
+--   salt: text
+--   role: text
+
+-- audits
+--   id: uuid
+--   created_at: timestamp with time zone
+--   business_name: text
+--   sector: text
+--   phone: text
+--   email: text
+--   mode: text
+--   active_platforms: text[]
+--   score_overall: integer
+--   score_instagram: integer
+--   score_linkedin: integer
+--   score_youtube: integer
+--   score_google: integer
+--   report_text: text
+--   is_read: boolean
+--   read_by: text
+--   read_at: timestamp with time zone
+
+-- blog_posts
+--   id: uuid
+--   locale: text
+--   slug: text
+--   title: text
+--   seo_title: text
+--   description: text
+--   content: text
+--   cover: text
+--   tags: text[]
+--   author: text
+--   published_at: date
+--   is_published: boolean
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   deleted_at: timestamp with time zone
+
+-- contacts
+--   id: uuid
+--   created_at: timestamp with time zone
+--   type: text
+--   name: text
+--   email: text
+--   phone: text
+--   message: text
+--   is_read: boolean
+--   read_by: text
+--   read_at: timestamp with time zone
+
+-- crm_account_checklist
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   instagram_done: boolean
+--   facebook_done: boolean
+--   meta_business_done: boolean
+--   ad_account_done: boolean
+--   google_business_done: boolean
+--   website_done: boolean
+--   domain_done: boolean
+--   drive_done: boolean
+--   canva_done: boolean
+--   logo_done: boolean
+--   colors_done: boolean
+--   fonts_done: boolean
+--   old_media_done: boolean
+--   contacts_done: boolean
+--   access_notes: text
+
+-- crm_activity_logs
+--   id: uuid
+--   created_at: timestamp with time zone
+--   user_id: uuid
+--   entity_type: text
+--   entity_id: uuid
+--   action: text
+--   details: jsonb
+
+-- crm_advertising_jobs
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   publishing_job_id: uuid
+--   title: text
+--   content_url: text
+--   objective: text
+--   target_audience: text
+--   region: text
+--   budget: numeric
+--   start_date: date
+--   end_date: date
+--   owner: text
+--   ad_account: text
+--   campaign_name: text
+--   status: text
+--   result_notes: text
+--   report_url: text
+--   platform: text
+
+-- crm_approval_requests
+--   id: uuid
+--   token: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   job_type: text
+--   edit_job_id: uuid
+--   design_job_id: uuid
+--   title: text
+--   preview_url: text
+--   status: text
+--   customer_note: text
+--   expires_at: timestamp with time zone
+--   responded_at: timestamp with time zone
+
+-- crm_brand_kits
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   colors: jsonb
+--   primary_font: text
+--   secondary_font: text
+--   logo_url: text
+--   brand_notes: text
+
+-- crm_companies
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   name: text
+--   website: text
+--   sector: text
+--   phone: text
+--   email: text
+--   instagram: text
+--   notes: text
+--   assigned_user: text
+--   deleted_at: timestamp with time zone
+
+-- crm_contacts
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   company_id: uuid
+--   name: text
+--   phone: text
+--   email: text
+--   role: text
+--   instagram: text
+--   notes: text
+--   deleted_at: timestamp with time zone
+
+-- crm_content_tasks
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   title: text
+--   type: text
+--   status: text
+--   assigned_person: text
+--   due_date: date
+--   deleted_at: timestamp with time zone
+
+-- crm_contract_addons
+--   id: uuid
+--   created_at: timestamp with time zone
+--   contract_id: uuid
+--   title: text
+--   price: numeric
+--   notes: text
+--   deleted_at: timestamp with time zone
+
+-- crm_contracts
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   lead_id: uuid
+--   start_date: date
+--   end_date: date
+--   monthly_fee: numeric
+--   payment_day: integer
+--   duration_months: integer
+--   auto_renew: boolean
+--   monthly_post_count: integer
+--   monthly_video_count: integer
+--   monthly_shoot_days: integer
+--   story_service: boolean
+--   advertising_management: boolean
+--   services: jsonb
+--   extra_services: text
+--   signed_contract_url: text
+--   notes: text
+--   invoiced: boolean
+--   deleted_at: timestamp with time zone
+
+-- crm_credentials
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   platform: text
+--   username: text
+--   password: text          -- ⚠️ DÜZ METİN — bkz. güvenlik notu en altta
+--   notes: text
+--   deleted_at: timestamp with time zone
+
+-- crm_design_jobs
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   title: text
+--   design_type: text
+--   dimensions: text
+--   reference_url: text
+--   asset_urls: text[]
+--   campaign_info: text
+--   prices_text: text
+--   copy_text: text
+--   brand_colors: text
+--   designer: text
+--   priority: text
+--   queue_position: integer
+--   estimated_work_minutes: integer
+--   due_date: date
+--   drive_url: text
+--   status: text
+
+-- crm_edit_jobs
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   shoot_id: uuid
+--   title: text
+--   video_type: text
+--   estimated_duration_seconds: integer
+--   estimated_work_minutes: integer
+--   editor: text
+--   priority: text
+--   queue_position: integer
+--   planned_start_date: date
+--   due_date: date
+--   raw_folder_url: text
+--   selected_media_url: text
+--   drive_url: text
+--   reference_url: text
+--   music: text
+--   script: text
+--   subtitle_required: boolean
+--   cover_required: boolean
+--   technique_notes: text
+--   audio_notes: text
+--   coordinator_note: text
+--   media_sorting_completed: boolean
+--   status: text
+
+-- crm_follow_ups
+--   id: uuid
+--   created_at: timestamp with time zone
+--   lead_id: uuid
+--   follow_up_date: date
+--   type: text
+--   note: text
+--   completed: boolean
+--   deleted_at: timestamp with time zone
+
+-- crm_leads
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   title: text
+--   company_id: uuid
+--   contact_id: uuid
+--   company_name: text
+--   contact_name: text
+--   phone: text
+--   email: text
+--   instagram: text
+--   website: text
+--   sector: text
+--   source: text
+--   status: text
+--   score: integer
+--   last_contact_date: timestamp with time zone
+--   next_follow_up_date: date
+--   notes: text
+--   assigned_user: text
+--   converted_client_id: uuid
+--   audit_id: uuid
+--   source_contact_id: uuid
+--   first_name: text
+--   last_name: text
+--   city: text
+--   district: text
+--   interested_service: text
+--   referral_source: text
+--   estimated_budget: numeric
+--   company_size: text
+--   first_contact_date: date
+--   lost_reason: text
+--   deleted_at: timestamp with time zone
+
+-- crm_meetings
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   lead_id: uuid
+--   meeting_at: timestamp with time zone
+--   location: text
+--   participants: text[]
+--   purpose: text
+--   current_problems: text
+--   expectations: text
+--   current_accounts: text
+--   requested_services: text[]
+--   estimated_monthly_budget: numeric
+--   notes: text
+--   deleted_at: timestamp with time zone
+
+-- crm_monthly_plans
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   contract_id: uuid
+--   period: text
+--   status: text
+--   agreed_post_count: integer
+--   planned_post_count: integer
+--   produced_post_count: integer
+--   published_post_count: integer
+--   agreed_video_count: integer
+--   planned_video_count: integer
+--   shot_video_count: integer
+--   edited_video_count: integer
+--   published_video_count: integer
+--   agreed_shoot_days: integer
+--   notes: text
+--   deleted_at: timestamp with time zone
+
+-- crm_notifications
+--   id: uuid
+--   created_at: timestamp with time zone
+--   title: text
+--   message: text
+--   read: boolean
+--   type: text
+
+-- crm_payments
+--   id: uuid
+--   created_at: timestamp with time zone
+--   client_id: uuid
+--   period: text
+--   amount: numeric
+--   status: text
+--   payment_date: date
+--   notes: text
+--   deleted_at: timestamp with time zone
+
+-- crm_publishing_jobs
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   edit_job_id: uuid
+--   design_job_id: uuid
+--   title: text
+--   platform: text
+--   publish_date: date
+--   publish_time: time without time zone
+--   caption: text
+--   hashtags: text
+--   location: text
+--   collaboration_account: text
+--   cover_url: text
+--   publisher: text
+--   is_ad: boolean
+--   publish_url: text
+--   status: text
+
+-- crm_recurring_task_runs
+--   id: uuid
+--   template_id: uuid
+--   run_date: date
+--   generated_task_id: uuid
+
+-- crm_recurring_task_templates
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   title: text
+--   description: text
+--   interval_days: integer
+--   next_run_date: date
+--   priority: text
+--   active: boolean
+
+-- crm_reference_assets
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   period: text
+--   title: text
+--   source_url: text
+--   preview_url: text
+--   source_platform: text
+--   content_type: text
+--   description: text
+--   adapt_notes: text
+--   avoid_notes: text
+--   coordinator_note: text
+--   status: text
+--   deleted_at: timestamp with time zone
+
+-- crm_revisions
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   job_type: text
+--   edit_job_id: uuid
+--   design_job_id: uuid
+--   requested_by: text
+--   reason: text
+--   description: text
+--   assigned_to: text
+--   due_date: date
+--   revision_round: integer
+--   completed: boolean
+
+-- crm_shoots
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   client_id: uuid
+--   monthly_plan_id: uuid
+--   shoot_date: date
+--   start_time: time without time zone
+--   end_time: time without time zone
+--   location: text
+--   team_members: text[]
+--   client_contact: text
+--   content_titles: text[]
+--   equipment: text[]
+--   required_products: text
+--   speakers: text
+--   wardrobe: text
+--   notes: text
+--   client_informed: boolean
+--   team_informed: boolean
+--   status: text
+--   extra_reason: text
+--   coordinator_approved: boolean
+--   adaptation_period: boolean
+--   extra_fee: boolean
+--   deleted_at: timestamp with time zone
+
+-- influencer_collaborations
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   influencer_id: uuid
+--   musteri_id: uuid
+--   musteri_adi: text
+--   kampanya_adi: text
+--   icerik_tipi: text
+--   platform: text
+--   baslangic_tarihi: date
+--   bitis_tarihi: date
+--   durum: text
+--   anlasilan_ucret: numeric
+--   odenen_ucret: numeric
+--   para_birimi: text
+--   erisim: bigint
+--   izlenme: bigint
+--   etkilesim: bigint
+--   tiklama: integer
+--   donusum: integer
+--   icerik_url: text
+--   brief_notlar: text
+--   sonuc_notlar: text
+--   deleted_at: timestamp with time zone
+
+-- influencer_projects
+--   id: uuid
+--   created_at: timestamp with time zone
+--   influencer_id: uuid
+--   proje_adi: text
+--   rol: text
+--   tarih: date
+--   notlar: text
+--   deleted_at: timestamp with time zone
+
+-- influencers
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   ad: text
+--   soyad: text
+--   email: text
+--   telefon: text
+--   sehir: text
+--   ulke: text
+--   hesaplar: jsonb
+--   kategori: text[]
+--   nis_etiketler: text[]
+--   durum: text
+--   kara_liste_nedeni: text
+--   min_ucret: numeric
+--   max_ucret: numeric
+--   para_birimi: text
+--   ajans_adi: text
+--   temsilci_adi: text
+--   temsilci_telefon: text
+--   notlar: text
+--   ic_notlar: text
+--   sorumlu: text
+--   deleted_at: timestamp with time zone
+
+-- message_notes
+--   id: uuid
+--   message_id: uuid
+--   message_table: text
+--   username: text
+--   content: text
+--   created_at: timestamp with time zone
+
+-- message_reads
+--   id: uuid
+--   message_id: uuid
+--   message_table: text
+--   username: text
+--   read_at: timestamp with time zone
+
+-- musteri_faturalar
+--   id: uuid
+--   created_at: timestamp with time zone
+--   musteri_id: uuid
+--   fatura_no: text
+--   tutar: numeric
+--   vade_tarihi: date
+--   odeme_tarihi: date
+--   durum: text
+--   notlar: text
+--   deleted_at: timestamp with time zone
+
+-- musteri_gorevler
+--   id: uuid
+--   created_at: timestamp with time zone
+--   musteri_id: uuid
+--   baslik: text
+--   aciklama: text
+--   bitis_tarihi: date
+--   tamamlandi: boolean
+--   oncelik: text
+--   deleted_at: timestamp with time zone
+
+-- musteri_hedefler
+--   id: uuid
+--   created_at: timestamp with time zone
+--   musteri_id: uuid
+--   ay: text
+--   ctr_hedef: numeric
+--   etkilesim_hedef: numeric
+--   takipci_hedef: integer
+--   erisim_hedef: bigint
+--   ciro_hedef: numeric
+--   deleted_at: timestamp with time zone
+
+-- musteri_iletisimler                     -- v20 ile yon/sonuc/sure_dakika/telefon_no/kullanici_id eklendi
+--   id: uuid
+--   created_at: timestamp with time zone
+--   musteri_id: uuid
+--   tarih: date
+--   tip: text
+--   baslik: text
+--   icerik: text
+--   deleted_at: timestamp with time zone
+
+-- musteri_metrikleri
+--   id: uuid
+--   created_at: timestamp with time zone
+--   musteri_id: uuid
+--   ay: text
+--   reklam_butcesi: numeric
+--   etkilesim_orani: numeric
+--   takipci_artisi: integer
+--   toplam_erisim: bigint
+--   tiklama_orani: numeric
+--   tiklama_sayisi: integer
+--   donusum_sayisi: integer
+--   musteri_cirosu: numeric
+--   notlar: text
+--   deleted_at: timestamp with time zone
+
+-- musteri_teklifler
+--   id: uuid
+--   created_at: timestamp with time zone
+--   musteri_id: uuid
+--   baslik: text
+--   tutar: numeric
+--   durum: text
+--   gonderim_tarihi: date
+--   notlar: text
+--   teklif_no: text
+--   hizmetler: jsonb
+--   lead_id: uuid
+--   company_id: uuid
+--   paket_adi: text
+--   kurulum_ucreti: numeric
+--   ek_hizmetler: text
+--   teklif_tarihi: date
+--   gecerlilik_tarihi: date
+--   package_level: text
+--   rejection_reason: text
+--   revision_reason: text
+--   viewed_at: timestamp with time zone
+--   package_details: jsonb
+--   deleted_at: timestamp with time zone
+
+-- musteriler
+--   id: uuid
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   ad: text
+--   sektor: text
+--   website: text
+--   email: text
+--   telefon: text
+--   sorumlu: text
+--   durum: text
+--   platformlar: text[]
+--   aylik_ucret: numeric
+--   baslangic_tarihi: date
+--   notlar: text
+--   sozlesme_bitis_tarihi: date
+--   yenileme_hatirlatma_gun: integer
+--   vergi_numarasi: text
+--   pipeline_asamasi: text
+--   invoiced: boolean
+--   deleted_at: timestamp with time zone
+
+-- projects
+--   id: uuid
+--   locale: text
+--   slug: text
+--   industry: text
+--   duration: text
+--   title: text
+--   seo_title: text
+--   summary: text
+--   cover_metric: text
+--   cover_metric_label: text
+--   cover_image: text
+--   challenge_title: text
+--   challenge_intro: text
+--   challenge_points: text[]
+--   approach_title: text
+--   approach_steps: jsonb
+--   results_title: text
+--   results_summary: text
+--   results_metrics: jsonb
+--   gallery_images: text[]
+--   is_published: boolean
+--   created_at: timestamp with time zone
+--   updated_at: timestamp with time zone
+--   deleted_at: timestamp with time zone
+
+-- ============================================================================
+-- GÜVENLİK NOTU: crm_credentials.password düz metin olarak saklanıyor.
+-- Bu, "şifreler" (credentials) modülünün kapsamlı bir güvenlik incelemesi
+-- gerektirdiğinin kanıtı. Faz 1 kapsamı dışında bırakıldı — ayrı bir görev
+-- olarak takip ediliyor (bkz. arka planda çalışan inceleme görevi).
+-- ============================================================================
