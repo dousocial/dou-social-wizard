@@ -10,6 +10,9 @@ import { InfluencerCtaSection } from "@/components/influencers/InfluencerCtaSect
 import { getPublishedInfluencers } from "@/lib/influencers";
 import { alternatesFor } from "@/lib/site";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/influencerlar">): Promise<Metadata> {
