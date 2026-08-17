@@ -75,13 +75,13 @@ export function InfluencerVideoModal({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/85 backdrop-blur-md"
+            className="fixed inset-0 bg-black/90 backdrop-blur-xl"
             aria-hidden="true"
           />
 
           {/* ═════════════════════════════════════════════════════════════════════
               MODAL PANEL
-              - Mobilde: Tam ekran 9/16 Reels / TikTok tarzı sinematik dikey görünüm
+              - Mobilde: Dikey, alt panel ayrılmış, kristal netliğinde modern düzen
               - Masaüstünde: Yan yana video ve detay kartı
              ═════════════════════════════════════════════════════════════════════ */}
           <motion.div
@@ -90,34 +90,34 @@ export function InfluencerVideoModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: 16 }}
             transition={{ duration: 0.3, ease: EASE }}
-            className="relative z-10 flex h-full w-full max-w-4xl flex-col overflow-hidden bg-black text-paper shadow-2xl md:h-[82vh] md:max-h-[760px] md:flex-row md:rounded-3xl md:border md:border-white/15 md:bg-paper md:text-ink"
+            className="relative z-10 flex h-full w-full max-w-4xl flex-col overflow-hidden bg-ink text-paper shadow-2xl md:h-[82vh] md:max-h-[760px] md:flex-row md:rounded-3xl md:border md:border-mute-200 md:bg-paper md:text-ink"
             role="dialog"
             aria-modal="true"
             aria-label={`${influencer.name} İçerik İnceleme`}
           >
-            {/* ── Mobil Üst Kapatma & Başlık Barı (Mobilde görünür) ── */}
-            <div className="absolute left-0 right-0 top-0 z-30 flex items-center justify-between bg-gradient-to-b from-black/80 via-black/40 to-transparent p-4 md:hidden">
+            {/* ── Mobil Üst Bar (Kategori, İsim ve Kapat Butonu) ── */}
+            <div className="absolute left-0 right-0 top-0 z-30 flex items-center justify-between border-b border-white/10 bg-black/60 px-4 py-3 backdrop-blur-md md:hidden">
               <div className="flex items-center gap-2">
                 <span className="rounded-full bg-accent px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                   {influencer.category}
                 </span>
-                <span className="font-display text-sm font-bold text-white">
+                <span className="font-display text-xs font-bold text-white">
                   {influencer.name}
                 </span>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md transition-all active:scale-95"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-all active:scale-95"
                 aria-label="Kapat"
               >
-                <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <path d="M3 3l10 10M13 3L3 13" />
                 </svg>
               </button>
             </div>
 
-            {/* ── Masaüstü Kapatma Butonu (MD ve üstü) ── */}
+            {/* ── Masaüstü Kapat Butonu (MD ve üstü) ── */}
             <button
               type="button"
               onClick={onClose}
@@ -129,10 +129,10 @@ export function InfluencerVideoModal({
               </svg>
             </button>
 
-            {/* ── Left Column: Video Cinema Frame (Mobilde tam ekran dikey) ── */}
-            <div className="relative flex h-full w-full flex-1 items-center justify-center bg-black md:h-auto md:w-[48%] md:flex-none">
+            {/* ── Video Alanı ── */}
+            <div className="relative flex flex-1 items-center justify-center bg-black pt-14 pb-2 md:h-auto md:w-[48%] md:flex-none md:p-0">
               {isDirectVideo ? (
-                <div className="relative h-full w-full">
+                <div className="relative flex h-full w-full items-center justify-center">
                   <video
                     ref={videoRef}
                     src={influencer.videoUrl}
@@ -141,7 +141,7 @@ export function InfluencerVideoModal({
                     loop
                     muted={isMuted}
                     playsInline
-                    className="h-full w-full object-contain md:object-cover"
+                    className="max-h-full w-full object-contain md:h-full md:object-cover"
                     onClick={() => {
                       if (videoRef.current) {
                         if (videoRef.current.paused) {
@@ -155,68 +155,8 @@ export function InfluencerVideoModal({
                     }}
                   />
 
-                  {/* Mobil Canlı Bilgi ve Instagram Butonu (Video üzerinde floating) */}
-                  <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 md:hidden">
-                    <div className="pointer-events-auto">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-xs font-medium text-white/70">{influencer.handle}</p>
-                          <h3 className="font-display text-xl font-bold text-white">{influencer.name}</h3>
-                        </div>
-                        {influencer.followers && (
-                          <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-[11px] font-semibold text-white">
-                            {influencer.followers} Kitle
-                          </span>
-                        )}
-                      </div>
-
-                      {influencer.bio && (
-                        <p className="mt-2 line-clamp-2 text-xs text-white/80 leading-relaxed">
-                          {influencer.bio}
-                        </p>
-                      )}
-
-                      {/* Mobil Aksiyon Butonları (Instagram + Video Kontrolleri) */}
-                      <div className="mt-4 flex items-center gap-2">
-                        <a
-                          href={influencer.instagramUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex flex-1 items-center justify-center gap-2 rounded-full bg-white py-3 text-xs font-semibold text-ink shadow-lg transition-transform active:scale-95"
-                        >
-                          <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                          </svg>
-                          <span>Instagram Profiline Git</span>
-                        </a>
-
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (videoRef.current) {
-                              videoRef.current.muted = !isMuted;
-                              setIsMuted(!isMuted);
-                            }
-                          }}
-                          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md"
-                          aria-label={isMuted ? "Sesi Aç" : "Sesi Kapat"}
-                        >
-                          {isMuted ? (
-                            <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
-                              <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
-                            </svg>
-                          ) : (
-                            <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
-                              <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-                            </svg>
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Masaüstü Video Kontrol Barı */}
-                  <div className="absolute bottom-4 left-4 right-4 hidden items-center justify-between rounded-full border border-white/15 bg-black/60 px-4 py-2 backdrop-blur-md md:flex">
+                  {/* Video İçi Hızlı Duraklat / Ses Kontrolleri */}
+                  <div className="absolute right-3 top-16 z-20 flex flex-col gap-2 md:bottom-4 md:left-4 md:right-4 md:top-auto md:flex-row md:items-center md:justify-between md:rounded-full md:border md:border-white/15 md:bg-black/60 md:px-4 md:py-2">
                     <button
                       type="button"
                       onClick={() => {
@@ -230,21 +170,22 @@ export function InfluencerVideoModal({
                           }
                         }
                       }}
-                      className="flex items-center gap-2 text-xs font-medium tracking-wide text-white hover:text-accent"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-black/70 text-white backdrop-blur-md md:h-auto md:w-auto md:bg-transparent md:text-xs md:font-medium md:hover:text-accent"
+                      aria-label={isPlaying ? "Duraklat" : "Oynat"}
                     >
                       {isPlaying ? (
                         <>
-                          <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24">
+                          <svg className="h-4 w-4 fill-current md:h-3.5 md:w-3.5" viewBox="0 0 24 24">
                             <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                           </svg>
-                          <span>Duraklat</span>
+                          <span className="hidden md:inline md:ml-2">Duraklat</span>
                         </>
                       ) : (
                         <>
-                          <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24">
+                          <svg className="h-4 w-4 fill-current md:h-3.5 md:w-3.5" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z" />
                           </svg>
-                          <span>Oynat</span>
+                          <span className="hidden md:inline md:ml-2">Oynat</span>
                         </>
                       )}
                     </button>
@@ -257,9 +198,24 @@ export function InfluencerVideoModal({
                           setIsMuted(!isMuted);
                         }
                       }}
-                      className="text-xs font-medium text-white/80 hover:text-white"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-black/70 text-white backdrop-blur-md md:h-auto md:w-auto md:bg-transparent md:text-xs md:font-medium md:text-white/80 md:hover:text-white"
+                      aria-label={isMuted ? "Sesi Aç" : "Sesi Kapat"}
                     >
-                      {isMuted ? "Sesi Aç" : "Sesi Kapat"}
+                      {isMuted ? (
+                        <>
+                          <svg className="h-4 w-4 fill-current md:h-3.5 md:w-3.5" viewBox="0 0 24 24">
+                            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                          </svg>
+                          <span className="hidden md:inline md:ml-1.5">Sesi Aç</span>
+                        </>
+                      ) : (
+                        <>
+                          <svg className="h-4 w-4 fill-current md:h-3.5 md:w-3.5" viewBox="0 0 24 24">
+                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                          </svg>
+                          <span className="hidden md:inline md:ml-1.5">Sesi Kapat</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -276,24 +232,39 @@ export function InfluencerVideoModal({
                   <p className="mt-1 max-w-xs text-xs text-white/70">
                     Orijinal video içeriğini doğrudan Instagram profilinde inceleyebilirsiniz.
                   </p>
-                  {influencer.videoUrl && (
-                    <a
-                      href={influencer.videoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-5 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-xs font-semibold text-white transition-opacity hover:opacity-90"
-                    >
-                      İçeriği Aç
-                      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  )}
                 </div>
               )}
             </div>
 
-            {/* ── Right Column: Creator Info (Masaüstünde görünür) ── */}
+            {/* ── Mobil Alt Bölüm (Kristal Netliğinde Ayrı Kart) ── */}
+            <div className="relative z-20 border-t border-white/10 bg-black/95 px-5 py-4 backdrop-blur-xl md:hidden">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-display text-lg font-bold text-white">{influencer.name}</h3>
+                  <p className="text-xs font-semibold text-accent">{influencer.handle}</p>
+                </div>
+                {influencer.followers && (
+                  <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-xs font-bold text-white">
+                    {influencer.followers} Kitle
+                  </span>
+                )}
+              </div>
+
+              {/* Instagram Butonu (Yüksek Kontrast, Tam Okunabilir) */}
+              <a
+                href={influencer.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-white py-3.5 text-center text-xs font-bold uppercase tracking-wider text-black shadow-xl transition-transform active:scale-95"
+              >
+                <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+                <span>Instagram Profiline Git</span>
+              </a>
+            </div>
+
+            {/* ── Masaüstü Sağ Kolon: Detaylı Profil Künyesi (MD ve üstü) ── */}
             <div className="hidden flex-1 flex-col justify-between overflow-y-auto p-6 md:flex md:p-8">
               <div className="space-y-6">
                 {/* Category & Followers */}
@@ -350,7 +321,7 @@ export function InfluencerVideoModal({
                 )}
               </div>
 
-              {/* Action Button */}
+              {/* Masaüstü Instagram Butonu */}
               <div className="mt-8 border-t border-mute-100 pt-6">
                 <a
                   href={influencer.instagramUrl}
