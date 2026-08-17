@@ -26,6 +26,7 @@ const COMPANY = [
 ] as const;
 
 const RELATED = [
+  { href: "/denizli-reklam-ajansi", label: "Denizli Reklam Ajansı" },
   { href: "/denizli-sosyal-medya-ajansi", label: "Denizli Sosyal Medya Ajansı" },
   { href: "/meta-ads-ajansi", label: "Meta Ads Ajansı" },
   { href: "/instagram-reklam-yonetimi", label: "Instagram Reklam Yönetimi" },

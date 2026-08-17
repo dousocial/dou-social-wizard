@@ -1642,6 +1642,101 @@
       "casesEyebrow": "Sonuçlar",
       "faqEyebrow": "Sıkça sorulanlar"
     },
+    "denizli-reklam-ajansi": {
+      "metaTitle": "Denizli Reklam Ajansı — DOU Social | 360° Dijital Pazarlama",
+      "metaDescription": "Denizli reklam ajansı DOU Social ile markanızı büyütün. Meta Ads reklam yönetimi, profesyonel içerik üretimi, video prodüksiyon, SEO ve büyüme odaklı reklam stratejileri. Ücretsiz analiz alın.",
+      "eyebrow": "Denizli · 360° Dijital Reklam Ajansı",
+      "title": "Denizli'nin performans ve büyüme odaklı reklam ajansı.",
+      "lead": "Klasik reklamcılık bitti. DOU Social; Denizli'deki yerel ve ulusal markalara ölçülebilir Meta Ads reklamları, kreatif video prodüksiyonu, sosyal medya yönetimi ve yüksek dönüşümlü dijital pazarlama çözümleri sunar.",
+      "proof": [
+        {
+          "value": "45+",
+          "label": "Yönetilen Aktif Marka ve Kampanya"
+        },
+        {
+          "value": "4.8x",
+          "label": "Ortalama Reklam Getirisi (ROAS)"
+        },
+        {
+          "value": "%100",
+          "label": "Şeffaf Raporlama ve Ölçülebilir Büyüme"
+        }
+      ],
+      "problemsTitle": "Denizli'deki işletmelerin reklam ajanslarında yaşadığı temel sorunlar.",
+      "problems": [
+        {
+          "title": "Bütçe Harcanıyor Ama Satış Yok",
+          "description": "Hedef kitle doğru kurgulanmadığı ve kreatif strateji olmadığı için reklam bütçeleri boşa gidiyor."
+        },
+        {
+          "title": "Sıradan ve Kalitesiz Görseller",
+          "description": "Stock fotoğraflarla yapılan ruhsuz paylaşımlar markanızın değerini ve güvenilirliğini düşürüyor."
+        },
+        {
+          "title": "Şeffaf Raporlama Eksikliği",
+          "description": "Hangi reklamın ne kadar kazandırdığı, maliyetlerin nereye gittiği net olarak sunulmuyor."
+        }
+      ],
+      "processTitle": "Denizli markaları için 4 adımlı reklam ve büyüme modeli.",
+      "process": [
+        {
+          "title": "Pazar ve Rakip Analizi",
+          "description": "Denizli pazarındaki ve sektörünüzdeki rakipleri, hedef kitlenizin satın alma alışkanlıklarını derinlemesine analiz ediyoruz."
+        },
+        {
+          "title": "Kreatif İçerik ve Prodüksiyon",
+          "description": "Markanıza özel yüksek çözünürlüklü fotoğraf çekimleri, dikey video/Reels prodüksiyonları ve etkileyici reklam metinleri hazırlıyoruz."
+        },
+        {
+          "title": "Veri Odaklı Reklam Yönetimi",
+          "description": "Meta Ads ve Google Reklamları ile bütçenizi minimum maliyet - maksimum dönüşüm sağlayacak şekilde optimize ediyoruz."
+        },
+        {
+          "title": "Haftalık Optimizasyon ve Canlı Raporlama",
+          "description": "Her hafta performansı test edip en karlı reklamları ölçeklendiriyor, tüm verileri şeffaf bir panelde sizinle paylaşıyoruz."
+        }
+      ],
+      "casesTitle": "Denizli'de yarattığımız başarı hikayeleri.",
+      "cases": [
+        {
+          "slug": "yapigranit",
+          "metric": "4.2x",
+          "industry": "Mermer & Doğal Taş",
+          "title": "B2B ihracat ve yurt içi lead üretiminde 4.2x büyüme."
+        },
+        {
+          "slug": "sport-simulation",
+          "metric": "3.8x",
+          "industry": "Spor & Teknoloji",
+          "title": "Simülatör satışlarında yüksek nitelikli lead hacmi."
+        },
+        {
+          "slug": "pamair",
+          "metric": "2.9x",
+          "industry": "Endüstriyel Havalandırma",
+          "title": "Denizli ve Ege genelinde kurumsal marka bilinirliği."
+        }
+      ],
+      "faqTitle": "Denizli reklam ajansı hakkında merak edilenler.",
+      "faq": [
+        {
+          "q": "Denizli'de neden DOU Social ile çalışmalısınız?",
+          "a": "DOU Social, Denizli'nin dinamiklerini, sanayisini, yerel işletme kültürünü ve dijital tüketici davranışını çok iyi bilir. Sadece paylaşım yapan bir ajans değil, doğrudan satış ve ciro artışı sağlayan bir büyüme ortağıdır."
+        },
+        {
+          "q": "Reklam bütçem ne kadar olmalı?",
+          "a": "Bütçeyi sektörünüze, hedeflerinize ve rekabet düzeyine göre optimize ediyoruz. Küçük bütçelerle başlayıp karlı olduğunu gördükçe adım adım ölçeklendiriyoruz."
+        },
+        {
+          "q": "Sözleşme süreleri ve çalışma koşulları nasıl?",
+          "a": "Uzun süreli bağlayıcı taahhütler yerine, ürettiğimiz somut sonuçlar ve karşılıklı memnuniyetle devam eden esnek ve şeffaf çalışma modelleri sunuyoruz."
+        },
+        {
+          "q": "Fotoğraf ve video çekimlerini siz mi yapıyorsunuz?",
+          "a": "Evet. Kendi profesyonel prodüksiyon ekibimiz ve ekipmanlarımızla Denizli'deki işletmenize gelerek stüdyo kalitesinde fotoğraf ve video çekimleri gerçekleştiriyoruz."
+        }
+      ]
+    },
     "denizli-sosyal-medya-ajansi": {
       "metaTitle": "Denizli Sosyal Medya Ajansı — DOU Social",
       "metaDescription": "Denizli'de sosyal medya ajansı arıyorsan: Instagram, TikTok ve Meta Ads yönetiminde ölçülebilir sonuç üreten yerel ajans. Ücretsiz teklif.",

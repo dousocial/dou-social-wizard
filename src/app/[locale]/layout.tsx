@@ -14,6 +14,7 @@ import { CallFab } from "@/components/layout/CallFab";
 import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
 import { ConsentManager } from "@/components/analytics/ConsentManager";
 import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
+import { LocalBusinessSchema } from "@/components/seo/LocalBusinessSchema";
 import "../globals.css";
 
 // Body text — Inter: neutral, highly legible, industry-standard for premium UIs
@@ -115,6 +116,7 @@ export default async function LocaleLayout({
       </head>
       <body className="min-h-full flex flex-col">
         <OrganizationSchema />
+        <LocalBusinessSchema url={SITE_URL} />
         <NextIntlClientProvider>
           <SmoothScrollProvider>
             <a href="#main-content" className="skip-to-content">
