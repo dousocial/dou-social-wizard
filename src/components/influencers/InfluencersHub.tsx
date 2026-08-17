@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { InfluencerItem } from "@/lib/influencers";
 import { Container } from "@/components/ui/Container";
@@ -28,6 +28,7 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeVideoInfluencer, setActiveVideoInfluencer] =
     useState<InfluencerItem | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -71,11 +72,51 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
     });
   }, [initialInfluencers, selectedSector, searchQuery]);
 
-  const handleScroll = (direction: "left" | "right") => {
-    if (!scrollContainerRef.current) return;
-    const scrollAmount = direction === "left" ? -340 : 340;
-    scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-  };
+  // Manuel kaydırma fonksiyonu
+  const handleScroll = useCallback((direction: "left" | "right") => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const cardWidth = 360;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+
+    if (direction === "right") {
+      if (el.scrollLeft >= maxScroll - 15) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: cardWidth, behavior: "smooth" });
+      }
+    } else {
+      if (el.scrollLeft <= 15) {
+        el.scrollTo({ left: maxScroll, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: -cardWidth, behavior: "smooth" });
+      }
+    }
+  }, []);
+
+  // ── Otomatik Kaydırma (Autoplay Carousel with Infinite Loop) ──
+  useEffect(() => {
+    if (isPaused || Boolean(activeVideoInfluencer) || filteredInfluencers.length <= 1) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      const el = scrollContainerRef.current;
+      if (!el) return;
+
+      const cardWidth = 360;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+
+      // Sona ulaştığında başa yumuşakça dön
+      if (el.scrollLeft >= maxScroll - 20) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: cardWidth, behavior: "smooth" });
+      }
+    }, 3200);
+
+    return () => clearInterval(interval);
+  }, [isPaused, activeVideoInfluencer, filteredInfluencers.length]);
 
   return (
     <section className="border-t border-mute-100 py-12 md:py-16">
@@ -138,7 +179,7 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
               )}
             </div>
 
-            {/* Yatay Kaydırma Navigasyon Okları (Mobilde & Masaüstünde) */}
+            {/* Yatay Kaydırma Navigasyon Okları */}
             {filteredInfluencers.length > 0 && (
               <div className="flex items-center gap-1.5 shrink-0">
                 <button
@@ -166,15 +207,24 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
           </div>
         </div>
 
-        {/* ── Influencer Kayar Vitrin (Horizontal Scroll Carousel with Grid Snap) ── */}
-        <div className="mt-10">
+        {/* ── Influencer Otomatik & Akıcı Kayar Vitrin ── */}
+        <div
+          className="mt-10"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => {
+            // Dokunma bittikten 2 saniye sonra otomatik kaydırmaya devam et
+            setTimeout(() => setIsPaused(false), 2000);
+          }}
+        >
           <AnimatePresence mode="popLayout">
             {filteredInfluencers.length > 0 ? (
               <div className="relative -mx-4 px-4 sm:mx-0 sm:px-0">
                 <div
                   ref={scrollContainerRef}
                   className="flex gap-6 overflow-x-auto pb-6 pt-2 scrollbar-none snap-x snap-mandatory"
-                  style={{ WebkitOverflowScrolling: "touch" }}
+                  style={{ WebkitOverflowScrolling: "touch", scrollBehavior: "smooth" }}
                 >
                   {filteredInfluencers.map((influencer, i) => (
                     <div
