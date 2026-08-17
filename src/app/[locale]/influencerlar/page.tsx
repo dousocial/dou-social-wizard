@@ -59,13 +59,13 @@ export default function InfluencersPage({
             <div className="mt-10 grid grid-cols-3 gap-6 border-t border-mute-100 pt-8 dark:border-mute-800">
               <div>
                 <p className="font-display text-2xl font-bold text-ink dark:text-white md:text-3xl">
-                  50+
+                  5+
                 </p>
                 <p className="mt-1 text-xs text-mute-500">{t("stats.creators")}</p>
               </div>
               <div>
                 <p className="font-display text-2xl font-bold text-ink dark:text-white md:text-3xl">
-                  10M+
+                  100K+
                 </p>
                 <p className="mt-1 text-xs text-mute-500">{t("stats.reach")}</p>
               </div>
