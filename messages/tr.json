@@ -14,7 +14,7 @@
   "Nav": {
     "services": "Hizmetler",
     "projects": "Projeler",
-    "influencers": "Influencer'lar",
+    "influencers": "Influencerlar",
     "about": "Hakkımızda",
     "blog": "Blog",
     "contact": "İletişim",
@@ -1622,7 +1622,7 @@
     }
   },
   "InfluencersHub": {
-    "metaTitle": "Çalıştığımız Influencer'lar — DOU Social",
+    "metaTitle": "Çalıştığımız Influencerlar — DOU Social",
     "metaDescription": "DOU Social ile iş birliği yapan yüksek etkileşimli içerik üreticileri ve influencer portföyü.",
     "eyebrow": "CREATOR NETWORK",
     "heroTitle": "Markanıza Değer Katan İçerik Üreticileri.",

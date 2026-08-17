@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { InfluencerItem } from "@/lib/influencers";
 import { Container } from "@/components/ui/Container";
+import { Link } from "@/i18n/navigation";
 import { InfluencerCard } from "./InfluencerCard";
 import { InfluencerVideoModal } from "./InfluencerVideoModal";
 import { cn } from "@/lib/utils";
@@ -152,6 +153,29 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
                   />
                 ))}
               </motion.div>
+            ) : initialInfluencers.length === 0 ? (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-mute-200 py-20 text-center"
+              >
+                <p className="font-display text-2xl font-bold tracking-tight text-ink">
+                  Henüz yayında içerik üreticisi bulunmuyor.
+                </p>
+                <p className="mt-2 max-w-md text-sm text-mute-500">
+                  CRM panelinden onaylanıp web sitesinde yayına alınan
+                  influencer&apos;lar doğrudan burada listelenecektir.
+                </p>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                  <Link
+                    href="/influencer"
+                    className="rounded-full bg-ink px-6 py-3 text-xs font-semibold uppercase tracking-wider text-paper transition-colors hover:bg-mute-800"
+                  >
+                    Başvuru Formunu Aç
+                  </Link>
+                </div>
+              </motion.div>
             ) : (
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -160,7 +184,7 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
                 className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-mute-200 py-20 text-center"
               >
                 <p className="font-display text-xl font-semibold text-ink">
-                  Seçilen sektörde eşleşen influencer bulunamadı.
+                  Seçilen kriterlere uygun influencer bulunamadı.
                 </p>
                 <p className="mt-2 text-xs text-mute-500">
                   Farklı bir sektör seçebilir veya arama filtresini sıfırlayabilirsiniz.
