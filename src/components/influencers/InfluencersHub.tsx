@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { InfluencerItem } from "@/lib/influencers";
 import { Container } from "@/components/ui/Container";
 import { Link } from "@/i18n/navigation";
 import { InfluencerCard } from "./InfluencerCard";
 import { InfluencerVideoModal } from "./InfluencerVideoModal";
+import { Marquee } from "@/components/ui/Marquee";
 import { cn } from "@/lib/utils";
 
 interface InfluencersHubProps {
@@ -28,9 +29,6 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeVideoInfluencer, setActiveVideoInfluencer] =
     useState<InfluencerItem | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Extract all available sector categories from data
   const sectors = useMemo(() => {
@@ -72,54 +70,30 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
     });
   }, [initialInfluencers, selectedSector, searchQuery]);
 
-  // Manuel kaydırma fonksiyonu
-  const handleScroll = useCallback((direction: "left" | "right") => {
-    const el = scrollContainerRef.current;
-    if (!el) return;
-    const cardWidth = 360;
-    const maxScroll = el.scrollWidth - el.clientWidth;
+  // Infinite smooth marquee items
+  const cardElements = useMemo(() => {
+    // If only 1-2 items, duplicate to give a seamless infinite continuous flow
+    const baseList =
+      filteredInfluencers.length > 0 && filteredInfluencers.length < 4
+        ? [...filteredInfluencers, ...filteredInfluencers, ...filteredInfluencers]
+        : filteredInfluencers;
 
-    if (direction === "right") {
-      if (el.scrollLeft >= maxScroll - 15) {
-        el.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        el.scrollBy({ left: cardWidth, behavior: "smooth" });
-      }
-    } else {
-      if (el.scrollLeft <= 15) {
-        el.scrollTo({ left: maxScroll, behavior: "smooth" });
-      } else {
-        el.scrollBy({ left: -cardWidth, behavior: "smooth" });
-      }
-    }
-  }, []);
-
-  // ── Otomatik Kaydırma (Autoplay Carousel with Infinite Loop) ──
-  useEffect(() => {
-    if (isPaused || Boolean(activeVideoInfluencer) || filteredInfluencers.length <= 1) {
-      return;
-    }
-
-    const interval = setInterval(() => {
-      const el = scrollContainerRef.current;
-      if (!el) return;
-
-      const cardWidth = 360;
-      const maxScroll = el.scrollWidth - el.clientWidth;
-
-      // Sona ulaştığında başa yumuşakça dön
-      if (el.scrollLeft >= maxScroll - 20) {
-        el.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        el.scrollBy({ left: cardWidth, behavior: "smooth" });
-      }
-    }, 3200);
-
-    return () => clearInterval(interval);
-  }, [isPaused, activeVideoInfluencer, filteredInfluencers.length]);
+    return baseList.map((influencer, i) => (
+      <div
+        key={`${influencer.id}-${i}`}
+        className="w-[290px] sm:w-[320px] md:w-[340px]"
+      >
+        <InfluencerCard
+          influencer={influencer}
+          index={i % (filteredInfluencers.length || 1)}
+          onWatchVideo={(item) => setActiveVideoInfluencer(item)}
+        />
+      </div>
+    ));
+  }, [filteredInfluencers]);
 
   return (
-    <section className="border-t border-mute-100 py-12 md:py-16">
+    <section className="border-t border-mute-100 py-12 md:py-16 overflow-hidden">
       <Container>
         {/* ── Filter Bar: Sektör Seçici & Arama ── */}
         <div className="flex flex-col gap-6 border-b border-mute-100 pb-8 md:flex-row md:items-center md:justify-between">
@@ -145,8 +119,8 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
             })}
           </div>
 
-          {/* Arama Kutusu, Kaydırma Okları & Sayaç */}
-          <div className="flex items-center justify-between gap-4">
+          {/* Arama Kutusu & Sayaç */}
+          <div className="flex items-center gap-4">
             <div className="relative w-full sm:w-64">
               <input
                 type="text"
@@ -179,68 +153,29 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
               )}
             </div>
 
-            {/* Yatay Kaydırma Navigasyon Okları */}
-            {filteredInfluencers.length > 0 && (
-              <div className="flex items-center gap-1.5 shrink-0">
-                <button
-                  type="button"
-                  onClick={() => handleScroll("left")}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-mute-200 bg-paper text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
-                  aria-label="Sola Kaydır"
-                >
-                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleScroll("right")}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-mute-200 bg-paper text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
-                  aria-label="Sağa Kaydır"
-                >
-                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            )}
+            <span className="hidden whitespace-nowrap font-mono text-xs text-mute-400 sm:inline-block">
+              {filteredInfluencers.length} / {initialInfluencers.length}
+            </span>
           </div>
         </div>
+      </Container>
 
-        {/* ── Influencer Otomatik & Akıcı Kayar Vitrin ── */}
-        <div
-          className="mt-10"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onTouchStart={() => setIsPaused(true)}
-          onTouchEnd={() => {
-            // Dokunma bittikten 2 saniye sonra otomatik kaydırmaya devam et
-            setTimeout(() => setIsPaused(false), 2000);
-          }}
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredInfluencers.length > 0 ? (
-              <div className="relative -mx-4 px-4 sm:mx-0 sm:px-0">
-                <div
-                  ref={scrollContainerRef}
-                  className="flex gap-6 overflow-x-auto pb-6 pt-2 scrollbar-none snap-x snap-mandatory"
-                  style={{ WebkitOverflowScrolling: "touch", scrollBehavior: "smooth" }}
-                >
-                  {filteredInfluencers.map((influencer, i) => (
-                    <div
-                      key={influencer.id}
-                      className="w-[82vw] shrink-0 snap-start sm:w-[320px] md:w-[340px] lg:w-[360px]"
-                    >
-                      <InfluencerCard
-                        influencer={influencer}
-                        index={i}
-                        onWatchVideo={(item) => setActiveVideoInfluencer(item)}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : initialInfluencers.length === 0 ? (
+      {/* ── Kesintisiz, Sürekli & Smooth Kayan Infinite Marquee Vitrini ── */}
+      <div className="mt-10">
+        <AnimatePresence mode="popLayout">
+          {filteredInfluencers.length > 0 ? (
+            <div className="py-2">
+              <Marquee
+                items={cardElements}
+                direction="left"
+                speed={Math.max(25, cardElements.length * 7)}
+                gapClass="gap-6"
+                pauseOnHover={true}
+                className="w-full"
+              />
+            </div>
+          ) : initialInfluencers.length === 0 ? (
+            <Container>
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -263,7 +198,9 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
                   </Link>
                 </div>
               </motion.div>
-            ) : (
+            </Container>
+          ) : (
+            <Container>
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -287,17 +224,17 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
                   Filtreleri Sıfırla
                 </button>
               </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+            </Container>
+          )}
+        </AnimatePresence>
+      </div>
 
-        {/* ── Video Modal ── */}
-        <InfluencerVideoModal
-          influencer={activeVideoInfluencer}
-          isOpen={Boolean(activeVideoInfluencer)}
-          onClose={() => setActiveVideoInfluencer(null)}
-        />
-      </Container>
+      {/* ── Video Modal ── */}
+      <InfluencerVideoModal
+        influencer={activeVideoInfluencer}
+        isOpen={Boolean(activeVideoInfluencer)}
+        onClose={() => setActiveVideoInfluencer(null)}
+      />
     </section>
   );
 }
