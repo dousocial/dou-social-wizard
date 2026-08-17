@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { InfluencerItem } from "@/lib/influencers";
 import { Container } from "@/components/ui/Container";
@@ -28,6 +28,8 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeVideoInfluencer, setActiveVideoInfluencer] =
     useState<InfluencerItem | null>(null);
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Extract all available sector categories from data
   const sectors = useMemo(() => {
@@ -69,6 +71,12 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
     });
   }, [initialInfluencers, selectedSector, searchQuery]);
 
+  const handleScroll = (direction: "left" | "right") => {
+    if (!scrollContainerRef.current) return;
+    const scrollAmount = direction === "left" ? -340 : 340;
+    scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
+
   return (
     <section className="border-t border-mute-100 py-12 md:py-16">
       <Container>
@@ -96,8 +104,8 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
             })}
           </div>
 
-          {/* Arama Kutusu & Sayaç */}
-          <div className="flex items-center gap-4">
+          {/* Arama Kutusu, Kaydırma Okları & Sayaç */}
+          <div className="flex items-center justify-between gap-4">
             <div className="relative w-full sm:w-64">
               <input
                 type="text"
@@ -130,29 +138,58 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
               )}
             </div>
 
-            <span className="hidden whitespace-nowrap font-mono text-xs text-mute-400 sm:inline-block">
-              {filteredInfluencers.length} / {initialInfluencers.length}
-            </span>
+            {/* Yatay Kaydırma Navigasyon Okları (Mobilde & Masaüstünde) */}
+            {filteredInfluencers.length > 0 && (
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => handleScroll("left")}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-mute-200 bg-paper text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                  aria-label="Sola Kaydır"
+                >
+                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleScroll("right")}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-mute-200 bg-paper text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                  aria-label="Sağa Kaydır"
+                >
+                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* ── Influencer Grid ── */}
-        <div className="mt-12">
+        {/* ── Influencer Kayar Vitrin (Horizontal Scroll Carousel with Grid Snap) ── */}
+        <div className="mt-10">
           <AnimatePresence mode="popLayout">
             {filteredInfluencers.length > 0 ? (
-              <motion.div
-                layout
-                className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-              >
-                {filteredInfluencers.map((influencer, i) => (
-                  <InfluencerCard
-                    key={influencer.id}
-                    influencer={influencer}
-                    index={i}
-                    onWatchVideo={(item) => setActiveVideoInfluencer(item)}
-                  />
-                ))}
-              </motion.div>
+              <div className="relative -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div
+                  ref={scrollContainerRef}
+                  className="flex gap-6 overflow-x-auto pb-6 pt-2 scrollbar-none snap-x snap-mandatory"
+                  style={{ WebkitOverflowScrolling: "touch" }}
+                >
+                  {filteredInfluencers.map((influencer, i) => (
+                    <div
+                      key={influencer.id}
+                      className="w-[82vw] shrink-0 snap-start sm:w-[320px] md:w-[340px] lg:w-[360px]"
+                    >
+                      <InfluencerCard
+                        influencer={influencer}
+                        index={i}
+                        onWatchVideo={(item) => setActiveVideoInfluencer(item)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             ) : initialInfluencers.length === 0 ? (
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
