@@ -1,0 +1,40 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dou-social",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["node_modules/next/dist/bin/next", "dev", "-p", "3010"],
+      "port": 3010,
+      "autoPort": false
+    },
+    {
+      "name": "dou-social-alt",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["node_modules/next/dist/bin/next", "dev", "-p", "3011"],
+      "port": 3011,
+      "autoPort": false
+    },
+    {
+      "name": "dou-social-crm",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--dir", "C:\\Users\\Efe\\Desktop\\dou-social-crm", "dev"],
+      "port": 3010,
+      "autoPort": false
+    },
+    {
+      "name": "dou-crm-v2",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--dir", "C:\\Users\\Efe\\Desktop\\dou-crm-v2", "dev"],
+      "port": 3030,
+      "autoPort": false
+    },
+    {
+      "name": "dou-web",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--dir", "C:\\Users\\Efe\\Desktop\\dou-web", "dev"],
+      "port": 3020,
+      "autoPort": false
+    }
+  ]
+}
