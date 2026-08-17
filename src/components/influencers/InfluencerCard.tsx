@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { InfluencerItem } from "@/lib/influencers";
@@ -15,7 +16,46 @@ export function InfluencerCard({
   index,
   onWatchVideo,
 }: InfluencerCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const playPromiseRef = useRef<Promise<void> | null>(null);
+
   const hasVideo = Boolean(influencer.videoUrl);
+  const isDirectVideo =
+    hasVideo &&
+    influencer.videoUrl &&
+    (influencer.videoUrl.endsWith(".mp4") ||
+      influencer.videoUrl.endsWith(".webm") ||
+      influencer.videoUrl.includes("commondatastorage.googleapis.com") ||
+      influencer.videoUrl.includes("supabase.co/storage"));
+
+  // ── YouTube Style Instant Video Preview on Hover ──
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !isDirectVideo) return;
+
+    if (isHovered) {
+      video.currentTime = 0;
+      playPromiseRef.current = video.play();
+      playPromiseRef.current?.catch(() => {
+        // Autoplay policy fallback
+      });
+    } else {
+      if (playPromiseRef.current) {
+        playPromiseRef.current
+          .then(() => {
+            video.pause();
+            video.currentTime = 0;
+          })
+          .catch(() => {
+            video.pause();
+          });
+      } else {
+        video.pause();
+      }
+    }
+  }, [isHovered, isDirectVideo]);
 
   return (
     <motion.div
@@ -24,7 +64,9 @@ export function InfluencerCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-mute-200 bg-paper transition-all duration-300 hover:border-mute-400 hover:shadow-lg"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-mute-200 bg-paper transition-all duration-300 hover:border-mute-400 hover:shadow-xl"
     >
       {/* ── Top Header Strip ── */}
       <div className="flex items-center justify-between border-b border-mute-100 px-5 py-3.5">
@@ -36,35 +78,69 @@ export function InfluencerCard({
         </span>
       </div>
 
-      {/* ── Portrait Frame ── */}
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-mute-100">
+      {/* ── Portrait & Video Cinema Preview Frame ── */}
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-black">
+        {/* 1. Base High-Res Profile Image */}
         <Image
           src={influencer.profileImage}
           alt={influencer.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+          className={`object-cover object-center transition-all duration-500 ease-out ${
+            isHovered && isDirectVideo && isVideoLoaded
+              ? "opacity-0 scale-105"
+              : "opacity-100 group-hover:scale-105"
+          }`}
         />
 
-        {/* Ambient Dark Gradient */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/25 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-95" />
-
-        {/* Follower Badge */}
-        {influencer.followers && (
-          <div className="absolute right-4 top-4 rounded-full border border-white/20 bg-ink/70 px-3 py-1 text-[11px] font-medium tracking-wider text-paper backdrop-blur-md">
-            {influencer.followers} Kitle
-          </div>
+        {/* 2. YouTube-Style Silent HD Video Preview on Hover */}
+        {isDirectVideo && influencer.videoUrl && (
+          <video
+            ref={videoRef}
+            src={influencer.videoUrl}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            onLoadedData={() => setIsVideoLoaded(true)}
+            className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
+              isHovered ? "opacity-100" : "opacity-0"
+            }`}
+          />
         )}
 
-        {/* Play Video Trigger Overlay */}
+        {/* Ambient Dark Bottom Gradient (Always readable identity text) */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/25 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-95" />
+
+        {/* Top Right: Follower Badge or Live Preview Indicator */}
+        <div className="absolute right-4 top-4 flex items-center gap-1.5">
+          {isHovered && isDirectVideo ? (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-ink/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent backdrop-blur-md">
+              <span className="h-1.5 w-1.5 animate-ping rounded-full bg-accent" />
+              Önizleme
+            </span>
+          ) : (
+            influencer.followers && (
+              <div className="rounded-full border border-white/20 bg-ink/70 px-3 py-1 text-[11px] font-medium tracking-wider text-paper backdrop-blur-md">
+                {influencer.followers} Kitle
+              </div>
+            )
+          )}
+        </div>
+
+        {/* Center: Play Video Modal Trigger Overlay */}
         {hasVideo && (
           <button
             type="button"
             onClick={() => onWatchVideo?.(influencer)}
-            className="group/btn absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/20"
+            className="group/btn absolute inset-0 z-10 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/15"
             aria-label={`${influencer.name} videosunu izle`}
           >
-            <div className="flex h-13 w-13 items-center justify-center rounded-full border border-white/30 bg-ink/70 text-white backdrop-blur-md transition-transform duration-300 group-hover/btn:scale-110 group-hover/btn:border-white group-hover/btn:bg-paper group-hover/btn:text-ink">
+            <div
+              className={`flex h-13 w-13 items-center justify-center rounded-full border border-white/30 bg-ink/70 text-white backdrop-blur-md transition-all duration-300 group-hover/btn:scale-110 group-hover/btn:border-white group-hover/btn:bg-paper group-hover/btn:text-ink ${
+                isHovered ? "scale-90 opacity-40 hover:opacity-100 hover:scale-110" : "opacity-90"
+              }`}
+            >
               <svg
                 className="h-5 w-5 translate-x-0.5"
                 fill="currentColor"
@@ -77,11 +153,11 @@ export function InfluencerCard({
         )}
 
         {/* Bottom Floating Identity on Image */}
-        <div className="absolute bottom-4 left-5 right-5 text-white">
-          <h3 className="font-display text-2xl font-bold tracking-tight text-white">
+        <div className="pointer-events-none absolute bottom-4 left-5 right-5 z-10 text-white">
+          <h3 className="font-display text-2xl font-bold tracking-tight text-white drop-shadow-sm">
             {influencer.name}
           </h3>
-          <p className="mt-0.5 text-xs text-white/70">
+          <p className="mt-0.5 text-xs text-white/80 font-medium">
             {influencer.handle}
           </p>
         </div>
