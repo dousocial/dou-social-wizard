@@ -221,7 +221,8 @@
         "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
         "consent-required": "KVKK onayı vermeden gönderemiyoruz.",
         "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene.",
-        "recaptcha-failed": "Bot doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar dene."
+        "recaptcha-failed": "Bot doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar dene.",
+        "db-error": "Gönderim sırasında bir sorun oluştu. Lütfen biraz sonra tekrar dene."
       },
       "optional": "opsiyonel",
       "consentPrefix": "Kişisel verilerimin işlenmesine ilişkin",
@@ -1403,7 +1404,8 @@
         "invalid-email": "Geçerli bir e-posta gir.",
         "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
         "consent-required": "KVKK onayı vermeden gönderemiyoruz.",
-        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene."
+        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene.",
+        "db-error": "Gönderim sırasında bir sorun oluştu. Lütfen biraz sonra tekrar dene."
       }
     }
   },
@@ -1510,7 +1512,8 @@
         "invalid-phone": "Geçerli bir telefon numarası girin (örn: 0555 555 5555).",
         "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
         "consent-required": "Devam etmek için onay vermelisiniz.",
-        "rate-limited": "Çok hızlı gönderdiniz. Birkaç dakika sonra tekrar deneyin."
+        "rate-limited": "Çok hızlı gönderdiniz. Birkaç dakika sonra tekrar deneyin.",
+        "db-error": "Gönderim sırasında bir sorun oluştu. Lütfen biraz sonra tekrar deneyin."
       }
     }
   },
@@ -1561,7 +1564,8 @@
         "invalid-email": "Geçerli bir e-posta gir.",
         "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
         "consent-required": "KVKK onayı vermeden gönderemiyoruz.",
-        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene."
+        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene.",
+        "db-error": "Gönderim sırasında bir sorun oluştu. Lütfen biraz sonra tekrar dene."
       }
     }
   },

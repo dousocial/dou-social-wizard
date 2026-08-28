@@ -1,21 +1,10 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { supabase } from "@/lib/supabase";
-import { verifyToken } from "@/lib/session";
+import { requirePermission } from "@/lib/session";
 
 export type BlogActionState = { error?: string; success?: boolean; id?: string } | null;
-
-async function requireAdmin() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("dou_sid")?.value;
-  if (!token) redirect("/yonetim/giris");
-  const session = verifyToken(token);
-  if (!session) redirect("/yonetim/giris");
-  return session;
-}
 
 function isNextRedirect(err: unknown): boolean {
   return (
@@ -64,7 +53,7 @@ export async function createBlogPost(
   formData: FormData
 ): Promise<BlogActionState> {
   try {
-    await requireAdmin();
+    await requirePermission("content.write");
 
     const title = String(formData.get("title") ?? "").trim();
     const seoTitle = String(formData.get("seo_title") ?? "").trim() || null;
@@ -123,7 +112,7 @@ export async function updateBlogPost(
   formData: FormData
 ): Promise<BlogActionState> {
   try {
-    await requireAdmin();
+    await requirePermission("content.write");
 
     const id = String(formData.get("id") ?? "");
     if (!id) return { error: "ID gerekli" };
@@ -178,7 +167,7 @@ export async function deleteBlogPost(
   formData: FormData
 ): Promise<BlogActionState> {
   try {
-    await requireAdmin();
+    await requirePermission("content.write");
 
     const id = String(formData.get("id") ?? "");
     if (!id) return { error: "ID gerekli" };

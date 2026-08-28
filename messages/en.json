@@ -220,7 +220,8 @@
         "invalid-email": "Please enter a valid email.",
         "invalid-input": "Some fields are invalid or too long.",
         "consent-required": "Consent is required to submit.",
-        "rate-limited": "Sending too fast. Please try again in a few minutes."
+        "rate-limited": "Sending too fast. Please try again in a few minutes.",
+        "db-error": "Something went wrong while sending. Please try again shortly."
       },
       "optional": "optional",
       "consentPrefix": "I have read the",
@@ -1402,7 +1403,8 @@
         "invalid-email": "Please enter a valid email.",
         "invalid-input": "Some fields are invalid or too long.",
         "consent-required": "Consent is required to submit.",
-        "rate-limited": "Sending too fast. Please try again in a few minutes."
+        "rate-limited": "Sending too fast. Please try again in a few minutes.",
+        "db-error": "Something went wrong while sending. Please try again shortly."
       }
     }
   },
@@ -1509,7 +1511,8 @@
         "invalid-phone": "Please enter a valid phone number (e.g. 0555 555 5555).",
         "invalid-input": "Some fields are invalid or too long.",
         "consent-required": "You must give your consent to continue.",
-        "rate-limited": "You submitted too quickly. Please try again in a few minutes."
+        "rate-limited": "You submitted too quickly. Please try again in a few minutes.",
+        "db-error": "Something went wrong while sending. Please try again shortly."
       }
     }
   },
@@ -1560,7 +1563,8 @@
         "invalid-email": "Please enter a valid email.",
         "invalid-input": "Some fields are invalid or too long.",
         "consent-required": "Consent is required to submit.",
-        "rate-limited": "Sending too fast. Please try again in a few minutes."
+        "rate-limited": "Sending too fast. Please try again in a few minutes.",
+        "db-error": "Something went wrong while sending. Please try again shortly."
       }
     }
   },

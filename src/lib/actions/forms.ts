@@ -39,6 +39,43 @@ function validateShared(s: SharedFields): string | null {
   return null;
 }
 
+const BUDGET_VALUES: Record<string, number> = {
+  lt25k: 25000,
+  "25-50k": 50000,
+  "50-100k": 100000,
+  gt100k: 100000,
+};
+
+async function createInboundLead(data: {
+  title: string;
+  companyName?: string;
+  contactName: string;
+  email: string;
+  phone?: string;
+  website?: string;
+  sector?: string;
+  interestedService?: string;
+  estimatedBudget?: number | null;
+  notes: string;
+}): Promise<{ error: string | null }> {
+  const { error } = await supabase.from("crm_leads").insert({
+    title: data.title.slice(0, 200),
+    company_name: (data.companyName ?? "").slice(0, 200),
+    contact_name: data.contactName.slice(0, 200),
+    email: data.email.slice(0, 320),
+    phone: (data.phone ?? "").slice(0, 40),
+    website: (data.website ?? "").slice(0, 500),
+    sector: (data.sector ?? "").slice(0, 120),
+    interested_service: (data.interestedService ?? "").slice(0, 500),
+    estimated_budget: data.estimatedBudget ?? null,
+    source: "inbound",
+    status: "yeni",
+    notes: data.notes.slice(0, 5000),
+  });
+
+  return { error: error?.message ?? null };
+}
+
 /** Honeypot: hidden field bots fill in but humans don't. */
 function isHoneypotTriggered(formData: FormData): boolean {
   const trap = String(formData.get("website_url") ?? "").trim();
@@ -93,7 +130,7 @@ export async function submitContactForm(
 
   if (dbErr) {
     console.error("[contact form] supabase error:", dbErr.message, dbErr.code);
-    return { status: "error", error: "db-error: " + dbErr.message };
+    return { status: "error", error: "db-error" };
   }
 
   return { status: "success" };
@@ -119,7 +156,22 @@ export async function submitQuoteRequest(
   const sharedErr = validateShared(shared);
   if (sharedErr) return { status: "error", error: sharedErr };
 
-  console.log("[quote]", { ...shared, company, industry, services, budget });
+  const leadResult = await createInboundLead({
+    title: company || shared.name,
+    companyName: company,
+    contactName: shared.name,
+    email: shared.email,
+    phone: shared.phone,
+    sector: industry,
+    interestedService: services.join(", "),
+    estimatedBudget: BUDGET_VALUES[budget] ?? null,
+    notes: `Teklif talebi. Hizmetler: ${services.join(", ")}. Bütçe aralığı: ${budget}. ${shared.message ?? ""}`,
+  });
+  if (leadResult.error) {
+    console.error("[quote] crm_leads insert error:", leadResult.error);
+    return { status: "error", error: "db-error" };
+  }
+
   return { status: "success" };
 }
 
@@ -152,7 +204,21 @@ export async function submitCheckupRequest(
     if (h) handles[p] = h;
   }
 
-  console.log("[checkup]", { ...shared, sector, platforms, handles, website });
+  const leadResult = await createInboundLead({
+    title: `${shared.name} - Dijital Checkup`,
+    contactName: shared.name,
+    email: shared.email,
+    phone: shared.phone,
+    website,
+    sector,
+    interestedService: "Dijital Checkup",
+    notes: `Platformlar: ${platforms.join(", ")}. Hesaplar: ${JSON.stringify(handles)}. ${shared.message ?? ""}`,
+  });
+  if (leadResult.error) {
+    console.error("[checkup] crm_leads insert error:", leadResult.error);
+    return { status: "error", error: "db-error" };
+  }
+
   return { status: "success" };
 }
 
@@ -174,6 +240,18 @@ export async function submitMeetingRequest(
   const sharedErr = validateShared(shared);
   if (sharedErr) return { status: "error", error: sharedErr };
 
-  console.log("[meeting]", { ...shared, topic, slots });
+  const leadResult = await createInboundLead({
+    title: `${shared.name} - Strateji Görüşmesi`,
+    contactName: shared.name,
+    email: shared.email,
+    phone: shared.phone,
+    interestedService: "Strateji Görüşmesi",
+    notes: `Konu: ${topic}. Uygun zamanlar: ${slots.join(", ")}.`,
+  });
+  if (leadResult.error) {
+    console.error("[meeting] crm_leads insert error:", leadResult.error);
+    return { status: "error", error: "db-error" };
+  }
+
   return { status: "success" };
 }

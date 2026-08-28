@@ -1,25 +1,14 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { verifyToken } from "@/lib/session";
+import { requirePermission } from "@/lib/session";
 import { createClient } from "@supabase/supabase-js";
 import sharp from "sharp";
 
 export type UploadResult = { url?: string; error?: string };
 
-async function requireAdmin() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("dou_sid")?.value;
-  if (!token) redirect("/yonetim/giris");
-  const session = verifyToken(token);
-  if (!session) redirect("/yonetim/giris");
-  return session;
-}
-
 export async function uploadImage(formData: FormData): Promise<UploadResult> {
   try {
-    await requireAdmin();
+    await requirePermission("content.write");
   } catch (e: unknown) {
     const msg = e instanceof Error ? e.message : String(e);
     if (msg.includes("NEXT_REDIRECT")) throw e;

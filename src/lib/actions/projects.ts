@@ -1,21 +1,10 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { supabase } from "@/lib/supabase";
-import { verifyToken } from "@/lib/session";
+import { requirePermission } from "@/lib/session";
 
 export type ProjectActionState = { error?: string; success?: boolean; id?: string } | null;
-
-async function requireAdmin() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("dou_sid")?.value;
-  if (!token) redirect("/yonetim/giris");
-  const session = verifyToken(token);
-  if (!session) redirect("/yonetim/giris");
-  return session;
-}
 
 function isNextRedirect(err: unknown): boolean {
   return (
@@ -105,7 +94,7 @@ export async function createProject(
   formData: FormData
 ): Promise<ProjectActionState> {
   try {
-    await requireAdmin();
+    await requirePermission("content.write");
 
     const payload = buildPayload(formData);
     if (!payload.title) return { error: "Başlık gerekli" };
@@ -134,7 +123,7 @@ export async function updateProject(
   formData: FormData
 ): Promise<ProjectActionState> {
   try {
-    await requireAdmin();
+    await requirePermission("content.write");
 
     const id = String(formData.get("id") ?? "");
     if (!id) return { error: "ID gerekli" };
@@ -165,7 +154,7 @@ export async function deleteProject(
   formData: FormData
 ): Promise<ProjectActionState> {
   try {
-    await requireAdmin();
+    await requirePermission("content.write");
 
     const id = String(formData.get("id") ?? "");
     if (!id) return { error: "ID gerekli" };
