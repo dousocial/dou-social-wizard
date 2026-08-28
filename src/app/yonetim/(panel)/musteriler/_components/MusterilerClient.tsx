@@ -185,7 +185,7 @@ type CustomerModalState = { open: false } | { open: true; editing: Musteri | nul
 type LeadModalState = { open: false } | { open: true; editing: Lead | null };
 
 const EMPTY_CUSTOMER_FORM = {
-  ad: "", sektor: "", website: "", email: "", telefon: "",
+  ad: "", sektor: "", sektor_diger: "", website: "", email: "", telefon: "",
   vergi_numarasi: "", sorumlu: "", durum: "aktif", aylik_ucret: "", baslangic_tarihi: "", notlar: "",
   platformlar: [] as string[],
   sozlesme_bitis_tarihi: "", yenileme_hatirlatma_gun: "30",
@@ -203,7 +203,8 @@ const EMPTY_LEAD_FORM = {
 
 function validateCustomer(form: typeof EMPTY_CUSTOMER_FORM) {
   if (!cleanText(form.ad)) return "Müşteri adı zorunludur.";
-  if (!cleanText(form.sektor)) return "Sektör zorunludur.";
+  const sector = form.sektor === "Diğer" ? form.sektor_diger : form.sektor;
+  if (!cleanText(sector)) return "Sektör zorunludur.";
   if (!cleanText(form.sorumlu)) return "Sorumlu kişi zorunludur.";
   if (!cleanText(form.telefon)) return "Telefon zorunludur.";
   if (!isValidPhoneTR(form.telefon, true)) return "Telefon formatı geçersiz. Örnek: 0555 555 5555";
@@ -518,7 +519,7 @@ export function MusterilerClient({
 
   function openEditCustomer(m: Musteri) {
     setCustomerForm({
-      ad: m.ad, sektor: m.sektor, website: m.website || "",
+      ad: m.ad, sektor: m.sektor, sektor_diger: "", website: m.website || "",
       email: m.email || "", telefon: m.telefon || "",
       vergi_numarasi: m.vergi_numarasi || "",
       sorumlu: m.sorumlu || "", durum: m.durum,
@@ -547,7 +548,8 @@ export function MusterilerClient({
     if (err) { setCustError(err); return; }
 
     const data = {
-      ad: cleanText(customerForm.ad), sektor: cleanText(customerForm.sektor),
+      ad: cleanText(customerForm.ad),
+      sektor: cleanText(customerForm.sektor === "Diğer" ? customerForm.sektor_diger : customerForm.sektor),
       website: cleanText(customerForm.website), email: cleanText(customerForm.email),
       telefon: formatPhoneTR(customerForm.telefon), vergi_numarasi: normalizeTaxNumber(customerForm.vergi_numarasi),
       sorumlu: cleanText(customerForm.sorumlu),
@@ -1423,7 +1425,24 @@ export function MusterilerClient({
                 </div>
                 <div>
                   <label style={LABEL}>Sektör *</label>
-                  <input list="crm-sector-options" style={INPUT} value={customerForm.sektor} onChange={(e) => setCustomerForm((f) => ({ ...f, sektor: e.target.value }))} placeholder="ör. E-ticaret, Sağlık" required />
+                  <select
+                    style={INPUT}
+                    value={customerForm.sektor}
+                    onChange={(e) => setCustomerForm((f) => ({ ...f, sektor: e.target.value, sektor_diger: e.target.value === "Diğer" ? f.sektor_diger : "" }))}
+                    required
+                  >
+                    <option value="">Sektör seçin</option>
+                    {sectorOptions.map((sector) => <option key={sector} value={sector}>{sector}</option>)}
+                  </select>
+                  {customerForm.sektor === "Diğer" && (
+                    <input
+                      style={{ ...INPUT, marginTop: 8 }}
+                      value={customerForm.sektor_diger}
+                      onChange={(e) => setCustomerForm((f) => ({ ...f, sektor_diger: e.target.value }))}
+                      placeholder="Sektör adını yazın"
+                      required
+                    />
+                  )}
                 </div>
                 <div>
                   <label style={LABEL}>Telefon * <span style={{ fontWeight: 400, textTransform: "none" }}>(0555 555 5555)</span></label>

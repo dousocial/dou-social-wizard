@@ -245,7 +245,7 @@ function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
 }
 
 const EMPTY_MUSTERI_FORM = (m: Musteri) => ({
-  ad: m.ad, sektor: m.sektor, website: m.website || "",
+  ad: m.ad, sektor: m.sektor, sektor_diger: m.sektor === "Diğer" ? "" : m.sektor, website: m.website || "",
   email: m.email || "", telefon: m.telefon || "", sorumlu: m.sorumlu || "",
   durum: m.durum, aylik_ucret: m.aylik_ucret ? String(m.aylik_ucret) : "",
   baslangic_tarihi: m.baslangic_tarihi || "", notlar: m.notlar || "",
@@ -253,6 +253,11 @@ const EMPTY_MUSTERI_FORM = (m: Musteri) => ({
   sozlesme_bitis_tarihi: m.sozlesme_bitis_tarihi || "",
   yenileme_hatirlatma_gun: m.yenileme_hatirlatma_gun ? String(m.yenileme_hatirlatma_gun) : "30",
 });
+
+const SECTOR_OPTIONS = [
+  "Gıda / Restoran", "Sağlık / Klinik", "Eğitim / Akademi", "E-ticaret",
+  "İnşaat / Mimarlık", "Tekstil / Moda", "Turizm / Otel", "B2B / Yazılım", "Diğer",
+];
 
 const EMPTY_METRIK = {
   ay: "", reklam_butcesi: "", etkilesim_orani: "", takipci_artisi: "",
@@ -596,8 +601,12 @@ export function MusteriDetailClient({
   async function handleEditSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!editForm.ad.trim()) { setEditError("Müşteri adı zorunludur."); return; }
+    if (!(editForm.sektor === "Diğer" ? editForm.sektor_diger : editForm.sektor).trim()) {
+      setEditError("Sektör zorunludur.");
+      return;
+    }
     const data: MusteriInput = {
-      ad: editForm.ad.trim(), sektor: editForm.sektor.trim(),
+      ad: editForm.ad.trim(), sektor: (editForm.sektor === "Diğer" ? editForm.sektor_diger : editForm.sektor).trim(),
       website: editForm.website.trim(), email: editForm.email.trim(),
       telefon: editForm.telefon.trim(), sorumlu: editForm.sorumlu.trim(),
       durum: editForm.durum, platformlar: editForm.platformlar,
@@ -1857,7 +1866,21 @@ export function MusteriDetailClient({
                 </div>
                 <div>
                   <label style={LABEL}>Sektör</label>
-                  <input style={INPUT} value={editForm.sektor} onChange={(e) => setEditForm((f) => ({ ...f, sektor: e.target.value }))} />
+                  <select style={INPUT} value={editForm.sektor} onChange={(e) => setEditForm((f) => ({ ...f, sektor: e.target.value }))}>
+                    <option value="">Sektör seçin</option>
+                    {[...SECTOR_OPTIONS, ...(SECTOR_OPTIONS.includes(musteri.sektor) ? [] : [musteri.sektor])]
+                      .filter((sector, index, options) => sector && options.indexOf(sector) === index)
+                      .map((sector) => <option key={sector} value={sector}>{sector}</option>)}
+                  </select>
+                  {editForm.sektor === "Diğer" && (
+                    <input
+                      style={{ ...INPUT, marginTop: 8 }}
+                      value={editForm.sektor_diger}
+                      onChange={(e) => setEditForm((f) => ({ ...f, sektor_diger: e.target.value }))}
+                      placeholder="Sektör adını yazın"
+                      required
+                    />
+                  )}
                 </div>
                 <div>
                   <label style={LABEL}>Durum</label>
