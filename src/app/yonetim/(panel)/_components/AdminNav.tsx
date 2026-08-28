@@ -122,18 +122,6 @@ const CRM_LINKS = [
     ),
   },
   {
-    href: "/yonetim/otomasyon",
-    label: "Otomatik Görevler",
-    exact: false,
-    color: "#38bdf8",
-    bg: "rgba(56,189,248,0.15)",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" style={{ width: 18, height: 18 }}>
-        <path d="M10 3a7 7 0 107 7M10 6v4l3 2M14 2h4v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
-  {
     href: "/yonetim/firmalar",
     label: "Firmalar & Rehber",
     exact: false,
