@@ -156,6 +156,56 @@ export async function submitCheckupRequest(
   return { status: "success" };
 }
 
+// ─── /influencer ─────────────────────────────────────────────────────────
+export async function submitInfluencerApplication(
+  _prev: FormState,
+  formData: FormData
+): Promise<FormState> {
+  if (isHoneypotTriggered(formData)) return { status: "success" };
+  const limited = await checkRateLimit("influencer");
+  if (!limited.ok) return { status: "error", error: "rate-limited" };
+
+  const adSoyad = String(formData.get("name") ?? "").trim();
+  const telefon = String(formData.get("phone") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim();
+  const sosyalHesap = String(formData.get("social") ?? "").trim();
+  const fiyat = String(formData.get("price") ?? "").trim();
+  const ilgiAlanlari = String(formData.get("interests") ?? "").trim();
+  const sektorler = formData.getAll("sectors").map(String);
+  const icerikLinki = String(formData.get("content_url") ?? "").trim();
+  const kvkkOnay = formData.get("consent") === "on";
+  const beyanOnay = formData.get("declaration") === "on";
+
+  if (!adSoyad || !telefon || !sosyalHesap)
+    return { status: "error", error: "missing-fields" };
+  if (email && !isEmail(email))
+    return { status: "error", error: "invalid-email" };
+  if (!kvkkOnay || !beyanOnay)
+    return { status: "error", error: "consent-required" };
+  if (adSoyad.length > 200 || sosyalHesap.length > 200)
+    return { status: "error", error: "invalid-input" };
+
+  const { error: dbErr } = await supabase.from("influencer_basvurulari").insert({
+    ad_soyad: adSoyad,
+    telefon,
+    email: email || null,
+    sosyal_hesap: sosyalHesap,
+    fiyat: fiyat || null,
+    ilgi_alanlari: ilgiAlanlari || null,
+    sektorler,
+    icerik_linki: icerikLinki || null,
+    kvkk_onay: kvkkOnay,
+    beyan_onay: beyanOnay,
+  });
+
+  if (dbErr) {
+    console.error("[influencer form] supabase error:", dbErr.message, dbErr.code);
+    return { status: "error", error: "db-error: " + dbErr.message };
+  }
+
+  return { status: "success" };
+}
+
 // ─── /strateji-gorusmesi ─────────────────────────────────────────────────
 export async function submitMeetingRequest(
   _prev: FormState,

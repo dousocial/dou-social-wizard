@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 const NAV_ITEMS = [
   { href: "/hizmetler", key: "services" },
   { href: "/projeler", key: "projects" },
+  { href: "/influencerlar", key: "influencers" },
   { href: "/hakkimizda", key: "about" },
   { href: "/blog", key: "blog" },
   { href: "/sss", key: "faq" },

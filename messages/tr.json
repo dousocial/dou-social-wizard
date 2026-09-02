@@ -14,6 +14,7 @@
   "Nav": {
     "services": "Hizmetler",
     "projects": "Projeler",
+    "influencers": "Influencerlar",
     "about": "Hakkımızda",
     "blog": "Blog",
     "contact": "İletişim",
@@ -2316,5 +2317,72 @@
         "body": "İşbu politika yayımlandığı tarihte yürürlüğe girer ve Dou Social tarafından yürütülen tüm veri işleme faaliyetleri için bağlayıcıdır."
       }
     ]
+  },
+  "Influencer": {
+    "metaTitle": "Influencer Başvurusu",
+    "metaDescription": "DOU Social ile içerik üretimi ve iş birliği yapmak isteyen influencer'lar için başvuru formu.",
+    "eyebrow": "Influencer Başvurusu",
+    "heroTitle": "Bizimle çalışmak ister misin?",
+    "heroLead": "Kısa bir form dolduruyorsun, biz sektörüne ve içeriğine uygun projeler çıktığında sana ulaşıyoruz.",
+    "info": {
+      "sure": {
+        "label": "Süre",
+        "value": "2 dakika"
+      },
+      "donus": {
+        "label": "Dönüş",
+        "value": "Uygun proje çıktığında iletişime geçiyoruz"
+      }
+    },
+    "form": {
+      "name": "Ad Soyad",
+      "phone": "Telefon",
+      "email": "E-posta",
+      "social": "Sosyal medya hesabı (Instagram/TikTok vb.)",
+      "price": "Kalem fiyatın",
+      "pricePlaceholder": "Ör. gönderi başına 2.000₺, pazarlığa açık vb.",
+      "interests": "İlgi alanların",
+      "interestsPlaceholder": "Ör. spor, seyahat, moda...",
+      "sectors": {
+        "label": "İlgilendiğin sektörler",
+        "options": {
+          "spor-fitness": "Spor & Fitness",
+          "guzellik-estetik": "Güzellik & Estetik",
+          "moda": "Moda",
+          "yiyecek-icecek": "Yiyecek & İçecek",
+          "egitim": "Eğitim",
+          "e-ticaret": "E-ticaret",
+          "teknoloji": "Teknoloji",
+          "saglik": "Sağlık",
+          "diger": "Diğer"
+        }
+      },
+      "contentUrl": "En beğendiğin içeriğinin linki",
+      "declaration": "Bu formu kendi bilgilerimle ve kendi rızamla doldurduğumu beyan ederim.",
+      "optional": "opsiyonel",
+      "submit": "Başvuruyu gönder",
+      "sending": "Gönderiliyor...",
+      "successTitle": "Başvurun bize ulaştı!",
+      "successBody": "Profiline uygun bir proje çıktığında seninle iletişime geçeceğiz.",
+      "errors": {
+        "missing-fields": "Lütfen zorunlu alanları doldur.",
+        "invalid-email": "Geçerli bir e-posta gir.",
+        "invalid-input": "Bazı alanlar geçersiz veya çok uzun.",
+        "consent-required": "Onay kutularını işaretlemeden gönderemiyoruz.",
+        "rate-limited": "Çok hızlı gönderdin. Lütfen birkaç dakika sonra tekrar dene."
+      }
+    }
+  },
+  "InfluencersHub": {
+    "metaTitle": "Çalıştığımız Influencerlar — DOU Social",
+    "metaDescription": "DOU Social ile iş birliği yapan yüksek etkileşimli içerik üreticileri ve influencer portföyü.",
+    "eyebrow": "CREATOR NETWORK",
+    "heroTitle": "Markanıza Değer Katan İçerik Üreticileri.",
+    "heroLead": "Doğru kitleye, doğru hikayeyle ulaşın. Birlikte çalıştığımız, yüksek etkileşimli ve özgün içerik üreten influencer ağımızı keşfedin.",
+    "stats": {
+      "creators": "Aktif İçerik Üreticisi",
+      "reach": "Toplam Kitle Erişimi",
+      "organic": "Özgün & Yüksek Etkileşim"
+    }
   }
 }

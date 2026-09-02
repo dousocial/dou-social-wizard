@@ -14,6 +14,7 @@
   "Nav": {
     "services": "Services",
     "projects": "Work",
+    "influencers": "Influencers",
     "about": "About",
     "blog": "Blog",
     "contact": "Contact",
@@ -2315,5 +2316,72 @@
         "body": "This policy enters into force on the date of publication and is binding for all data processing activities carried out by Dou Social."
       }
     ]
+  },
+  "Influencer": {
+    "metaTitle": "Influencer Application",
+    "metaDescription": "Application form for influencers who want to create content and collaborate with DOU Social.",
+    "eyebrow": "Influencer Application",
+    "heroTitle": "Want to work with us?",
+    "heroLead": "Fill out a short form — we'll reach out when a project fits your niche and content.",
+    "info": {
+      "sure": {
+        "label": "Duration",
+        "value": "2 minutes"
+      },
+      "donus": {
+        "label": "Response",
+        "value": "We reach out when a fitting project comes up"
+      }
+    },
+    "form": {
+      "name": "Full name",
+      "phone": "Phone",
+      "email": "Email",
+      "social": "Social media account (Instagram/TikTok etc.)",
+      "price": "Your rate",
+      "pricePlaceholder": "E.g. 2,000₺ per post, open to negotiation, etc.",
+      "interests": "Your interests",
+      "interestsPlaceholder": "E.g. sports, travel, fashion...",
+      "sectors": {
+        "label": "Industries you're interested in",
+        "options": {
+          "spor-fitness": "Sports & Fitness",
+          "guzellik-estetik": "Beauty & Aesthetics",
+          "moda": "Fashion",
+          "yiyecek-icecek": "Food & Beverage",
+          "egitim": "Education",
+          "e-ticaret": "E-commerce",
+          "teknoloji": "Technology",
+          "saglik": "Health",
+          "diger": "Other"
+        }
+      },
+      "contentUrl": "Link to your favorite piece of content",
+      "declaration": "I declare that I filled out this form with my own information and of my own free will.",
+      "optional": "optional",
+      "submit": "Submit application",
+      "sending": "Sending...",
+      "successTitle": "Your application reached us!",
+      "successBody": "We'll get in touch when a project fits your profile.",
+      "errors": {
+        "missing-fields": "Please fill in the required fields.",
+        "invalid-email": "Please enter a valid email.",
+        "invalid-input": "Some fields are invalid or too long.",
+        "consent-required": "You must check the consent boxes to submit.",
+        "rate-limited": "Sending too fast. Please try again in a few minutes."
+      }
+    }
+  },
+  "InfluencersHub": {
+    "metaTitle": "Our Influencers — DOU Social",
+    "metaDescription": "High-engagement content creators and influencer portfolio collaborating with DOU Social.",
+    "eyebrow": "CREATOR NETWORK",
+    "heroTitle": "Content Creators Bringing Value to Your Brand.",
+    "heroLead": "Reach the right audience with the right story. Explore our network of high-engagement, authentic creators.",
+    "stats": {
+      "creators": "Active Creators",
+      "reach": "Total Audience Reach",
+      "organic": "Authentic & High Impact"
+    }
   }
 }
