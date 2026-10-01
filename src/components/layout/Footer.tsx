@@ -7,7 +7,6 @@ import { Container } from "@/components/ui/Container";
 
 const SERVICES = [
   { href: "/hizmetler/sosyal-medya-marka",   label: "Sosyal Medya & Marka" },
-  { href: "/hizmetler/meta-reklamlari",       label: "Meta Reklamları" },
   { href: "/hizmetler/icerik-video",          label: "İçerik & Video Üretimi" },
   { href: "/hizmetler/performans-pazarlama",  label: "Performans Pazarlama" },
   { href: "/hizmetler/google-seo",            label: "Google & SEO" },

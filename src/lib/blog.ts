@@ -101,7 +101,7 @@ function dbRowToMeta(
     date: String(row.published_at),
     author: String(row.author ?? "DOU Social"),
     tags: Array.isArray(row.tags) ? (row.tags as string[]) : [],
-    cover: row.cover ? String(row.cover) : undefined,
+    cover: row.cover ? String(row.cover) : "/services/reklam-yonetimi.png",
     readingMinutes: Math.max(1, Math.round(readingTimeCalc(content).minutes)),
   };
 }

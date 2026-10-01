@@ -1,4 +1,3 @@
-import { MarketingServicesSection } from "@/components/sections/MarketingServicesSection";
 import { alternatesFor } from "@/lib/site";
 import { use } from "react";
 import type { Metadata } from "next";
@@ -53,7 +52,6 @@ export default function ServicesHubPage({
         </Container>
       </Section>
 
-      <MarketingServicesSection />
       <ServicesHubGrid />
       <FinalCTA />
     </>

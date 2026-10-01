@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { MARKETING_SERVICES } from "@/lib/marketing-services";
 import { use } from "react";
 import type { Metadata } from "next";
@@ -65,7 +66,14 @@ export default function BlogPostPage({
   if (!post) notFound();
 
   const all = use(getAllPosts(locale));
-  const related = all.filter((p) => p.slug !== slug).sort((a, b) => Number(b.tags?.some(tag => post.tags?.includes(tag))) - Number(a.tags?.some(tag => post.tags?.includes(tag)))).slice(0, 3);
+  const related = all
+    .filter((p) => p.slug !== slug)
+    .sort(
+      (a, b) =>
+        Number(b.tags?.some((tag) => post.tags?.includes(tag))) -
+        Number(a.tags?.some((tag) => post.tags?.includes(tag)))
+    )
+    .slice(0, 3);
 
   const t = useTranslations("Blog");
   const url = `${SITE_URL}${locale === "tr" ? "" : `/${locale}`}/blog/${slug}`;
@@ -90,26 +98,34 @@ export default function BlogPostPage({
           <Reveal className="mx-auto max-w-3xl">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-mute-400 transition hover:text-accent"
+              className="text-mute-400 hover:text-accent inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase transition"
             >
               ← {t("back")}
             </Link>
 
-            <div className="mt-8 flex flex-wrap items-center gap-2 text-xs uppercase tracking-wider text-mute-400">
+            <div className="text-mute-400 mt-8 flex flex-wrap items-center gap-2 text-xs tracking-wider uppercase">
               <span>{formatDate(post.date, locale)}</span>
               <span>·</span>
               <span>{post.readingMinutes} dk okuma</span>
-              {post.tags?.filter((tag) => !MARKETING_SERVICES.some((service) => service.slug === tag)).map((tag) => (
-                <span key={tag} className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-accent">
-                  {tag}
-                </span>
-              ))}
+              {post.tags
+                ?.filter(
+                  (tag) =>
+                    !MARKETING_SERVICES.some((service) => service.slug === tag)
+                )
+                .map((tag) => (
+                  <span
+                    key={tag}
+                    className="bg-accent/10 text-accent rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-widest uppercase"
+                  >
+                    {tag}
+                  </span>
+                ))}
             </div>
 
-            <h1 className="mt-5 font-display text-4xl leading-[1.05] tracking-tight text-ink md:text-5xl lg:text-6xl">
+            <h1 className="font-display text-ink mt-5 text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
               {post.title}
             </h1>
-            <p className="mt-5 text-xl leading-relaxed text-mute-500">
+            <p className="text-mute-500 mt-5 text-xl leading-relaxed">
               {post.description}
             </p>
           </Reveal>
@@ -120,14 +136,13 @@ export default function BlogPostPage({
       {post.cover && (
         <div className="mt-12 md:mt-16">
           <Container>
-            <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+            <div className="relative mx-auto aspect-video max-w-4xl overflow-hidden rounded-2xl">
+              <Image
                 src={post.cover}
                 alt={post.title}
                 className="w-full object-cover"
-                loading="eager"
-                decoding="async"
+                fill
+                sizes="(max-width: 1023px) 100vw, 896px"
               />
             </div>
           </Container>
@@ -157,36 +172,38 @@ export default function BlogPostPage({
 
       {/* ── İlgili yazılar ───────────────────────────────────────────── */}
       {related.length > 0 && (
-        <section className="border-t border-mute-100 py-20 md:py-28">
+        <section className="border-mute-100 border-t py-20 md:py-28">
           <Container>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <p className="text-accent text-xs font-semibold tracking-[0.2em] uppercase">
               Devamını oku
             </p>
-            <h2 className="mt-4 font-display text-3xl tracking-tight text-ink">
+            <h2 className="font-display text-ink mt-4 text-3xl tracking-tight">
               {t("relatedTitle")}
             </h2>
             <ul className="mt-12 grid gap-8 md:grid-cols-3">
               {related.map((p) => (
                 <li key={p.slug}>
-                  <Link href={`/blog/${p.slug}` as never} className="group block">
+                  <Link
+                    href={`/blog/${p.slug}` as never}
+                    className="group block"
+                  >
                     {p.cover ? (
-                      <div className="aspect-[16/9] overflow-hidden rounded-xl bg-mute-100">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                      <div className="bg-mute-100 relative aspect-[16/9] overflow-hidden rounded-xl">
+                        <Image
                           src={p.cover}
                           alt={p.title}
-                          loading="lazy"
-                          decoding="async"
+                          fill
+                          sizes="(max-width: 767px) 100vw, 33vw"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
                     ) : (
-                      <div className="aspect-[16/9] rounded-xl bg-ink" />
+                      <div className="bg-ink aspect-[16/9] rounded-xl" />
                     )}
-                    <p className="mt-4 text-xs uppercase tracking-wider text-mute-400">
+                    <p className="text-mute-400 mt-4 text-xs tracking-wider uppercase">
                       {formatDate(p.date, locale)} · {p.readingMinutes} dk
                     </p>
-                    <h3 className="mt-2 font-display text-lg leading-tight tracking-tight text-ink transition group-hover:text-accent">
+                    <h3 className="font-display text-ink group-hover:text-accent mt-2 text-lg leading-tight tracking-tight transition">
                       {p.title}
                     </h3>
                   </Link>
@@ -203,15 +220,20 @@ export default function BlogPostPage({
 }
 
 function formatDate(date: string, locale: string): string {
-  return new Date(date).toLocaleDateString(locale === "tr" ? "tr-TR" : "en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  return new Date(date).toLocaleDateString(
+    locale === "tr" ? "tr-TR" : "en-US",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
 }
 
 function extractFAQ(content: string): { q: string; a: string }[] {
-  const sectionMatch = content.match(/##\s+S[ıi]kça Sorulan Sorular\s*([\s\S]*?)(?:\n##|$)/);
+  const sectionMatch = content.match(
+    /##\s+S[ıi]kça Sorulan Sorular\s*([\s\S]*?)(?:\n##|$)/
+  );
   if (!sectionMatch) return [];
 
   const section = sectionMatch[1];

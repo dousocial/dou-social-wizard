@@ -1,3 +1,7 @@
+import {
+  normalizeAuditPhone,
+  saveQuickAuditLead,
+} from "@/lib/quick-audit-lead";
 import { readJsonBody } from "@/lib/request-json";
 import { NextResponse } from "next/server";
 import { runQuickAudit } from "@/lib/quick-audit";
@@ -27,12 +31,31 @@ export async function POST(request: Request) {
     );
   if (Number(request.headers.get("content-length")) > 4096)
     return NextResponse.json({ error: "İstek çok büyük." }, { status: 413 });
-  let input: { website?: string; instagram?: string };
+  let input: {
+    website?: string;
+    instagram?: string;
+    phone: string;
+    consent: boolean;
+  };
+  let phone: string;
   try {
     const body = await readJsonBody(request, 4096);
     if (!body || typeof body !== "object" || Array.isArray(body))
       throw new Error();
     input = body as typeof input;
+    try {
+      phone = normalizeAuditPhone(input.phone);
+    } catch {
+      return NextResponse.json(
+        { error: "Geçerli bir telefon numarası girin." },
+        { status: 400 }
+      );
+    }
+    if (input.consent !== true)
+      return NextResponse.json(
+        { error: "Başvurunuzu kaydetmek için veri kullanımı onayı gerekiyor." },
+        { status: 400 }
+      );
     if (
       !input ||
       typeof input !== "object" ||
@@ -55,6 +78,17 @@ export async function POST(request: Request) {
   }
   try {
     const report = await runQuickAudit(input);
+    try {
+      await saveQuickAuditLead(phone, report);
+    } catch {
+      return NextResponse.json(
+        {
+          error:
+            "Analiz başvurunuz kaydedilemedi. Lütfen biraz sonra tekrar deneyin.",
+        },
+        { status: 503 }
+      );
+    }
     return NextResponse.json(report, {
       headers: { "Cache-Control": "no-store" },
     });
