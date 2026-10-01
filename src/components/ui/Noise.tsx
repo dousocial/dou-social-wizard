@@ -16,7 +16,7 @@ interface NoiseProps {
  * Uses `useId()` to ensure unique filter IDs when multiple instances
  * are rendered on the same page — avoids SVG filter ID collisions.
  *
- * Performance: static SVG rendered once, no JS animation.
+ * Desktop only: full-surface SVG filters are expensive on mobile GPUs.
  */
 export function Noise({ opacity = 0.04, className }: NoiseProps) {
   const id = useId();
@@ -26,7 +26,7 @@ export function Noise({ opacity = 0.04, className }: NoiseProps) {
   return (
     <svg
       className={cn(
-        "pointer-events-none absolute inset-0 h-full w-full",
+        "pointer-events-none absolute inset-0 hidden h-full w-full md:block",
         className
       )}
       xmlns="http://www.w3.org/2000/svg"
@@ -48,11 +48,7 @@ export function Noise({ opacity = 0.04, className }: NoiseProps) {
             stitchTiles="stitch"
             result="noise"
           />
-          <feColorMatrix
-            in="noise"
-            type="saturate"
-            values="0"
-          />
+          <feColorMatrix in="noise" type="saturate" values="0" />
         </filter>
       </defs>
       <rect

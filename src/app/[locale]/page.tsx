@@ -102,35 +102,41 @@ export default function Home({ params }: PageProps<"/[locale]">) {
     <>
       <HomePageSchema locale={locale === "en" ? "en" : "tr"} />
       <Hero />
-      <MarqueeStrip />
-      <ClientLogos />
-      <Services />
-      <HowWeWork />
-      <Team />
+      <div className="home-sections">
+        <MarqueeStrip />
+        <ClientLogos />
+        <Services />
+        <HowWeWork />
+        <Team />
 
-      {/* <ClientsGrid /> */}
-      <Section spacing="md" className="border-t border-mute-100">
-        <Container>
-          <Reveal className="flex flex-col items-center py-24 text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-              Çok Yakında
-            </span>
-            <h2
-              className="mt-8 font-display font-bold tracking-tight text-ink"
-              style={{ fontSize: "var(--text-5xl)" }}
-            >
-              Projelerimiz hazırlanıyor.
-            </h2>
-            <p className="mt-5 max-w-md text-mute-500" style={{ fontSize: "var(--text-lg)" }}>
-              Gerçekleştirdiğimiz çalışmaları en kısa sürede burada paylaşıyor olacağız.
-            </p>
-          </Reveal>
-        </Container>
-      </Section>
+        {/* <ClientsGrid /> */}
+        <Section spacing="md" className="border-mute-100 border-t">
+          <Container>
+            <Reveal className="flex flex-col items-center py-24 text-center">
+              <span className="border-accent/30 bg-accent/5 text-accent inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold tracking-widest uppercase">
+                <span className="bg-accent h-1.5 w-1.5 animate-pulse rounded-full" />
+                Çok Yakında
+              </span>
+              <h2
+                className="font-display text-ink mt-8 font-bold tracking-tight"
+                style={{ fontSize: "var(--text-5xl)" }}
+              >
+                Projelerimiz hazırlanıyor.
+              </h2>
+              <p
+                className="text-mute-500 mt-5 max-w-md"
+                style={{ fontSize: "var(--text-lg)" }}
+              >
+                Gerçekleştirdiğimiz çalışmaları en kısa sürede burada paylaşıyor
+                olacağız.
+              </p>
+            </Reveal>
+          </Container>
+        </Section>
 
-      <TestimonialsServer />
-      <FinalCTA />
+        <TestimonialsServer />
+        <FinalCTA />
+      </div>
     </>
   );
 }
