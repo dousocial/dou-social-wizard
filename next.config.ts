@@ -18,6 +18,8 @@ const nextConfig: NextConfig = {
     root: path.resolve(import.meta.dirname),
   },
   images: {
+    // Serve assets directly while the hosted image optimizer rejects requests.
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
     remotePatterns: [
