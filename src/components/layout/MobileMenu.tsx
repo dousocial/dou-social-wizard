@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/brand/Logo";
 import { LangSwitcher } from "./LangSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
@@ -48,22 +48,19 @@ const navItemVariants = {
   show: { opacity: 1, x: 0, transition: { duration: 0.35, ease: EASE } },
 };
 
+const subscribeToClient = () => () => {};
+const clientSnapshot = () => true;
+const serverSnapshot = () => false;
+
 export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    subscribeToClient,
+    clientSnapshot,
+    serverSnapshot
+  );
   const t = useTranslations("Nav");
-  const pathname = usePathname();
   const reduceMotion = useReducedMotion();
-
-  // Portal için client-side mount kontrolü
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Rota değişince kapat (Link navigasyonu tamamlanınca)
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   // Lenis scroll kilidi — body.overflow çalışmaz, lenis.stop() gerekir
   useEffect(() => {

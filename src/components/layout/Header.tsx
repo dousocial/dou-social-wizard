@@ -168,7 +168,7 @@ export function Header({
               </ButtonLink>
             </motion.div>
 
-            <MobileMenu forceLight={forceWhite} />
+            <MobileMenu key={pathname} forceLight={forceWhite} />
           </div>
         </div>
       </Container>
