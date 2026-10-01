@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import Lenis from "lenis";
+import type Lenis from "lenis";
 
 let _lenis: Lenis | null = null;
 
@@ -12,13 +12,20 @@ export function getLenis(): Lenis | null {
 
 export function scrollToTop(): void {
   if (_lenis) {
-    _lenis.scrollTo(0, { duration: 0.6, easing: (t: number) => 1 - Math.pow(1 - t, 3) });
+    _lenis.scrollTo(0, {
+      duration: 0.6,
+      easing: (t: number) => 1 - Math.pow(1 - t, 3),
+    });
   } else {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
 
-export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
+export function SmoothScrollProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
 
   useEffect(() => {
@@ -49,26 +56,30 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 
     history.scrollRestoration = "manual";
 
-    const lenis = new Lenis({
-      duration: 0.7,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: !prefersReducedMotion,
-      touchMultiplier: 1.2,
-    });
-
-    _lenis = lenis;
-
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
+    let cancelled = false;
+    let instance: Lenis | null = null;
+    let rafId = 0;
+    void import("lenis").then(({ default: Lenis }) => {
+      if (cancelled) return;
+      const lenis = new Lenis({
+        duration: 0.7,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        touchMultiplier: 1.2,
+      });
+      instance = lenis;
+      _lenis = lenis;
+      function raf(time: number) {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      }
       rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
+    });
     return () => {
+      cancelled = true;
       cancelAnimationFrame(rafId);
-      _lenis = null;
-      lenis.destroy();
+      if (_lenis === instance) _lenis = null;
+      instance?.destroy();
     };
   }, []);
 

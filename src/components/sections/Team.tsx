@@ -11,37 +11,37 @@ const TEAM = [
   {
     name: "Emin Kahraman",
     role: "CEO",
-    photo: "/team/emin.jpg",
+    photo: "/team/emin.webp",
     quote: "Burada sadece hedefleri değil, başarıyı paylaşmanın tadını çıkarıyoruz. DOU’da vizyonumuzu gerçeğe dönüştürürken her gün yeni bir şeyler öğrenmek paha biçilemez.",
   },
   {
     name: "Doğukan Şahin",
     role: "Kurucu - Proje Yönetici",
-    photo: "/team/dogukan.png",
+    photo: "/team/dogukan.webp",
     quote: "DOU’nun temellerini atarken hayalim sadece bir iş değil, bir aile kurmaktı. Her projede bu heyecanı ekibimle paylaşmak en büyük motivasyonum!",
   },
   {
     name: "Miray Dede",
     role: "Koordinatör",
-    photo: "/team/miray.png" as string | null,
+    photo: "/team/miray.webp" as string | null,
     quote: "DOU’da koordinasyon sadece süreç yönetimi değil, aynı zamanda yaratıcılığın doğru zamanda doğru noktaya ulaşmasını sağlamaktır. Markalarımızın dijitalde güçlü bir iz bırakmasına katkı sunmaktan gurur duyuyorum.",
   },
   {
     name: "Fuat Koraç",
     role: "Videographer",
-    photo: "/team/fuat.png",
+    photo: "/team/fuat.webp",
     quote: "Hayatı bir kadrajın içinden, en estetik haliyle yakalamayı seviyorum. Hızlı tüketilen dijital dünyada kaliteden ödün vermeden, dinamik çekimler ve ritmik kurgularla markaların ve fikirlerin görsel kimliğini tasarlıyorum.",
   },
   {
     name: "Nur Tekin",
     role: "Çekim Asistanı",
-    photo: "/team/nur.png",
+    photo: "/team/nur.webp",
     quote: "En iyi kareler bazen saniyeler içinde ortaya çıkar. O anları yakalarken DOU’nun yaratıcı projelerine katkı sağlamak benim için büyük bir mutluluk.",
   },
   {
     name: "Ali Efekan Gökcen",
     role: "Yazılım Uzmanı",
-    photo: "/team/efe.png",
+    photo: "/team/efe.webp",
     quote: "Kod yazmak sadece bir iş değil, ortak vizyonumuzu dijital dünyada hayata geçirme sanatı. DOU ailesinin bir parçası olarak her gün yeni bir teknolojik çözüme imza atmak paha biçilemez.",
   },
 ];

@@ -37,7 +37,7 @@ export default function ServicesHubPage({
               {t("eyebrow")}
             </p>
             <h1
-              className="mt-6 font-display font-bold leading-[1.05] tracking-tight text-ink"
+              className="mt-6 break-words font-display font-bold leading-[1.05] tracking-tight text-ink"
               style={{ fontSize: "var(--text-6xl)" }}
             >
               {t("heroTitle")}

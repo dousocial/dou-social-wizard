@@ -1,0 +1,283 @@
+{
+  "before": 17961741,
+  "after": 1985304,
+  "reduction": 0.8894704026742174,
+  "records": [
+    {
+      "source": "public/services/denizli-etkinlik-cekimi.png",
+      "output": "public/services/denizli-etkinlik-cekimi.webp",
+      "before": 1618779,
+      "after": 30728
+    },
+    {
+      "source": "public/services/denizli-organizasyon-cekimi.png",
+      "output": "public/services/denizli-organizasyon-cekimi.webp",
+      "before": 1965412,
+      "after": 63170
+    },
+    {
+      "source": "public/services/facebook-reklam-yonetimi.png",
+      "output": "public/services/facebook-reklam-yonetimi.webp",
+      "before": 1974828,
+      "after": 46834
+    },
+    {
+      "source": "public/services/google-ads-yonetimi.png",
+      "output": "public/services/google-ads-yonetimi.webp",
+      "before": 2029854,
+      "after": 52574
+    },
+    {
+      "source": "public/services/instagram-reklam-yonetimi.png",
+      "output": "public/services/instagram-reklam-yonetimi.webp",
+      "before": 2273241,
+      "after": 59784
+    },
+    {
+      "source": "public/services/meta-ads-ajansi.png",
+      "output": "public/services/meta-ads-ajansi.webp",
+      "before": 2012893,
+      "after": 66180
+    },
+    {
+      "source": "public/services/reklam-yonetimi.png",
+      "output": "public/services/reklam-yonetimi.webp",
+      "before": 2268947,
+      "after": 67076
+    },
+    {
+      "source": "public/blog/mermer-dijital-pazarlama-trendleri-2026/ar-sanal-showroom.jpg",
+      "output": "public/blog/mermer-dijital-pazarlama-trendleri-2026/ar-sanal-showroom.webp",
+      "before": 114491,
+      "after": 47378
+    },
+    {
+      "source": "public/blog/mermer-dijital-pazarlama-trendleri-2026/kapak.jpg",
+      "output": "public/blog/mermer-dijital-pazarlama-trendleri-2026/kapak.webp",
+      "before": 127380,
+      "after": 63096
+    },
+    {
+      "source": "public/blog/mermer-dijital-pazarlama-trendleri-2026/mat-mermer-yuzey.jpg",
+      "output": "public/blog/mermer-dijital-pazarlama-trendleri-2026/mat-mermer-yuzey.webp",
+      "before": 107022,
+      "after": 46572
+    },
+    {
+      "source": "public/blog/mermer-dijital-pazarlama-trendleri-2026/ocak-hikayesi.jpg",
+      "output": "public/blog/mermer-dijital-pazarlama-trendleri-2026/ocak-hikayesi.webp",
+      "before": 170837,
+      "after": 100460
+    },
+    {
+      "source": "public/blog/mermer-dijital-pazarlama-trendleri-2026/yapay-zeka-gorsellestirme.jpg",
+      "output": "public/blog/mermer-dijital-pazarlama-trendleri-2026/yapay-zeka-gorsellestirme.webp",
+      "before": 90226,
+      "after": 37784
+    },
+    {
+      "source": "public/blog/mermer-sektoru-dijital-pazarlama/kapak.jpg",
+      "output": "public/blog/mermer-sektoru-dijital-pazarlama/kapak.webp",
+      "before": 123827,
+      "after": 62464
+    },
+    {
+      "source": "public/blog/mermer-sektoru-dijital-pazarlama/mermer-turleri.jpg",
+      "output": "public/blog/mermer-sektoru-dijital-pazarlama/mermer-turleri.webp",
+      "before": 105640,
+      "after": 39774
+    },
+    {
+      "source": "public/blog/mermer-sektoru-dijital-pazarlama/mimar-numune.jpg",
+      "output": "public/blog/mermer-sektoru-dijital-pazarlama/mimar-numune.webp",
+      "before": 134238,
+      "after": 61844
+    },
+    {
+      "source": "public/blog/mermer-sektoru-dijital-pazarlama/ocak.jpg",
+      "output": "public/blog/mermer-sektoru-dijital-pazarlama/ocak.webp",
+      "before": 182968,
+      "after": 108870
+    },
+    {
+      "source": "public/blog/mermer-sektoru-dijital-pazarlama/showroom.jpg",
+      "output": "public/blog/mermer-sektoru-dijital-pazarlama/showroom.webp",
+      "before": 140327,
+      "after": 66324
+    },
+    {
+      "source": "public/blog/spor-salonu-dijital-pazarlama/acik-hava-antrenman.jpg",
+      "output": "public/blog/spor-salonu-dijital-pazarlama/acik-hava-antrenman.webp",
+      "before": 176597,
+      "after": 106226
+    },
+    {
+      "source": "public/blog/spor-salonu-dijital-pazarlama/antrenor-rehberlik.jpg",
+      "output": "public/blog/spor-salonu-dijital-pazarlama/antrenor-rehberlik.webp",
+      "before": 156040,
+      "after": 83652
+    },
+    {
+      "source": "public/blog/spor-salonu-dijital-pazarlama/icerik-uretimi.jpg",
+      "output": "public/blog/spor-salonu-dijital-pazarlama/icerik-uretimi.webp",
+      "before": 117073,
+      "after": 51948
+    },
+    {
+      "source": "public/blog/spor-salonu-dijital-pazarlama/kapak.jpg",
+      "output": "public/blog/spor-salonu-dijital-pazarlama/kapak.webp",
+      "before": 130057,
+      "after": 65722
+    },
+    {
+      "source": "public/blog/spor-salonu-dijital-pazarlama-trendleri-2026/hibrit-model.jpg",
+      "output": "public/blog/spor-salonu-dijital-pazarlama-trendleri-2026/hibrit-model.webp",
+      "before": 127955,
+      "after": 61316
+    },
+    {
+      "source": "public/blog/spor-salonu-dijital-pazarlama-trendleri-2026/kapak.jpg",
+      "output": "public/blog/spor-salonu-dijital-pazarlama-trendleri-2026/kapak.webp",
+      "before": 94795,
+      "after": 45206
+    },
+    {
+      "source": "public/blog/spor-salonu-dijital-pazarlama-trendleri-2026/kisisel-plan-uygulama.jpg",
+      "output": "public/blog/spor-salonu-dijital-pazarlama-trendleri-2026/kisisel-plan-uygulama.webp",
+      "before": 156040,
+      "after": 83652
+    },
+    {
+      "source": "public/blog/spor-salonu-dijital-pazarlama-trendleri-2026/topluluk-kutlama.jpg",
+      "output": "public/blog/spor-salonu-dijital-pazarlama-trendleri-2026/topluluk-kutlama.webp",
+      "before": 135410,
+      "after": 67068
+    },
+    {
+      "source": "public/team/dogukan.png",
+      "output": "public/team/dogukan.webp",
+      "before": 54012,
+      "after": 21734
+    },
+    {
+      "source": "public/team/efe.png",
+      "output": "public/team/efe.webp",
+      "before": 66067,
+      "after": 26102
+    },
+    {
+      "source": "public/team/emin.jpg",
+      "output": "public/team/emin.webp",
+      "before": 55006,
+      "after": 22936
+    },
+    {
+      "source": "public/team/fuat.png",
+      "output": "public/team/fuat.webp",
+      "before": 74435,
+      "after": 32780
+    },
+    {
+      "source": "public/team/miray.png",
+      "output": "public/team/miray.webp",
+      "before": 221174,
+      "after": 37708
+    },
+    {
+      "source": "public/team/nur.png",
+      "output": "public/team/nur.webp",
+      "before": 72132,
+      "after": 30714
+    },
+    {
+      "source": "public/logos/b2mimarlik.png",
+      "output": "public/logos/b2mimarlik.webp",
+      "before": 8262,
+      "after": 2124
+    },
+    {
+      "source": "public/logos/ceylin.png",
+      "output": "public/logos/ceylin.webp",
+      "before": 21355,
+      "after": 7538
+    },
+    {
+      "source": "public/logos/en20.png",
+      "output": "public/logos/en20.webp",
+      "before": 96872,
+      "after": 9884
+    },
+    {
+      "source": "public/logos/fitlife.png",
+      "output": "public/logos/fitlife.webp",
+      "before": 69639,
+      "after": 15612
+    },
+    {
+      "source": "public/logos/han.png",
+      "output": "public/logos/han.webp",
+      "before": 13314,
+      "after": 3522
+    },
+    {
+      "source": "public/logos/kayra.png",
+      "output": "public/logos/kayra.webp",
+      "before": 24827,
+      "after": 6326
+    },
+    {
+      "source": "public/logos/pamair.png",
+      "output": "public/logos/pamair.webp",
+      "before": 135871,
+      "after": 22794
+    },
+    {
+      "source": "public/logos/rb.png",
+      "output": "public/logos/rb.webp",
+      "before": 9145,
+      "after": 3638
+    },
+    {
+      "source": "public/logos/vintora.png",
+      "output": "public/logos/vintora.webp",
+      "before": 17552,
+      "after": 15530
+    },
+    {
+      "source": "public/logos/yapigranit.png",
+      "output": "public/logos/yapigranit.webp",
+      "before": 107509,
+      "after": 9534
+    },
+    {
+      "source": "public/videos/hero-bg-poster.jpg",
+      "output": "public/videos/hero-bg-poster.webp",
+      "before": 85762,
+      "after": 10230
+    },
+    {
+      "source": "public/examples/google-guide.png",
+      "output": "public/examples/google-guide.webp",
+      "before": 54349,
+      "after": 18654
+    },
+    {
+      "source": "public/examples/instagram-guide.png",
+      "output": "public/examples/instagram-guide.webp",
+      "before": 86268,
+      "after": 40802
+    },
+    {
+      "source": "public/examples/linkedin-guide.png",
+      "output": "public/examples/linkedin-guide.webp",
+      "before": 83077,
+      "after": 38276
+    },
+    {
+      "source": "public/examples/youtube-guide.png",
+      "output": "public/examples/youtube-guide.webp",
+      "before": 70236,
+      "after": 23164
+    }
+  ]
+}

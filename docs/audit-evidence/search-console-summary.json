@@ -1,0 +1,55 @@
+{
+  "source": "Info hesabıyla tarayıcı Search Console görünümü",
+  "date": "2026-10-01",
+  "property": "sc-domain:dousocial.com",
+  "current": {
+    "start": "2026-09-01",
+    "end": "2026-09-28",
+    "clicks": 30,
+    "impressionsApprox": 2100,
+    "ctr": 1.4,
+    "position": 10.9
+  },
+  "previous": {
+    "start": "2026-08-04",
+    "end": "2026-08-31",
+    "clicks": 35,
+    "impressionsApprox": 1780,
+    "ctr": 2,
+    "position": 13
+  },
+  "threeMonths": {
+    "start": "2026-06-29",
+    "end": "2026-09-28",
+    "clicks": 98,
+    "impressionsApprox": 4800,
+    "ctr": 2,
+    "position": 11.6
+  },
+  "brandQuery": {
+    "query": "dou social",
+    "currentClicks": 1,
+    "previousClicks": 7
+  },
+  "indexing": {
+    "date": "2026-09-21",
+    "indexed": 102,
+    "excluded": 29,
+    "reasons": {
+      "notFound": 16,
+      "redirected": 3,
+      "alternateCanonical": 2,
+      "noindex": 1,
+      "discovered": 5,
+      "crawled": 2
+    }
+  },
+  "coreWebVitals": "Son 90 günde mobil ve masaüstü için yeterli kullanım verisi yok",
+  "sitemap": {
+    "url": "https://www.dousocial.com/sitemap.xml",
+    "lastReadBefore": "2026-09-28",
+    "previousUrls": 60,
+    "resubmitted": "2026-10-01",
+    "submissionConfirmed": true
+  }
+}

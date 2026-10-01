@@ -28,7 +28,11 @@ const SCROLL_THRESHOLD = 24;
 // Koyu hero arka planı olan sayfalar — burada header şeffaf + beyaz metin doğru görünür
 const DARK_HERO_PAGES = new Set(["/"]);
 
-export function Header({ initialDarkTheme = false }: { initialDarkTheme?: boolean }) {
+export function Header({
+  initialDarkTheme = false,
+}: {
+  initialDarkTheme?: boolean;
+}) {
   const t = useTranslations("Nav");
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -48,22 +52,21 @@ export function Header({ initialDarkTheme = false }: { initialDarkTheme?: boolea
 
   // Sadece ana sayfada (koyu video hero) şeffaf+beyaz header kullan
   const hasDarkHero = DARK_HERO_PAGES.has(pathname);
-  const forceWhite  = !scrolled && hasDarkHero && isDarkTheme;
+  const forceWhite = !scrolled && hasDarkHero && isDarkTheme;
 
   return (
     <header
       className={cn(
         "sticky top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-b border-mute-100/80 bg-paper/90 shadow-sm backdrop-blur-xl backdrop-saturate-150"
+          ? "border-mute-100/80 bg-paper/90 border-b shadow-sm backdrop-blur-xl backdrop-saturate-150"
           : hasDarkHero
             ? "border-b border-transparent bg-transparent"
-            : "border-b border-mute-100/60 bg-paper/80 backdrop-blur-md"
+            : "border-mute-100/60 bg-paper/80 border-b backdrop-blur-md"
       )}
     >
       <Container size="wide">
         <div className="flex h-[70px] items-center justify-between gap-6 md:h-20">
-
           {/* Logo */}
           <Link
             href="/"
@@ -83,7 +86,7 @@ export function Header({ initialDarkTheme = false }: { initialDarkTheme?: boolea
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 md:flex" role="navigation">
+          <nav className="hidden items-center gap-1 lg:flex" role="navigation">
             {NAV_ITEMS.map((item) => {
               const active = isActive(item.href);
               return (
@@ -99,8 +102,12 @@ export function Header({ initialDarkTheme = false }: { initialDarkTheme?: boolea
                   className={cn(
                     "relative px-2 py-2 text-sm font-medium transition-colors duration-200",
                     forceWhite
-                      ? active ? "text-white" : "text-white/65 hover:text-white"
-                      : active ? "text-ink"  : "text-mute-500 hover:text-ink"
+                      ? active
+                        ? "text-white"
+                        : "text-white/65 hover:text-white"
+                      : active
+                        ? "text-ink"
+                        : "text-mute-500 hover:text-ink"
                   )}
                 >
                   {t(item.key)}
@@ -111,7 +118,7 @@ export function Header({ initialDarkTheme = false }: { initialDarkTheme?: boolea
                       <motion.span
                         layoutId="nav-active"
                         className={cn(
-                          "absolute bottom-0.5 left-2 right-2 h-px",
+                          "absolute right-2 bottom-0.5 left-2 h-px",
                           forceWhite ? "bg-white" : "bg-ink"
                         )}
                         initial={{ opacity: 0, scaleX: 0 }}
@@ -140,24 +147,28 @@ export function Header({ initialDarkTheme = false }: { initialDarkTheme?: boolea
 
           {/* Sağ taraf aksiyonları */}
           <div className="flex items-center gap-3">
-            <LangSwitcher
-              className="hidden sm:flex"
+            <LangSwitcher className="hidden sm:flex" forceLight={forceWhite} />
+            <ThemeToggle
               forceLight={forceWhite}
+              onThemeChange={setIsDarkTheme}
             />
-            <ThemeToggle forceLight={forceWhite} onThemeChange={setIsDarkTheme} />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="hidden md:block"
+              transition={{
+                duration: 0.4,
+                delay: 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="hidden lg:block"
             >
               <ButtonLink href="/dijital-checkup" size="sm">
                 {t("cta")}
               </ButtonLink>
             </motion.div>
 
-            <MobileMenu forceLight={forceWhite} />
+            <MobileMenu key={pathname} forceLight={forceWhite} />
           </div>
         </div>
       </Container>

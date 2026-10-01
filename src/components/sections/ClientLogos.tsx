@@ -2,74 +2,59 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { Reveal, RevealItem } from "@/components/ui/Reveal";
-
-// ─── Logo eklemek için ────────────────────────────────────────────────────────
-// 1. Logoyu public/logos/ klasörüne koy (örn: public/logos/yapigranit.png)
-// 2. İlgili müşterinin logo alanını güncelle: logo: "/logos/yapigranit.png"
 
 const CLIENTS = [
-  { id: 1, name: "YAPIGRANİT MERMERCİLİK", initials: "YG", logo: "/logos/yapigranit.png" },
-  { id: 2,  name: "FITLIFE KITCHEN",        initials: "E2", logo:"/logos/fitlife.png" },
-  { id: 3,  name: "EN20 SPOR SALONU",         initials: "FL", logo:"/logos/en20.png" },
-  { id: 4,  name: "KAYRA DESIGNER",          initials: "KD", logo:"/logos/kayra.png"  },
-  { id: 5,  name: "B2 MİMARLIK",            initials: "B2", logo:"/logos/b2mimarlik.png"  },
-  { id: 6,  name: "VİNTORA ETİKET",         initials: "VE", logo:"/logos/vintora.png"  },
-  { id: 7,  name: "REAL BROKER",            initials: "RB", logo:"/logos/rb.png"  },
-  { id: 8,  name: "DİYETİSYEN CEYLİN YASTIKÇI", initials: "CY", logo:"/logos/ceylin.png"  },
-  { id: 9,  name: "HANGARAGE",              initials: "HG", logo:"/logos/han.png"  },
-  { id: 10, name: "PAMAİR HAVACILIK",       initials: "PA", logo:"/logos/pamair.png"  },
+  { name: "Yapıgranit Mermercilik", logo: "yapigranit", dark: true },
+  { name: "Fitlife Kitchen", logo: "fitlife", dark: false },
+  { name: "EN20 Spor Salonu", logo: "en20", dark: true },
+  { name: "Kayra Designer", logo: "kayra", dark: false },
+  { name: "B2 Mimarlık", logo: "b2mimarlik", dark: false },
+  { name: "Vintora Etiket", logo: "vintora", dark: false },
+  { name: "Real Broker", logo: "rb", dark: false },
+  { name: "Diyetisyen Ceylin Yastıkçı", logo: "ceylin", dark: false },
+  { name: "Hangarage", logo: "han", dark: false },
+  { name: "Pamair Havacılık", logo: "pamair", dark: false },
 ];
 
 export async function ClientLogos() {
   const t = await getTranslations("ClientLogos");
-
   return (
-    <Section spacing="md" className="border-t border-mute-100">
+    <Section spacing="md" className="border-mute-100 border-t">
       <Container>
-        <Reveal className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+        <div className="text-center">
+          <p className="text-accent text-xs font-semibold tracking-[0.2em] uppercase">
             {t("eyebrow")}
           </p>
           <h2
-            className="mt-3 font-display leading-tight tracking-tight text-ink"
+            className="font-display text-ink mt-3 leading-tight tracking-tight"
             style={{ fontSize: "var(--text-3xl)" }}
           >
             {t("title")}
           </h2>
-        </Reveal>
-
-        <Reveal stagger className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5 md:gap-4">
+        </div>
+        <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5 md:gap-4">
           {CLIENTS.map((client) => (
-            <RevealItem key={client.id}>
-              <div className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-mute-200 transition-all duration-300 hover:bg-accent hover:shadow-md">
-                {client.logo ? (
-                  <Image
-                    src={client.logo}
-                    alt={client.name}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
-                    className="object-contain p-3 opacity-80 transition-all duration-300 md:grayscale md:opacity-65 md:group-hover:grayscale-0 md:group-hover:brightness-0 md:group-hover:invert md:group-hover:opacity-100 md:group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display text-2xl font-bold text-mute-400 transition-colors duration-300 group-hover:text-white/80">
-                      {client.initials}
-                    </span>
-                  </div>
-                )}
-                {/* Şirket adı — hover'da aşağıdan kayarak gelir */}
-                <div className="absolute inset-x-0 bottom-0 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0">
-                  <div className="bg-black/40 px-3 py-2 backdrop-blur-sm">
-                    <p className="truncate text-center text-[9px] font-semibold uppercase tracking-[0.15em] text-white">
-                      {client.name}
-                    </p>
-                  </div>
-                </div>
+            <li
+              key={client.logo}
+              className="border-mute-200 bg-paper overflow-hidden rounded-2xl border"
+            >
+              <div
+                className={`relative aspect-[4/3] ${client.dark ? "bg-[#253238]" : "bg-[#f5f2ed]"}`}
+              >
+                <Image
+                  src={`/logos/${client.logo}.webp`}
+                  alt={client.name}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
+                  className="object-contain p-5 md:p-7"
+                />
               </div>
-            </RevealItem>
+              <p className="text-ink flex min-h-14 items-center justify-center px-3 py-3 text-center text-xs leading-relaxed font-medium">
+                {client.name}
+              </p>
+            </li>
           ))}
-        </Reveal>
+        </ul>
       </Container>
     </Section>
   );

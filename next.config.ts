@@ -73,6 +73,15 @@ const nextConfig: NextConfig = {
           { key: "X-DNS-Prefetch-Control", value: "on" },
         ],
       },
+      ...["/services/(.*)", "/blog/(.*)", "/examples/(.*)"].map((source) => ({
+        source,
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=604800, stale-while-revalidate=86400",
+          },
+        ],
+      })),
       {
         source: "/brand/(.*)",
         headers: [
@@ -102,7 +111,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/videos/(.*)",
-        headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=604800, stale-while-revalidate=86400",
+          },
+        ],
       },
     ];
   },

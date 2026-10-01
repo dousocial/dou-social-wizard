@@ -1,0 +1,1668 @@
+{
+  "date": "2026-10-01",
+  "scope": "Kod ve belirli canlı kontroller. Tam güvenlik/WCAG/DB denetimi değildir.",
+  "items": [
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "HTTPS aktif",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "SSL sertifikası geçerli",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "www / non-www tek versiyona yönlendirilmiş",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Non-www, www adresine yönleniyor; 307 yerine kalıcı yönlendirme Vercel domain ayarında ayrıca tamamlanmalı."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "HTTP → HTTPS redirect var",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "404 sayfası mevcut",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "500 hata sayfası mevcut",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "Favicon mevcut",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "robots.txt mevcut",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "sitemap.xml mevcut",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "Canonical URL'ler doğru",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "<html lang=\"tr\"> doğru",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "UTF-8 karakter desteği mevcut",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "URL yapısı temiz",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "Gereksiz query parametreleri kontrol altında",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "Production environment düzgün ayrılmış",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "Environment secret'ları frontend'e sızmıyor",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "Git repository düzenli",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": ".env dosyaları Git'e girmiyor",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "1. 🏗️ Temel Teknik Altyapı",
+      "item": "Dependency'ler güncel ve güvenli",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Desktop düzgün",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Laptop düzgün",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Tablet düzgün",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Mobil düzgün",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "320px genişlikte bile layout bozulmuyor",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Menü mobilde çalışıyor",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Hamburger menü çalışıyor",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Mobilde horizontal scroll yok",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Butonlar mobilde rahat tıklanabiliyor",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Fontlar mobilde okunabilir",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Tutarlı spacing sistemi",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Tutarlı typography",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Tutarlı renk sistemi",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Hover state",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Active state",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Focus state",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Disabled state",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Loading state",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Error state",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Empty state",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Success state",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Input validation",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "E-mail validation",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Telefon validation",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Required field kontrolü",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Kullanıcıya anlaşılır hata mesajı",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Form gönderilirken loading",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Başarılı gönderim mesajı",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "2. 🎨 Frontend",
+      "item": "Spam/bot koruması",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bellek içi API limiter var; paylaşımlı üretim deposu ve tüm uçların kapsamı tamamlanmadı."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Lighthouse Performance kontrolü",
+      "status": "Doğrulandı",
+      "evidence": "Lighthouse laboratuvar ölçümü yapıldı; Search Console mobil/masaüstü saha verisi yetersiz, INP geçer sonucu yok."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Core Web Vitals kontrolü",
+      "status": "Doğrulandı",
+      "evidence": "Lighthouse laboratuvar ölçümü yapıldı; Search Console mobil/masaüstü saha verisi yetersiz, INP geçer sonucu yok."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "LCP optimize",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "CLS düşük",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "INP düşük",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Görseller WebP/AVIF",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Görseller lazy-load",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Gereksiz büyük görsel yok",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Fontlar optimize",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Font sayısı azaltılmış",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "CSS minimize",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "JS bundle optimize",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Code splitting",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Gereksiz JS yüklenmiyor",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Third-party scriptler kontrol altında",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "CDN kullanımı değerlendirilmiş",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Browser caching",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bu değişikliğin görselleri ve incelenen sayfaları kontrol edildi; tüm site/cihazlar için garanti değil."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Gzip/Brotli compression",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Server response time düşük",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "API çağrıları optimize",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "3. ⚡ Performans",
+      "item": "Database query'leri optimize",
+      "status": "Doğrulanmadı",
+      "evidence": "Canlı Supabase yönetimi, yedekleme/geri yükleme ve sorgu ölçümü bu çalışmada yapılmadı."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "<title> her sayfada unique",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Meta description",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Canonical",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Sitemap",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Robots",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "H1 mevcut",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "H1 tek ve anlamlı",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "H2/H3 hiyerarşisi doğru",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "SEO-friendly URL",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Internal linking",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Broken link kontrolü",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "301 redirect sistemi",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "404 kontrolü",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Duplicate content kontrolü",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Organization schema",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "LocalBusiness schema",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Product schema gerekiyorsa",
+      "status": "Şimdiki kapsamda uygulanmıyor",
+      "evidence": "Ajans tanıtım sitesi ve mevcut akışlar için zorunlu değil."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Article schema",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "FAQ schema gerekiyorsa",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "Breadcrumb schema",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "4. 🔍 SEO",
+      "item": "WebSite schema",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "İşletmenin ne yaptığı açıkça belirtilmiş",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Hizmetler açık şekilde tanımlanmış",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Lokasyon açık",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "İletişim bilgileri açık",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Hakkımızda bilgisi mevcut",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Uzmanlık alanları açık",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "FAQ bölümü",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Semantik HTML",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Structured Data",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Entity bilgileri tutarlı",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Marka adı her yerde tutarlı",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "NAP bilgileri tutarlı",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "İçerikler gerçekten soruları cevaplıyor",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Hizmet + lokasyon ilişkisi açık",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Yazar/uzman bilgileri gerektiğinde belirtiliyor",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "5. 🤖 GEO / AI Search",
+      "item": "Kaynaklandırma gereken içerikler kaynaklandırılıyor",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "Google Analytics 4",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "Google Search Console",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "Conversion tracking",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "Form submit tracking",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "Telefon tıklama tracking",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "WhatsApp tıklama tracking",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "E-mail tıklama tracking",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "CTA tracking",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "Scroll tracking",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "Outbound link tracking",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "404 tracking",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "UTM sistemi",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "6. 📊 Analytics",
+      "item": "Consent/Cookie sistemi",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "HTTPS",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Security headers",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "CSP",
+      "status": "Açık eksik",
+      "evidence": "next.config.ts güvenlik başlıklarında CSP yok; nonce/inline script uyumuyla tasarlanmalı."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "HSTS",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "X-Content-Type-Options",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Referrer-Policy",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Rate limiting",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bellek içi API limiter var; paylaşımlı üretim deposu ve tüm uçların kapsamı tamamlanmadı."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "API authentication",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Authorization kontrolü",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Input sanitization",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "XSS koruması",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "SQL Injection koruması",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "CSRF koruması gerekiyorsa",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "CORS doğru yapılandırılmış",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Secret key'ler frontend'de değil",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Admin paneli korunuyor",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Login brute-force koruması",
+      "status": "Açık eksik",
+      "evidence": "loginAction içinde deneme sınırı bulunmadı; ayrı güvenlik düzeltmesi gerekir."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Dependency vulnerability scan",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Backup sistemi",
+      "status": "Doğrulanmadı",
+      "evidence": "Canlı Supabase yönetimi, yedekleme/geri yükleme ve sorgu ölçümü bu çalışmada yapılmadı."
+    },
+    {
+      "section": "7. 🔐 Güvenlik",
+      "item": "Error loglarında hassas veri bulunmuyor",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "API endpointleri düzenli",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Authentication",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Authorization",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Validation",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Rate limiting",
+      "status": "Kısmen doğrulandı",
+      "evidence": "Bellek içi API limiter var; paylaşımlı üretim deposu ve tüm uçların kapsamı tamamlanmadı."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Error handling",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Logging",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Database indexing",
+      "status": "Doğrulanmadı",
+      "evidence": "Canlı Supabase yönetimi, yedekleme/geri yükleme ve sorgu ölçümü bu çalışmada yapılmadı."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Pagination",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Caching",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Transaction yönetimi",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "API response standardizasyonu",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "HTTP status code'ları doğru",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Timeout mekanizması",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Retry mekanizması gerekiyorsa",
+      "status": "Şimdiki kapsamda uygulanmıyor",
+      "evidence": "Ajans tanıtım sitesi ve mevcut akışlar için zorunlu değil."
+    },
+    {
+      "section": "8. 🧠 Backend / API",
+      "item": "Background jobs gerekiyorsa queue sistemi",
+      "status": "Şimdiki kapsamda uygulanmıyor",
+      "evidence": "Ajans tanıtım sitesi ve mevcut akışlar için zorunlu değil."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Gereksiz duplicate data yok",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Indexler mevcut",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Foreign key ilişkileri doğru",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Migration sistemi",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Backup",
+      "status": "Doğrulanmadı",
+      "evidence": "Canlı Supabase yönetimi, yedekleme/geri yükleme ve sorgu ölçümü bu çalışmada yapılmadı."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Restore testi",
+      "status": "Doğrulanmadı",
+      "evidence": "Canlı Supabase yönetimi, yedekleme/geri yükleme ve sorgu ölçümü bu çalışmada yapılmadı."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Query performansı",
+      "status": "Doğrulanmadı",
+      "evidence": "Canlı Supabase yönetimi, yedekleme/geri yükleme ve sorgu ölçümü bu çalışmada yapılmadı."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Connection pooling",
+      "status": "Doğrulanmadı",
+      "evidence": "Canlı Supabase yönetimi, yedekleme/geri yükleme ve sorgu ölçümü bu çalışmada yapılmadı."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Production DB güvenliği",
+      "status": "Doğrulanmadı",
+      "evidence": "Canlı Supabase yönetimi, yedekleme/geri yükleme ve sorgu ölçümü bu çalışmada yapılmadı."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Kullanıcı şifreleri hash'li",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "9. 🗄️ Database",
+      "item": "Hassas veriler gerektiğinde encryption",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "10. 📱 UX",
+      "item": "Hero section net",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "10. 📱 UX",
+      "item": "Değer önerisi net",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "10. 📱 UX",
+      "item": "CTA net",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "10. 📱 UX",
+      "item": "Navigation anlaşılır",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "10. 📱 UX",
+      "item": "Kullanıcı kaybolmuyor",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "10. 📱 UX",
+      "item": "Gereksiz popup yok",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "10. 📱 UX",
+      "item": "Gereksiz animasyon yok",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "10. 📱 UX",
+      "item": "Contact bilgisi kolay bulunuyor",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "10. 📱 UX",
+      "item": "Mobil kullanım rahat",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "10. 📱 UX",
+      "item": "Kullanıcı istediği bilgiye 2-3 tıkta ulaşabiliyor",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "Keyboard navigation",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "Focus görünür",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "Alt text",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "Form label'ları",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "Kontrast",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "Semantic HTML",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "ARIA gerektiği yerde",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "Screen reader testi",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "button gerçekten button",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "Link gerçekten link",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "Video için alternatifler",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "11. ♿ Accessibility",
+      "item": "Reduced motion desteği",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "12. 🍪 Cookie / KVKK",
+      "item": "KVKK metni",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "12. 🍪 Cookie / KVKK",
+      "item": "Gizlilik politikası",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "12. 🍪 Cookie / KVKK",
+      "item": "Çerez politikası",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "12. 🍪 Cookie / KVKK",
+      "item": "Açık rıza gereken durumlar",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "12. 🍪 Cookie / KVKK",
+      "item": "Cookie consent",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "12. 🍪 Cookie / KVKK",
+      "item": "Analytics consent yönetimi",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "12. 🍪 Cookie / KVKK",
+      "item": "Pazarlama çerezleri kontrolü",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "12. 🍪 Cookie / KVKK",
+      "item": "Kullanıcı verilerinin nasıl işlendiği açıklanıyor",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "12. 🍪 Cookie / KVKK",
+      "item": "İletişim/form verilerinin saklanması düzenli",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Login",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Register",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Form",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Search",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Navigation",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Checkout varsa ödeme",
+      "status": "Şimdiki kapsamda uygulanmıyor",
+      "evidence": "Ajans tanıtım sitesi ve mevcut akışlar için zorunlu değil."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Contact",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "API",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Chrome",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Safari",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Firefox",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Edge",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "iPhone",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Android",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Tablet",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Desktop",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Unit test",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Integration test",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "E2E test",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "API test",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Lighthouse CI",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "13. 🧪 Testing",
+      "item": "Accessibility test",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Git",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Development",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Staging",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Production",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "CI/CD",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Automatic deployment",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Environment variables",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Build validation",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Automatic tests",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Error monitoring",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Uptime monitoring",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Backup",
+      "status": "Doğrulanmadı",
+      "evidence": "Canlı Supabase yönetimi, yedekleme/geri yükleme ve sorgu ölçümü bu çalışmada yapılmadı."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Rollback sistemi",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "Domain/DNS yönetimi",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "14. 🚀 Deployment / DevOps",
+      "item": "SSL renewal",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Net CTA",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Telefon",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "WhatsApp",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Form",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Teklif alma",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Demo",
+      "status": "Şimdiki kapsamda uygulanmıyor",
+      "evidence": "Ajans tanıtım sitesi ve mevcut akışlar için zorunlu değil."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Rezervasyon",
+      "status": "Şimdiki kapsamda uygulanmıyor",
+      "evidence": "Ajans tanıtım sitesi ve mevcut akışlar için zorunlu değil."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Ürün satın alma",
+      "status": "Şimdiki kapsamda uygulanmıyor",
+      "evidence": "Ajans tanıtım sitesi ve mevcut akışlar için zorunlu değil."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Sosyal proof",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Referanslar",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Müşteri yorumları",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Case study",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "SSS",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Güven unsurları",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Hakkımızda",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Ekip",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Adres",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "15. 📈 Business / Conversion",
+      "item": "Google Maps",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "CMS gerekiyorsa CMS",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "Blog",
+      "status": "Doğrulandı",
+      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "Sayfa oluşturma",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "SEO title düzenleme",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "Meta description düzenleme",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "Görsel yönetimi",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "Redirect yönetimi",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "Sitemap otomatik güncelleme",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "Draft/publish",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "Kullanıcı rolleri",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "16. 🧩 İçerik Yönetimi",
+      "item": "Editör yetkileri",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Structured content",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Schema.org",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "FAQ",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Entity consistency",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Açık hizmet tanımları",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Açık şirket bilgileri",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Uzmanlık içerikleri",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Kaynaklandırılmış içerikler",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Machine-readable bilgiler",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "AI crawler erişim stratejisi",
+      "status": "Doğrulanmadı",
+      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "İçeriklerin güncellik tarihi",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Author information",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Organization bilgileri",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    },
+    {
+      "section": "17. 🤖 AI Hazırlığı",
+      "item": "Local entity signals",
+      "status": "Kodda var veya kısmen doğrulandı",
+      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+    }
+  ]
+}

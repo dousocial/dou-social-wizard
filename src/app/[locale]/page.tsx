@@ -19,9 +19,9 @@ import { localizedUrl } from "@/lib/site";
 
 const META = {
   tr: {
-    title: "Denizli Dijital Pazarlama ve Meta Ads Ajansı",
+    title: "Denizli Reklam ve Sosyal Medya Ajansı",
     description:
-      "DOU Social; Denizli merkezli Meta Ads, sosyal medya yönetimi, içerik üretimi, web tasarım ve yerel SEO ajansı. Reklam bütçenizi daha verimli, markanızı daha görünür hale getirir.",
+      "Denizli’de Google Ads ve Meta reklam yönetimi, sosyal medya, web tasarım ve etkinlik çekimi. DOU Social’ın hizmetlerini inceleyin, ücretsiz analiz isteyin.",
     locale: "tr_TR",
   },
   en: {
