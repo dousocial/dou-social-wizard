@@ -149,3 +149,5 @@ Search Console'da geçmiş URL listesi, hızlı kaldırma başvurusu ve yeni sit
 ## Son yerel kontrol
 
 37 birim test geçti. Production build başarılı. Sitemap’teki 91 adres yerelde HTTP 200, tek H1 ve beklenen canonical ile açıldı. 24 temel SEO/redirect kontrolü geçti; yönetim HTML testi ortam eksikliğinden kapsam dışında. Web adresi tek başına gerçek HTML üzerinden, Instagram adı tek başına herkese açık profil özeti üzerinden sonuç döndürdü. Boş/özel ağ girişleri reddedildi; aynı istemcinin fazla isteği 429 ile sınırlandı. 320px tarayıcı kontrolünde footer sosyal bağlantılarındaki taşma bulundu ve satır kaydırma eklendi. Canlı yayın doğrulaması aşağıda ayrıca kaydedilecek.
+
+Vercel önizleme ilk sürüm için READY durumuna ulaştı. GitHub Actions temiz kurulumunda esbuild script izni eksikliği bulundu; yalnızca esbuild için açık izin eklenerek tekrar doğrulamaya gönderildi. Önizleme URL’si Vercel Authentication ile korunuyor; connector üzerinden HTML erişimi reddedildi. Yerel tarayıcıda ücretsiz analiz, hizmet ve blog örnekleri 320px genişlikte taşma ve hata overlay’i olmadan doğrulandı.
