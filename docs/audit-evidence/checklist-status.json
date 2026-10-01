@@ -1,6 +1,6 @@
 {
   "date": "2026-10-01",
-  "scope": "Kod ve belirli canlı kontroller. Tam güvenlik/WCAG/DB denetimi değildir.",
+  "scope": "1 Ekim son yayın: 93 sitemap sayfası, 70 iç hedef, 71 test; GA4 önemli etkinlik ve Search Console bağlantısı. Tam güvenlik/WCAG/DB denetimi değildir.",
   "items": [
     {
       "section": "1. 🏗️ Temel Teknik Altyapı",
@@ -17,8 +17,8 @@
     {
       "section": "1. 🏗️ Temel Teknik Altyapı",
       "item": "www / non-www tek versiyona yönlendirilmiş",
-      "status": "Kısmen doğrulandı",
-      "evidence": "Non-www, www adresine yönleniyor; 307 yerine kalıcı yönlendirme Vercel domain ayarında ayrıca tamamlanmalı."
+      "status": "Doğrulandı",
+      "evidence": "Vercel alan adı ayarı 308; canlı HTTPS yanıtı yolu ve sorguyu www adresinde koruyor."
     },
     {
       "section": "1. 🏗️ Temel Teknik Altyapı",
@@ -59,8 +59,8 @@
     {
       "section": "1. 🏗️ Temel Teknik Altyapı",
       "item": "Canonical URL'ler doğru",
-      "status": "Kodda var veya kısmen doğrulandı",
-      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+      "status": "Doğrulandı",
+      "evidence": "1 Ekim son yayın: sitemap içindeki 93 canonical kontrolü, 0 uyuşmazlık."
     },
     {
       "section": "1. 🏗️ Temel Teknik Altyapı",
@@ -419,14 +419,14 @@
     {
       "section": "4. 🔍 SEO",
       "item": "<title> her sayfada unique",
-      "status": "Doğrulanmadı",
-      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+      "status": "Doğrulandı",
+      "evidence": "93 sayfada 0 yinelenen title."
     },
     {
       "section": "4. 🔍 SEO",
       "item": "Meta description",
-      "status": "Kodda var veya kısmen doğrulandı",
-      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+      "status": "Doğrulandı",
+      "evidence": "93 sayfada açıklama var ve yinelenen açıklama yok."
     },
     {
       "section": "4. 🔍 SEO",
@@ -449,14 +449,14 @@
     {
       "section": "4. 🔍 SEO",
       "item": "H1 mevcut",
-      "status": "Kodda var veya kısmen doğrulandı",
-      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+      "status": "Doğrulandı",
+      "evidence": "93 sayfada tam bir H1."
     },
     {
       "section": "4. 🔍 SEO",
       "item": "H1 tek ve anlamlı",
-      "status": "Kodda var veya kısmen doğrulandı",
-      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+      "status": "Kısmen doğrulandı",
+      "evidence": "93 sayfada tam bir H1; başlık seviyesi atlama yok. Anlamlılık için editoryal değerlendirme gerekir."
     },
     {
       "section": "4. 🔍 SEO",
@@ -479,8 +479,8 @@
     {
       "section": "4. 🔍 SEO",
       "item": "Broken link kontrolü",
-      "status": "Doğrulanmadı",
-      "evidence": "Ek cihaz, canlı hesap veya kapsamlı denetim gerekir."
+      "status": "Doğrulandı",
+      "evidence": "93 sayfadan bulunan 70 iç hedef, HTTP hatası yok."
     },
     {
       "section": "4. 🔍 SEO",
@@ -503,8 +503,8 @@
     {
       "section": "4. 🔍 SEO",
       "item": "Organization schema",
-      "status": "Kodda var veya kısmen doğrulandı",
-      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+      "status": "Doğrulandı",
+      "evidence": "Tutarlı #organization kimliği; canlı JSON-LD parse kontrolü geçti. Google rich result garantisi değildir."
     },
     {
       "section": "4. 🔍 SEO",
@@ -521,8 +521,8 @@
     {
       "section": "4. 🔍 SEO",
       "item": "Article schema",
-      "status": "Kodda var veya kısmen doğrulandı",
-      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+      "status": "Doğrulandı",
+      "evidence": "Gerçek tarih, Organization/Person yazar türü ve URL; 71 test ve canlı JSON parse kontrolleri geçti."
     },
     {
       "section": "4. 🔍 SEO",
@@ -641,14 +641,14 @@
     {
       "section": "6. 📊 Analytics",
       "item": "Google Analytics 4",
-      "status": "Kodda var veya kısmen doğrulandı",
-      "evidence": "İlgili kod/bileşen mevcut; tüm sayfalarda veya canlı hesapta uçtan uca doğrulandığı anlamına gelmez."
+      "status": "Kısmen doğrulandı",
+      "evidence": "DOU Social GA4 mülkünde generate_lead önemli etkinlik oluşturuldu; ilk gerçek başvurunun veri gelişi henüz doğrulanmadı."
     },
     {
       "section": "6. 📊 Analytics",
       "item": "Google Search Console",
       "status": "Doğrulandı",
-      "evidence": "Canlı HTTP, hesap görünümü veya bu çalışmanın test/dağıtım kanıtı; kapsam maddeyle sınırlıdır."
+      "evidence": "dousocial.com doğrulanmış mülk; GA4 bağlantısı başarıyla oluşturuldu."
     },
     {
       "section": "6. 📊 Analytics",

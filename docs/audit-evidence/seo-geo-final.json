@@ -1,0 +1,1206 @@
+{
+  "date": "2026-10-01T10:57:58.305Z",
+  "pages": [
+    {
+      "url": "https://www.dousocial.com",
+      "status": 200,
+      "title": "Denizli Reklam ve Sosyal Medya Ajansı",
+      "description": "Denizli’de Google Ads ve Meta reklam yönetimi, sosyal medya, web tasarım ve etkinlik çekimi. DOU Social’ın hizmetlerini inceleyin, ücretsiz analiz isteyin.",
+      "canonical": "https://www.dousocial.com",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/hakkimizda",
+      "status": 200,
+      "title": "Hakkımızda · DOU Social",
+      "description": "DOU Social, dijital reklamcılık, içerik üretimi ve marka stratejisi alanında tam kapsamlı büyüme ortaklığı sunan Denizli merkezli bir ajandır.",
+      "canonical": "https://www.dousocial.com/hakkimizda",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hakkimizda",
+      "status": 200,
+      "title": "About Us · DOU Social",
+      "description": "DOU Social is a full-service digital growth agency based in Denizli, offering creative content, performance ads, automation, and brand strategy under one roof.",
+      "canonical": "https://www.dousocial.com/en/hakkimizda",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/en",
+      "status": 200,
+      "title": "Digital Marketing and Meta Ads Agency in Turkey",
+      "description": "DOU Social is a Denizli-based digital marketing agency for Meta Ads, social media management, content production, web design and local SEO.",
+      "canonical": "https://www.dousocial.com/en",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/iletisim",
+      "status": 200,
+      "title": "İletişim · DOU Social",
+      "description": "DOU Social ile iletişime geç. Denizli merkezli dijital ajans, telefon, WhatsApp, e-posta veya form üzerinden 24 saat içinde yanıt.",
+      "canonical": "https://www.dousocial.com/iletisim",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler",
+      "status": 200,
+      "title": "Hizmetler · DOU Social",
+      "description": "Sosyal medya, Meta reklam, içerik üretimi, performans pazarlaması ve daha fazlası — DOU Social ile dijital büyüme operasyonu.",
+      "canonical": "https://www.dousocial.com/hizmetler",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler",
+      "status": 200,
+      "title": "Services · DOU Social",
+      "description": "Social media, Meta ads, content production, performance marketing and more — DOU Social's full digital growth operation.",
+      "canonical": "https://www.dousocial.com/en/hizmetler",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/en/iletisim",
+      "status": 200,
+      "title": "Contact · DOU Social",
+      "description": "Get in touch with DOU Social. Reach our Denizli office by phone, WhatsApp, email or form — we reply within 24 hours.",
+      "canonical": "https://www.dousocial.com/en/iletisim",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/influencerlar",
+      "status": 200,
+      "title": "Çalıştığımız Influencerlar — DOU Social · DOU Social",
+      "description": "DOU Social ile iş birliği yapan yüksek etkileşimli içerik üreticileri ve influencer portföyü.",
+      "canonical": "https://www.dousocial.com/influencerlar",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/sss",
+      "status": 200,
+      "title": "Sık Sorulan Sorular · DOU Social",
+      "description": "DOU Social hakkında merak edilenlerin cevapları. Hizmetler, fiyatlandırma, süreç ve iletişim hakkında bilgi alın.",
+      "canonical": "https://www.dousocial.com/sss",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/influencerlar",
+      "status": 200,
+      "title": "Our Influencers — DOU Social · DOU Social",
+      "description": "High-engagement content creators and influencer portfolio collaborating with DOU Social.",
+      "canonical": "https://www.dousocial.com/en/influencerlar",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/en/sss",
+      "status": 200,
+      "title": "Frequently Asked Questions · DOU Social",
+      "description": "Answers to questions about DOU Social. Learn about our services, pricing, process, and how to get in touch.",
+      "canonical": "https://www.dousocial.com/en/sss",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/en/reklam-yonetimi",
+      "status": 200,
+      "title": "Advertising Management · DOU Social",
+      "description": "We plan Google and Meta campaigns around measurable enquiries and business goals.",
+      "canonical": "https://www.dousocial.com/en/reklam-yonetimi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/blog",
+      "status": 200,
+      "title": "Blog · DOU Social",
+      "description": "Reklam, içerik, marka stratejisi üzerine sahadan notlar. DOU Social ekibinden taktik, framework ve case analizleri.",
+      "canonical": "https://www.dousocial.com/blog",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/reklam-yonetimi",
+      "status": 200,
+      "title": "Reklam Yönetimi · DOU Social",
+      "description": "Google ve Meta kampanyalarını tek bir ölçüm ve teklif hedefi etrafında planlıyoruz.",
+      "canonical": "https://www.dousocial.com/reklam-yonetimi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/google-ads-yonetimi",
+      "status": 200,
+      "title": "Google Ads Management · DOU Social",
+      "description": "Connect search demand to a relevant landing page and enquiry process.",
+      "canonical": "https://www.dousocial.com/en/google-ads-yonetimi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/google-ads-yonetimi",
+      "status": 200,
+      "title": "Google Ads Yönetimi · DOU Social",
+      "description": "Arama yapan potansiyel müşteriyi, ihtiyacına uygun sayfa ve teklif akışıyla buluşturuyoruz.",
+      "canonical": "https://www.dousocial.com/google-ads-yonetimi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/facebook-reklam-yonetimi",
+      "status": 200,
+      "title": "Facebook Ads Management · DOU Social",
+      "description": "Build a Facebook campaign journey from interest to a trackable enquiry.",
+      "canonical": "https://www.dousocial.com/en/facebook-reklam-yonetimi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/facebook-reklam-yonetimi",
+      "status": 200,
+      "title": "Facebook Reklam Yönetimi · DOU Social",
+      "description": "Facebook üzerinden gelen ilgiyi takip edilebilir başvuru ve müşteri görüşmesine dönüştüren bir kampanya akışı kuruyoruz.",
+      "canonical": "https://www.dousocial.com/facebook-reklam-yonetimi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/denizli-etkinlik-cekimi",
+      "status": 200,
+      "title": "Event Photography and Video in Denizli · DOU Social",
+      "description": "Plan photography and video for launches, conferences and trade events in Denizli.",
+      "canonical": "https://www.dousocial.com/en/denizli-etkinlik-cekimi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/denizli-etkinlik-cekimi",
+      "status": 200,
+      "title": "Etkinlik Çekimi Denizli · DOU Social",
+      "description": "Lansman, konferans ve fuarlar için etkinlik akışına göre fotoğraf ve video çekim planı hazırlıyoruz.",
+      "canonical": "https://www.dousocial.com/denizli-etkinlik-cekimi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/teklif-al",
+      "status": 200,
+      "title": "Teklif Al · DOU Social",
+      "description": "DOU Social ile dijital büyüme planı için ücretsiz teklif al. Sektör, hedef ve bütçeni bildir, 24 saat içinde size özel teklifle dönelim.",
+      "canonical": "https://www.dousocial.com/teklif-al",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/teklif-al",
+      "status": 200,
+      "title": "Get a Quote · DOU Social",
+      "description": "Get a free, custom proposal from DOU Social. Tell us your sector, goals and budget — we'll come back within 24 hours.",
+      "canonical": "https://www.dousocial.com/en/teklif-al",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/en/denizli-organizasyon-cekimi",
+      "status": 200,
+      "title": "Production Coverage for Organisations in Denizli · DOU Social",
+      "description": "Coordinate on-site coverage and content deliveries for organisers in Denizli.",
+      "canonical": "https://www.dousocial.com/en/denizli-organizasyon-cekimi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/denizli-organizasyon-cekimi",
+      "status": 200,
+      "title": "Organizasyon Çekimi Denizli · DOU Social",
+      "description": "Organizasyon ekipleri için sahadaki koordinasyonu ve farklı içerik teslimlerini tek bir çekim planında birleştiriyoruz.",
+      "canonical": "https://www.dousocial.com/denizli-organizasyon-cekimi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/dijital-checkup",
+      "status": 200,
+      "title": "Ücretsiz Web Sitesi ve Instagram Analizi — DOU Social · DOU Social",
+      "description": "Web sitesi adresinizi veya yalnızca Instagram kullanıcı adınızı paylaşın. Erişilebilen verilere dayalı ücretsiz ön inceleme alın.",
+      "canonical": "https://www.dousocial.com/dijital-checkup",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/dijital-checkup",
+      "status": 200,
+      "title": "Free Website and Instagram Review — DOU Social · DOU Social",
+      "description": "Enter a website address or Instagram username for a free preliminary review based on accessible information.",
+      "canonical": "https://www.dousocial.com/en/dijital-checkup",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/influencer",
+      "status": 200,
+      "title": "Influencer Başvurusu · DOU Social",
+      "description": "DOU Social ile içerik üretimi ve iş birliği yapmak isteyen influencer'lar için başvuru formu.",
+      "canonical": "https://www.dousocial.com/influencer",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/influencer",
+      "status": 200,
+      "title": "Influencer Application · DOU Social",
+      "description": "Application form for influencers who want to create content and collaborate with DOU Social.",
+      "canonical": "https://www.dousocial.com/en/influencer",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/denizli-sosyal-medya-ajansi",
+      "status": 200,
+      "title": "Denizli Sosyal Medya Ajansı — DOU Social · DOU Social",
+      "description": "Denizli'de sosyal medya ajansı arıyorsan: Instagram, TikTok ve Meta Ads yönetiminde ölçülebilir sonuç üreten yerel ajans. Ücretsiz teklif.",
+      "canonical": "https://www.dousocial.com/denizli-sosyal-medya-ajansi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/denizli-sosyal-medya-ajansi",
+      "status": 200,
+      "title": "Denizli Social Media Agency — DOU Social · DOU Social",
+      "description": "Looking for a social media agency in Denizli? Instagram, TikTok and Meta Ads management with measurable outcomes. Free quote.",
+      "canonical": "https://www.dousocial.com/en/denizli-sosyal-medya-ajansi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/meta-ads-ajansi",
+      "status": 200,
+      "title": "Meta Reklam Yönetimi · DOU Social",
+      "description": "Facebook ve Instagram reklamlarını ortak bir strateji, kreatif test ve ölçüm süreciyle yönetiyoruz.",
+      "canonical": "https://www.dousocial.com/meta-ads-ajansi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/instagram-reklam-yonetimi",
+      "status": 200,
+      "title": "Instagram Reklam Yönetimi · DOU Social",
+      "description": "Reels, Stories ve akış reklamlarını markanızın teklifine ve müşteri yolculuğuna uygun içeriklerle planlıyoruz.",
+      "canonical": "https://www.dousocial.com/instagram-reklam-yonetimi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/meta-ads-ajansi",
+      "status": 200,
+      "title": "Meta Ads Management · DOU Social",
+      "description": "Manage Facebook and Instagram campaigns through a shared creative and measurement process.",
+      "canonical": "https://www.dousocial.com/en/meta-ads-ajansi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/dijital-pazarlama-ajansi",
+      "status": 200,
+      "title": "Dijital Pazarlama Ajansı — DOU Social · DOU Social",
+      "description": "Reklam, içerik, sosyal medya, web ve marka stratejisi — markanın dijital büyümesini tek elden yöneten ajans. Türkiye + global.",
+      "canonical": "https://www.dousocial.com/dijital-pazarlama-ajansi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/dijital-pazarlama-ajansi",
+      "status": 200,
+      "title": "Digital Marketing Agency — DOU Social · DOU Social",
+      "description": "Ads, content, social, web and brand strategy — your brand's digital growth managed under one roof. Turkey + global.",
+      "canonical": "https://www.dousocial.com/en/dijital-pazarlama-ajansi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/en/instagram-reklam-yonetimi",
+      "status": 200,
+      "title": "Instagram Ads Management · DOU Social",
+      "description": "Plan Reels, Stories and feed campaigns around your offer and customer journey.",
+      "canonical": "https://www.dousocial.com/en/instagram-reklam-yonetimi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/gizlilik-politikasi",
+      "status": 200,
+      "title": "Gizlilik Politikası · DOU Social",
+      "description": "DOU Social Gizlilik Politikası. KVKK ve GDPR kapsamında topladığımız, işlediğimiz ve sakladığımız kişisel veriler hakkında bilgi.",
+      "canonical": "https://www.dousocial.com/gizlilik-politikasi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/cerez-politikasi",
+      "status": 200,
+      "title": "Çerez Politikası · DOU Social",
+      "description": "DOU Social websitesi çerez politikası. Hangi çerezleri kullandığımız, ne kadar sakladığımız ve nasıl kontrol edebileceğiniz.",
+      "canonical": "https://www.dousocial.com/cerez-politikasi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/gizlilik-politikasi",
+      "status": 200,
+      "title": "Privacy Policy · DOU Social",
+      "description": "DOU Social Privacy Policy. Information about personal data we collect, process and store under GDPR and KVKK.",
+      "canonical": "https://www.dousocial.com/en/gizlilik-politikasi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/kullanim-kosullari",
+      "status": 200,
+      "title": "Kullanım Koşulları · DOU Social",
+      "description": "DOU Social websitesi kullanım koşulları. Site içeriğine erişim, fikri mülkiyet ve sorumluluk sınırlamaları.",
+      "canonical": "https://www.dousocial.com/kullanim-kosullari",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/kullanim-kosullari",
+      "status": 200,
+      "title": "Terms of Service · DOU Social",
+      "description": "DOU Social website terms of service. Access to site content, intellectual property and liability limitations.",
+      "canonical": "https://www.dousocial.com/en/kullanim-kosullari",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/en/cerez-politikasi",
+      "status": 200,
+      "title": "Cookie Policy · DOU Social",
+      "description": "DOU Social cookie policy. Which cookies we use, how long we store them and how you can control them.",
+      "canonical": "https://www.dousocial.com/en/cerez-politikasi",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler/sosyal-medya-marka",
+      "status": 200,
+      "title": "Markanın dijital sesi, stratejik ve tutarlı. · DOU Social",
+      "description": "İçerik planlaması, topluluk yönetimi ve marka iletişimiyle sosyal medya varlığınızı güçlendiriyor, takipçi kitlenizi sadık bir topluluğa dönüştürüyoruz.",
+      "canonical": "https://www.dousocial.com/hizmetler/sosyal-medya-marka",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler/meta-reklamlari",
+      "status": 200,
+      "title": "Don't spend your ad budget — convert it. · DOU Social",
+      "description": "We achieve measurable results through precise targeting, optimised budget usage and continuous A/B testing on Instagram and Facebook.",
+      "canonical": "https://www.dousocial.com/en/hizmetler/meta-reklamlari",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler/sosyal-medya-marka",
+      "status": 200,
+      "title": "Your brand's digital voice — strategic and consistent. · DOU Social",
+      "description": "We strengthen your social media presence through content planning, community management and brand communications, turning your audience into a loyal community.",
+      "canonical": "https://www.dousocial.com/en/hizmetler/sosyal-medya-marka",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler/meta-reklamlari",
+      "status": 200,
+      "title": "Reklam bütçeni harcama, sonuca dönüştür. · DOU Social",
+      "description": "Instagram ve Facebook'ta doğru hedefleme, optimize bütçe kullanımı ve sürekli A/B test ile ölçülebilir sonuçlar elde ediyoruz.",
+      "canonical": "https://www.dousocial.com/hizmetler/meta-reklamlari",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler/icerik-video",
+      "status": 200,
+      "title": "Sahada hızlı, kurguda güçlüyüz. · DOU Social",
+      "description": "Markanıza özel fotoğraf, video ve yaratıcı içeriklerle dikkat çeken, hatırda kalan dijital deneyimler oluşturuyoruz.",
+      "canonical": "https://www.dousocial.com/hizmetler/icerik-video",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler/icerik-video",
+      "status": 200,
+      "title": "Fast on set, strong in post. · DOU Social",
+      "description": "We create standout, memorable digital experiences through photography, video and creative content tailored to your brand.",
+      "canonical": "https://www.dousocial.com/en/hizmetler/icerik-video",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler/performans-pazarlama",
+      "status": 200,
+      "title": "Daha fazla dönüşüm, daha yüksek yatırım getirisi. · DOU Social",
+      "description": "Veri odaklı reklam stratejileriyle her bütçe biriminden maksimum verim elde ediyor, sürdürülebilir büyüme sağlıyoruz.",
+      "canonical": "https://www.dousocial.com/hizmetler/performans-pazarlama",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler/performans-pazarlama",
+      "status": 200,
+      "title": "More conversions, higher return on investment. · DOU Social",
+      "description": "We squeeze maximum value from every budget unit through data-driven ad strategies, achieving sustainable growth.",
+      "canonical": "https://www.dousocial.com/en/hizmetler/performans-pazarlama",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler/google-seo",
+      "status": 200,
+      "title": "Yakınınızdaki müşteriler sizi bulsun. · DOU Social",
+      "description": "Google Haritalar ve yerel aramalarda işletmenizi öne çıkaran optimizasyon çalışmalarıyla organik görünürlüğünüzü artırıyoruz.",
+      "canonical": "https://www.dousocial.com/hizmetler/google-seo",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler/google-seo",
+      "status": 200,
+      "title": "Help nearby customers find you. · DOU Social",
+      "description": "We increase your organic visibility by optimising your presence on Google Maps and in local search results.",
+      "canonical": "https://www.dousocial.com/en/hizmetler/google-seo",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler/web-yazilim",
+      "status": 200,
+      "title": "Hızlı, kullanıcı dostu, dönüşüm odaklı. · DOU Social",
+      "description": "Modern teknolojilerle geliştirilen web siteleri ve dijital altyapılarla markanızın online varlığını güçlendiriyoruz.",
+      "canonical": "https://www.dousocial.com/hizmetler/web-yazilim",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler/kurumsal-kimlik",
+      "status": 200,
+      "title": "Markanızın karakterini tasarıma dönüştürün. · DOU Social",
+      "description": "Profesyonel logo, kurumsal kimlik ve tasarım sistemleriyle markanızın güçlü ve tutarlı bir görsel dilini oluşturuyoruz.",
+      "canonical": "https://www.dousocial.com/hizmetler/kurumsal-kimlik",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler/web-yazilim",
+      "status": 200,
+      "title": "Fast, user-friendly, conversion-focused. · DOU Social",
+      "description": "We strengthen your online presence with websites and digital infrastructure built on modern technologies.",
+      "canonical": "https://www.dousocial.com/en/hizmetler/web-yazilim",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler/influencer-marketing",
+      "status": 200,
+      "title": "Doğru içerik üreticisiyle güçlü iş birlikleri. · DOU Social",
+      "description": "Markanız için en uygun influencer'ları seçerek gerçek kitlelerle bağ kuran, satışa ve farkındalığa dönüşen kampanyalar yönetiyoruz.",
+      "canonical": "https://www.dousocial.com/hizmetler/influencer-marketing",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler/influencer-marketing",
+      "status": 200,
+      "title": "Powerful partnerships with the right creators. · DOU Social",
+      "description": "We manage campaigns that connect with real audiences and convert to sales and awareness by selecting the most suitable influencers for your brand.",
+      "canonical": "https://www.dousocial.com/en/hizmetler/influencer-marketing",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler/kurumsal-kimlik",
+      "status": 200,
+      "title": "Turn your brand's character into design. · DOU Social",
+      "description": "We build a strong, consistent visual language for your brand through professional logo design, corporate identity and design systems.",
+      "canonical": "https://www.dousocial.com/en/hizmetler/kurumsal-kimlik",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler/eticaret-buyume",
+      "status": 200,
+      "title": "Daha fazla satış, daha düşük maliyet. · DOU Social",
+      "description": "Satış odaklı reklam, analiz ve optimizasyon çalışmalarıyla e-ticaret mağazanızın büyümesini hızlandırıyoruz.",
+      "canonical": "https://www.dousocial.com/hizmetler/eticaret-buyume",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/hizmetler/crm-dijital",
+      "status": 200,
+      "title": "İş süreçlerinizi dijitalleştirin. · DOU Social",
+      "description": "CRM kurulumu, süreç otomasyonu ve dijital dönüşüm danışmanlığıyla müşteri yönetimini daha verimli ve ölçeklenebilir hale getiriyoruz.",
+      "canonical": "https://www.dousocial.com/hizmetler/crm-dijital",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler/eticaret-buyume",
+      "status": 200,
+      "title": "More sales, lower cost. · DOU Social",
+      "description": "We accelerate the growth of your e-commerce store through sales-focused advertising, analytics and optimisation.",
+      "canonical": "https://www.dousocial.com/en/hizmetler/eticaret-buyume",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/en/hizmetler/crm-dijital",
+      "status": 200,
+      "title": "Digitalise your business processes. · DOU Social",
+      "description": "We make customer management more efficient and scalable through CRM implementation, process automation and digital transformation consulting.",
+      "canonical": "https://www.dousocial.com/en/hizmetler/crm-dijital",
+      "robots": "index, follow",
+      "language": "en"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/aylik-reklam-raporu-kontrol-listesi",
+      "status": 200,
+      "title": "Aylık reklam raporu için işletme kontrol listesi · DOU Social",
+      "description": "Bir raporda bulunması gereken dönem, harcama, sonuç, talep kalitesi ve karar bilgilerini birlikte değerlendirin.",
+      "canonical": "https://www.dousocial.com/blog/aylik-reklam-raporu-kontrol-listesi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/denizli-etkinlik-cekimi-planlama",
+      "status": 200,
+      "title": "Denizli etkinlik çekimi için hazırlık rehberi · DOU Social",
+      "description": "Etkinlik öncesinde program, öncelikli anlar, mekân koşulları ve teslimleri belirlemek için organizatör rehberi.",
+      "canonical": "https://www.dousocial.com/blog/denizli-etkinlik-cekimi-planlama",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/denizli-facebook-yerel-reklam-hazirligi",
+      "status": 200,
+      "title": "Denizli’de Facebook reklamı öncesi yerel işletme kontrolü · DOU Social",
+      "description": "Hizmet bölgesi, iletişim, teklif ve ekip kapasitesini yerel reklam yayınına hazırlayan kontrol listesi.",
+      "canonical": "https://www.dousocial.com/blog/denizli-facebook-yerel-reklam-hazirligi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/denizli-google-ads-baslangic-rehberi",
+      "status": 200,
+      "title": "Denizli’de Google Ads: kampanya başlamadan önce hazırlanacaklar · DOU Social",
+      "description": "Yerel bir işletmenin reklamı açmadan önce hedef, bölge, açılış sayfası ve ölçüm kararlarını nasıl netleştireceğini anlatan rehber.",
+      "canonical": "https://www.dousocial.com/blog/denizli-google-ads-baslangic-rehberi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/etkinlik-ozet-videosu-briefi",
+      "status": 200,
+      "title": "Etkinlik özet videosu için brief ve kurgu planı · DOU Social",
+      "description": "Özet filmin hedefini, anlatısını, ses kullanımını ve farklı yayın sürümlerini çekim öncesinde netleştirin.",
+      "canonical": "https://www.dousocial.com/blog/etkinlik-ozet-videosu-briefi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/etkinlik-fotograf-video-cekim-listesi",
+      "status": 200,
+      "title": "Etkinlik fotoğraf ve videosu için çekim listesi · DOU Social",
+      "description": "Ayrıntı, insan, program ve mekân görüntülerini etkinliğin hikâyesine göre önceliklendirin.",
+      "canonical": "https://www.dousocial.com/blog/etkinlik-fotograf-video-cekim-listesi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/denizli-organizasyon-cekimi-teklif",
+      "status": 200,
+      "title": "Denizli organizasyon çekimi teklifleri nasıl karşılaştırılır? · DOU Social",
+      "description": "Sadece toplam fiyatı değil, süre, ekip, alan, teslim ve kullanım kapsamını karşılaştırarak çekim teklifini değerlendirin.",
+      "canonical": "https://www.dousocial.com/blog/denizli-organizasyon-cekimi-teklif",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/facebook-reklam-hesabi-ajans-erisimleri",
+      "status": 200,
+      "title": "Facebook reklam hesabında ajans erişimleri nasıl düzenlenir? · DOU Social",
+      "description": "Şifre paylaşmadan çalışma, hesap sahipliği ve ekip değişiminde erişim kontrolü için işletme odaklı rehber.",
+      "canonical": "https://www.dousocial.com/blog/facebook-reklam-hesabi-ajans-erisimleri",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/facebook-potansiyel-musteri-formu-web-sitesi",
+      "status": 200,
+      "title": "Facebook müşteri formu mu web sitesi formu mu? · DOU Social",
+      "description": "Talep toplama yöntemini müşterinin karar ihtiyacına, soru sayısına ve takip sistemine göre değerlendirin.",
+      "canonical": "https://www.dousocial.com/blog/facebook-potansiyel-musteri-formu-web-sitesi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/google-ads-butcesi-yonetim-ucreti",
+      "status": 200,
+      "title": "Google Ads bütçesi ile yönetim ücreti arasındaki fark · DOU Social",
+      "description": "Ajans teklifinde medya harcaması, yönetim, kurulum ve üretim kalemlerini ayrı okuyabilmeniz için pratik bir bütçe rehberi.",
+      "canonical": "https://www.dousocial.com/blog/google-ads-butcesi-yonetim-ucreti",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/google-ads-meta-reklamlari-farki",
+      "status": 200,
+      "title": "Google Ads mi Meta mı? Müşteri yolculuğuna göre seçim · DOU Social",
+      "description": "Arama ihtiyacı ile sosyal ortamda keşfi karşılaştırarak reklam kanalını bütçe, içerik ve satış sürecine göre seçin.",
+      "canonical": "https://www.dousocial.com/blog/google-ads-meta-reklamlari-farki",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/google-ads-tiklama-var-talep-yok",
+      "status": 200,
+      "title": "Google Ads’te tıklama var, talep yok: nereden başlanmalı? · DOU Social",
+      "description": "Reklamdan sonra talep gelmediğinde ölçüm, arama niyeti, sayfa ve iletişim akışını sırayla kontrol etmek için rehber.",
+      "canonical": "https://www.dousocial.com/blog/google-ads-tiklama-var-talep-yok",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/instagram-gonderi-one-cikarma-reklam-yonetimi",
+      "status": 200,
+      "title": "Instagram gönderi öne çıkarma ne zaman yeterli olabilir? · DOU Social",
+      "description": "Basit bir yayın destekleme ihtiyacı ile düzenli kampanya yönetiminin gerektirdiği planlama ve ölçüm arasındaki fark.",
+      "canonical": "https://www.dousocial.com/blog/instagram-gonderi-one-cikarma-reklam-yonetimi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/google-ads-negatif-anahtar-kelimeler",
+      "status": 200,
+      "title": "Google Ads negatif anahtar kelimeleri nasıl değerlendirilir? · DOU Social",
+      "description": "İlgisiz aramaları elemek için arama terimlerini iş hedefiyle karşılaştıran, aşırı engellemeyi önleyen bir çalışma yöntemi.",
+      "canonical": "https://www.dousocial.com/blog/google-ads-negatif-anahtar-kelimeler",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/instagram-reels-stories-reklam-briefi",
+      "status": 200,
+      "title": "Reels ve Stories reklamı için brief nasıl yazılır? · DOU Social",
+      "description": "Çekim ve kurgu ekibinin aynı hedefe çalışması için mesaj, teslim formatı ve kullanım alanını tarif edin.",
+      "canonical": "https://www.dousocial.com/blog/instagram-reels-stories-reklam-briefi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/instagram-reklam-yonetimi-rehberi",
+      "status": 200,
+      "title": "Instagram reklam yönetimi: profil, içerik ve talep akışı · DOU Social",
+      "description": "Instagram reklamını yalnızca yayın ayarı olarak değil, profil ve müşteri iletişimiyle birlikte hazırlayın.",
+      "canonical": "https://www.dousocial.com/blog/instagram-reklam-yonetimi-rehberi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/meta-reklam-kreatif-testleri",
+      "status": 200,
+      "title": "Meta reklamlarında yaratıcı test nasıl planlanır? · DOU Social",
+      "description": "Görsel ve video testinde hipotez kurma, değişkenleri ayırma ve ticari sonuçları yorumlama yöntemi.",
+      "canonical": "https://www.dousocial.com/blog/meta-reklam-kreatif-testleri",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/instagram-reklam-dm-talep-takibi",
+      "status": 200,
+      "title": "Instagram reklamlarından gelen DM’ler nasıl takip edilir? · DOU Social",
+      "description": "Mesaj sayısını geçerli talep ve görüşme durumuyla ilişkilendirmek için sade bir ekip çalışma düzeni.",
+      "canonical": "https://www.dousocial.com/blog/instagram-reklam-dm-talep-takibi",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/meta-reklam-raporu-nasil-okunur",
+      "status": 200,
+      "title": "Meta reklam raporunda hangi sorular sorulmalı? · DOU Social",
+      "description": "Harcamayı, sonuç tanımını ve sonraki aksiyonları birlikte okuyarak reklam raporunu karar aracına dönüştürün.",
+      "canonical": "https://www.dousocial.com/blog/meta-reklam-raporu-nasil-okunur",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/meta-reklam-yonetimi-baslangic",
+      "status": 200,
+      "title": "Meta reklam yönetiminde hedef, içerik ve ölçüm planı · DOU Social",
+      "description": "Facebook ve Instagram reklamlarına başlamadan önce müşteri ihtiyacını, içerik paketini ve sonuç ölçümünü aynı plana bağlayın.",
+      "canonical": "https://www.dousocial.com/blog/meta-reklam-yonetimi-baslangic",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/organizasyon-cekimi-teslim-revizyon",
+      "status": 200,
+      "title": "Organizasyon çekiminde teslim ve revizyon nasıl planlanır? · DOU Social",
+      "description": "Seçki, kurgu, dosya biçimi, geri bildirim ve arşiv kararlarını çekimden önce tanımlayın.",
+      "canonical": "https://www.dousocial.com/blog/organizasyon-cekimi-teslim-revizyon",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/organizasyon-cekim-ekibi-koordinasyonu",
+      "status": 200,
+      "title": "Organizasyon günü çekim ekibi koordinasyonu · DOU Social",
+      "description": "Program değişiklikleri, mekân erişimi ve kurum onaylarının çekim ekibine doğru ulaşması için görev planı.",
+      "canonical": "https://www.dousocial.com/blog/organizasyon-cekim-ekibi-koordinasyonu",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/reklam-acilis-sayfasi-donusum",
+      "status": 200,
+      "title": "Reklam açılış sayfasında teklif talebini kolaylaştırmak · DOU Social",
+      "description": "Reklam mesajını sayfada devam ettiren, iletişim adımını erişilebilir kılan ve hataları görünür gösteren kontrol rehberi.",
+      "canonical": "https://www.dousocial.com/blog/reklam-acilis-sayfasi-donusum",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/reklam-ajansi-secerken-sorular",
+      "status": 200,
+      "title": "Reklam ajansı seçerken sorulacak sorular · DOU Social",
+      "description": "Ajans tekliflerini kapsam, hesap sahipliği, ölçüm ve çalışma süreci üzerinden karşılaştırın.",
+      "canonical": "https://www.dousocial.com/blog/reklam-ajansi-secerken-sorular",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama-trendleri",
+      "status": 200,
+      "title": "Mimarlık ve İç Mimarlıkta Dijital Pazarlama Trendleri 2026 · DOU Social",
+      "description": "Mimarlık ve iç mimarlık için yapay zekâ, VR/AR, sürdürülebilirlik ve sosyal medya trendlerini kapsayan güncel 2026 dijital pazarlama rehberi.",
+      "canonical": "https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama-trendleri",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama",
+      "status": 200,
+      "title": "Mimarlık ve İç Mimarlık İçin Dijital Pazarlama Rehberi · DOU Social",
+      "description": "Mimarlık ve iç mimarlık ofisleri için içerik, reklam, hedef kitle, bütçe ve yerel SEO stratejilerini kapsayan güncel 2026 dijital pazarlama rehberi.",
+      "canonical": "https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/mermer-sektoru-dijital-pazarlama",
+      "status": 200,
+      "title": "Mermer Sektöründe Dijital Pazarlama: 2026 Rehberi · DOU Social",
+      "description": "Mermer ve doğal taş markaları için içerik, reklam, hedef kitle ve SEO stratejilerini kapsayan güncel 2026 dijital pazarlama rehberi.",
+      "canonical": "https://www.dousocial.com/blog/mermer-sektoru-dijital-pazarlama",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/mermer-dijital-pazarlama-trendleri-2026",
+      "status": 200,
+      "title": "Mermer Sektörü Dijital Pazarlama Trendleri (2026) · DOU Social",
+      "description": "Mermer ve doğal taş markaları için yapay zekâ, AR sanal showroom, sürdürülebilirlik ve 2026 tasarım trendlerini kapsayan güncel dijital pazarlama rehberi.",
+      "canonical": "https://www.dousocial.com/blog/mermer-dijital-pazarlama-trendleri-2026",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama-trendleri-2026",
+      "status": 200,
+      "title": "Spor Salonu Dijital Pazarlama Trendleri (2026) · DOU Social",
+      "description": "Spor salonu ve fitness markaları için yapay zekâ, hibrit modeller, oyunlaştırma ve yerel SEO trendlerini kapsayan güncel 2026 dijital pazarlama rehberi.",
+      "canonical": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama-trendleri-2026",
+      "robots": "index, follow",
+      "language": "tr"
+    },
+    {
+      "url": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama",
+      "status": 200,
+      "title": "Spor Salonu Dijital Pazarlama Rehberi (2026) · DOU Social",
+      "description": "Spor salonu ve fitness markaları için içerik, reklam, hedef kitle, bütçe ve yerel SEO stratejilerini kapsayan güncel 2026 dijital pazarlama rehberi.",
+      "canonical": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama",
+      "robots": "index, follow",
+      "language": "tr"
+    }
+  ],
+  "linkResults": [
+    {
+      "path": "/dijital-checkup",
+      "status": 200,
+      "url": "https://www.dousocial.com/dijital-checkup"
+    },
+    {
+      "path": "/projeler",
+      "status": 200,
+      "url": "https://www.dousocial.com/projeler"
+    },
+    {
+      "path": "/reklam-yonetimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/reklam-yonetimi"
+    },
+    {
+      "path": "/google-ads-yonetimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/google-ads-yonetimi"
+    },
+    {
+      "path": "/meta-ads-ajansi",
+      "status": 200,
+      "url": "https://www.dousocial.com/meta-ads-ajansi"
+    },
+    {
+      "path": "/instagram-reklam-yonetimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/instagram-reklam-yonetimi"
+    },
+    {
+      "path": "/facebook-reklam-yonetimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/facebook-reklam-yonetimi"
+    },
+    {
+      "path": "/denizli-etkinlik-cekimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/denizli-etkinlik-cekimi"
+    },
+    {
+      "path": "/hizmetler",
+      "status": 200,
+      "url": "https://www.dousocial.com/hizmetler"
+    },
+    {
+      "path": "/iletisim",
+      "status": 200,
+      "url": "https://www.dousocial.com/iletisim"
+    },
+    {
+      "path": "/en/reklam-yonetimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/reklam-yonetimi"
+    },
+    {
+      "path": "/denizli-organizasyon-cekimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/denizli-organizasyon-cekimi"
+    },
+    {
+      "path": "/en/google-ads-yonetimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/google-ads-yonetimi"
+    },
+    {
+      "path": "/en/meta-ads-ajansi",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/meta-ads-ajansi"
+    },
+    {
+      "path": "/en/facebook-reklam-yonetimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/facebook-reklam-yonetimi"
+    },
+    {
+      "path": "/en/instagram-reklam-yonetimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/instagram-reklam-yonetimi"
+    },
+    {
+      "path": "/en/hizmetler",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/hizmetler"
+    },
+    {
+      "path": "/en/denizli-etkinlik-cekimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/denizli-etkinlik-cekimi"
+    },
+    {
+      "path": "/en/denizli-organizasyon-cekimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/denizli-organizasyon-cekimi"
+    },
+    {
+      "path": "/influencer",
+      "status": 200,
+      "url": "https://www.dousocial.com/influencer"
+    },
+    {
+      "path": "/en/teklif-al",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/teklif-al"
+    },
+    {
+      "path": "/en/iletisim",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/iletisim"
+    },
+    {
+      "path": "/en/influencer",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/influencer"
+    },
+    {
+      "path": "/blog/aylik-reklam-raporu-kontrol-listesi",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/aylik-reklam-raporu-kontrol-listesi"
+    },
+    {
+      "path": "/blog/denizli-etkinlik-cekimi-planlama",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/denizli-etkinlik-cekimi-planlama"
+    },
+    {
+      "path": "/blog/denizli-facebook-yerel-reklam-hazirligi",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/denizli-facebook-yerel-reklam-hazirligi"
+    },
+    {
+      "path": "/blog/denizli-google-ads-baslangic-rehberi",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/denizli-google-ads-baslangic-rehberi"
+    },
+    {
+      "path": "/blog/denizli-organizasyon-cekimi-teklif",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/denizli-organizasyon-cekimi-teklif"
+    },
+    {
+      "path": "/blog/etkinlik-fotograf-video-cekim-listesi",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/etkinlik-fotograf-video-cekim-listesi"
+    },
+    {
+      "path": "/blog/etkinlik-ozet-videosu-briefi",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/etkinlik-ozet-videosu-briefi"
+    },
+    {
+      "path": "/blog/facebook-potansiyel-musteri-formu-web-sitesi",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/facebook-potansiyel-musteri-formu-web-sitesi"
+    },
+    {
+      "path": "/blog/facebook-reklam-hesabi-ajans-erisimleri",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/facebook-reklam-hesabi-ajans-erisimleri"
+    },
+    {
+      "path": "/blog/google-ads-butcesi-yonetim-ucreti",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/google-ads-butcesi-yonetim-ucreti"
+    },
+    {
+      "path": "/blog/google-ads-negatif-anahtar-kelimeler",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/google-ads-negatif-anahtar-kelimeler"
+    },
+    {
+      "path": "/blog/google-ads-meta-reklamlari-farki",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/google-ads-meta-reklamlari-farki"
+    },
+    {
+      "path": "/blog/google-ads-tiklama-var-talep-yok",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/google-ads-tiklama-var-talep-yok"
+    },
+    {
+      "path": "/blog/instagram-gonderi-one-cikarma-reklam-yonetimi",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/instagram-gonderi-one-cikarma-reklam-yonetimi"
+    },
+    {
+      "path": "/blog/instagram-reels-stories-reklam-briefi",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/instagram-reels-stories-reklam-briefi"
+    },
+    {
+      "path": "/blog/instagram-reklam-dm-talep-takibi",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/instagram-reklam-dm-talep-takibi"
+    },
+    {
+      "path": "/blog/instagram-reklam-yonetimi-rehberi",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/instagram-reklam-yonetimi-rehberi"
+    },
+    {
+      "path": "/blog/meta-reklam-kreatif-testleri",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/meta-reklam-kreatif-testleri"
+    },
+    {
+      "path": "/blog/meta-reklam-raporu-nasil-okunur",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/meta-reklam-raporu-nasil-okunur"
+    },
+    {
+      "path": "/blog/meta-reklam-yonetimi-baslangic",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/meta-reklam-yonetimi-baslangic"
+    },
+    {
+      "path": "/blog/organizasyon-cekim-ekibi-koordinasyonu",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/organizasyon-cekim-ekibi-koordinasyonu"
+    },
+    {
+      "path": "/blog/reklam-ajansi-secerken-sorular",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/reklam-ajansi-secerken-sorular"
+    },
+    {
+      "path": "/blog/reklam-acilis-sayfasi-donusum",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/reklam-acilis-sayfasi-donusum"
+    },
+    {
+      "path": "/blog/organizasyon-cekimi-teslim-revizyon",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/organizasyon-cekimi-teslim-revizyon"
+    },
+    {
+      "path": "/blog/mimarlik-ic-mimarlik-dijital-pazarlama-trendleri",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama-trendleri"
+    },
+    {
+      "path": "/blog/mermer-sektoru-dijital-pazarlama",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/mermer-sektoru-dijital-pazarlama"
+    },
+    {
+      "path": "/blog/mimarlik-ic-mimarlik-dijital-pazarlama",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama"
+    },
+    {
+      "path": "/blog/mermer-dijital-pazarlama-trendleri-2026",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/mermer-dijital-pazarlama-trendleri-2026"
+    },
+    {
+      "path": "/teklif-al",
+      "status": 200,
+      "url": "https://www.dousocial.com/teklif-al"
+    },
+    {
+      "path": "/blog/spor-salonu-dijital-pazarlama",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama"
+    },
+    {
+      "path": "/gizlilik-politikasi",
+      "status": 200,
+      "url": "https://www.dousocial.com/gizlilik-politikasi"
+    },
+    {
+      "path": "/blog/spor-salonu-dijital-pazarlama-trendleri-2026",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama-trendleri-2026"
+    },
+    {
+      "path": "/en/gizlilik-politikasi",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/gizlilik-politikasi"
+    },
+    {
+      "path": "/en/influencerlar",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/influencerlar"
+    },
+    {
+      "path": "/projeler/restoran-yerel-buyume",
+      "status": 200,
+      "url": "https://www.dousocial.com/projeler/restoran-yerel-buyume"
+    },
+    {
+      "path": "/influencerlar",
+      "status": 200,
+      "url": "https://www.dousocial.com/influencerlar"
+    },
+    {
+      "path": "/projeler/e-ticaret-3x-donusum",
+      "status": 200,
+      "url": "https://www.dousocial.com/projeler/e-ticaret-3x-donusum"
+    },
+    {
+      "path": "/projeler/saglik-klinigi-marka-yenileme",
+      "status": 200,
+      "url": "https://www.dousocial.com/projeler/saglik-klinigi-marka-yenileme"
+    },
+    {
+      "path": "/en/projeler/restoran-yerel-buyume",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/projeler/restoran-yerel-buyume"
+    },
+    {
+      "path": "/en/projeler/e-ticaret-3x-donusum",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/projeler/e-ticaret-3x-donusum"
+    },
+    {
+      "path": "/en/projeler/saglik-klinigi-marka-yenileme",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/projeler/saglik-klinigi-marka-yenileme"
+    },
+    {
+      "path": "/projeler/online-egitim-lansmani",
+      "status": 200,
+      "url": "https://www.dousocial.com/projeler/online-egitim-lansmani"
+    },
+    {
+      "path": "/projeler/b2b-yazilim-lead-jenerasyonu",
+      "status": 200,
+      "url": "https://www.dousocial.com/projeler/b2b-yazilim-lead-jenerasyonu"
+    },
+    {
+      "path": "/en/projeler/online-egitim-lansmani",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/projeler/online-egitim-lansmani"
+    },
+    {
+      "path": "/en/projeler/b2b-yazilim-lead-jenerasyonu",
+      "status": 200,
+      "url": "https://www.dousocial.com/en/projeler/b2b-yazilim-lead-jenerasyonu"
+    },
+    {
+      "path": "/hakkimizda",
+      "status": 200,
+      "url": "https://www.dousocial.com/hakkimizda"
+    },
+    {
+      "path": "/blog",
+      "status": 200,
+      "url": "https://www.dousocial.com/blog"
+    }
+  ],
+  "issues": {
+    "duplicateTitles": [],
+    "duplicateDescriptions": [],
+    "duplicateArticles": [],
+    "missingDescription": [],
+    "invalidSchema": [],
+    "canonicalMismatch": [],
+    "h1": [],
+    "headingSkips": [],
+    "missingAlt": [],
+    "brokenLinks": []
+  }
+}
