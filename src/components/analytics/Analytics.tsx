@@ -77,9 +77,13 @@ export function Analytics() {
 export function trackEvent(name: string, params?: Record<string, unknown>) {
   if (typeof window === "undefined") return;
   try { if (localStorage.getItem("dou_consent_v1") !== "granted") return; } catch { return; }
-  // GA4 / GTM dataLayer
-  // @ts-expect-error global gtag injected by Analytics script
-  window.dataLayer?.push({ event: name, ...params });
+  if (GTM_ID) {
+    // @ts-expect-error dataLayer injected by the GTM script
+    window.dataLayer?.push({ event: name, ...params });
+  } else {
+    // @ts-expect-error gtag injected by the GA script
+    window.gtag?.("event", name, params);
+  }
   // Meta Pixel
   // @ts-expect-error global fbq injected by Meta Pixel script
   window.fbq?.("trackCustom", name, params);
