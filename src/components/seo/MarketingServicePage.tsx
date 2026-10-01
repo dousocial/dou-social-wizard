@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getMarketingService } from "@/lib/marketing-services";
 import { getAllPosts } from "@/lib/blog";
@@ -81,17 +80,6 @@ export async function MarketingServicePage({
           </Link>
         </Container>
       </section>
-      <Container>
-        <div className="bg-mute-100 relative mb-12 aspect-video max-h-[560px] overflow-hidden rounded-2xl">
-          <Image
-            src={service.cover}
-            alt={service.title}
-            fill
-            sizes="(max-width: 1279px) 100vw, 1200px"
-            className="object-cover"
-          />
-        </div>
-      </Container>
       <section className="border-mute-100 border-t py-16">
         <Container>
           <h2 className="font-display text-ink text-3xl">
