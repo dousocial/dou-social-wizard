@@ -8,7 +8,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { Reveal, RevealItem } from "@/components/ui/Reveal";
+import { Reveal } from "@/components/ui/Reveal";
 import { ServiceDrawer } from "@/components/sections/ServiceDrawer";
 import { ServiceGallery } from "@/components/sections/ServiceGallery";
 import { type ServiceSlug } from "@/lib/services";
@@ -229,8 +229,7 @@ export function Services() {
         </Reveal>
 
         {/* 3-card grid */}
-        <Reveal
-          stagger
+        <div
           className="bg-mute-200 mt-px grid gap-px md:grid-cols-3"
         >
           {rest
@@ -238,7 +237,7 @@ export function Services() {
             .map((s) => {
               const Icon = ICONS[s.key];
               return (
-                <RevealItem key={s.key} variant="scaleUp">
+                <Reveal key={s.key} variant="scaleUp">
                   <div className="group bg-paper relative h-full overflow-hidden">
                     {/* Accent left border */}
                     <div
@@ -280,15 +279,15 @@ export function Services() {
                       </div>
                     </button>
                   </div>
-                </RevealItem>
+                </Reveal>
               );
             })}
           {MARKETING_SERVICES.map((service) => (
-            <RevealItem key={service.slug} variant="scaleUp">
+            <Reveal key={service.slug} variant="scaleUp">
               <MarketingServiceCard slug={service.slug} locale={locale} />
-            </RevealItem>
+            </Reveal>
           ))}
-        </Reveal>
+        </div>
 
         {/* All services link */}
         <Reveal className="mt-8 flex justify-end">

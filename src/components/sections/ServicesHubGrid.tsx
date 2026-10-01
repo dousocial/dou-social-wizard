@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { Reveal, RevealItem } from "@/components/ui/Reveal";
+import { Reveal } from "@/components/ui/Reveal";
 import { ServiceDrawer } from "@/components/sections/ServiceDrawer";
 import { SERVICE_SLUGS, type ServiceSlug } from "@/lib/services";
 
@@ -315,8 +315,7 @@ export function ServicesHubGrid() {
         </Reveal>
 
         {/* Grid */}
-        <Reveal
-          stagger
+        <div
           className="bg-mute-200 mt-px grid gap-px md:grid-cols-2 lg:grid-cols-3"
         >
           {rest
@@ -324,7 +323,7 @@ export function ServicesHubGrid() {
             .map((slug, i) => {
               const Icon = SERVICE_ICONS[slug];
               return (
-                <RevealItem key={slug} variant="scaleUp">
+                <Reveal key={slug} variant="scaleUp">
                   <div className="group bg-paper relative h-full overflow-hidden">
                     <div
                       aria-hidden
@@ -361,15 +360,15 @@ export function ServicesHubGrid() {
                       </div>
                     </button>
                   </div>
-                </RevealItem>
+                </Reveal>
               );
             })}
           {MARKETING_SERVICES.map((service) => (
-            <RevealItem key={service.slug} variant="scaleUp">
+            <Reveal key={service.slug} variant="scaleUp">
               <MarketingServiceCard slug={service.slug} locale={locale} />
-            </RevealItem>
+            </Reveal>
           ))}
-        </Reveal>
+        </div>
       </Container>
 
       <ServiceDrawer slug={activeSlug} onClose={() => setActiveSlug(null)} />
