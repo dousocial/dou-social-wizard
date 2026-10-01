@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { getMarketingService } from "@/lib/marketing-services";
 
@@ -16,15 +15,6 @@ export function MarketingServiceCard({
       href={`/${slug}`}
       className="group bg-paper hover:bg-mute-50 focus-visible:outline-accent flex h-full flex-col overflow-hidden text-left transition focus-visible:outline-2"
     >
-      <div className="bg-mute-100 relative aspect-video overflow-hidden">
-        <Image
-          src={service.cover}
-          alt=""
-          fill
-          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
       <div className="flex flex-1 flex-col p-8 md:p-10">
         <h3 className="font-display text-ink text-xl leading-tight font-bold tracking-tight">
           {service.title}
