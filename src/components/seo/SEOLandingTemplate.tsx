@@ -59,7 +59,7 @@ export function SEOLandingTemplate({ slug }: { slug: string }) {
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="/teklif-al">{tShared("ctaPrimary")}</ButtonLink>
-              <ButtonLink href="/strateji-gorusmesi" variant="secondary">
+              <ButtonLink href="/iletisim" variant="secondary">
                 {tShared("ctaSecondary")}
               </ButtonLink>
             </div>

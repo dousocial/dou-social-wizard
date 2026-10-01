@@ -1374,7 +1374,13 @@
           "social": "Social Media Management",
           "content": "Content Production",
           "web": "Web Design",
-          "strategy": "Brand Strategy"
+          "strategy": "Brand Strategy",
+          "google-ads": "Google Ads Management",
+          "facebook-ads": "Facebook Ad Management",
+          "instagram-ads": "Instagram Ad Management",
+          "advertising": "Advertising Management",
+          "event-shoot": "Denizli Event Coverage",
+          "organization-shoot": "Denizli Organization Coverage"
         }
       },
       "budget": {
@@ -1408,11 +1414,11 @@
     }
   },
   "Checkup": {
-    "metaTitle": "Free Social Media Analysis — DOU Social",
-    "metaDescription": "How are your Instagram, ads, and LinkedIn performing? Fill out the form and get your custom PDF report in 5 minutes.",
+    "metaTitle": "Free Website and Instagram Review — DOU Social",
+    "metaDescription": "Enter a website address or Instagram username for a free preliminary review based on accessible information.",
     "eyebrow": "Free",
-    "heroTitle": "How is your social media doing? We'll tell you.",
-    "heroLead": "Are your Instagram, ad budget, and other platforms actually working? Fill out the form and get your custom evaluation PDF in 5 minutes.",
+    "heroTitle": "Review your website or Instagram profile.",
+    "heroLead": "Start a free preliminary review with a website address or an Instagram username. You can also provide both.",
     "points": {
       "analysis": {
         "title": "Your personal report",
@@ -1424,12 +1430,12 @@
       },
       "free": {
         "title": "Free, no sign-up",
-        "description": "Your email is enough. No meeting or phone call required. If you like it, we'll talk."
+        "description": "A website address or username is enough. No phone number or email required."
       }
     },
     "formEyebrow": "Analysis Form",
-    "formTitle": "Which accounts should we look at?",
-    "formNote": "We don't need access to your accounts. We create your report from the screenshots and info you share.",
+    "formTitle": "Share your link.",
+    "formNote": "One field is enough. We review available information and clearly state access limitations.",
     "form": {
       "platforms": {
         "label": "Which platforms do you have accounts on?",
@@ -1440,7 +1446,13 @@
           "tiktok": "TikTok",
           "youtube": "YouTube",
           "google": "Google Business Profile",
-          "linkedin": "LinkedIn"
+          "linkedin": "LinkedIn",
+          "google-ads": "Google Ads Management",
+          "facebook-ads": "Facebook Ad Management",
+          "instagram-ads": "Instagram Ad Management",
+          "advertising": "Advertising Management",
+          "event-shoot": "Denizli Event Coverage",
+          "organization-shoot": "Denizli Organization Coverage"
         }
       },
       "handles": {
@@ -1449,7 +1461,13 @@
         "tiktok": "Your TikTok username",
         "youtube": "Your YouTube channel name",
         "google": "Your business name on Google",
-        "linkedin": "Your LinkedIn company page name"
+        "linkedin": "Your LinkedIn company page name",
+        "google-ads": "Google Ads Management",
+        "facebook-ads": "Facebook Ad Management",
+        "instagram-ads": "Instagram Ad Management",
+        "advertising": "Advertising Management",
+        "event-shoot": "Denizli Event Coverage",
+        "organization-shoot": "Denizli Organization Coverage"
       },
       "handlePlaceholders": {
         "instagram": "@youraccount",
@@ -1457,7 +1475,13 @@
         "tiktok": "@youraccount",
         "youtube": "Channel name",
         "google": "Business name",
-        "linkedin": "Company page name"
+        "linkedin": "Company page name",
+        "google-ads": "Google Ads Management",
+        "facebook-ads": "Facebook Ad Management",
+        "instagram-ads": "Instagram Ad Management",
+        "advertising": "Advertising Management",
+        "event-shoot": "Denizli Event Coverage",
+        "organization-shoot": "Denizli Organization Coverage"
       },
       "screenshots": {
         "label": "Add a screenshot",
@@ -1468,7 +1492,13 @@
           "tiktok": "Open TikTok → Profile → Content Analytics and take a screenshot",
           "youtube": "In YouTube Studio, go to Analytics → Overview and take a screenshot",
           "google": "Find your business on Google Maps → See performance and take a screenshot",
-          "linkedin": "Go to your LinkedIn company page → Analytics → Visitors tab and take a screenshot"
+          "linkedin": "Go to your LinkedIn company page → Analytics → Visitors tab and take a screenshot",
+          "google-ads": "Google Ads Management",
+          "facebook-ads": "Facebook Ad Management",
+          "instagram-ads": "Instagram Ad Management",
+          "advertising": "Advertising Management",
+          "event-shoot": "Denizli Event Coverage",
+          "organization-shoot": "Denizli Organization Coverage"
         }
       },
       "sector": {

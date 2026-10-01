@@ -1,25 +1,20 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { supabase } from "@/lib/supabase";
-import { verifyToken } from "@/lib/session";
+import { requirePermission } from "@/lib/session";
 
-export type BlogActionState = { error?: string; success?: boolean; id?: string } | null;
-
-async function requireAdmin() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("dou_sid")?.value;
-  if (!token) redirect("/yonetim/giris");
-  const session = verifyToken(token);
-  if (!session) redirect("/yonetim/giris");
-  return session;
-}
+export type BlogActionState = {
+  error?: string;
+  success?: boolean;
+  id?: string;
+} | null;
 
 function isNextRedirect(err: unknown): boolean {
   return (
-    typeof err === "object" && err !== null && "digest" in err &&
+    typeof err === "object" &&
+    err !== null &&
+    "digest" in err &&
     typeof (err as { digest: unknown }).digest === "string" &&
     (err as { digest: string }).digest.startsWith("NEXT_REDIRECT")
   );
@@ -28,8 +23,12 @@ function isNextRedirect(err: unknown): boolean {
 function slugify(text: string): string {
   return text
     .toLowerCase()
-    .replace(/ğ/g, "g").replace(/ü/g, "u").replace(/ş/g, "s")
-    .replace(/ı/g, "i").replace(/ö/g, "o").replace(/ç/g, "c")
+    .replace(/ğ/g, "g")
+    .replace(/ü/g, "u")
+    .replace(/ş/g, "s")
+    .replace(/ı/g, "i")
+    .replace(/ö/g, "o")
+    .replace(/ç/g, "c")
     .replace(/[^a-z0-9\s-]/g, "")
     .trim()
     .replace(/\s+/g, "-")
@@ -37,7 +36,10 @@ function slugify(text: string): string {
 }
 
 function parseTags(raw: string): string[] {
-  return raw.split(",").map((t) => t.trim()).filter(Boolean);
+  return raw
+    .split(",")
+    .map((t) => t.trim())
+    .filter(Boolean);
 }
 
 function parseFAQ(formData: FormData): { q: string; a: string }[] {
@@ -64,7 +66,7 @@ export async function createBlogPost(
   formData: FormData
 ): Promise<BlogActionState> {
   try {
-    await requireAdmin();
+    await requirePermission("content.write");
 
     const title = String(formData.get("title") ?? "").trim();
     const seoTitle = String(formData.get("seo_title") ?? "").trim() || null;
@@ -77,10 +79,19 @@ export async function createBlogPost(
     const faqItems = parseFAQ(formData);
     const faqSection = buildFAQSection(faqItems);
     const fullContent = content + faqSection;
-    const publishedAt = String(formData.get("published_at") ?? "").trim() || null;
     const isPublished = formData.get("is_published") === "true";
+    const publishedAt =
+      String(formData.get("published_at") ?? "").trim() ||
+      (isPublished ? new Date().toISOString() : null);
     const locale = String(formData.get("locale") ?? "tr");
+    if (!["tr", "en"].includes(locale)) return { error: "Geçersiz dil" };
 
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 200)
+      return { error: "Geçerli bir slug gerekli" };
+    if (isPublished && (!content || !description))
+      return { error: "Yayın için içerik ve meta açıklama gerekli" };
+    if (publishedAt && Number.isNaN(Date.parse(publishedAt)))
+      return { error: "Geçerli bir yayın tarihi gerekli" };
     if (!title) return { error: "Başlık gerekli" };
     if (!description) return { error: "Meta açıklama gerekli" };
     if (!slug) return { error: "Slug gerekli" };
@@ -123,7 +134,7 @@ export async function updateBlogPost(
   formData: FormData
 ): Promise<BlogActionState> {
   try {
-    await requireAdmin();
+    await requirePermission("content.write");
 
     const id = String(formData.get("id") ?? "");
     if (!id) return { error: "ID gerekli" };
@@ -139,9 +150,17 @@ export async function updateBlogPost(
     const faqItems = parseFAQ(formData);
     const faqSection = buildFAQSection(faqItems);
     const fullContent = content + faqSection;
-    const publishedAt = String(formData.get("published_at") ?? "").trim() || null;
     const isPublished = formData.get("is_published") === "true";
+    const publishedAt =
+      String(formData.get("published_at") ?? "").trim() ||
+      (isPublished ? new Date().toISOString() : null);
 
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 200)
+      return { error: "Geçerli bir slug gerekli" };
+    if (isPublished && (!content || !description))
+      return { error: "Yayın için içerik ve meta açıklama gerekli" };
+    if (publishedAt && Number.isNaN(Date.parse(publishedAt)))
+      return { error: "Geçerli bir yayın tarihi gerekli" };
     if (!title) return { error: "Başlık gerekli" };
 
     const { error } = await supabase
@@ -178,7 +197,7 @@ export async function deleteBlogPost(
   formData: FormData
 ): Promise<BlogActionState> {
   try {
-    await requireAdmin();
+    await requirePermission("content.write");
 
     const id = String(formData.get("id") ?? "");
     if (!id) return { error: "ID gerekli" };

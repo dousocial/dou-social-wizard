@@ -1,29 +1,17 @@
-import { use } from "react";
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { SEOLandingTemplate } from "@/components/seo/SEOLandingTemplate";
+import { setRequestLocale } from "next-intl/server";
+import { MarketingServicePage } from "@/components/seo/MarketingServicePage";
+import { getMarketingService } from "@/lib/marketing-services";
+import { alternatesFor } from "@/lib/site";
 
 const SLUG = "meta-ads-ajansi";
-
-export async function generateMetadata({
-  params,
-}: PageProps<"/[locale]/meta-ads-ajansi">): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({
-    locale,
-    namespace: `SeoLanding.${SLUG}`,
-  });
-  return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
-  };
+  const service = getMarketingService(SLUG, locale)!;
+  return { title: service.title, description: service.lead, alternates: alternatesFor(`/${SLUG}`, locale as "tr" | "en") };
 }
-
-export default function Page({
-  params,
-}: PageProps<"/[locale]/meta-ads-ajansi">) {
-  const { locale } = use(params);
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   setRequestLocale(locale);
-
-  return <SEOLandingTemplate slug={SLUG} />;
+  return <MarketingServicePage slug={SLUG} locale={locale} />;
 }

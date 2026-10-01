@@ -20,7 +20,6 @@ export function Analytics() {
             `}
           </Script>
           <noscript>
-            {/* eslint-disable-next-line @next/next/no-sync-scripts */}
             <iframe
               src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
               height="0"
@@ -77,9 +76,14 @@ export function Analytics() {
 /** Type-safe helper to fire custom events from client components */
 export function trackEvent(name: string, params?: Record<string, unknown>) {
   if (typeof window === "undefined") return;
-  // GA4 / GTM dataLayer
-  // @ts-expect-error global gtag injected by Analytics script
-  window.dataLayer?.push({ event: name, ...params });
+  try { if (localStorage.getItem("dou_consent_v1") !== "granted") return; } catch { return; }
+  if (GTM_ID) {
+    // @ts-expect-error dataLayer injected by the GTM script
+    window.dataLayer?.push({ event: name, ...params });
+  } else {
+    // @ts-expect-error gtag injected by the GA script
+    window.gtag?.("event", name, params);
+  }
   // Meta Pixel
   // @ts-expect-error global fbq injected by Meta Pixel script
   window.fbq?.("trackCustom", name, params);

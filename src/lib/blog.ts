@@ -46,6 +46,7 @@ async function getAllPostsMDX(locale: string): Promise<BlogPostMeta[]> {
       const raw = await fs.readFile(path.join(dir, file), "utf8");
       const { data, content } = matter(raw);
       const fm = data as BlogFrontmatter;
+      if (!fm.title?.trim() || !content.trim()) return null;
       const stats = readingTimeCalc(content);
       return {
         ...fm,
@@ -55,10 +56,15 @@ async function getAllPostsMDX(locale: string): Promise<BlogPostMeta[]> {
       } satisfies BlogPostMeta;
     })
   );
-  return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+  return posts
+    .filter((post): post is BlogPostMeta => post !== null)
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-async function getPostBySlugMDX(locale: string, slug: string): Promise<BlogPost | null> {
+async function getPostBySlugMDX(
+  locale: string,
+  slug: string
+): Promise<BlogPost | null> {
   const file = path.join(BLOG_ROOT, locale, `${slug}.mdx`);
   let raw: string;
   try {
@@ -68,6 +74,7 @@ async function getPostBySlugMDX(locale: string, slug: string): Promise<BlogPost 
   }
   const { data, content } = matter(raw);
   const fm = data as BlogFrontmatter;
+  if (!fm.title?.trim() || !content.trim()) return null;
   const stats = readingTimeCalc(content);
   return {
     ...fm,
@@ -80,8 +87,10 @@ async function getPostBySlugMDX(locale: string, slug: string): Promise<BlogPost 
 
 // ─── Supabase helpers ─────────────────────────────────────────────────────────
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function dbRowToMeta(row: Record<string, any>, locale: string): BlogPostMeta {
+function dbRowToMeta(
+  row: Record<string, unknown>,
+  locale: string
+): BlogPostMeta {
   const content = String(row.content ?? "");
   return {
     slug: String(row.slug),
@@ -97,8 +106,7 @@ function dbRowToMeta(row: Record<string, any>, locale: string): BlogPostMeta {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function dbRowToPost(row: Record<string, any>, locale: string): BlogPost {
+function dbRowToPost(row: Record<string, unknown>, locale: string): BlogPost {
   return {
     ...dbRowToMeta(row, locale),
     content: String(row.content ?? ""),
@@ -106,23 +114,36 @@ function dbRowToPost(row: Record<string, any>, locale: string): BlogPost {
 }
 
 async function getAllPostsDB(locale: string): Promise<BlogPostMeta[]> {
-  try {
-    const { data } = await supabase
-      .from("blog_posts")
-      .select("slug, locale, title, seo_title, description, cover, tags, author, published_at, content")
-      .eq("locale", locale)
-      .eq("is_published", true)
-      .not("published_at", "is", null)
-      .order("published_at", { ascending: false });
-    if (!data) return [];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return data.map((row: any) => dbRowToMeta(row as Record<string, any>, locale));
-  } catch {
-    return [];
-  }
+  // A database outage must not turn a real blog into a noindex empty hub.
+  const configured = Boolean(
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+  );
+  if (!configured) return [];
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select(
+      "slug, locale, title, seo_title, description, cover, tags, author, published_at, content"
+    )
+    .eq("locale", locale)
+    .eq("is_published", true)
+    .not("published_at", "is", null)
+    .lte("published_at", new Date().toISOString())
+    .order("published_at", { ascending: false });
+  if (error) throw error;
+  if (!data) throw new Error("Published blog content could not be loaded");
+  return data
+    .filter(
+      (row: Record<string, unknown>) =>
+        String(row.title ?? "").trim() && String(row.content ?? "").trim()
+    )
+    .map((row: Record<string, unknown>) => dbRowToMeta(row, locale));
 }
 
-async function getPostBySlugDB(locale: string, slug: string): Promise<BlogPost | null> {
+async function getPostBySlugDB(
+  locale: string,
+  slug: string
+): Promise<BlogPost | null> {
   try {
     const { data } = await supabase
       .from("blog_posts")
@@ -130,10 +151,16 @@ async function getPostBySlugDB(locale: string, slug: string): Promise<BlogPost |
       .eq("locale", locale)
       .eq("slug", slug)
       .eq("is_published", true)
+      .not("published_at", "is", null)
+      .lte("published_at", new Date().toISOString())
       .single();
-    if (!data) return null;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return dbRowToPost(data as Record<string, any>, locale);
+    if (
+      !data ||
+      !String(data.title ?? "").trim() ||
+      !String(data.content ?? "").trim()
+    )
+      return null;
+    return dbRowToPost(data as Record<string, unknown>, locale);
   } catch {
     return null;
   }
@@ -148,10 +175,15 @@ export async function getAllPosts(locale: string): Promise<BlogPostMeta[]> {
   ]);
   const mdxSlugs = new Set(mdxPosts.map((p) => p.slug));
   const uniqueDbPosts = dbPosts.filter((p) => !mdxSlugs.has(p.slug));
-  return [...mdxPosts, ...uniqueDbPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
+  return [...mdxPosts, ...uniqueDbPosts].sort((a, b) =>
+    a.date < b.date ? 1 : -1
+  );
 }
 
-export async function getPostBySlug(locale: string, slug: string): Promise<BlogPost | null> {
+export async function getPostBySlug(
+  locale: string,
+  slug: string
+): Promise<BlogPost | null> {
   const mdx = await getPostBySlugMDX(locale, slug);
   if (mdx) return mdx;
   return getPostBySlugDB(locale, slug);

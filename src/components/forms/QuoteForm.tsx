@@ -128,7 +128,7 @@ export function QuoteForm() {
   }
 
   const industries = ["ecommerce", "b2b", "restaurant", "education", "healthcare", "other"];
-  const services   = ["meta-ads", "social", "content", "web", "strategy"];
+  const services   = ["google-ads", "meta-ads", "facebook-ads", "instagram-ads", "advertising", "event-shoot", "organization-shoot", "social", "content", "web", "strategy"];
   const budgets    = ["lt25k", "25-50k", "50-100k", "gt100k"];
 
   const variants = makeStepVariants(direction);

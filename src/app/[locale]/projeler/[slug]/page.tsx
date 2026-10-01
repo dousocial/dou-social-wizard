@@ -1,3 +1,4 @@
+import { alternatesFor } from "@/lib/site";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -15,7 +16,10 @@ import { CaseStudySchema } from "@/components/seo/CaseStudySchema";
 import { CaseDetailDB, type DBProject } from "@/components/cases/CaseDetailDB";
 import { createClient } from "@supabase/supabase-js";
 
-async function getProjectFromDB(slug: string, locale: string): Promise<DBProject | null> {
+async function getProjectFromDB(
+  slug: string,
+  locale: string
+): Promise<DBProject | null> {
   try {
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -46,16 +50,29 @@ export async function generateMetadata({
   const { locale, slug } = await params;
 
   if (isCaseSlug(slug)) {
-    const t = await getTranslations({ locale, namespace: `Cases.items.${slug}` });
-    return { title: t("title"), description: t("summary") };
+    const t = await getTranslations({
+      locale,
+      namespace: `Cases.items.${slug}`,
+    });
+    return {
+      title: t("title"),
+      description: t("summary"),
+      alternates: alternatesFor(`/projeler/${slug}`, locale as "tr" | "en"),
+    };
   }
 
   const project = await getProjectFromDB(slug, locale);
   if (!project) return {};
   return {
+    alternates: {
+      canonical: alternatesFor(`/projeler/${slug}`, locale as "tr" | "en")
+        .canonical,
+    },
     title: project.seo_title ?? project.title,
     description: project.summary,
-    openGraph: project.cover_image ? { images: [{ url: project.cover_image }] } : undefined,
+    openGraph: project.cover_image
+      ? { images: [{ url: project.cover_image }] }
+      : undefined,
   };
 }
 
@@ -67,7 +84,10 @@ export default async function CaseDetailPage({
 
   // ── i18n-based (existing) projects ──────────────────────────────────────
   if (isCaseSlug(slug)) {
-    const t = await getTranslations({ locale, namespace: `Cases.items.${slug}` });
+    const t = await getTranslations({
+      locale,
+      namespace: `Cases.items.${slug}`,
+    });
 
     return (
       <>

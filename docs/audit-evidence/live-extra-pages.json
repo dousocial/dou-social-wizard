@@ -1,0 +1,76 @@
+[
+  {
+    "path": "/en/blog",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/blog",
+    "empty_blog": true,
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ]
+  },
+  {
+    "path": "/sss",
+    "status": 200,
+    "final": "https://www.dousocial.com/sss",
+    "empty_blog": false,
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ]
+  },
+  {
+    "path": "/en/sss",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/sss",
+    "empty_blog": false,
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ]
+  },
+  {
+    "path": "/audit",
+    "status": 200,
+    "final": "https://www.dousocial.com/audit",
+    "empty_blog": false,
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ]
+  },
+  {
+    "path": "/en/audit",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/audit",
+    "empty_blog": false,
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ]
+  },
+  {
+    "path": "/yonetim/giris",
+    "status": 200,
+    "final": "https://www.dousocial.com/yonetim/giris",
+    "empty_blog": false,
+    "noindex": false,
+    "canonical": []
+  },
+  {
+    "path": "/olmayan-sayfa-kontrol",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "path": "/blog/olmayan-yazi-kontrol",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "path": "/hizmetler/olmayan-hizmet-kontrol",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "path": "/onay/olmayan-token-kontrol",
+    "error": "HTTP Error 404: Not Found"
+  }
+]

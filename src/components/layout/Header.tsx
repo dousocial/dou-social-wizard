@@ -152,7 +152,7 @@ export function Header({ initialDarkTheme = false }: { initialDarkTheme?: boolea
               transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="hidden md:block"
             >
-              <ButtonLink href="/audit" size="sm">
+              <ButtonLink href="/dijital-checkup" size="sm">
                 {t("cta")}
               </ButtonLink>
             </motion.div>

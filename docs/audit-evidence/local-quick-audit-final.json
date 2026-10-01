@@ -1,0 +1,119 @@
+[
+  {
+    "input": {
+      "website": "https://www.dousocial.com"
+    },
+    "status": 200,
+    "sources": [
+      {
+        "kind": "website",
+        "url": "https://www.dousocial.com/",
+        "available": true,
+        "summary": "Web sitesi HTTP 200 yanıtı verdi. İlk HTML içindeki teknik görünürlük sinyalleri incelendi.",
+        "findings": [
+          {
+            "label": "HTTPS",
+            "status": "pass",
+            "detail": "Sayfa HTTPS üzerinden açıldı."
+          },
+          {
+            "label": "Sayfa başlığı",
+            "status": "pass",
+            "detail": "Denizli Dijital Pazarlama ve Meta Ads Ajansı"
+          },
+          {
+            "label": "Meta açıklama",
+            "status": "pass",
+            "detail": "DOU Social; Denizli merkezli Meta Ads, sosyal medya yönetimi, içerik üretimi, web tasarım ve yerel SEO ajansı. Reklam bütçenizi daha verimli, markanızı daha görünür hale getirir."
+          },
+          {
+            "label": "Ana başlık",
+            "status": "pass",
+            "detail": "1 H1 bulundu. Sayfanın amacını açıkça anlatan bir ana başlık kullanın."
+          },
+          {
+            "label": "Canonical",
+            "status": "pass",
+            "detail": "Tanımlı adres: https://www.dousocial.com. İçerikle ve gerçek URL ile eşleşmesi ayrıca kontrol edilmeli."
+          },
+          {
+            "label": "Mobil görünüm ayarı",
+            "status": "pass",
+            "detail": "Viewport tanımı var; mobil düzenin görsel testi ayrıca gerekir."
+          },
+          {
+            "label": "İçerik dili",
+            "status": "pass",
+            "detail": "tr"
+          },
+          {
+            "label": "Görsel alternatifleri",
+            "status": "pass",
+            "detail": "27 görselden 0 tanesinde alt niteliği eksik. Alt metnin anlamlılığı ayrıca incelenmeli."
+          },
+          {
+            "label": "Yapılandırılmış veri",
+            "status": "pass",
+            "detail": "JSON-LD bulundu; şema doğruluğu Rich Results Test ile kontrol edilmeli."
+          },
+          {
+            "label": "İndeksleme talimatı",
+            "status": "pass",
+            "detail": "HTML robots meta içinde noindex görülmedi. HTTP başlıkları ve robots.txt bu kontrole dahil değildir."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "input": {
+      "instagram": "@dousocial"
+    },
+    "status": 200,
+    "sources": [
+      {
+        "kind": "instagram",
+        "url": "https://www.instagram.com/dousocial/",
+        "available": true,
+        "summary": "@dousocial profilinin herkese açık özeti okundu.",
+        "findings": [
+          {
+            "label": "Herkese açık profil özeti",
+            "status": "pass",
+            "detail": "8 Followers, 36 Following, 0 Posts - See Instagram photos and videos from ferdaous (@dousocial)"
+          },
+          {
+            "label": "Özel istatistikler",
+            "status": "unknown",
+            "detail": "Gösterim, erişim, etkileşim oranı ve reklam sonuçları herkese açık özette bulunmaz. Detaylı inceleme için hesap istatistikleri gerekir."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "input": {},
+    "status": 400,
+    "error": {
+      "error": "Geçerli bir web sitesi adresi veya Instagram kullanıcı adı girin."
+    }
+  },
+  {
+    "input": {
+      "website": "http://127.0.0.1"
+    },
+    "status": 400,
+    "error": {
+      "error": "Geçerli bir web sitesi adresi veya Instagram kullanıcı adı girin."
+    }
+  },
+  {
+    "input": {
+      "instagram": "../../etc/passwd"
+    },
+    "status": 429,
+    "error": {
+      "error": "Çok fazla analiz isteği gönderdiniz. Biraz sonra tekrar deneyin."
+    }
+  }
+]

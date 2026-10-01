@@ -1,12 +1,6 @@
-import type { Metadata } from "next";
-import { AuditTool } from "@/components/audit/AuditTool";
+import { permanentRedirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "DouAI – Sosyal Medya Analizi · DOU Social",
-  description:
-    "İşletmenizin sosyal medya hesaplarını ücretsiz analiz edin. Sayılarınızı girin ya da ekran görüntüsü yükleyin, DouAI saniyeler içinde kişisel rapor hazırlasın.",
-};
-
-export default function AuditPage() {
-  return <AuditTool />;
+export default async function AuditPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  permanentRedirect(locale === "en" ? "/en/dijital-checkup" : "/dijital-checkup");
 }

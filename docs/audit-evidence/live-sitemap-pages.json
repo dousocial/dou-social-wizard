@@ -1,0 +1,962 @@
+[
+  {
+    "url": "https://www.dousocial.com",
+    "status": 200,
+    "final": "https://www.dousocial.com",
+    "title": [
+      "Denizli Dijital Pazarlama ve Meta Ads Ajansı"
+    ],
+    "h1": [
+      "Karşınıza çıkan reklamları<!-- --> <span class=\"bg-gradient-to-r from-red-400 via-red-500 to-red-700 bg-clip-text text-transparent font-bold\">biz</span> <!-- -->tasarlıyoruz."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 256621
+  },
+  {
+    "url": "https://www.dousocial.com/en",
+    "status": 200,
+    "final": "https://www.dousocial.com/en",
+    "title": [
+      "Digital Marketing and Meta Ads Agency in Turkey"
+    ],
+    "h1": [
+      "The ads you see?<!-- --> <span class=\"bg-gradient-to-r from-red-400 via-red-500 to-red-700 bg-clip-text text-transparent font-bold\">We</span> <!-- -->designed them."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 254529
+  },
+  {
+    "url": "https://www.dousocial.com/hakkimizda",
+    "status": 200,
+    "final": "https://www.dousocial.com/hakkimizda",
+    "title": [
+      "Hakkımızda · DOU Social"
+    ],
+    "h1": [
+      "Sadece Bir Ajans Değil, Büyüme Ortağıyız."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 147027
+  },
+  {
+    "url": "https://www.dousocial.com/en/hakkimizda",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hakkimizda",
+    "title": [
+      "About Us · DOU Social"
+    ],
+    "h1": [
+      "Not Just an Agency. Your Growth Partner."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 145435
+  },
+  {
+    "url": "https://www.dousocial.com/iletisim",
+    "status": 200,
+    "final": "https://www.dousocial.com/iletisim",
+    "title": [
+      "İletişim · DOU Social"
+    ],
+    "h1": [
+      "Projeniz için konuşalım."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 156226
+  },
+  {
+    "url": "https://www.dousocial.com/en/iletisim",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/iletisim",
+    "title": [
+      "Contact · DOU Social"
+    ],
+    "h1": [
+      "Let&#x27;s talk about your project."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 154105
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler",
+    "title": [
+      "Hizmetler · DOU Social"
+    ],
+    "h1": [
+      "Dijital büyümenin tüm boyutları, tek elden."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 151195
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler",
+    "title": [
+      "Services · DOU Social"
+    ],
+    "h1": [
+      "Every dimension of digital growth, from one source."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 149493
+  },
+  {
+    "url": "https://www.dousocial.com/projeler",
+    "status": 200,
+    "final": "https://www.dousocial.com/projeler",
+    "title": [
+      "Projeler · DOU Social"
+    ],
+    "h1": [
+      "Sayılarla konuşan işler."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 134154
+  },
+  {
+    "url": "https://www.dousocial.com/en/projeler",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/projeler",
+    "title": [
+      "Work · DOU Social"
+    ],
+    "h1": [
+      "Work that speaks in numbers."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 132455
+  },
+  {
+    "url": "https://www.dousocial.com/influencerlar",
+    "status": 200,
+    "final": "https://www.dousocial.com/influencerlar",
+    "title": [
+      "Çalıştığımız Influencerlar — DOU Social · DOU Social"
+    ],
+    "h1": [
+      "Markanıza Değer Katan İçerik Üreticileri."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/influencerlar\"/>"
+    ],
+    "bytes": 273904
+  },
+  {
+    "url": "https://www.dousocial.com/en/influencerlar",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/influencerlar",
+    "title": [
+      "Our Influencers — DOU Social · DOU Social"
+    ],
+    "h1": [
+      "Content Creators Bringing Value to Your Brand."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/influencerlar\"/>"
+    ],
+    "bytes": 271980
+  },
+  {
+    "url": "https://www.dousocial.com/blog",
+    "status": 200,
+    "final": "https://www.dousocial.com/blog",
+    "title": [
+      "Blog · DOU Social"
+    ],
+    "h1": [
+      "Dijital pazarlamada rehberiniz."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 155344
+  },
+  {
+    "url": "https://www.dousocial.com/en/blog",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/blog",
+    "title": [
+      "Blog · DOU Social"
+    ],
+    "h1": [
+      "Dijital pazarlamada rehberiniz."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 132040
+  },
+  {
+    "url": "https://www.dousocial.com/teklif-al",
+    "status": 200,
+    "final": "https://www.dousocial.com/teklif-al",
+    "title": [
+      "Teklif Al · DOU Social"
+    ],
+    "h1": [
+      "Markana özel teklif."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 133461
+  },
+  {
+    "url": "https://www.dousocial.com/en/teklif-al",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/teklif-al",
+    "title": [
+      "Get a Quote · DOU Social"
+    ],
+    "h1": [
+      "A proposal made for your brand."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 131704
+  },
+  {
+    "url": "https://www.dousocial.com/dijital-checkup",
+    "status": 200,
+    "final": "https://www.dousocial.com/dijital-checkup",
+    "title": [
+      "Ücretsiz Sosyal Medya Analizi — DOU Social · DOU Social"
+    ],
+    "h1": [
+      "Sosyal medyan gerçekten çalışıyor mu?"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 146847
+  },
+  {
+    "url": "https://www.dousocial.com/en/dijital-checkup",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/dijital-checkup",
+    "title": [
+      "Free Social Media Analysis — DOU Social · DOU Social"
+    ],
+    "h1": [
+      "How is your social media doing? We&#x27;ll tell you."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 144865
+  },
+  {
+    "url": "https://www.dousocial.com/influencer",
+    "status": 200,
+    "final": "https://www.dousocial.com/influencer",
+    "title": [
+      "Influencer Başvurusu · DOU Social"
+    ],
+    "h1": [
+      "Bizimle çalışmak ister misin?"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/influencer\"/>"
+    ],
+    "bytes": 145268
+  },
+  {
+    "url": "https://www.dousocial.com/en/influencer",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/influencer",
+    "title": [
+      "Influencer Application · DOU Social"
+    ],
+    "h1": [
+      "Want to work with us?"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/influencer\"/>"
+    ],
+    "bytes": 143283
+  },
+  {
+    "url": "https://www.dousocial.com/denizli-sosyal-medya-ajansi",
+    "status": 200,
+    "final": "https://www.dousocial.com/denizli-sosyal-medya-ajansi",
+    "title": [
+      "Denizli Sosyal Medya Ajansı — DOU Social · DOU Social"
+    ],
+    "h1": [
+      "Denizli&#x27;nin sosyal medya ajansı."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 158441
+  },
+  {
+    "url": "https://www.dousocial.com/en/denizli-sosyal-medya-ajansi",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/denizli-sosyal-medya-ajansi",
+    "title": [
+      "Denizli Social Media Agency — DOU Social · DOU Social"
+    ],
+    "h1": [
+      "The social media agency of Denizli."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 156573
+  },
+  {
+    "url": "https://www.dousocial.com/meta-ads-ajansi",
+    "status": 200,
+    "final": "https://www.dousocial.com/meta-ads-ajansi",
+    "title": [
+      "Meta Ads Ajansı — Facebook &amp; Instagram Reklam Yönetimi · DOU Social"
+    ],
+    "h1": [
+      "Reklam bütçeni harcama, sonuca dönüştür."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 156172
+  },
+  {
+    "url": "https://www.dousocial.com/en/meta-ads-ajansi",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/meta-ads-ajansi",
+    "title": [
+      "Meta Ads Agency — Facebook &amp; Instagram Ad Management · DOU Social"
+    ],
+    "h1": [
+      "Stop spending. Start converting."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 154292
+  },
+  {
+    "url": "https://www.dousocial.com/instagram-reklam-yonetimi",
+    "status": 200,
+    "final": "https://www.dousocial.com/instagram-reklam-yonetimi",
+    "title": [
+      "Instagram Reklam Yönetimi — DOU Social · DOU Social"
+    ],
+    "h1": [
+      "Instagram&#x27;da görünmek değil, satmak."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 156274
+  },
+  {
+    "url": "https://www.dousocial.com/en/instagram-reklam-yonetimi",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/instagram-reklam-yonetimi",
+    "title": [
+      "Instagram Ads Management — DOU Social · DOU Social"
+    ],
+    "h1": [
+      "On Instagram, don&#x27;t just appear — sell."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 154249
+  },
+  {
+    "url": "https://www.dousocial.com/dijital-pazarlama-ajansi",
+    "status": 200,
+    "final": "https://www.dousocial.com/dijital-pazarlama-ajansi",
+    "title": [
+      "Dijital Pazarlama Ajansı — DOU Social · DOU Social"
+    ],
+    "h1": [
+      "Markanın dijital büyüme operasyonu."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com\"/>"
+    ],
+    "bytes": 156130
+  },
+  {
+    "url": "https://www.dousocial.com/en/dijital-pazarlama-ajansi",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/dijital-pazarlama-ajansi",
+    "title": [
+      "Digital Marketing Agency — DOU Social · DOU Social"
+    ],
+    "h1": [
+      "Your brand&#x27;s digital growth operation."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en\"/>"
+    ],
+    "bytes": 154470
+  },
+  {
+    "url": "https://www.dousocial.com/gizlilik-politikasi",
+    "status": 200,
+    "final": "https://www.dousocial.com/gizlilik-politikasi",
+    "title": [
+      "Gizlilik Politikası · DOU Social"
+    ],
+    "h1": [
+      "Gizlilik Politikası"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/gizlilik-politikasi\"/>"
+    ],
+    "bytes": 136679
+  },
+  {
+    "url": "https://www.dousocial.com/en/gizlilik-politikasi",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/gizlilik-politikasi",
+    "title": [
+      "Privacy Policy · DOU Social"
+    ],
+    "h1": [
+      "Privacy Policy"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/gizlilik-politikasi\"/>"
+    ],
+    "bytes": 134278
+  },
+  {
+    "url": "https://www.dousocial.com/kullanim-kosullari",
+    "status": 200,
+    "final": "https://www.dousocial.com/kullanim-kosullari",
+    "title": [
+      "Kullanım Koşulları · DOU Social"
+    ],
+    "h1": [
+      "Kullanım Koşulları"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/kullanim-kosullari\"/>"
+    ],
+    "bytes": 134438
+  },
+  {
+    "url": "https://www.dousocial.com/en/kullanim-kosullari",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/kullanim-kosullari",
+    "title": [
+      "Terms of Service · DOU Social"
+    ],
+    "h1": [
+      "Terms of Service"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/kullanim-kosullari\"/>"
+    ],
+    "bytes": 132488
+  },
+  {
+    "url": "https://www.dousocial.com/cerez-politikasi",
+    "status": 200,
+    "final": "https://www.dousocial.com/cerez-politikasi",
+    "title": [
+      "Çerez Politikası · DOU Social"
+    ],
+    "h1": [
+      "Çerez Politikası"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/cerez-politikasi\"/>"
+    ],
+    "bytes": 133295
+  },
+  {
+    "url": "https://www.dousocial.com/en/cerez-politikasi",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/cerez-politikasi",
+    "title": [
+      "Cookie Policy · DOU Social"
+    ],
+    "h1": [
+      "Cookie Policy"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/cerez-politikasi\"/>"
+    ],
+    "bytes": 131233
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler/sosyal-medya-marka",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler/sosyal-medya-marka",
+    "title": [
+      "Markanın dijital sesi, stratejik ve tutarlı. · DOU Social"
+    ],
+    "h1": [
+      "Markanın dijital sesi, stratejik ve tutarlı."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/hizmetler/sosyal-medya-marka\"/>"
+    ],
+    "bytes": 157089
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler/sosyal-medya-marka",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler/sosyal-medya-marka",
+    "title": [
+      "Your brand&#x27;s digital voice — strategic and consistent. · DOU Social"
+    ],
+    "h1": [
+      "Your brand&#x27;s digital voice — strategic and consistent."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/hizmetler/sosyal-medya-marka\"/>"
+    ],
+    "bytes": 155969
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler/meta-reklamlari",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler/meta-reklamlari",
+    "title": [
+      "Reklam bütçeni harcama, sonuca dönüştür. · DOU Social"
+    ],
+    "h1": [
+      "Reklam bütçeni harcama, sonuca dönüştür."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/hizmetler/meta-reklamlari\"/>"
+    ],
+    "bytes": 156911
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler/meta-reklamlari",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler/meta-reklamlari",
+    "title": [
+      "Don&#x27;t spend your ad budget — convert it. · DOU Social"
+    ],
+    "h1": [
+      "Don&#x27;t spend your ad budget — convert it."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/hizmetler/meta-reklamlari\"/>"
+    ],
+    "bytes": 155201
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler/icerik-video",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler/icerik-video",
+    "title": [
+      "Sahada hızlı, kurguda güçlüyüz. · DOU Social"
+    ],
+    "h1": [
+      "Sahada hızlı, kurguda güçlüyüz."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/hizmetler/icerik-video\"/>"
+    ],
+    "bytes": 157222
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler/icerik-video",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler/icerik-video",
+    "title": [
+      "Fast on set, strong in post. · DOU Social"
+    ],
+    "h1": [
+      "Fast on set, strong in post."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/hizmetler/icerik-video\"/>"
+    ],
+    "bytes": 155501
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler/performans-pazarlama",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler/performans-pazarlama",
+    "title": [
+      "Daha fazla dönüşüm, daha yüksek yatırım getirisi. · DOU Social"
+    ],
+    "h1": [
+      "Daha fazla dönüşüm, daha yüksek yatırım getirisi."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/hizmetler/performans-pazarlama\"/>"
+    ],
+    "bytes": 157056
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler/performans-pazarlama",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler/performans-pazarlama",
+    "title": [
+      "More conversions, higher return on investment. · DOU Social"
+    ],
+    "h1": [
+      "More conversions, higher return on investment."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/hizmetler/performans-pazarlama\"/>"
+    ],
+    "bytes": 155343
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler/google-seo",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler/google-seo",
+    "title": [
+      "Yakınınızdaki müşteriler sizi bulsun. · DOU Social"
+    ],
+    "h1": [
+      "Yakınınızdaki müşteriler sizi bulsun."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/hizmetler/google-seo\"/>"
+    ],
+    "bytes": 156727
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler/google-seo",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler/google-seo",
+    "title": [
+      "Help nearby customers find you. · DOU Social"
+    ],
+    "h1": [
+      "Help nearby customers find you."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/hizmetler/google-seo\"/>"
+    ],
+    "bytes": 154792
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler/web-yazilim",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler/web-yazilim",
+    "title": [
+      "Hızlı, kullanıcı dostu, dönüşüm odaklı. · DOU Social"
+    ],
+    "h1": [
+      "Hızlı, kullanıcı dostu, dönüşüm odaklı."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/hizmetler/web-yazilim\"/>"
+    ],
+    "bytes": 157827
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler/web-yazilim",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler/web-yazilim",
+    "title": [
+      "Fast, user-friendly, conversion-focused. · DOU Social"
+    ],
+    "h1": [
+      "Fast, user-friendly, conversion-focused."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/hizmetler/web-yazilim\"/>"
+    ],
+    "bytes": 155951
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler/kurumsal-kimlik",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler/kurumsal-kimlik",
+    "title": [
+      "Markanızın karakterini tasarıma dönüştürün. · DOU Social"
+    ],
+    "h1": [
+      "Markanızın karakterini tasarıma dönüştürün."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/hizmetler/kurumsal-kimlik\"/>"
+    ],
+    "bytes": 156567
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler/kurumsal-kimlik",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler/kurumsal-kimlik",
+    "title": [
+      "Turn your brand&#x27;s character into design. · DOU Social"
+    ],
+    "h1": [
+      "Turn your brand&#x27;s character into design."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/hizmetler/kurumsal-kimlik\"/>"
+    ],
+    "bytes": 155230
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler/influencer-marketing",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler/influencer-marketing",
+    "title": [
+      "Doğru içerik üreticisiyle güçlü iş birlikleri. · DOU Social"
+    ],
+    "h1": [
+      "Doğru içerik üreticisiyle güçlü iş birlikleri."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/hizmetler/influencer-marketing\"/>"
+    ],
+    "bytes": 157120
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler/influencer-marketing",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler/influencer-marketing",
+    "title": [
+      "Powerful partnerships with the right creators. · DOU Social"
+    ],
+    "h1": [
+      "Powerful partnerships with the right creators."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/hizmetler/influencer-marketing\"/>"
+    ],
+    "bytes": 155640
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler/eticaret-buyume",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler/eticaret-buyume",
+    "title": [
+      "Daha fazla satış, daha düşük maliyet. · DOU Social"
+    ],
+    "h1": [
+      "Daha fazla satış, daha düşük maliyet."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/hizmetler/eticaret-buyume\"/>"
+    ],
+    "bytes": 156695
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler/eticaret-buyume",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler/eticaret-buyume",
+    "title": [
+      "More sales, lower cost. · DOU Social"
+    ],
+    "h1": [
+      "More sales, lower cost."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/hizmetler/eticaret-buyume\"/>"
+    ],
+    "bytes": 154923
+  },
+  {
+    "url": "https://www.dousocial.com/hizmetler/crm-dijital",
+    "status": 200,
+    "final": "https://www.dousocial.com/hizmetler/crm-dijital",
+    "title": [
+      "İş süreçlerinizi dijitalleştirin. · DOU Social"
+    ],
+    "h1": [
+      "İş süreçlerinizi dijitalleştirin."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/hizmetler/crm-dijital\"/>"
+    ],
+    "bytes": 156835
+  },
+  {
+    "url": "https://www.dousocial.com/en/hizmetler/crm-dijital",
+    "status": 200,
+    "final": "https://www.dousocial.com/en/hizmetler/crm-dijital",
+    "title": [
+      "Digitalise your business processes. · DOU Social"
+    ],
+    "h1": [
+      "Digitalise your business processes."
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/en/hizmetler/crm-dijital\"/>"
+    ],
+    "bytes": 155204
+  },
+  {
+    "url": "https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama-trendleri",
+    "status": 200,
+    "final": "https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama-trendleri",
+    "title": [
+      "Mimarlık ve İç Mimarlıkta Dijital Pazarlama Trendleri 2026 · DOU Social"
+    ],
+    "h1": [
+      "Mimarlık ve İç Mimarlıkta Pazarlama Trendleri (2026)"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama-trendleri\"/>"
+    ],
+    "bytes": 170981
+  },
+  {
+    "url": "https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama",
+    "status": 200,
+    "final": "https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama",
+    "title": [
+      "Mimarlık ve İç Mimarlık İçin Dijital Pazarlama Rehberi · DOU Social"
+    ],
+    "h1": [
+      "Mimarlık ve İç Mimarlıkta Dijital Pazarlama"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/blog/mimarlik-ic-mimarlik-dijital-pazarlama\"/>"
+    ],
+    "bytes": 174192
+  },
+  {
+    "url": "https://www.dousocial.com/blog/mermer-sektoru-dijital-pazarlama",
+    "status": 200,
+    "final": "https://www.dousocial.com/blog/mermer-sektoru-dijital-pazarlama",
+    "title": [
+      "Mermer Sektöründe Dijital Pazarlama: 2026 Rehberi · DOU Social"
+    ],
+    "h1": [
+      "Mermer Sektöründe Dijital Pazarlama: 2026 Rehberi"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/blog/mermer-sektoru-dijital-pazarlama\"/>"
+    ],
+    "bytes": 188782
+  },
+  {
+    "url": "https://www.dousocial.com/blog/mermer-dijital-pazarlama-trendleri-2026",
+    "status": 200,
+    "final": "https://www.dousocial.com/blog/mermer-dijital-pazarlama-trendleri-2026",
+    "title": [
+      "Mermer Sektörü Dijital Pazarlama Trendleri (2026) · DOU Social"
+    ],
+    "h1": [
+      "Mermer Sektörü Dijital Pazarlama Trendleri (2026)"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/blog/mermer-dijital-pazarlama-trendleri-2026\"/>"
+    ],
+    "bytes": 174224
+  },
+  {
+    "url": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama",
+    "status": 200,
+    "final": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama",
+    "title": [
+      "Spor Salonu Dijital Pazarlama Rehberi (2026) · DOU Social"
+    ],
+    "h1": [
+      "Spor Salonu Dijital Pazarlama Rehberi (2026)"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama\"/>"
+    ],
+    "bytes": 177796
+  },
+  {
+    "url": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama-trendleri-2026",
+    "status": 200,
+    "final": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama-trendleri-2026",
+    "title": [
+      "Spor Salonu Dijital Pazarlama Trendleri (2026) · DOU Social"
+    ],
+    "h1": [
+      "Spor Salonu Dijital Pazarlama Trendleri (2026)"
+    ],
+    "noindex": false,
+    "canonical": [
+      "<link rel=\"canonical\" href=\"https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama-trendleri-2026\"/>"
+    ],
+    "bytes": 172648
+  }
+]

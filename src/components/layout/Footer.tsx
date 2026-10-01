@@ -1,4 +1,6 @@
-import { useTranslations } from "next-intl";
+import { CookiePreferences } from "@/components/analytics/CookiePreferences";
+import { MARKETING_SERVICES } from "@/lib/marketing-services";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/brand/Logo";
 import { Container } from "@/components/ui/Container";
@@ -39,6 +41,7 @@ const SOCIAL = [
 
 export function Footer() {
   const t = useTranslations("Footer");
+  const en = useLocale() === "en";
   const tNav = useTranslations("Nav");
   const year = new Date().getFullYear();
 
@@ -56,6 +59,7 @@ export function Footer() {
               {t("services")}
             </h3>
             <ul className="mt-4 space-y-3">
+              {MARKETING_SERVICES.map((service) => <li key={service.slug}><Link href={`/${service.slug}`} className="text-sm text-mute-600 transition hover:text-ink">{en ? service.en.title : service.tr.title}</Link></li>)}
               {SERVICES.map((s) => (
                 <li key={s.label}>
                   <Link
@@ -111,7 +115,7 @@ export function Footer() {
                 </a>
               </p>
             </address>
-            <ul className="mt-6 flex gap-4">
+            <ul className="mt-6 flex flex-wrap gap-4">
               {SOCIAL.map((s) => (
                 <li key={s.label}>
                   <a
@@ -130,7 +134,8 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-mute-100 pt-8 text-xs text-mute-500 md:flex-row md:items-center">
           <p>© {year} DOU Social. {t("rights")}</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-6">
+            <CookiePreferences />
             <Link
               href={"/gizlilik-politikasi" as never}
               className="transition hover:text-ink"

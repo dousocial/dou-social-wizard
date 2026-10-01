@@ -1,0 +1,12 @@
+[
+  {
+    "check": "DB outage does not publish empty indexing state /en/blog",
+    "passed": true,
+    "status": 500
+  },
+  {
+    "check": "DB outage does not publish empty indexing state /sitemap.xml",
+    "passed": true,
+    "status": 500
+  }
+]

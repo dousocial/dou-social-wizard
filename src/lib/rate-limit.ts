@@ -28,10 +28,12 @@ export function rateLimit(
   options: RateLimitOptions
 ): RateLimitResult {
   const now = Date.now();
+  if (buckets.size > 1000) for (const [key, value] of buckets) if (value.resetAt <= now) buckets.delete(key);
+  if (buckets.size > 10000 && !buckets.has(identifier)) return { ok: false, remaining: 0, resetIn: options.windowSeconds };
   const windowMs = options.windowSeconds * 1000;
   const bucket = buckets.get(identifier);
 
-  if (!bucket || now > bucket.resetAt) {
+  if (!bucket || now >= bucket.resetAt) {
     buckets.set(identifier, { count: 1, resetAt: now + windowMs });
     return { ok: true, remaining: options.max - 1, resetIn: options.windowSeconds };
   }

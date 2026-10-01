@@ -1,3 +1,4 @@
+import { alternatesFor } from "@/lib/site";
 import { use } from "react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -19,6 +20,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: alternatesFor("/denizli-sosyal-medya-ajansi", locale as "tr" | "en"),
   };
 }
 

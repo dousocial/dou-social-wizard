@@ -1,0 +1,331 @@
+[
+  {
+    "slug": "reklam-yonetimi",
+    "tr": {
+      "title": "Reklam Yönetimi",
+      "lead": "Google ve Meta kampanyalarını tek bir ölçüm ve teklif hedefi etrafında planlıyoruz.",
+      "intro": "Birden fazla kanalda reklam vermek, her kanala aynı bütçeyi dağıtmak anlamına gelmez. İşletmenin talebini, satış döngüsünü ve hedef müşterisini birlikte ele alır; kampanyaları buna göre planlarız. Denizli merkezli DOU Social, reklam yönetimini içerik ve açılış sayfası çalışmalarıyla birlikte değerlendirir.",
+      "deliverables": [
+        "Kanal ve hedef analizi",
+        "Kampanya yapısı ve bütçe planı",
+        "Reklam metni ve kreatif brief",
+        "Dönüşüm ölçümü kontrolü",
+        "Düzenli sonuç değerlendirmesi"
+      ],
+      "faq": [
+        {
+          "q": "Hangi reklam kanalıyla başlamalıyım?",
+          "a": "Ürün, talep ve satış sürecine göre seçim yapılır. Aktif arama talebinde Google, görsel keşif ve ilgi geliştirmede Meta değerlendirilebilir. Önce hedef ve ölçüm netleşir."
+        },
+        {
+          "q": "Ajans ücreti reklam bütçesine dahil mi?",
+          "a": "Medya bütçesi ve yönetim ücreti farklı kalemlerdir. Teklifte hizmet kapsamı, üretim ihtiyacı ve bütçe ayrımı açıkça belirtilir."
+        }
+      ]
+    },
+    "en": {
+      "title": "Advertising Management",
+      "lead": "We plan Google and Meta campaigns around measurable enquiries and business goals.",
+      "intro": "Running ads across channels does not mean dividing the budget equally. We consider customer demand, the sales cycle and your target audience, then build a channel plan. Denizli-based DOU Social connects campaign management with creative production and landing pages.",
+      "deliverables": [
+        "Channel and goal analysis",
+        "Campaign structure and budget plan",
+        "Ad copy and creative brief",
+        "Conversion measurement review",
+        "Regular performance reviews"
+      ],
+      "faq": [
+        {
+          "q": "Which channel should we start with?",
+          "a": "The choice depends on demand, product and sales process. Google can serve existing search demand; Meta can support visual discovery. Goals and measurement come first."
+        },
+        {
+          "q": "Does the management fee include media spend?",
+          "a": "Media spend and management fees are separate items. The proposal specifies production needs, service scope and budget allocation."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "google-ads-yonetimi",
+    "tr": {
+      "title": "Google Ads Yönetimi",
+      "lead": "Arama yapan potansiyel müşteriyi, ihtiyacına uygun sayfa ve teklif akışıyla buluşturuyoruz.",
+      "intro": "Google Ads çalışmasında yalnızca tıklama sayısına bakmayız. Arama sorgusu, reklam mesajı, açılış sayfası ve teklif kalitesini birlikte değerlendiririz. Denizli işletmeleri için yerel talep; Türkiye genelinde hizmet veren markalar için hedef bölge ve ürün öncelikleri planın temelini oluşturur.",
+      "deliverables": [
+        "Arama niyeti ve anahtar kelime planı",
+        "Negatif anahtar kelime kontrolü",
+        "Arama kampanyası kurulumu",
+        "Landing page ve dönüşüm kontrolü",
+        "Sorgu ve teklif kalitesi raporu"
+      ],
+      "faq": [
+        {
+          "q": "Google Ads ile SEO aynı hizmet mi?",
+          "a": "Hayır. Google Ads ücretli reklam kampanyalarını, SEO ise organik görünürlüğü ele alır. İki çalışma ortak açılış sayfaları ve arama niyeti üzerinden birbirini destekleyebilir."
+        },
+        {
+          "q": "Reklam açınca hemen satış olur mu?",
+          "a": "Satış garanti edilemez. Talep, teklif, rekabet, bütçe ve sayfanın kalitesi sonucu etkiler. İlk aşamada doğru ölçüm ve kontrollü test planı kurulur."
+        }
+      ]
+    },
+    "en": {
+      "title": "Google Ads Management",
+      "lead": "Connect search demand to a relevant landing page and enquiry process.",
+      "intro": "A Google Ads plan considers more than clicks. Search queries, ad messaging, landing pages and enquiry quality are reviewed together. We define local demand for Denizli businesses and target regions for brands serving customers across Turkey.",
+      "deliverables": [
+        "Search intent and keyword planning",
+        "Negative keyword review",
+        "Search campaign setup",
+        "Landing page and conversion review",
+        "Search query and enquiry quality reporting"
+      ],
+      "faq": [
+        {
+          "q": "Is Google Ads the same as SEO?",
+          "a": "Google Ads manages paid campaigns while SEO addresses organic visibility. Both can share search intent research and useful landing pages."
+        },
+        {
+          "q": "Will ads guarantee immediate sales?",
+          "a": "No. Demand, offer, competition, budget and the customer experience affect results. We start with measurement and controlled tests."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "meta-ads-ajansi",
+    "tr": {
+      "title": "Meta Reklam Yönetimi",
+      "lead": "Facebook ve Instagram reklamlarını ortak bir strateji, kreatif test ve ölçüm süreciyle yönetiyoruz.",
+      "intro": "Meta reklamları, hedef kitleye sunulan mesaj ile görsel üretimin birlikte çalışmasını gerektirir. Kampanya hedefini belirler; reklam varyasyonlarını, açılış sayfasını ve gelen başvuruların takibini aynı plan içinde ele alırız. Facebook ve Instagram için ihtiyaç olduğunda platforma özel içerikler hazırlanır.",
+      "deliverables": [
+        "Hesap ve kampanya yapısı incelemesi",
+        "Facebook ve Instagram hedef planı",
+        "Kreatif varyasyon briefleri",
+        "Pixel ve dönüşüm erişimi kontrolü",
+        "Maliyet ve başvuru kalitesi değerlendirmesi"
+      ],
+      "faq": [
+        {
+          "q": "Meta reklam yönetimi hangi platformları kapsar?",
+          "a": "Bu hizmet Facebook ve Instagram kampanyalarını kapsar. Kullanılacak yerleşimler, içerik ve kampanya hedefi teklif aşamasında netleştirilir."
+        },
+        {
+          "q": "İçerik üretimi yönetim ücretine dahil mi?",
+          "a": "Mevcut görsellerin kullanımı ile yeni çekim ve tasarım üretimi farklı kapsamlardır. Teklifte hangi kreatif teslimlerin dahil olduğu açıkça belirtilir."
+        }
+      ]
+    },
+    "en": {
+      "title": "Meta Ads Management",
+      "lead": "Manage Facebook and Instagram campaigns through a shared creative and measurement process.",
+      "intro": "Meta campaigns connect messaging with creative production. We define the campaign goal and review creative variations, landing pages and enquiry follow-up as one process. Platform-specific assets can support Facebook and Instagram placements.",
+      "deliverables": [
+        "Account and campaign review",
+        "Facebook and Instagram goal planning",
+        "Creative variation briefs",
+        "Pixel and conversion access review",
+        "Cost and enquiry quality review"
+      ],
+      "faq": [
+        {
+          "q": "Which platforms are covered?",
+          "a": "The service covers Facebook and Instagram campaigns. Placements, content and campaign goals are agreed in the proposal."
+        },
+        {
+          "q": "Is content production included?",
+          "a": "Using existing assets and producing new photography, video or design are different scopes. Included deliverables are specified in the proposal."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "facebook-reklam-yonetimi",
+    "tr": {
+      "title": "Facebook Reklam Yönetimi",
+      "lead": "Facebook üzerinden gelen ilgiyi takip edilebilir başvuru ve müşteri görüşmesine dönüştüren bir kampanya akışı kuruyoruz.",
+      "intro": "Facebook kampanyalarında hedef, yalnızca beğeni toplamak değildir. İşletmenin müşteri profiline göre web sitesi, mesaj veya başvuru akışı değerlendirilir. Gelen taleplerin zamanında yanıtlanması ve teklif kalitesinin izlenmesi reklam planının bir parçasıdır.",
+      "deliverables": [
+        "Facebook sayfası ve hesap erişimleri",
+        "Hedefe uygun kampanya planı",
+        "Lead form veya web akışı seçimi",
+        "Reklam mesajı ve görsel planı",
+        "Başvuru kaynağı ve kalite takibi"
+      ],
+      "faq": [
+        {
+          "q": "Facebook lead formu mu web sitesi formu mu?",
+          "a": "Hızlı başvuru ile ayrıntılı değerlendirme ihtiyacı birlikte düşünülür. Formun kolay doldurulması kadar başvurunun gerçekten hedef müşteriden gelmesi de önemlidir."
+        },
+        {
+          "q": "Facebook ve Instagram reklamları ayrı mı yönetilir?",
+          "a": "İkisi aynı Meta altyapısından yönetilebilir. Mesaj, kreatif ve yerleşim ihtiyaçları farklıysa platform bazlı plan yapılır."
+        }
+      ]
+    },
+    "en": {
+      "title": "Facebook Ads Management",
+      "lead": "Build a Facebook campaign journey from interest to a trackable enquiry.",
+      "intro": "Facebook campaigns need an objective beyond likes. We assess website, message and lead form journeys against your customer profile. Timely responses and enquiry quality are part of the campaign plan.",
+      "deliverables": [
+        "Page and account access review",
+        "Goal-based campaign planning",
+        "Lead form or website journey selection",
+        "Ad messaging and visual planning",
+        "Enquiry source and quality tracking"
+      ],
+      "faq": [
+        {
+          "q": "Should we use a lead form or a website form?",
+          "a": "We balance ease of enquiry with qualification requirements. A convenient form is useful only when it generates relevant enquiries."
+        },
+        {
+          "q": "Are Facebook and Instagram managed separately?",
+          "a": "Both can use the Meta platform. We plan platform-specific assets when messaging and placement requirements differ."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "instagram-reklam-yonetimi",
+    "tr": {
+      "title": "Instagram Reklam Yönetimi",
+      "lead": "Reels, Stories ve akış reklamlarını markanızın teklifine ve müşteri yolculuğuna uygun içeriklerle planlıyoruz.",
+      "intro": "Instagram reklam yönetiminde içerik, hedef ve takip süreci birlikte tasarlanır. İlk saniyelerde açık mesaj, mobilde anlaşılır teklif ve reklamdan sonra çalışan bir iletişim akışı gerekir. Reklam sonucu yalnızca görüntülenme ile değil, nitelikli mesaj veya başvuruyla değerlendirilir.",
+      "deliverables": [
+        "Reels ve Stories kreatif briefleri",
+        "Akış ve dikey format planı",
+        "Mesaj veya web dönüşüm hedefi",
+        "Kreatif test ve revizyon planı",
+        "Başvuru ve maliyet değerlendirmesi"
+      ],
+      "faq": [
+        {
+          "q": "Gönderiyi öne çıkarmak yeterli mi?",
+          "a": "Basit tanıtımlar için kullanılabilir; ancak hedef, ölçüm ve kreatif test ihtiyacı varsa kampanya yapısı ayrıntılı planlanmalıdır."
+        },
+        {
+          "q": "Instagram reklamından gelen mesajlar nasıl ölçülür?",
+          "a": "Mesaj başlangıçları ile nitelikli müşteri görüşmesi aynı şey değildir. Talep, teklif ve satış aşamaları ayrı takip edilmelidir."
+        }
+      ]
+    },
+    "en": {
+      "title": "Instagram Ads Management",
+      "lead": "Plan Reels, Stories and feed campaigns around your offer and customer journey.",
+      "intro": "Instagram advertising connects creative, objectives and follow-up. Clear opening messages, mobile-friendly offers and a working enquiry journey matter. Views are considered alongside qualified messages and enquiries.",
+      "deliverables": [
+        "Reels and Stories creative briefs",
+        "Feed and vertical format planning",
+        "Message or website conversion goals",
+        "Creative testing and revision plan",
+        "Enquiry and cost review"
+      ],
+      "faq": [
+        {
+          "q": "Is boosting a post enough?",
+          "a": "It may support simple promotion. Campaigns with specific goals, measurement and creative tests need a more structured plan."
+        },
+        {
+          "q": "How do we measure incoming messages?",
+          "a": "Message starts and qualified customer conversations are different. Enquiries, quotes and sales should be tracked separately."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "denizli-etkinlik-cekimi",
+    "tr": {
+      "title": "Etkinlik Çekimi Denizli",
+      "lead": "Lansman, konferans ve fuarlar için etkinlik akışına göre fotoğraf ve video çekim planı hazırlıyoruz.",
+      "intro": "Etkinlik çekimi, önemli anların önceden belirlenmesiyle başlar. Konuşmacılar, sahne akışı, marka alanları ve katılımcı deneyimi için çekim listesi hazırlanır. Denizli ve çevresindeki projelerde mekan, zaman ve teslim ihtiyacına göre kapsam oluşturulur; etkinlik sonrası kullanılacak içerik formatları önceden belirlenir.",
+      "deliverables": [
+        "Etkinlik akışı ve çekim listesi",
+        "Mekan ve saha koşulları planı",
+        "Fotoğraf ve video kapsamı",
+        "Özet video ve sosyal format briefi",
+        "Teslim takvimi ve revizyon kapsamı"
+      ],
+      "faq": [
+        {
+          "q": "Etkinlik çekimi için hangi bilgiler gerekir?",
+          "a": "Tarih, mekan, saat aralığı, program, önemli kişiler ve kullanılacak teslim formatları gerekir. Ekip ve teknik ihtiyaç bu bilgilere göre tekliflendirilir."
+        },
+        {
+          "q": "Aynı gün video teslimi yapılır mı?",
+          "a": "Hızlı teslim ihtiyacı önceden belirtilmelidir. Çekim ve kurgu kapasitesine göre ayrı kapsam ve takvim oluşturulur; her iş için otomatik teslim vaadi verilmez."
+        }
+      ]
+    },
+    "en": {
+      "title": "Event Photography and Video in Denizli",
+      "lead": "Plan photography and video for launches, conferences and trade events in Denizli.",
+      "intro": "Event coverage starts with the moments that matter. Speakers, stage schedules, branded areas and audience experience inform the shot list. For Denizli and surrounding locations, venue, timing and delivery needs define the scope.",
+      "deliverables": [
+        "Schedule and shot list",
+        "Venue and on-site planning",
+        "Photography and video scope",
+        "Recap and social format brief",
+        "Delivery schedule and revision scope"
+      ],
+      "faq": [
+        {
+          "q": "What information is needed for a quote?",
+          "a": "Date, venue, coverage hours, schedule, key people and required formats. Crew and technical requirements depend on that brief."
+        },
+        {
+          "q": "Is same-day delivery available?",
+          "a": "Please specify urgent delivery in advance. It requires a separate production and editing plan and is not included automatically."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "denizli-organizasyon-cekimi",
+    "tr": {
+      "title": "Organizasyon Çekimi Denizli",
+      "lead": "Organizasyon ekipleri için sahadaki koordinasyonu ve farklı içerik teslimlerini tek bir çekim planında birleştiriyoruz.",
+      "intro": "Organizasyon çekiminde birden fazla sahne, marka veya ekip aynı takvimde çalışabilir. Yetkili iletişim kişisi, erişim saatleri, kritik anlar ve teslim onayları önceden netleşir. Bu hizmet organizasyon sahibi veya ajansın koordinasyon ihtiyacına odaklanır; çekim günü sorumluluklar ve sonrasındaki kullanım kapsamı belirlenir.",
+      "deliverables": [
+        "Organizatör ve saha ekibi koordinasyonu",
+        "Çoklu alan ve zaman çizelgesi",
+        "Marka bazlı çekim öncelikleri",
+        "Teslim formatı ve kullanım planı",
+        "Onay ve revizyon akışı"
+      ],
+      "faq": [
+        {
+          "q": "Etkinlik çekiminden farkı nedir?",
+          "a": "Etkinlik çekimi tek etkinliğin hikayesine; organizasyon çekimi ise organizatörün çoklu alan, ekip, marka ve teslim koordinasyonuna odaklanır. İhtiyaca göre tek teklif altında birleştirilebilir."
+        },
+        {
+          "q": "Çekim teklifleri nasıl karşılaştırılmalı?",
+          "a": "Saat, ekip, fotoğraf/video teslim sayısı, kurgu, format, revizyon, kullanım hakları ve ulaşım kalemleri aynı kapsamla karşılaştırılmalıdır."
+        }
+      ]
+    },
+    "en": {
+      "title": "Production Coverage for Organisations in Denizli",
+      "lead": "Coordinate on-site coverage and content deliveries for organisers in Denizli.",
+      "intro": "Organisation coverage can involve multiple stages, brands and teams. Contacts, access times, critical moments and delivery approvals are agreed in advance. This service focuses on the organiser’s coordination needs and content usage requirements.",
+      "deliverables": [
+        "Organiser and field team coordination",
+        "Multi-area schedule",
+        "Brand-specific coverage priorities",
+        "Delivery format and usage plan",
+        "Approval and revision workflow"
+      ],
+      "faq": [
+        {
+          "q": "How is this different from event coverage?",
+          "a": "Event coverage focuses on the event story. Organisation coverage focuses on multiple areas, teams, brands and coordinated deliveries. Both can be combined in one proposal."
+        },
+        {
+          "q": "How should production quotes be compared?",
+          "a": "Compare hours, crew, deliverables, editing, formats, revisions, usage rights and travel on an equivalent scope."
+        }
+      ]
+    }
+  }
+]

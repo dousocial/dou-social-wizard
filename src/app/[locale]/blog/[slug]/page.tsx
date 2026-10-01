@@ -1,3 +1,4 @@
+import { MARKETING_SERVICES } from "@/lib/marketing-services";
 import { use } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -64,7 +65,7 @@ export default function BlogPostPage({
   if (!post) notFound();
 
   const all = use(getAllPosts(locale));
-  const related = all.filter((p) => p.slug !== slug).slice(0, 3);
+  const related = all.filter((p) => p.slug !== slug).sort((a, b) => Number(b.tags?.some(tag => post.tags?.includes(tag))) - Number(a.tags?.some(tag => post.tags?.includes(tag)))).slice(0, 3);
 
   const t = useTranslations("Blog");
   const url = `${SITE_URL}${locale === "tr" ? "" : `/${locale}`}/blog/${slug}`;
@@ -98,7 +99,7 @@ export default function BlogPostPage({
               <span>{formatDate(post.date, locale)}</span>
               <span>·</span>
               <span>{post.readingMinutes} dk okuma</span>
-              {post.tags?.map((tag) => (
+              {post.tags?.filter((tag) => !MARKETING_SERVICES.some((service) => service.slug === tag)).map((tag) => (
                 <span key={tag} className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-accent">
                   {tag}
                 </span>
