@@ -35,6 +35,7 @@ function validateShared(s: SharedFields): string | null {
   if (!isEmail(s.email)) return "invalid-email";
   if (!s.consent) return "consent-required";
   if (s.name.length > 200 || s.email.length > 320) return "invalid-input";
+  if (s.phone && s.phone.length > 50) return "invalid-phone";
   if (s.message && s.message.length > 5000) return "invalid-input";
   return null;
 }
@@ -92,8 +93,8 @@ export async function submitContactForm(
   });
 
   if (dbErr) {
-    console.error("[contact form] supabase error:", dbErr.message, dbErr.code);
-    return { status: "error", error: "db-error: " + dbErr.message };
+    console.error("Contact request storage failed");
+    return { status: "error", error: "db-error" };
   }
 
   return { status: "success" };
@@ -119,7 +120,31 @@ export async function submitQuoteRequest(
   const sharedErr = validateShared(shared);
   if (sharedErr) return { status: "error", error: sharedErr };
 
-  console.log("[quote]", { ...shared, company, industry, services, budget });
+  if (
+    [company, industry, budget, ...services].some((v) => v.length > 500) ||
+    services.length > 20
+  )
+    return { status: "error", error: "invalid-input" };
+  try {
+    const { error } = await supabase
+      .from("contacts")
+      .insert({
+        type: "teklif",
+        name: shared.name,
+        email: shared.email,
+        phone: shared.phone ?? null,
+        message: JSON.stringify({
+          company,
+          industry,
+          services,
+          budget,
+          message: shared.message,
+        }),
+      });
+    if (error) return { status: "error", error: "db-error" };
+  } catch {
+    return { status: "error", error: "db-error" };
+  }
   return { status: "success" };
 }
 
@@ -152,7 +177,20 @@ export async function submitCheckupRequest(
     if (h) handles[p] = h;
   }
 
-  console.log("[checkup]", { ...shared, sector, platforms, handles, website });
+  try {
+    const { error } = await supabase
+      .from("contacts")
+      .insert({
+        type: "checkup",
+        name: shared.name,
+        email: shared.email,
+        phone: shared.phone ?? null,
+        message: JSON.stringify({ sector, platforms, handles, website }),
+      });
+    if (error) return { status: "error", error: "db-error" };
+  } catch {
+    return { status: "error", error: "db-error" };
+  }
   return { status: "success" };
 }
 
@@ -185,45 +223,25 @@ export async function submitInfluencerApplication(
   if (adSoyad.length > 200 || sosyalHesap.length > 200)
     return { status: "error", error: "invalid-input" };
 
-  const { error: dbErr } = await supabase.from("influencer_basvurulari").insert({
-    ad_soyad: adSoyad,
-    telefon,
-    email: email || null,
-    sosyal_hesap: sosyalHesap,
-    fiyat: fiyat || null,
-    ilgi_alanlari: ilgiAlanlari || null,
-    sektorler,
-    icerik_linki: icerikLinki || null,
-    kvkk_onay: kvkkOnay,
-    beyan_onay: beyanOnay,
-  });
+  const { error: dbErr } = await supabase
+    .from("influencer_basvurulari")
+    .insert({
+      ad_soyad: adSoyad,
+      telefon,
+      email: email || null,
+      sosyal_hesap: sosyalHesap,
+      fiyat: fiyat || null,
+      ilgi_alanlari: ilgiAlanlari || null,
+      sektorler,
+      icerik_linki: icerikLinki || null,
+      kvkk_onay: kvkkOnay,
+      beyan_onay: beyanOnay,
+    });
 
   if (dbErr) {
-    console.error("[influencer form] supabase error:", dbErr.message, dbErr.code);
-    return { status: "error", error: "db-error: " + dbErr.message };
+    console.error("Influencer application storage failed");
+    return { status: "error", error: "db-error" };
   }
 
-  return { status: "success" };
-}
-
-// ─── /strateji-gorusmesi ─────────────────────────────────────────────────
-export async function submitMeetingRequest(
-  _prev: FormState,
-  formData: FormData
-): Promise<FormState> {
-  if (isHoneypotTriggered(formData)) return { status: "success" };
-  const limited = await checkRateLimit("meeting");
-  if (!limited.ok) return { status: "error", error: "rate-limited" };
-
-  const shared = readShared(formData);
-  const slots = formData.getAll("slots").map(String);
-  const topic = String(formData.get("topic") ?? "").trim();
-
-  if (slots.length === 0 || !topic)
-    return { status: "error", error: "missing-fields" };
-  const sharedErr = validateShared(shared);
-  if (sharedErr) return { status: "error", error: sharedErr };
-
-  console.log("[meeting]", { ...shared, topic, slots });
   return { status: "success" };
 }

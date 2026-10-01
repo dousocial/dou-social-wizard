@@ -1,0 +1,103 @@
+[
+  {
+    "check": "Retired redirect /strateji-gorusmesi",
+    "passed": true
+  },
+  {
+    "check": "Retired redirect /tr/strateji-gorusmesi",
+    "passed": true
+  },
+  {
+    "check": "Retired redirect /en/strateji-gorusmesi",
+    "passed": true
+  },
+  {
+    "check": "Noindex /projeler",
+    "passed": true
+  },
+  {
+    "check": "Noindex /en/projeler",
+    "passed": true
+  },
+  {
+    "check": "Noindex /en/blog",
+    "passed": true
+  },
+  {
+    "check": "Admin login header",
+    "passed": true
+  },
+  {
+    "check": "Admin login content",
+    "status": "unverified",
+    "reason": "Missing Supabase environment variables"
+  },
+  {
+    "check": "Legacy admin header",
+    "passed": true
+  },
+  {
+    "check": "Private approval header",
+    "passed": true
+  },
+  {
+    "check": "Canonical /hakkimizda",
+    "passed": true
+  },
+  {
+    "check": "Canonical /en/hakkimizda",
+    "passed": true
+  },
+  {
+    "check": "Canonical /blog",
+    "passed": true
+  },
+  {
+    "check": "Canonical /hizmetler",
+    "passed": true
+  },
+  {
+    "check": "Canonical /meta-ads-ajansi",
+    "passed": true
+  },
+  {
+    "check": "Canonical /en/meta-ads-ajansi",
+    "passed": true
+  },
+  {
+    "check": "Canonical /sss",
+    "passed": true
+  },
+  {
+    "check": "Empty/retired sitemap exclusions",
+    "passed": true
+  },
+  {
+    "check": "FAQ present",
+    "passed": true
+  },
+  {
+    "check": "Missing route 404 /olmayan-sayfa-kontrol",
+    "passed": true
+  },
+  {
+    "check": "Missing route 404 /blog/olmayan-yazi-kontrol",
+    "passed": true
+  },
+  {
+    "check": "Missing route 404 /hizmetler/olmayan-hizmet-kontrol",
+    "passed": true
+  },
+  {
+    "check": "Empty article returns 404",
+    "passed": true
+  },
+  {
+    "check": "Published EN enables indexing",
+    "passed": true
+  },
+  {
+    "check": "Published EN enters sitemap",
+    "passed": true
+  }
+]

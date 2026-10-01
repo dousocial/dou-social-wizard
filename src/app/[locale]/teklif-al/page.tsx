@@ -1,3 +1,4 @@
+import { alternatesFor } from "@/lib/site";
 import { use } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
@@ -15,6 +16,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: alternatesFor("/teklif-al", locale as "tr" | "en"),
   };
 }
 

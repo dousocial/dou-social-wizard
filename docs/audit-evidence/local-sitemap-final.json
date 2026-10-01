@@ -1,0 +1,639 @@
+[
+  {
+    "path": "",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com",
+    "expected": "https://www.dousocial.com"
+  },
+  {
+    "path": "/en",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en",
+    "expected": "https://www.dousocial.com/en"
+  },
+  {
+    "path": "/hakkimizda",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hakkimizda",
+    "expected": "https://www.dousocial.com/hakkimizda"
+  },
+  {
+    "path": "/en/hakkimizda",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hakkimizda",
+    "expected": "https://www.dousocial.com/en/hakkimizda"
+  },
+  {
+    "path": "/iletisim",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/iletisim",
+    "expected": "https://www.dousocial.com/iletisim"
+  },
+  {
+    "path": "/en/iletisim",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/iletisim",
+    "expected": "https://www.dousocial.com/en/iletisim"
+  },
+  {
+    "path": "/hizmetler",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler",
+    "expected": "https://www.dousocial.com/hizmetler"
+  },
+  {
+    "path": "/en/hizmetler",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler",
+    "expected": "https://www.dousocial.com/en/hizmetler"
+  },
+  {
+    "path": "/influencerlar",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/influencerlar",
+    "expected": "https://www.dousocial.com/influencerlar"
+  },
+  {
+    "path": "/en/influencerlar",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/influencerlar",
+    "expected": "https://www.dousocial.com/en/influencerlar"
+  },
+  {
+    "path": "/blog",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog",
+    "expected": "https://www.dousocial.com/blog"
+  },
+  {
+    "path": "/sss",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/sss",
+    "expected": "https://www.dousocial.com/sss"
+  },
+  {
+    "path": "/en/sss",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/sss",
+    "expected": "https://www.dousocial.com/en/sss"
+  },
+  {
+    "path": "/reklam-yonetimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/reklam-yonetimi",
+    "expected": "https://www.dousocial.com/reklam-yonetimi"
+  },
+  {
+    "path": "/en/reklam-yonetimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/reklam-yonetimi",
+    "expected": "https://www.dousocial.com/en/reklam-yonetimi"
+  },
+  {
+    "path": "/google-ads-yonetimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/google-ads-yonetimi",
+    "expected": "https://www.dousocial.com/google-ads-yonetimi"
+  },
+  {
+    "path": "/en/google-ads-yonetimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/google-ads-yonetimi",
+    "expected": "https://www.dousocial.com/en/google-ads-yonetimi"
+  },
+  {
+    "path": "/facebook-reklam-yonetimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/facebook-reklam-yonetimi",
+    "expected": "https://www.dousocial.com/facebook-reklam-yonetimi"
+  },
+  {
+    "path": "/en/facebook-reklam-yonetimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/facebook-reklam-yonetimi",
+    "expected": "https://www.dousocial.com/en/facebook-reklam-yonetimi"
+  },
+  {
+    "path": "/denizli-etkinlik-cekimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/denizli-etkinlik-cekimi",
+    "expected": "https://www.dousocial.com/denizli-etkinlik-cekimi"
+  },
+  {
+    "path": "/en/denizli-etkinlik-cekimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/denizli-etkinlik-cekimi",
+    "expected": "https://www.dousocial.com/en/denizli-etkinlik-cekimi"
+  },
+  {
+    "path": "/denizli-organizasyon-cekimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/denizli-organizasyon-cekimi",
+    "expected": "https://www.dousocial.com/denizli-organizasyon-cekimi"
+  },
+  {
+    "path": "/en/denizli-organizasyon-cekimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/denizli-organizasyon-cekimi",
+    "expected": "https://www.dousocial.com/en/denizli-organizasyon-cekimi"
+  },
+  {
+    "path": "/teklif-al",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/teklif-al",
+    "expected": "https://www.dousocial.com/teklif-al"
+  },
+  {
+    "path": "/en/teklif-al",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/teklif-al",
+    "expected": "https://www.dousocial.com/en/teklif-al"
+  },
+  {
+    "path": "/dijital-checkup",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/dijital-checkup",
+    "expected": "https://www.dousocial.com/dijital-checkup"
+  },
+  {
+    "path": "/en/dijital-checkup",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/dijital-checkup",
+    "expected": "https://www.dousocial.com/en/dijital-checkup"
+  },
+  {
+    "path": "/influencer",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/influencer",
+    "expected": "https://www.dousocial.com/influencer"
+  },
+  {
+    "path": "/en/influencer",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/influencer",
+    "expected": "https://www.dousocial.com/en/influencer"
+  },
+  {
+    "path": "/denizli-sosyal-medya-ajansi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/denizli-sosyal-medya-ajansi",
+    "expected": "https://www.dousocial.com/denizli-sosyal-medya-ajansi"
+  },
+  {
+    "path": "/en/denizli-sosyal-medya-ajansi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/denizli-sosyal-medya-ajansi",
+    "expected": "https://www.dousocial.com/en/denizli-sosyal-medya-ajansi"
+  },
+  {
+    "path": "/meta-ads-ajansi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/meta-ads-ajansi",
+    "expected": "https://www.dousocial.com/meta-ads-ajansi"
+  },
+  {
+    "path": "/en/meta-ads-ajansi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/meta-ads-ajansi",
+    "expected": "https://www.dousocial.com/en/meta-ads-ajansi"
+  },
+  {
+    "path": "/instagram-reklam-yonetimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/instagram-reklam-yonetimi",
+    "expected": "https://www.dousocial.com/instagram-reklam-yonetimi"
+  },
+  {
+    "path": "/en/instagram-reklam-yonetimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/instagram-reklam-yonetimi",
+    "expected": "https://www.dousocial.com/en/instagram-reklam-yonetimi"
+  },
+  {
+    "path": "/dijital-pazarlama-ajansi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/dijital-pazarlama-ajansi",
+    "expected": "https://www.dousocial.com/dijital-pazarlama-ajansi"
+  },
+  {
+    "path": "/en/dijital-pazarlama-ajansi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/dijital-pazarlama-ajansi",
+    "expected": "https://www.dousocial.com/en/dijital-pazarlama-ajansi"
+  },
+  {
+    "path": "/gizlilik-politikasi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/gizlilik-politikasi",
+    "expected": "https://www.dousocial.com/gizlilik-politikasi"
+  },
+  {
+    "path": "/en/gizlilik-politikasi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/gizlilik-politikasi",
+    "expected": "https://www.dousocial.com/en/gizlilik-politikasi"
+  },
+  {
+    "path": "/kullanim-kosullari",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/kullanim-kosullari",
+    "expected": "https://www.dousocial.com/kullanim-kosullari"
+  },
+  {
+    "path": "/en/kullanim-kosullari",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/kullanim-kosullari",
+    "expected": "https://www.dousocial.com/en/kullanim-kosullari"
+  },
+  {
+    "path": "/cerez-politikasi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/cerez-politikasi",
+    "expected": "https://www.dousocial.com/cerez-politikasi"
+  },
+  {
+    "path": "/en/cerez-politikasi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/cerez-politikasi",
+    "expected": "https://www.dousocial.com/en/cerez-politikasi"
+  },
+  {
+    "path": "/hizmetler/sosyal-medya-marka",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler/sosyal-medya-marka",
+    "expected": "https://www.dousocial.com/hizmetler/sosyal-medya-marka"
+  },
+  {
+    "path": "/en/hizmetler/sosyal-medya-marka",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler/sosyal-medya-marka",
+    "expected": "https://www.dousocial.com/en/hizmetler/sosyal-medya-marka"
+  },
+  {
+    "path": "/hizmetler/meta-reklamlari",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler/meta-reklamlari",
+    "expected": "https://www.dousocial.com/hizmetler/meta-reklamlari"
+  },
+  {
+    "path": "/en/hizmetler/meta-reklamlari",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler/meta-reklamlari",
+    "expected": "https://www.dousocial.com/en/hizmetler/meta-reklamlari"
+  },
+  {
+    "path": "/hizmetler/icerik-video",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler/icerik-video",
+    "expected": "https://www.dousocial.com/hizmetler/icerik-video"
+  },
+  {
+    "path": "/en/hizmetler/icerik-video",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler/icerik-video",
+    "expected": "https://www.dousocial.com/en/hizmetler/icerik-video"
+  },
+  {
+    "path": "/hizmetler/performans-pazarlama",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler/performans-pazarlama",
+    "expected": "https://www.dousocial.com/hizmetler/performans-pazarlama"
+  },
+  {
+    "path": "/en/hizmetler/performans-pazarlama",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler/performans-pazarlama",
+    "expected": "https://www.dousocial.com/en/hizmetler/performans-pazarlama"
+  },
+  {
+    "path": "/hizmetler/google-seo",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler/google-seo",
+    "expected": "https://www.dousocial.com/hizmetler/google-seo"
+  },
+  {
+    "path": "/en/hizmetler/google-seo",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler/google-seo",
+    "expected": "https://www.dousocial.com/en/hizmetler/google-seo"
+  },
+  {
+    "path": "/hizmetler/web-yazilim",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler/web-yazilim",
+    "expected": "https://www.dousocial.com/hizmetler/web-yazilim"
+  },
+  {
+    "path": "/en/hizmetler/web-yazilim",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler/web-yazilim",
+    "expected": "https://www.dousocial.com/en/hizmetler/web-yazilim"
+  },
+  {
+    "path": "/hizmetler/kurumsal-kimlik",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler/kurumsal-kimlik",
+    "expected": "https://www.dousocial.com/hizmetler/kurumsal-kimlik"
+  },
+  {
+    "path": "/en/hizmetler/kurumsal-kimlik",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler/kurumsal-kimlik",
+    "expected": "https://www.dousocial.com/en/hizmetler/kurumsal-kimlik"
+  },
+  {
+    "path": "/hizmetler/influencer-marketing",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler/influencer-marketing",
+    "expected": "https://www.dousocial.com/hizmetler/influencer-marketing"
+  },
+  {
+    "path": "/en/hizmetler/influencer-marketing",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler/influencer-marketing",
+    "expected": "https://www.dousocial.com/en/hizmetler/influencer-marketing"
+  },
+  {
+    "path": "/hizmetler/eticaret-buyume",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler/eticaret-buyume",
+    "expected": "https://www.dousocial.com/hizmetler/eticaret-buyume"
+  },
+  {
+    "path": "/en/hizmetler/eticaret-buyume",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler/eticaret-buyume",
+    "expected": "https://www.dousocial.com/en/hizmetler/eticaret-buyume"
+  },
+  {
+    "path": "/hizmetler/crm-dijital",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/hizmetler/crm-dijital",
+    "expected": "https://www.dousocial.com/hizmetler/crm-dijital"
+  },
+  {
+    "path": "/en/hizmetler/crm-dijital",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/en/hizmetler/crm-dijital",
+    "expected": "https://www.dousocial.com/en/hizmetler/crm-dijital"
+  },
+  {
+    "path": "/blog/aylik-reklam-raporu-kontrol-listesi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/aylik-reklam-raporu-kontrol-listesi",
+    "expected": "https://www.dousocial.com/blog/aylik-reklam-raporu-kontrol-listesi"
+  },
+  {
+    "path": "/blog/denizli-etkinlik-cekimi-planlama",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/denizli-etkinlik-cekimi-planlama",
+    "expected": "https://www.dousocial.com/blog/denizli-etkinlik-cekimi-planlama"
+  },
+  {
+    "path": "/blog/denizli-facebook-yerel-reklam-hazirligi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/denizli-facebook-yerel-reklam-hazirligi",
+    "expected": "https://www.dousocial.com/blog/denizli-facebook-yerel-reklam-hazirligi"
+  },
+  {
+    "path": "/blog/denizli-google-ads-baslangic-rehberi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/denizli-google-ads-baslangic-rehberi",
+    "expected": "https://www.dousocial.com/blog/denizli-google-ads-baslangic-rehberi"
+  },
+  {
+    "path": "/blog/denizli-organizasyon-cekimi-teklif",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/denizli-organizasyon-cekimi-teklif",
+    "expected": "https://www.dousocial.com/blog/denizli-organizasyon-cekimi-teklif"
+  },
+  {
+    "path": "/blog/etkinlik-fotograf-video-cekim-listesi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/etkinlik-fotograf-video-cekim-listesi",
+    "expected": "https://www.dousocial.com/blog/etkinlik-fotograf-video-cekim-listesi"
+  },
+  {
+    "path": "/blog/etkinlik-ozet-videosu-briefi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/etkinlik-ozet-videosu-briefi",
+    "expected": "https://www.dousocial.com/blog/etkinlik-ozet-videosu-briefi"
+  },
+  {
+    "path": "/blog/facebook-potansiyel-musteri-formu-web-sitesi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/facebook-potansiyel-musteri-formu-web-sitesi",
+    "expected": "https://www.dousocial.com/blog/facebook-potansiyel-musteri-formu-web-sitesi"
+  },
+  {
+    "path": "/blog/facebook-reklam-hesabi-ajans-erisimleri",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/facebook-reklam-hesabi-ajans-erisimleri",
+    "expected": "https://www.dousocial.com/blog/facebook-reklam-hesabi-ajans-erisimleri"
+  },
+  {
+    "path": "/blog/google-ads-butcesi-yonetim-ucreti",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/google-ads-butcesi-yonetim-ucreti",
+    "expected": "https://www.dousocial.com/blog/google-ads-butcesi-yonetim-ucreti"
+  },
+  {
+    "path": "/blog/google-ads-meta-reklamlari-farki",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/google-ads-meta-reklamlari-farki",
+    "expected": "https://www.dousocial.com/blog/google-ads-meta-reklamlari-farki"
+  },
+  {
+    "path": "/blog/google-ads-negatif-anahtar-kelimeler",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/google-ads-negatif-anahtar-kelimeler",
+    "expected": "https://www.dousocial.com/blog/google-ads-negatif-anahtar-kelimeler"
+  },
+  {
+    "path": "/blog/google-ads-tiklama-var-talep-yok",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/google-ads-tiklama-var-talep-yok",
+    "expected": "https://www.dousocial.com/blog/google-ads-tiklama-var-talep-yok"
+  },
+  {
+    "path": "/blog/instagram-gonderi-one-cikarma-reklam-yonetimi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/instagram-gonderi-one-cikarma-reklam-yonetimi",
+    "expected": "https://www.dousocial.com/blog/instagram-gonderi-one-cikarma-reklam-yonetimi"
+  },
+  {
+    "path": "/blog/instagram-reels-stories-reklam-briefi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/instagram-reels-stories-reklam-briefi",
+    "expected": "https://www.dousocial.com/blog/instagram-reels-stories-reklam-briefi"
+  },
+  {
+    "path": "/blog/instagram-reklam-dm-talep-takibi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/instagram-reklam-dm-talep-takibi",
+    "expected": "https://www.dousocial.com/blog/instagram-reklam-dm-talep-takibi"
+  },
+  {
+    "path": "/blog/instagram-reklam-yonetimi-rehberi",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/instagram-reklam-yonetimi-rehberi",
+    "expected": "https://www.dousocial.com/blog/instagram-reklam-yonetimi-rehberi"
+  },
+  {
+    "path": "/blog/meta-reklam-kreatif-testleri",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/meta-reklam-kreatif-testleri",
+    "expected": "https://www.dousocial.com/blog/meta-reklam-kreatif-testleri"
+  },
+  {
+    "path": "/blog/meta-reklam-raporu-nasil-okunur",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/meta-reklam-raporu-nasil-okunur",
+    "expected": "https://www.dousocial.com/blog/meta-reklam-raporu-nasil-okunur"
+  },
+  {
+    "path": "/blog/meta-reklam-yonetimi-baslangic",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/meta-reklam-yonetimi-baslangic",
+    "expected": "https://www.dousocial.com/blog/meta-reklam-yonetimi-baslangic"
+  },
+  {
+    "path": "/blog/organizasyon-cekim-ekibi-koordinasyonu",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/organizasyon-cekim-ekibi-koordinasyonu",
+    "expected": "https://www.dousocial.com/blog/organizasyon-cekim-ekibi-koordinasyonu"
+  },
+  {
+    "path": "/blog/organizasyon-cekimi-teslim-revizyon",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/organizasyon-cekimi-teslim-revizyon",
+    "expected": "https://www.dousocial.com/blog/organizasyon-cekimi-teslim-revizyon"
+  },
+  {
+    "path": "/blog/reklam-acilis-sayfasi-donusum",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/reklam-acilis-sayfasi-donusum",
+    "expected": "https://www.dousocial.com/blog/reklam-acilis-sayfasi-donusum"
+  },
+  {
+    "path": "/blog/reklam-ajansi-secerken-sorular",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/reklam-ajansi-secerken-sorular",
+    "expected": "https://www.dousocial.com/blog/reklam-ajansi-secerken-sorular"
+  },
+  {
+    "path": "/blog/mermer-sektoru-dijital-pazarlama",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/mermer-sektoru-dijital-pazarlama",
+    "expected": "https://www.dousocial.com/blog/mermer-sektoru-dijital-pazarlama"
+  },
+  {
+    "path": "/blog/mermer-dijital-pazarlama-trendleri-2026",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/mermer-dijital-pazarlama-trendleri-2026",
+    "expected": "https://www.dousocial.com/blog/mermer-dijital-pazarlama-trendleri-2026"
+  },
+  {
+    "path": "/blog/spor-salonu-dijital-pazarlama",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama",
+    "expected": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama"
+  },
+  {
+    "path": "/blog/spor-salonu-dijital-pazarlama-trendleri-2026",
+    "status": 200,
+    "h1": 1,
+    "canonical": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama-trendleri-2026",
+    "expected": "https://www.dousocial.com/blog/spor-salonu-dijital-pazarlama-trendleri-2026"
+  }
+]

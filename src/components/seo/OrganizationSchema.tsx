@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { name: "Blog",       url: `${SITE_URL}/blog` },
   { name: "SSS",        url: `${SITE_URL}/sss` },
   { name: "İletişim",   url: `${SITE_URL}/iletisim` },
-  { name: "Ücretsiz Analiz", url: `${SITE_URL}/audit` },
+  { name: "Ücretsiz Analiz", url: `${SITE_URL}/dijital-checkup` },
 ];
 
 export function OrganizationSchema() {

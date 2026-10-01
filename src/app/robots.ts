@@ -7,7 +7,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/yonetim/", "/admin/"],
+        // Private pages use authentication and X-Robots-Tag. Allow crawling
+        // of public login pages so crawlers can observe their noindex rule.
+        disallow: ["/api/"],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

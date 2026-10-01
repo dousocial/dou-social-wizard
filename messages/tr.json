@@ -1375,7 +1375,13 @@
           "social": "Sosyal Medya Yönetimi",
           "content": "İçerik Üretimi",
           "web": "Web Tasarım",
-          "strategy": "Marka Stratejisi"
+          "strategy": "Marka Stratejisi",
+          "google-ads": "Google Ads Yönetimi",
+          "facebook-ads": "Facebook Reklam Yönetimi",
+          "instagram-ads": "Instagram Reklam Yönetimi",
+          "advertising": "Reklam Yönetimi",
+          "event-shoot": "Denizli Etkinlik Çekimi",
+          "organization-shoot": "Denizli Organizasyon Çekimi"
         }
       },
       "budget": {
@@ -1409,11 +1415,11 @@
     }
   },
   "Checkup": {
-    "metaTitle": "Ücretsiz Sosyal Medya Analizi — DOU Social",
-    "metaDescription": "Instagram, reklam hesabın ve LinkedIn sayfan ne durumda? Formu doldur, sana özel PDF rapor 5 dakikada e-postanda olsun.",
+    "metaTitle": "Ücretsiz Web Sitesi ve Instagram Analizi — DOU Social",
+    "metaDescription": "Web sitesi adresinizi veya yalnızca Instagram kullanıcı adınızı paylaşın. Erişilebilen verilere dayalı ücretsiz ön inceleme alın.",
     "eyebrow": "Ücretsiz Analiz",
-    "heroTitle": "Sosyal medyan gerçekten çalışıyor mu?",
-    "heroLead": "Instagram hesabını, reklam bütçeni ve diğer platformları ücretsiz analiz ediyoruz. Formu doldur, sana özel rapor 5 dakikada e-postanda olsun.",
+    "heroTitle": "Web sitenizi veya Instagram hesabınızı inceleyelim.",
+    "heroLead": "Yalnızca web sitesi bağlantısı ya da Instagram kullanıcı adıyla ücretsiz ön inceleme başlatın. İkisini birlikte de paylaşabilirsiniz.",
     "points": {
       "analysis": {
         "title": "Sana özel bakış",
@@ -1425,12 +1431,12 @@
       },
       "free": {
         "title": "Tamamen ücretsiz",
-        "description": "Sadece e-posta yeterli. Toplantı yok, satış çağrısı yok. Beğenirsen biz konuşuruz."
+        "description": "Tek bir bağlantı veya kullanıcı adı yeterli. Telefon ve e-posta zorunlu değil."
       }
     },
     "formEyebrow": "Analiz Formu",
-    "formTitle": "Hangi hesaplarına bakalım?",
-    "formNote": "Hesaplarına şifre veya erişim istemiyoruz. Paylaştığın bilgiler ve ekran görüntülerinden raporu hazırlıyoruz.",
+    "formTitle": "Bağlantınızı paylaşın.",
+    "formNote": "Tek bir alan yeterli. Ulaşılabilen bilgileri kontrol eder, eksik erişimi açıkça belirtiriz.",
     "form": {
       "platforms": {
         "label": "Hangi platformlarda hesabın var?",
@@ -1441,7 +1447,13 @@
           "tiktok": "TikTok",
           "youtube": "YouTube",
           "google": "Google İşletme Profili",
-          "linkedin": "LinkedIn"
+          "linkedin": "LinkedIn",
+          "google-ads": "Google Ads Yönetimi",
+          "facebook-ads": "Facebook Reklam Yönetimi",
+          "instagram-ads": "Instagram Reklam Yönetimi",
+          "advertising": "Reklam Yönetimi",
+          "event-shoot": "Denizli Etkinlik Çekimi",
+          "organization-shoot": "Denizli Organizasyon Çekimi"
         }
       },
       "handles": {
@@ -1450,7 +1462,13 @@
         "tiktok": "TikTok kullanıcı adın nedir?",
         "youtube": "YouTube kanalının adı nedir?",
         "google": "Google'da işletmen nasıl görünüyor?",
-        "linkedin": "LinkedIn şirket sayfanın adı nedir?"
+        "linkedin": "LinkedIn şirket sayfanın adı nedir?",
+        "google-ads": "Google Ads Yönetimi",
+        "facebook-ads": "Facebook Reklam Yönetimi",
+        "instagram-ads": "Instagram Reklam Yönetimi",
+        "advertising": "Reklam Yönetimi",
+        "event-shoot": "Denizli Etkinlik Çekimi",
+        "organization-shoot": "Denizli Organizasyon Çekimi"
       },
       "handlePlaceholders": {
         "instagram": "@hesabim",
@@ -1458,7 +1476,13 @@
         "tiktok": "@hesabim",
         "youtube": "Kanal adı",
         "google": "İşletme adı",
-        "linkedin": "Şirket sayfası adı"
+        "linkedin": "Şirket sayfası adı",
+        "google-ads": "Google Ads Yönetimi",
+        "facebook-ads": "Facebook Reklam Yönetimi",
+        "instagram-ads": "Instagram Reklam Yönetimi",
+        "advertising": "Reklam Yönetimi",
+        "event-shoot": "Denizli Etkinlik Çekimi",
+        "organization-shoot": "Denizli Organizasyon Çekimi"
       },
       "screenshots": {
         "label": "Ekran görüntüsü ekle",
@@ -1469,7 +1493,13 @@
           "tiktok": "TikTok uygulamasında profiline git → İçerik Analizleri ekranını aç ve ekran görüntüsü al",
           "youtube": "YouTube Studio'ya gir → sol menüden Analitikler → Genel Bakış ekranının görüntüsünü al",
           "google": "Google'da işletmeni ara → Performansı gör ekranını aç ve ekran görüntüsü al",
-          "linkedin": "LinkedIn şirket sayfana gir → Analitikler → Ziyaretçiler sekmesinin görüntüsünü al"
+          "linkedin": "LinkedIn şirket sayfana gir → Analitikler → Ziyaretçiler sekmesinin görüntüsünü al",
+          "google-ads": "Google Ads Yönetimi",
+          "facebook-ads": "Facebook Reklam Yönetimi",
+          "instagram-ads": "Instagram Reklam Yönetimi",
+          "advertising": "Reklam Yönetimi",
+          "event-shoot": "Denizli Etkinlik Çekimi",
+          "organization-shoot": "Denizli Organizasyon Çekimi"
         }
       },
       "sector": {

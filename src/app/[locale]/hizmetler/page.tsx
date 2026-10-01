@@ -1,3 +1,5 @@
+import { MarketingServicesSection } from "@/components/sections/MarketingServicesSection";
+import { alternatesFor } from "@/lib/site";
 import { use } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
@@ -16,6 +18,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: alternatesFor("/hizmetler", locale as "tr" | "en"),
   };
 }
 
@@ -50,6 +53,7 @@ export default function ServicesHubPage({
         </Container>
       </Section>
 
+      <MarketingServicesSection />
       <ServicesHubGrid />
       <FinalCTA />
     </>

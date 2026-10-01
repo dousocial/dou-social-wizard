@@ -196,7 +196,7 @@ export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
                   {/* CTA butonu */}
                   <motion.div variants={navItemVariants} className="pt-6">
                     <Link
-                      href="/audit"
+                      href="/dijital-checkup"
                       onClick={close}
                       className="flex w-full items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-accent-hover"
                     >

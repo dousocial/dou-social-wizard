@@ -20,7 +20,6 @@ export function Analytics() {
             `}
           </Script>
           <noscript>
-            {/* eslint-disable-next-line @next/next/no-sync-scripts */}
             <iframe
               src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
               height="0"
@@ -77,6 +76,7 @@ export function Analytics() {
 /** Type-safe helper to fire custom events from client components */
 export function trackEvent(name: string, params?: Record<string, unknown>) {
   if (typeof window === "undefined") return;
+  try { if (localStorage.getItem("dou_consent_v1") !== "granted") return; } catch { return; }
   // GA4 / GTM dataLayer
   // @ts-expect-error global gtag injected by Analytics script
   window.dataLayer?.push({ event: name, ...params });

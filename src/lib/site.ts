@@ -9,9 +9,14 @@ export const STATIC_PATHS = [
   "/projeler",
   "/influencerlar",
   "/blog",
+  "/sss",
+  "/reklam-yonetimi",
+  "/google-ads-yonetimi",
+  "/facebook-reklam-yonetimi",
+  "/denizli-etkinlik-cekimi",
+  "/denizli-organizasyon-cekimi",
   "/teklif-al",
   "/dijital-checkup",
-  "/strateji-gorusmesi",
   "/influencer",
   "/denizli-sosyal-medya-ajansi",
   "/meta-ads-ajansi",
@@ -22,7 +27,8 @@ export const STATIC_PATHS = [
   "/cerez-politikasi",
 ] as const;
 
-export const NOINDEX_PATHS = ["/strateji-gorusmesi"] as const;
+// The projects hub is a placeholder until real work is published.
+export const NOINDEX_PATHS = ["/projeler"] as const;
 
 /**
  * Build a fully-qualified URL from a path + locale.
@@ -30,7 +36,8 @@ export const NOINDEX_PATHS = ["/strateji-gorusmesi"] as const;
  */
 export function localizedUrl(path: string, locale: "tr" | "en"): string {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
-  if (locale === "tr") return `${SITE_URL}${cleanPath === "/" ? "" : cleanPath}`;
+  if (locale === "tr")
+    return `${SITE_URL}${cleanPath === "/" ? "" : cleanPath}`;
   return `${SITE_URL}/en${cleanPath === "/" ? "" : cleanPath}`;
 }
 

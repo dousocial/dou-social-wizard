@@ -1,3 +1,4 @@
+import { alternatesFor } from "@/lib/site";
 import { use } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
@@ -5,7 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Reveal, RevealItem } from "@/components/ui/Reveal";
-import { CheckupForm } from "@/components/forms/CheckupForm";
+import { QuickAuditForm } from "@/components/audit/QuickAuditForm";
 
 const POINTS = ["analysis", "actionable", "free"] as const;
 
@@ -17,6 +18,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: alternatesFor("/dijital-checkup", locale as "tr" | "en"),
   };
 }
 
@@ -35,7 +37,7 @@ export default function CheckupPage({
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               {t("eyebrow")}
             </p>
-            <h1 className="mt-6 font-display text-5xl leading-[1.05] tracking-tight text-ink md:text-7xl">
+            <h1 className="mt-6 font-display leading-[1.08] tracking-tight text-ink" style={{ fontSize: "clamp(2.25rem, 5vw, 4.5rem)" }}>
               {t("heroTitle")}
             </h1>
             <p className="mt-6 max-w-xl text-lg text-mute-600">
@@ -81,7 +83,7 @@ export default function CheckupPage({
             </div>
 
             <div>
-              <CheckupForm />
+              <QuickAuditForm />
             </div>
           </Reveal>
         </Container>

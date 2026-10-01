@@ -9,7 +9,7 @@ interface Props {
 export function ArticleSchema({ post, url, siteUrl }: Props) {
   const data = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
     datePublished: post.date,
@@ -33,7 +33,7 @@ export function ArticleSchema({ post, url, siteUrl }: Props) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   );
 }

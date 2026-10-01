@@ -64,7 +64,7 @@ export default function BlogPostPage({
   if (!post) notFound();
 
   const all = use(getAllPosts(locale));
-  const related = all.filter((p) => p.slug !== slug).slice(0, 3);
+  const related = all.filter((p) => p.slug !== slug).sort((a, b) => Number(b.tags?.some(tag => post.tags?.includes(tag))) - Number(a.tags?.some(tag => post.tags?.includes(tag)))).slice(0, 3);
 
   const t = useTranslations("Blog");
   const url = `${SITE_URL}${locale === "tr" ? "" : `/${locale}`}/blog/${slug}`;
