@@ -1,16 +1,25 @@
 import { siteConfig } from "@/config/site";
+import { MARKETING_SERVICES } from "@/lib/marketing-services";
 import { localizedUrl } from "@/lib/site";
 
 type Locale = "tr" | "en";
 
-const SERVICES = [
-  "Meta Ads yönetimi",
-  "Sosyal medya yönetimi",
-  "İçerik üretimi",
-  "Web tasarım",
-  "Google Haritalar ve yerel SEO",
-  "Marka stratejisi",
-];
+const SERVICES = {
+  tr: [
+    "Sosyal medya yönetimi",
+    "İçerik üretimi",
+    "Web tasarım",
+    "Google Haritalar ve yerel SEO",
+    "Marka stratejisi",
+  ],
+  en: [
+    "Social media management",
+    "Content production",
+    "Web design",
+    "Google Maps and local SEO",
+    "Brand strategy",
+  ],
+};
 
 export function HomePageSchema({ locale }: { locale: Locale }) {
   const url = localizedUrl("/", locale);
@@ -23,12 +32,12 @@ export function HomePageSchema({ locale }: { locale: Locale }) {
       url,
       name:
         locale === "tr"
-          ? "DOU Social | Denizli Dijital Pazarlama ve Meta Ads Ajansı"
+          ? "Denizli Reklam ve Sosyal Medya Ajansı"
           : "DOU Social | Digital Marketing and Meta Ads Agency",
       description: seo.description[locale],
       inLanguage: locale === "tr" ? "tr-TR" : "en-US",
       isPartOf: { "@id": `${localizedUrl("/", "tr")}#website` },
-      about: { "@id": `${localizedUrl("/", "tr")}#professional-service` },
+      about: { "@id": `${localizedUrl("/", "tr")}#organization` },
       primaryImageOfPage: {
         "@type": "ImageObject",
         url: `${localizedUrl("/", "tr")}${brand.logo.dark}`,
@@ -40,7 +49,7 @@ export function HomePageSchema({ locale }: { locale: Locale }) {
     },
     {
       "@type": "ProfessionalService",
-      "@id": `${localizedUrl("/", "tr")}#professional-service`,
+      "@id": `${localizedUrl("/", "tr")}#organization`,
       name: brand.name,
       alternateName: brand.alternateName,
       description: seo.description.tr,
@@ -60,11 +69,6 @@ export function HomePageSchema({ locale }: { locale: Locale }) {
         addressRegion: contact.address.city,
         addressCountry: contact.address.country,
       },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: 37.7765,
-        longitude: 29.0864,
-      },
       sameAs: [
         social.instagram,
         social.linkedin,
@@ -74,15 +78,30 @@ export function HomePageSchema({ locale }: { locale: Locale }) {
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Dijital büyüme hizmetleri",
-        itemListElement: SERVICES.map((service) => ({
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: service,
-            provider: { "@id": `${localizedUrl("/", "tr")}#professional-service` },
-            areaServed: "Türkiye",
-          },
-        })),
+        itemListElement: [
+          ...SERVICES[locale].map((service) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: service,
+              provider: { "@id": `${localizedUrl("/", "tr")}#organization` },
+              areaServed: "Türkiye",
+            },
+          })),
+          ...MARKETING_SERVICES.map((service) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              "@id": `${localizedUrl(`/${service.slug}`, locale)}#service`,
+              name: (locale === "en" ? service.en : service.tr).title,
+              url: localizedUrl(`/${service.slug}`, locale),
+              provider: { "@id": `${localizedUrl("/", "tr")}#organization` },
+              areaServed: service.slug.startsWith("denizli-")
+                ? "Denizli"
+                : "Türkiye",
+            },
+          })),
+        ],
       },
     },
   ];

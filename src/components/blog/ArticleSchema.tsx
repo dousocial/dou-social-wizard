@@ -1,4 +1,5 @@
 import type { BlogPostMeta } from "@/lib/blog";
+import { buildArticleSchema } from "@/lib/article-schema";
 
 interface Props {
   post: BlogPostMeta;
@@ -7,34 +8,14 @@ interface Props {
 }
 
 export function ArticleSchema({ post, url, siteUrl }: Props) {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    image: post.cover ? new URL(post.cover, siteUrl).href : undefined,
-    description: post.description,
-    datePublished: post.date,
-    dateModified: post.date,
-    author: {
-      "@type": "Organization",
-      name: post.author ?? "DOU Social",
-      url: siteUrl,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "DOU Social",
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/brand/dou-logo-dark.png`,
-      },
-    },
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
-  };
+  const data = buildArticleSchema(post, url, siteUrl);
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }

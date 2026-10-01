@@ -12,6 +12,7 @@ export interface BlogFrontmatter {
   description: string;
   date: string; // ISO date (YYYY-MM-DD)
   author?: string;
+  updated?: string; // Actual editorial update, never a generated current date
   tags?: string[];
   cover?: string;
 }
@@ -100,6 +101,7 @@ function dbRowToMeta(
     description: String(row.description ?? ""),
     date: String(row.published_at),
     author: String(row.author ?? "DOU Social"),
+    updated: row.updated_at ? String(row.updated_at) : undefined,
     tags: Array.isArray(row.tags) ? (row.tags as string[]) : [],
     cover: row.cover ? String(row.cover) : "/services/reklam-yonetimi.webp",
     readingMinutes: Math.max(1, Math.round(readingTimeCalc(content).minutes)),
@@ -123,7 +125,7 @@ async function getAllPostsDB(locale: string): Promise<BlogPostMeta[]> {
   const { data, error } = await supabase
     .from("blog_posts")
     .select(
-      "slug, locale, title, seo_title, description, cover, tags, author, published_at, content"
+      "slug, locale, title, seo_title, description, cover, tags, author, published_at, updated_at, content"
     )
     .eq("locale", locale)
     .eq("is_published", true)

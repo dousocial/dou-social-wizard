@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site";
+
 interface Props {
   url: string;
 }
@@ -6,12 +8,12 @@ export function LocalBusinessSchema({ url }: Props) {
   const data = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": `${url}#localbusiness`,
+    "@id": `${url}#organization`,
     name: "DOU Social",
     image: `${url}/brand/dou-logo-dark.png`,
     url,
-    telephone: "+905300845468",
-    email: "info@dousocial.com",
+    telephone: siteConfig.contact.phoneTel,
+    email: siteConfig.contact.email,
     address: {
       "@type": "PostalAddress",
       streetAddress: "Zafer Mah. Zafer Cd. No: 60/1",
@@ -19,21 +21,10 @@ export function LocalBusinessSchema({ url }: Props) {
       addressRegion: "Denizli",
       addressCountry: "TR",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 37.7765,
-      longitude: 29.0864,
-    },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-        ],
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         opens: "09:00",
         closes: "18:00",
       },

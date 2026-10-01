@@ -2,16 +2,20 @@ import { SITE_URL } from "@/lib/site";
 import { siteConfig } from "@/config/site";
 
 const NAV_LINKS = [
-  { name: "Hizmetler",  url: `${SITE_URL}/hizmetler` },
-  { name: "Projeler",   url: `${SITE_URL}/projeler` },
+  { name: "Hizmetler", url: `${SITE_URL}/hizmetler` },
+  { name: "Projeler", url: `${SITE_URL}/projeler` },
   { name: "Hakkımızda", url: `${SITE_URL}/hakkimizda` },
-  { name: "Blog",       url: `${SITE_URL}/blog` },
-  { name: "SSS",        url: `${SITE_URL}/sss` },
-  { name: "İletişim",   url: `${SITE_URL}/iletisim` },
+  { name: "Blog", url: `${SITE_URL}/blog` },
+  { name: "SSS", url: `${SITE_URL}/sss` },
+  { name: "İletişim", url: `${SITE_URL}/iletisim` },
   { name: "Ücretsiz Analiz", url: `${SITE_URL}/dijital-checkup` },
 ];
 
-export function OrganizationSchema() {
+export function OrganizationSchema({
+  locale = "tr",
+}: {
+  locale?: "tr" | "en";
+}) {
   const { brand, contact, social, seo } = siteConfig;
   const organization = {
     "@context": "https://schema.org",
@@ -22,7 +26,7 @@ export function OrganizationSchema() {
     url: SITE_URL,
     logo: `${SITE_URL}${brand.logo.dark}`,
     image: `${SITE_URL}${brand.logo.dark}`,
-    description: seo.description.tr,
+    description: seo.description[locale],
     email: contact.email,
     telephone: contact.phoneTel,
     address: {
@@ -47,7 +51,7 @@ export function OrganizationSchema() {
     name: brand.name,
     url: SITE_URL,
     publisher: { "@id": `${SITE_URL}#organization` },
-    inLanguage: "tr-TR",
+    inLanguage: ["tr-TR", "en-US"],
   };
 
   const siteNav = {
@@ -58,7 +62,10 @@ export function OrganizationSchema() {
       "@type": "SiteNavigationElement",
       position: i + 1,
       name: link.name,
-      url: link.url,
+      url:
+        locale === "en"
+          ? link.url.replace(SITE_URL, `${SITE_URL}/en`)
+          : link.url,
     })),
   };
 
@@ -66,15 +73,21 @@ export function OrganizationSchema() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organization).replace(/</g, "\\u003c"),
+        }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(website).replace(/</g, "\\u003c"),
+        }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNav) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(siteNav).replace(/</g, "\\u003c"),
+        }}
       />
     </>
   );

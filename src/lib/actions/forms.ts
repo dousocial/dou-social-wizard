@@ -6,7 +6,7 @@ import { verifyRecaptcha } from "@/lib/recaptcha";
 
 export type FormState =
   | { status: "idle" }
-  | { status: "success" }
+  | { status: "success"; recorded: boolean }
   | { status: "error"; error: string };
 
 const isEmail = (s: string) => /^\S+@\S+\.\S+$/.test(s);
@@ -65,7 +65,7 @@ export async function submitContactForm(
   formData: FormData
 ): Promise<FormState> {
   if (isHoneypotTriggered(formData)) {
-    return { status: "success" };
+    return { status: "success", recorded: false };
   }
 
   const recaptchaToken = String(formData.get("recaptcha_token") ?? "");
@@ -97,7 +97,7 @@ export async function submitContactForm(
     return { status: "error", error: "db-error" };
   }
 
-  return { status: "success" };
+  return { status: "success", recorded: true };
 }
 
 // ─── /teklif-al ──────────────────────────────────────────────────────────
@@ -105,7 +105,7 @@ export async function submitQuoteRequest(
   _prev: FormState,
   formData: FormData
 ): Promise<FormState> {
-  if (isHoneypotTriggered(formData)) return { status: "success" };
+  if (isHoneypotTriggered(formData)) return { status: "success", recorded: false };
   const limited = await checkRateLimit("quote");
   if (!limited.ok) return { status: "error", error: "rate-limited" };
 
@@ -145,7 +145,7 @@ export async function submitQuoteRequest(
   } catch {
     return { status: "error", error: "db-error" };
   }
-  return { status: "success" };
+  return { status: "success", recorded: true };
 }
 
 // ─── /dijital-checkup ────────────────────────────────────────────────────
@@ -153,7 +153,7 @@ export async function submitCheckupRequest(
   _prev: FormState,
   formData: FormData
 ): Promise<FormState> {
-  if (isHoneypotTriggered(formData)) return { status: "success" };
+  if (isHoneypotTriggered(formData)) return { status: "success", recorded: false };
   const limited = await checkRateLimit("checkup");
   if (!limited.ok) return { status: "error", error: "rate-limited" };
 
@@ -191,7 +191,7 @@ export async function submitCheckupRequest(
   } catch {
     return { status: "error", error: "db-error" };
   }
-  return { status: "success" };
+  return { status: "success", recorded: true };
 }
 
 // ─── /influencer ─────────────────────────────────────────────────────────
@@ -199,7 +199,7 @@ export async function submitInfluencerApplication(
   _prev: FormState,
   formData: FormData
 ): Promise<FormState> {
-  if (isHoneypotTriggered(formData)) return { status: "success" };
+  if (isHoneypotTriggered(formData)) return { status: "success", recorded: false };
   const limited = await checkRateLimit("influencer");
   if (!limited.ok) return { status: "error", error: "rate-limited" };
 
@@ -243,5 +243,5 @@ export async function submitInfluencerApplication(
     return { status: "error", error: "db-error" };
   }
 
-  return { status: "success" };
+  return { status: "success", recorded: true };
 }

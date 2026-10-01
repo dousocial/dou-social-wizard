@@ -289,12 +289,12 @@ export function ServicesHubGrid() {
               </div>
             </div>
 
-            <h3
+            <h2
               className="font-display text-paper mt-10 leading-tight font-bold tracking-tight md:mt-14"
               style={{ fontSize: "var(--text-5xl)" }}
             >
               {tItem(`${featured}.title`)}
-            </h3>
+            </h2>
 
             <p
               className="text-mute-400 mt-4 max-w-xl"
@@ -343,12 +343,12 @@ export function ServicesHubGrid() {
                         </div>
                       </div>
 
-                      <h3
+                      <h2
                         className="font-display text-ink mt-8 leading-tight font-bold tracking-tight"
                         style={{ fontSize: "var(--text-xl)" }}
                       >
                         {tItem(`${slug}.title`)}
-                      </h3>
+                      </h2>
 
                       <p className="text-mute-500 mt-3 flex-1 text-sm leading-relaxed">
                         {tItem(`${slug}.summary`)}
@@ -365,7 +365,7 @@ export function ServicesHubGrid() {
             })}
           {MARKETING_SERVICES.map((service) => (
             <Reveal key={service.slug} variant="scaleUp">
-              <MarketingServiceCard slug={service.slug} locale={locale} />
+              <MarketingServiceCard slug={service.slug} locale={locale} headingAs="h2" />
             </Reveal>
           ))}
         </div>

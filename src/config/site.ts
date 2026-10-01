@@ -75,8 +75,8 @@ export const siteConfig = {
   // ── SEO & meta ───────────────────────────────────────────────────────
   seo: {
     description: {
-      tr: "Meta Ads, sosyal medya yönetimi, içerik üretimi, web tasarımı ve marka stratejisini tek elden yöneten Denizli merkezli dijital ajans.",
-      en: "Denizli-based digital agency delivering Meta Ads, social media management, content creation, web design, and brand strategy.",
+      tr: "Denizli merkezli DOU Social; Google Ads ve Meta reklam yönetimi, sosyal medya, web tasarım, etkinlik ve organizasyon çekimi hizmetleri sunar.",
+      en: "Denizli-based DOU Social provides Google Ads and Meta advertising, social media management, web design, event photography and video production.",
     },
   },
 

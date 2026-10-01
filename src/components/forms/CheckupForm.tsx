@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { submitCheckupRequest } from "@/lib/actions/forms";
@@ -11,6 +11,8 @@ import { KVKKConsentField } from "./KVKKConsentField";
 import { getLenis } from "@/components/layout/SmoothScrollProvider";
 import { cn } from "@/lib/utils";
 import type { FormState } from "@/lib/actions/forms";
+
+import { trackEvent } from "@/lib/analytics";
 
 const initial: FormState = { status: "idle" };
 
@@ -45,6 +47,13 @@ const baseInputClass = cn(
 export function CheckupForm() {
   const t = useTranslations("Checkup.form");
   const [state, formAction, isPending] = useActionState(submitCheckupRequest, initial);
+  const leadTracked = useRef(false);
+  useEffect(() => {
+    if (state.status === "success" && state.recorded && !leadTracked.current) {
+      leadTracked.current = true;
+      trackEvent("generate_lead", { form_type: "checkup" });
+    }
+  }, [state]);
   const [selected, setSelected] = useState<Platform[]>([]);
   const [phone, setPhone] = useState("");
 

@@ -114,7 +114,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <OrganizationSchema />
+        <OrganizationSchema locale={locale === "en" ? "en" : "tr"} />
         <NextIntlClientProvider>
           <SmoothScrollProvider>
             <a href="#main-content" className="skip-to-content">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
@@ -15,6 +15,8 @@ import {
 } from "./Field";
 import { Honeypot } from "./Honeypot";
 import type { FormState } from "@/lib/actions/forms";
+
+import { trackEvent } from "@/lib/analytics";
 
 const initial: FormState = { status: "idle" };
 const TOTAL_STEPS = 4;
@@ -93,6 +95,13 @@ export function QuoteForm() {
   const t = useTranslations("Quote.form");
   const reduceMotion = useReducedMotion();
   const [state, formAction, isPending] = useActionState(submitQuoteRequest, initial);
+  const leadTracked = useRef(false);
+  useEffect(() => {
+    if (state.status === "success" && state.recorded && !leadTracked.current) {
+      leadTracked.current = true;
+      trackEvent("generate_lead", { form_type: "quote" });
+    }
+  }, [state]);
   const formRef = useRef<HTMLFormElement>(null);
 
   const [step, setStep] = useState(1);

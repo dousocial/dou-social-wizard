@@ -104,7 +104,28 @@ export default function BlogPostPage({
             </Link>
 
             <div className="text-mute-400 mt-8 flex flex-wrap items-center gap-2 text-xs tracking-wider uppercase">
-              <span>{formatDate(post.date, locale)}</span>
+              <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
+              <span>·</span>
+              {!post.author || post.author === "DOU Social" ? (
+                <Link
+                  href="/hakkimizda"
+                  className="underline underline-offset-4"
+                >
+                  DOU Social
+                </Link>
+              ) : (
+                <span>{post.author}</span>
+              )}
+              {post.updated &&
+                !Number.isNaN(Date.parse(post.updated)) &&
+                Date.parse(post.updated) > Date.parse(post.date) && (
+                  <span>
+                    {locale === "en" ? "Updated: " : "Güncellendi: "}
+                    <time dateTime={post.updated}>
+                      {formatDate(post.updated, locale)}
+                    </time>
+                  </span>
+                )}
               <span>·</span>
               <span>{post.readingMinutes} dk okuma</span>
               {post.tags
