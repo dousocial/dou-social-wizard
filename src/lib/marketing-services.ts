@@ -5,7 +5,7 @@ export function getMarketingService(slug: string, locale: string) {
   if (!service) return null;
   return {
     slug: service.slug,
-    cover: `/services/${service.slug}.png`,
+    cover: `/services/${service.slug}.webp`,
     ...(locale === "en" ? service.en : service.tr),
   };
 }

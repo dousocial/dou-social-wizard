@@ -25,38 +25,45 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const backdropVariants = {
   hidden: { opacity: 0 },
-  show:   { opacity: 1, transition: { duration: 0.25 } },
-  exit:   { opacity: 0, transition: { duration: 0.2, delay: 0.05 } },
+  show: { opacity: 1, transition: { duration: 0.25 } },
+  exit: { opacity: 0, transition: { duration: 0.2, delay: 0.05 } },
 };
 
 const panelVariants = {
   hidden: { x: "100%" },
-  show:   { x: 0, transition: { duration: 0.4, ease: EASE } },
-  exit:   { x: "100%", transition: { duration: 0.3, ease: [0.32, 0, 0.67, 0] as const } },
+  show: { x: 0, transition: { duration: 0.4, ease: EASE } },
+  exit: {
+    x: "100%",
+    transition: { duration: 0.3, ease: [0.32, 0, 0.67, 0] as const },
+  },
 };
 
 const navContainerVariants = {
   hidden: {},
-  show:   { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
 };
 
 const navItemVariants = {
   hidden: { opacity: 0, x: 20 },
-  show:   { opacity: 1, x: 0, transition: { duration: 0.35, ease: EASE } },
+  show: { opacity: 1, x: 0, transition: { duration: 0.35, ease: EASE } },
 };
 
 export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
-  const [open, setOpen]       = useState(false);
+  const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const t        = useTranslations("Nav");
+  const t = useTranslations("Nav");
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
 
   // Portal için client-side mount kontrolü
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Rota değişince kapat (Link navigasyonu tamamlanınca)
-  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   // Lenis scroll kilidi — body.overflow çalışmaz, lenis.stop() gerekir
   useEffect(() => {
@@ -77,7 +84,9 @@ export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
   // Escape tuşu
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
@@ -94,7 +103,7 @@ export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
         aria-controls="mobile-menu-panel"
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "relative flex h-10 w-10 items-center justify-center md:hidden transition-colors duration-300",
+          "relative flex h-10 w-10 items-center justify-center transition-colors duration-300 lg:hidden",
           forceLight ? "text-white" : "text-ink"
         )}
       >
@@ -116,109 +125,117 @@ export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
       </button>
 
       {/* ── Portal: body'ye mount — sticky header stacking context'inden çıkar ── */}
-      {mounted && createPortal(
-        <AnimatePresence>
-          {open && (
-            <>
-              {/* Karartma */}
-              <motion.div
-                key="mobile-backdrop"
-                variants={reduceMotion ? undefined : backdropVariants}
-                initial={reduceMotion ? { opacity: 0 } : "hidden"}
-                animate={reduceMotion ? { opacity: 1 } : "show"}
-                exit={reduceMotion ? { opacity: 0 } : "exit"}
-                onClick={close}
-                className="fixed inset-0 bg-ink/40 md:hidden"
-                style={{ zIndex: 998 }}
-                aria-hidden
-              />
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
+              <>
+                {/* Karartma */}
+                <motion.div
+                  key="mobile-backdrop"
+                  variants={reduceMotion ? undefined : backdropVariants}
+                  initial={reduceMotion ? { opacity: 0 } : "hidden"}
+                  animate={reduceMotion ? { opacity: 1 } : "show"}
+                  exit={reduceMotion ? { opacity: 0 } : "exit"}
+                  onClick={close}
+                  className="bg-ink/40 fixed inset-0 lg:hidden"
+                  style={{ zIndex: 998 }}
+                  aria-hidden
+                />
 
-              {/* Panel */}
-              <motion.div
-                key="mobile-panel"
-                id="mobile-menu-panel"
-                role="dialog"
-                aria-modal="true"
-                aria-label={t("openMenu")}
-                variants={reduceMotion ? undefined : panelVariants}
-                initial={reduceMotion ? { x: "100%" } : "hidden"}
-                animate={reduceMotion ? { x: 0 } : "show"}
-                exit={reduceMotion ? { x: "100%" } : "exit"}
-                className="fixed right-0 top-0 flex h-full w-[min(340px,88vw)] flex-col overflow-y-auto bg-paper shadow-2xl md:hidden"
-                style={{ zIndex: 999 }}
-              >
-                {/* Panel üstü */}
-                <div className="flex h-16 shrink-0 items-center justify-between border-b border-mute-100 px-5">
-                  <Link href="/" onClick={close} aria-label="DOU Social">
-                    <Logo className="h-6 w-16 text-ink" />
-                  </Link>
-                  <button
-                    type="button"
-                    aria-label={t("closeMenu")}
-                    onClick={close}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-mute-100 text-ink transition-colors hover:bg-mute-200"
-                  >
-                    <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                      <path d="M4 4l8 8M4 12L12 4" />
-                    </svg>
-                  </button>
-                </div>
-
-                {/* Nav linkleri */}
-                <motion.nav
-                  variants={navContainerVariants}
-                  initial="hidden"
-                  animate="show"
-                  className="flex flex-1 flex-col overflow-y-auto px-5 pt-4"
+                {/* Panel */}
+                <motion.div
+                  key="mobile-panel"
+                  id="mobile-menu-panel"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={t("openMenu")}
+                  variants={reduceMotion ? undefined : panelVariants}
+                  initial={reduceMotion ? { x: "100%" } : "hidden"}
+                  animate={reduceMotion ? { x: 0 } : "show"}
+                  exit={reduceMotion ? { x: "100%" } : "exit"}
+                  className="bg-paper fixed top-0 right-0 flex h-full w-[min(340px,88vw)] flex-col overflow-y-auto shadow-2xl lg:hidden"
+                  style={{ zIndex: 999 }}
                 >
-                  {NAV_ITEMS.map((item) => (
-                    <motion.div key={item.key} variants={navItemVariants}>
-                      <Link
-                        href={item.href as never}
-                        onClick={close}
-                        className="flex items-center justify-between border-b border-mute-100 py-5 font-display text-2xl tracking-tight text-ink transition-colors hover:text-accent active:text-accent"
+                  {/* Panel üstü */}
+                  <div className="border-mute-100 flex h-16 shrink-0 items-center justify-between border-b px-5">
+                    <Link href="/" onClick={close} aria-label="DOU Social">
+                      <Logo className="text-ink h-6 w-16" />
+                    </Link>
+                    <button
+                      type="button"
+                      aria-label={t("closeMenu")}
+                      onClick={close}
+                      className="bg-mute-100 text-ink hover:bg-mute-200 flex h-9 w-9 items-center justify-center rounded-full transition-colors"
+                    >
+                      <svg
+                        viewBox="0 0 16 16"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                       >
-                        <span>{t(item.key)}</span>
-                        <svg
-                          viewBox="0 0 16 16"
-                          className="h-4 w-4 shrink-0 text-mute-300"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
+                        <path d="M4 4l8 8M4 12L12 4" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Nav linkleri */}
+                  <motion.nav
+                    variants={navContainerVariants}
+                    initial="hidden"
+                    animate="show"
+                    className="flex flex-1 flex-col overflow-y-auto px-5 pt-4"
+                  >
+                    {NAV_ITEMS.map((item) => (
+                      <motion.div key={item.key} variants={navItemVariants}>
+                        <Link
+                          href={item.href as never}
+                          onClick={close}
+                          className="border-mute-100 font-display text-ink hover:text-accent active:text-accent flex items-center justify-between border-b py-5 text-2xl tracking-tight transition-colors"
                         >
-                          <path d="M3 8h10M9 4l4 4-4 4" />
-                        </svg>
+                          <span>{t(item.key)}</span>
+                          <svg
+                            viewBox="0 0 16 16"
+                            className="text-mute-300 h-4 w-4 shrink-0"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          >
+                            <path d="M3 8h10M9 4l4 4-4 4" />
+                          </svg>
+                        </Link>
+                      </motion.div>
+                    ))}
+
+                    {/* CTA butonu */}
+                    <motion.div variants={navItemVariants} className="pt-6">
+                      <Link
+                        href="/dijital-checkup"
+                        onClick={close}
+                        className="bg-accent text-paper hover:bg-accent-hover flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-colors"
+                      >
+                        {t("cta")}
                       </Link>
                     </motion.div>
-                  ))}
+                  </motion.nav>
 
-                  {/* CTA butonu */}
-                  <motion.div variants={navItemVariants} className="pt-6">
-                    <Link
-                      href="/dijital-checkup"
-                      onClick={close}
-                      className="flex w-full items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-accent-hover"
-                    >
-                      {t("cta")}
-                    </Link>
-                  </motion.div>
-                </motion.nav>
-
-                {/* Alt footer */}
-                <div className="shrink-0 border-t border-mute-100 px-5 py-5 flex items-center justify-between">
-                  <span className="text-xs text-mute-400">© DOU Social</span>
-                  <div className="flex items-center gap-2">
-                    <ThemeToggle />
-                    <LangSwitcher />
+                  {/* Alt footer */}
+                  <div className="border-mute-100 flex shrink-0 items-center justify-between border-t px-5 py-5">
+                    <span className="text-mute-400 text-xs">© DOU Social</span>
+                    <div className="flex items-center gap-2">
+                      <ThemeToggle />
+                      <LangSwitcher />
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>,
-        document.body
-      )}
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </>
   );
 }

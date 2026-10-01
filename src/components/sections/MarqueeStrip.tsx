@@ -23,7 +23,7 @@ function buildItems() {
   return ITEMS.map((w, i) => (
     <span
       key={i}
-      className="font-display text-xs font-medium uppercase tracking-[0.18em] text-paper/55 px-8"
+      className="font-display text-xs font-medium uppercase tracking-[0.18em] text-white/80 px-8"
     >
       {w}
     </span>
@@ -32,7 +32,7 @@ function buildItems() {
 
 export function MarqueeStrip() {
   return (
-    <div className="bg-mute-800 py-3.5 overflow-hidden select-none">
+    <div className="bg-[#262626] py-3.5 overflow-hidden select-none">
       <Marquee items={buildItems()} direction="left" speed={30} gapClass="gap-0" />
     </div>
   );

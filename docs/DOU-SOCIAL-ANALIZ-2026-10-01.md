@@ -2,7 +2,7 @@
 
 1 Ekim 2026 tarihinde dousocial.com ve dousocial/dou-social-wizard reposu incelendi. Amaç, verilen 17 başlıklı checklist doğrultusunda teklif üreten bir site kurmak, gereksiz indekslenen sayfaları temizlemek ve reklam yönetimi ile Denizli çekim hizmetlerini genişletmek. Teknik temel mevcut; öncelik yeni blog sayısından önce güvenlik, doğru indeksleme ve gerçek başvuru kaydıdır.
 
-Bu rapor kod incelemesi ve canlı HTTP/HTML kontrollerine dayanır. Search Console, GA4 hesap verileri, Supabase yönetimi, müşteri dönüşümleri ve saha Core Web Vitals verilerine erişilmedi. Sıralama, trafik ve satış artışı vaat edilmez. Yerel değişiklikler canlı yayına alınmadı. Haziran tarihli AUDIT-SEO-GEO.md tarihsel bir rapordur; oradaki bazı sorunlar güncel kodda zaten çözülmüştür.
+Bu rapor ilk incelemenin bulgularını ve sonraki uygulamaları birlikte tutar. Önceki bölümlerdeki ilk durum ifadeleri tarihsel bulgulardır; güncel Search Console, görsel ve checklist durumu son bölümde açıklanır. Kod değişiklikleri Vercel üzerinden canlıya alınır. GA4 dönüşüm teslimi, Supabase yönetimi ve gerçek müşteri satışları bu çalışmada doğrulanmadı. Haziran tarihli AUDIT-SEO-GEO.md tarihsel bir rapordur.
 
 ## Doğrulanan mevcut durum
 
@@ -156,3 +156,75 @@ Vercel önizleme ilk sürüm için READY durumuna ulaştı. GitHub Actions temiz
 ## Telefon, CRM ve görsel takip güncellemesi
 
 Kullanıcının yeni isteğiyle ücretsiz analizde telefon ve talebe yanıt vermek için kayıt onayı zorunlu hale getirildi; e-posta istenmez. Web sitesi ya da Instagram alanlarından biri yeterlidir. Telefon normalize edilir, analiz raporu mevcut audits tablosunda saklanır. Yönetim analiz listesinde CRM’e aktar bağlantısı telefon ve raporla aday formunu açar; aday oluşturma mevcut yetkili CRM işleminden yapılır. Kayıt hatasında başvuru başarılı gösterilmez. Yeni hizmetler mevcut hizmet gridine entegre edildi; yinelenen Meta kartı ve ayrı reklam/çekim bölümünün kopyası kaldırıldı. Blog kapakları ve hizmet görselleri tematik konsept görsellerdir; gerçek müşteri işi veya Denizli’de çekilmiş bir etkinlik kanıtı olarak sunulmaz.
+
+## Search Console ve hız çalışmasının güncel sonucu
+
+1 Ekim 2026 tarihinde info hesabıyla Chrome üzerinden dousocial.com alan adı mülkü açıldı. Checklistin 17 başlığındaki 277 madde ayrı ayrı durum dosyasına aktarıldı: `docs/audit-evidence/checklist-status.json`. Bu dosya kontrol edilen, kodda bulunan, açık eksik olan ve ayrıca doğrulanması gereken maddeleri ayırır. Checklistin tamamı bitmiş değildir; dosyanın varlığı 277 maddenin canlıda test edildiği anlamına gelmez.
+
+### Arama trafiği ve öncelikler
+
+| Metrik | 4–31 Ağustos | 1–28 Eylül | Yorum |
+|---|---:|---:|---|
+| Tıklama | 35 | 30 | %14 düşüş; küçük örneklem |
+| Gösterim | Yaklaşık 1.780 | Yaklaşık 2.100 | Yuvarlanmış göstergeyle yaklaşık %18 artış |
+| Tıklama oranı | %2 | %1,4 | Görünürlük artışı tıklamaya aynı oranda dönüşmüyor |
+| Ortalama konum | 13 | 10,9 | Ortalama konum iyileşiyor; sorgu karışımı sonucu etkiler |
+
+Üç aylık görünümde 29 Haziran–28 Eylül için 98 tıklama, yaklaşık 4.800 gösterim, %2 tıklama oranı ve 11,6 ortalama konum var. Veriler bugünkü yeni hizmet ve blog yayınlarının etkisini içermez. Son 28 günlük görünür sorgularda “dou social” 7 tıklamadan 1 tıklamaya düşmüş; bu sorgunun 6 tıklama kaybı toplam 5 tıklama düşüşünden büyük. Bu, görünen verilerde marka aramasındaki değişimin önemli payı olduğunu gösterir; bütün kaybın teknik SEO'dan veya hızdan geldiği sonucuna varılamaz. Search Console bazı sorguları gizlediği için sorgu tablosu toplamının rapor toplamına eşit olması beklenmez.
+
+Son 28 günde ana sayfanın www adresi 12 tıklama / 346 gösterim / %3,5 TO / 10,2 konum, non-www adresi 3 tıklama / 382 gösterim / %0,8 TO / 3,0 konum gösteriyor. Bu dağılım eski canonical/redirect etkisi veya farklı sorgu karışımıyla ilişkili olabilir; tek başına kanıt değildir. Ana sayfanın title ve açıklaması yerel reklam ve sosyal medya hizmetlerini daha açık anlatacak şekilde güncellendi. Non-www için kalıcı yönlendirme Vercel domain ayarında ayrıca tamamlanmalıdır.
+
+Öncelikli sorgular: “denizli reklam ajansı” 2 tıklama / 67 gösterim; “denizli sosyal medya ajansı” 1 / 85; “denizli sosyal medya yönetimi” 1 / 18. Google Ads, Meta ve Denizli çekim sayfaları bu hizmet talebini karşılamak için birbirinden farklı kapsamlarla hazırlandı. Yeni metinlerin etkisini aynı sorgu ve sayfa üzerinden takip etmek gerekir.
+
+### İndeksleme ve yapılan işlem
+
+21 Eylül güncellemeli indeksleme raporu 102 indekslenen, 29 indekslenmeyen URL gösteriyor. Dışlanma nedenleri: 16 adet 404, 3 yönlendirme, 2 doğru canonical alternatifi, 1 noindex, 5 keşfedilmiş ama indekslenmemiş ve 2 taranmış ama indekslenmemiş URL. Bu tarih yeni dağıtımdan öncedir. 404 örneklerinin çoğu olmayan İngilizce blog/proje adresleri ve eski içeriklerdir. Bunları ilgisiz ana sayfaya yönlendirmek doğru değildir. Gerçekten kaldırılmış ve eşdeğeri olmayan sayfalarda 404 beklenen sonuçtur; [Google 404 rehberi](https://support.google.com/webmasters/answer/2445990?hl=en).
+
+Search Console'daki sitemap son olarak 28 Eylül'de okunmuş ve 60 sayfa göstermişti. Güncel `https://www.dousocial.com/sitemap.xml` 1 Ekim'de yeniden gönderildi; arayüz “Site haritası başarıyla gönderildi” sonucunu verdi. Gönderim indeksleme veya sıralama garantisi değildir; [Google sitemap açıklaması](https://developers.google.com/search/help/crawling-index-faq?hl=en).
+
+Mobil ve masaüstü Core Web Vitals raporları son 90 gün için yeterli kullanım verisi olmadığını söylüyor. Bu nedenle “INP iyi” veya “saha Core Web Vitals geçti” denemez. Lighthouse laboratuvar ölçümü bu boşluğu tek başına kapatmaz; [PageSpeed veri ayrımı](https://developers.google.com/speed/docs/insights/v5/about).
+
+### Görseller ve marka alanı
+
+- 46 yerel görsel WebP olarak hazırlandı. Toplam kaynak boyutu 17.961.741 bayttan 1.985.304 bayta indi; yaklaşık %89 küçülme. Eski kaynak adresleri uyumluluk için korunur, public bileşenler WebP'yi kullanır.
+- Yedi reklam/çekim kapağı tek başına 14.143.954 bayttan 386.346 bayta indi; yaklaşık %97 küçülme. Blog kapağı, hizmet kartı ve hizmet hero'su aynı tematik görseli kullanır. Eski blog içi görselleri, ekip fotoğrafları, logolar, analiz rehberi görselleri ve hero posteri de dönüştürüldü.
+- Logolardaki geniş boşluklar kırpıldı; marka şekli ve rengi korunuyor. Logolar tam opaklıkla gösteriliyor, hover'da beyaza dönmüyor. Yapıgranit ve EN20 beyaz logoları #253238 koyu zeminde, diğerleri #f5f2ed açık zeminde gösteriliyor. Şirket adları her zaman görünür. Aynı kart sistemi açık ve koyu temada korunur.
+- Mobilde CSS ile gizlenen video yine de yaklaşık 1,58 MB indiriyordu. Video artık yalnızca uygun masaüstü görünümünde, azaltılmış hareket ve veri tasarrufu istenmediğinde sonradan yükleniyor; mobilde video elementi yok. WebP poster 85.762 bayttan 10.230 bayta indi.
+- Ana başlık ilk HTML'de görünür; açılış animasyonunun başlığı saklaması kaldırıldı. Mobilde kullanılmayan Lenis kodu artık koşullu import edilir. Görsel/video cache başlıkları genişletildi.
+- Kaynak servisi gerçek Google yorumu döndürmezse varsayılan kişi adları ve performans iddialarından oluşan yorum kartları artık gösterilmiyor. Gerçek yorum akışı korunur.
+
+Vercel görsel optimizasyon servisi modern görsel isteyen canlı isteklerde 402 döndürdüğü için kaynak WebP dosyaları doğrudan sunuluyor. Next Image boyut rezervasyonu ve lazy loading korunur. Görselleri yalnızca ayarda WebP yazdığı için optimize olmuş saymak doğru değildi; canlı tarayıcı hatası giderildi.
+
+### Hız doğrulaması
+
+İlk canlı mobil Lighthouse ölçümü performans 55, erişilebilirlik 93, SEO 100; LCP 4,6 saniye, TBT 1.070 ms, CLS 0 ve toplam aktarım yaklaşık 2.710 KiB. İlk yerel production ölçümünde performans 84, erişilebilirlik 96, TBT 30 ms, CLS 0 ve yaklaşık 616 KiB aktarım görüldü. Yerel ve canlı sunucular farklı olduğundan bunlar doğrudan aynı koşuldaki önce/sonra sonucu değildir. Son canlı ölçüm dağıtım sonrasında ayrıca eklenecek. Lighthouse tek laboratuvar denemesidir; sonuçlar değişebilir. Hız düzeltmesi tek başına trafik artışını garanti etmez; [Google Core Web Vitals rehberi](https://developers.google.com/search/docs/appearance/core-web-vitals).
+
+### Checklistte kalan işler
+
+| Alan | Tamamlanan veya mevcut | Açık kalan doğrulama |
+|---|---|---|
+| Teknik altyapı | HTTPS, robots, sitemap, canonical düzeltmeleri, 404/error bileşenleri, env ignore | Kalıcı non-www redirect, tüm hata senaryoları ve geçmiş secret taraması |
+| Frontend | 320px ana sayfa/hizmetler, menü, görünür logo kartları | Her sayfada tüm cihaz/tema ve gerçek dokunma testleri |
+| Performans | WebP, mobil video indirme engeli, koşullu JS, cache, Lighthouse | Saha INP/LCP, tüm API/DB sorguları, uzun dönem ölçüm |
+| SEO | Hizmetler, bloglar, bağlantılar, metadata, sitemap temizliği | Eski Google URL listesiyle eşleştirme, yeniden tarama, kalıcı domain redirect |
+| GEO | Yerel hizmet tanımları ve schema bileşenleri | Gerçek vaka kanıtı, tüm içerikte uzman/author ve entity tutarlılığı |
+| Analytics | Consent sonrası kurulum ve başvuru olay kodları; Search Console erişimi | GA4 debug/gerçek event teslimi, telefon/WhatsApp satış ilişkilendirmesi, UTM ve 404/scroll kapsamı |
+| Güvenlik | Session imzası, izin kontrolleri, HTTPS başlıkları, yamalanmış paketler | CSP, login brute-force sınırı, paylaşımlı rate limit, kapsamlı auth/CSRF/XSS denetimi |
+| Backend | Analiz ve teklif kaydı, hata durumu, validasyon | Tüm uçların yetki/timeout/logging incelemesi ve canlı kalıcılık testi |
+| Database | Şema/migration kodu ve parola hash kodu | Canlı RLS, indeksler, pooling, backup, restore denemesi ve saklama süreleri |
+| UX | Açık CTA, iletişim, telefon, analiz; kaybolan kartlar düzeltildi | Gerçek kullanıcı araştırması ve tüm akışlar |
+| Accessibility | Label, alt, semantik bileşenler; kontrast/altı çizili link düzeltmesi | Ekran okuyucu, tam klavye denetimi, WCAG AA uygunluğu |
+| Cookie ve KVKK | İzin geri alma, politikalar ve talep onayı | Hukuki metin/retention incelemesi ve GTM içindeki etiketlerin canlı rıza davranışı |
+| Testing | 54 birim test, API başarı/hata, mock kayıt ve build | Safari, Firefox, Edge, fiziksel iPhone/Android, tam E2E/auth ve Lighthouse CI |
+| Deployment | PR/main CI ve otomatik Vercel dağıtımı | Uptime/error monitoring, DB yedekleme ve gerçek rollback tatbikatı |
+| Conversion | Telefon, WhatsApp, teklif, analizin telefonla kaydı ve CRM aktarımı | Kazanılan müşteri ölçümü, gerçek vaka/yorum kanıtı |
+| CMS | MDX/DB blog, yayın durumu, editör izinleri, sitemap yenileme | Yönetim UI üzerinden bütün yayın/draft/görsel/redirect akışı |
+| AI hazırlığı | Service/Article/Organization verileri ve kaynaklı rehberler | Tüm içerikte güncelleme/yazar denetimi ve crawler stratejisi |
+
+### Sonraki içerik ve ölçüm planı
+
+1. Yeni sitemap'in okunmasını ve yedi ticari hizmet URL'sinin indeks durumunu kontrol et. Eski 404'leri yalnızca gerçekten eşdeğer içerik varsa yönlendir.
+2. Her hafta aynı 28 günlük pencereyle marka ve marka dışı sorguları ayrı incele. Öncelik yerel reklam, sosyal medya, Google Ads ve çekim sorgularında doğru sayfanın görünmesidir.
+3. “Denizli reklam ajansı” ve “Denizli sosyal medya ajansı” için mevcut sayfaları gerçek iş örnekleri, kapsam ve teklif CTA'sıyla güçlendir. Yeni içerik üretimini sorgu ve müşteri sorularına göre yap; aynı konuda kopya sayfalar ekleme.
+4. Sağlık/estetik yazısında 273 gösterim, 2 tıklama ve 18,7 konum var. Arama niyetini, başlık/açıklamayı ve içeriği güncel mevzuat kaynaklarıyla ayrıca kontrol et; sırf gösterim var diye hacim artırma.
+5. GA4'te başvuru, telefon ve WhatsApp olaylarını doğrula; CRM'de nitelikli aday, teklif ve kazanılan müşteri sonucuyla birleştir. Trafik hedefinden önce hangi hizmetin gerçek görüşme getirdiğini öğren.
