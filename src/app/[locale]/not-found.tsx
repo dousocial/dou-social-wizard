@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <Section spacing="lg">
       <Container>
-        <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+        <div data-page-type="not-found" className="mx-auto flex max-w-2xl flex-col items-center text-center">
           <p className="font-display text-9xl leading-none tracking-tight text-accent md:text-[12rem]">
             404
           </p>

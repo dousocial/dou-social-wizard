@@ -30,7 +30,7 @@ describe("quote persistence", () => {
     insert.mockResolvedValue({ error: null });
     await expect(
       submitQuoteRequest({ status: "idle" }, form())
-    ).resolves.toEqual({ status: "success" });
+    ).resolves.toEqual({ status: "success", recorded: true });
     expect(insert).toHaveBeenCalledWith(
       expect.objectContaining({ type: "teklif", email: "test@example.com" })
     );

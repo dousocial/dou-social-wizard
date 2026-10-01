@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { InteractionTracking } from "./InteractionTracking";
 import { siteConfig } from "@/config/site";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? siteConfig.analytics.ga4Id;
@@ -12,6 +13,7 @@ const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 export function Analytics() {
   return (
     <>
+      <InteractionTracking />
       {GTM_ID && (
         <>
           <Script id="gtm-init" strategy="afterInteractive">
@@ -73,18 +75,4 @@ export function Analytics() {
   );
 }
 
-/** Type-safe helper to fire custom events from client components */
-export function trackEvent(name: string, params?: Record<string, unknown>) {
-  if (typeof window === "undefined") return;
-  try { if (localStorage.getItem("dou_consent_v1") !== "granted") return; } catch { return; }
-  if (GTM_ID) {
-    // @ts-expect-error dataLayer injected by the GTM script
-    window.dataLayer?.push({ event: name, ...params });
-  } else {
-    // @ts-expect-error gtag injected by the GA script
-    window.gtag?.("event", name, params);
-  }
-  // Meta Pixel
-  // @ts-expect-error global fbq injected by Meta Pixel script
-  window.fbq?.("trackCustom", name, params);
-}
+export { trackEvent } from "@/lib/analytics";

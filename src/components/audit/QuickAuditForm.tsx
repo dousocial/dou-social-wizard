@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import dynamic from "next/dynamic";
-import { trackEvent } from "@/components/analytics/Analytics";
+import { trackEvent } from "@/lib/analytics";
 import type { QuickAuditReport } from "@/lib/quick-audit-types";
 
 const AdvancedAudit = dynamic(() =>
@@ -49,6 +49,7 @@ export function QuickAuditForm() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
       setReport(data);
+      trackEvent("generate_lead", { form_type: "quick_audit" });
       trackEvent("audit_completed", {
         source_count: data.sources.length,
         available_count: data.sources.filter(

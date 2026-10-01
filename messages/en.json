@@ -1422,7 +1422,7 @@
     "points": {
       "analysis": {
         "title": "Your personal report",
-        "description": "Not generic advice. We look at your accounts and produce an honest 4–6 page evaluation."
+        "description": "We review public website or profile information and clearly state observed findings and access limitations."
       },
       "actionable": {
         "title": "What should you do?",
@@ -1435,7 +1435,7 @@
     },
     "formEyebrow": "Analysis Form",
     "formTitle": "Share your link.",
-    "formNote": "One field is enough. We review available information and clearly state access limitations.",
+    "formNote": "Provide a website or Instagram username. Your phone number and permission to store the request are required so we can respond.",
     "form": {
       "platforms": {
         "label": "Which platforms do you have accounts on?",

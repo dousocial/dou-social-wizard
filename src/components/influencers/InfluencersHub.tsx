@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { InfluencerItem } from "@/lib/influencers";
 import { Container } from "@/components/ui/Container";
@@ -25,6 +26,7 @@ const SECTOR_LIST = [
 ];
 
 export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
+  const locale = useLocale();
   const [selectedSector, setSelectedSector] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeVideoInfluencer, setActiveVideoInfluencer] =
@@ -95,6 +97,7 @@ export function InfluencersHub({ initialInfluencers }: InfluencersHubProps) {
   return (
     <section className="border-t border-mute-100 py-12 md:py-16 overflow-hidden">
       <Container>
+        <h2 className="sr-only">{locale === "en" ? "Content creators" : "İçerik üreticileri"}</h2>
         {/* ── Filter Bar: Sektör Seçici & Arama ── */}
         <div className="flex flex-col gap-6 border-b border-mute-100 pb-8 md:flex-row md:items-center md:justify-between">
           {/* Sektör Tabları */}

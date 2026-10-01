@@ -1423,7 +1423,7 @@
     "points": {
       "analysis": {
         "title": "Sana özel bakış",
-        "description": "Genel tavsiye değil. Kendi hesaplarına bakıp ne iyi gidiyor, ne gitmediğini dürüstçe yazıyoruz."
+        "description": "Herkese açık web sitesi veya profil bilgilerini kontrol eder, görebildiğimiz bulguları ve erişim sınırlarını açıkça belirtiriz."
       },
       "actionable": {
         "title": "Somut adımlar",
@@ -1436,7 +1436,7 @@
     },
     "formEyebrow": "Analiz Formu",
     "formTitle": "Bağlantınızı paylaşın.",
-    "formNote": "Tek bir alan yeterli. Ulaşılabilen bilgileri kontrol eder, eksik erişimi açıkça belirtiriz.",
+    "formNote": "Web sitesi veya Instagram alanlarından biri yeterlidir. Talebinize dönüş yapabilmek için telefon numaranız ve kayıt onayınız gerekir.",
     "form": {
       "platforms": {
         "label": "Hangi platformlarda hesabın var?",

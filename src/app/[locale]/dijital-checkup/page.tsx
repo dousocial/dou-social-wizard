@@ -56,9 +56,9 @@ export default function CheckupPage({
                   <span className="font-display text-5xl leading-none text-accent">
                     0{i + 1}
                   </span>
-                  <h3 className="mt-6 font-display text-2xl tracking-tight text-ink">
+                  <h2 className="mt-6 font-display text-2xl tracking-tight text-ink">
                     {t(`points.${p}.title`)}
-                  </h3>
+                  </h2>
                   <p className="mt-3 text-mute-600">
                     {t(`points.${p}.description`)}
                   </p>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState, useTransition } from "react";
+import { useActionState, useState, useTransition, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { submitContactForm, type FormState } from "@/lib/actions/forms";
 import { Button } from "@/components/ui/Button";
@@ -20,6 +20,8 @@ declare global {
 
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
 
+import { trackEvent } from "@/lib/analytics";
+
 const initial: FormState = { status: "idle" };
 
 function formatPhone(raw: string): string {
@@ -33,6 +35,13 @@ export function ContactForm() {
   const t = useTranslations("Contact.form");
   const [phone, setPhone] = useState("");
   const [state, formAction] = useActionState(submitContactForm, initial);
+  const leadTracked = useRef(false);
+  useEffect(() => {
+    if (state.status === "success" && state.recorded && !leadTracked.current) {
+      leadTracked.current = true;
+      trackEvent("generate_lead", { form_type: "contact" });
+    }
+  }, [state]);
   const [isPending, startTransition] = useTransition();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
