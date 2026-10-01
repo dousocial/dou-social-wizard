@@ -1,20 +1,13 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { supabase } from "@/lib/supabase";
-import { verifyToken } from "@/lib/session";
+import { requirePermission } from "@/lib/session";
 
 export type ProjectActionState = { error?: string; success?: boolean; id?: string } | null;
 
 async function requireAdmin() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("dou_sid")?.value;
-  if (!token) redirect("/yonetim/giris");
-  const session = verifyToken(token);
-  if (!session) redirect("/yonetim/giris");
-  return session;
+  return requirePermission("content.write");
 }
 
 function isNextRedirect(err: unknown): boolean {
@@ -117,7 +110,7 @@ export async function createProject(
       .select("id")
       .single();
 
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
 
     revalidatePath("/tr/projeler");
     revalidatePath("/en/projeler");
@@ -147,7 +140,7 @@ export async function updateProject(
       .update({ ...payload, updated_at: new Date().toISOString() })
       .eq("id", id);
 
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
 
     revalidatePath("/tr/projeler");
     revalidatePath("/en/projeler");
@@ -171,7 +164,7 @@ export async function deleteProject(
     if (!id) return { error: "ID gerekli" };
 
     const { error } = await supabase.from("projects").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
 
     revalidatePath("/tr/projeler");
     revalidatePath("/en/projeler");

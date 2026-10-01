@@ -5,7 +5,7 @@ const baseInputClass = cn(
   "w-full rounded-xl border border-mute-200 bg-paper px-4 py-3 text-ink",
   "placeholder:text-mute-400",
   // Focus — accent alt çizgi + halka
-  "focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15",
+  "focus:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink focus:ring-2 focus:ring-accent/15",
   // Hover
   "hover:border-mute-300",
   "transition-all duration-200"

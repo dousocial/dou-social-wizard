@@ -49,7 +49,7 @@ export async function addLead(data: LeadInput): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { data: newLead, error } = await sb().from("crm_leads").insert(data).select("id").single();
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/musteriler");
     return { error: null, id: newLead.id };
   } catch (e) {
@@ -64,7 +64,7 @@ export async function updateLead(id: string, data: Partial<LeadInput>): Promise<
       .from("crm_leads")
       .update({ ...data, updated_at: new Date().toISOString() })
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${id}`);
     return { error: null };
@@ -77,7 +77,7 @@ export async function deleteLead(id: string): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("crm_leads").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/musteriler");
     return { error: null };
   } catch (e) {

@@ -69,7 +69,7 @@ export function ContactForm() {
 
   if (state.status === "success") {
     return (
-      <div className="rounded-2xl border border-mute-200 bg-mute-50 p-10 text-center">
+      <div role="status" className="rounded-2xl border border-mute-200 bg-mute-50 p-10 text-center">
         <h3 className="font-display text-3xl tracking-tight text-ink">
           {t("successTitle")}
         </h3>
@@ -124,7 +124,7 @@ export function ContactForm() {
       <KVKKConsentField />
 
       {state.status === "error" && (
-        <p className="text-sm text-accent">{t(`errors.${state.error}`)}</p>
+        <p role="alert" className="text-sm text-accent">{t(`errors.${state.error}`)}</p>
       )}
 
       <Button type="submit" disabled={isPending}>

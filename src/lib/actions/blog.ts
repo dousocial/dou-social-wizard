@@ -114,7 +114,7 @@ export async function createBlogPost(
       .select("id")
       .single();
 
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
 
     revalidatePath("/tr/blog");
     revalidatePath("/en/blog");
@@ -179,7 +179,7 @@ export async function updateBlogPost(
       })
       .eq("id", id);
 
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
 
     revalidatePath("/tr/blog");
     revalidatePath("/en/blog");
@@ -203,7 +203,7 @@ export async function deleteBlogPost(
     if (!id) return { error: "ID gerekli" };
 
     const { error } = await supabase.from("blog_posts").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
 
     revalidatePath("/tr/blog");
     revalidatePath("/en/blog");

@@ -5,7 +5,8 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { supabase } from "@/lib/supabase";
-import { isUserRole, requirePermission, signToken, verifyToken } from "@/lib/session";
+import { isUserRole, requirePermission, signToken, getActiveSession } from "@/lib/session";
+import { getClientId, rateLimit } from "@/lib/rate-limit";
 
 export type ActionState = { error?: string; success?: boolean } | null;
 
@@ -27,6 +28,12 @@ export async function loginAction(_prev: ActionState, formData: FormData): Promi
     const password = String(formData.get("password") ?? "");
 
     if (!username || !password) return { error: "Kullanıcı adı ve şifre gerekli" };
+    if (username.length > 100 || password.length > 1024) return { error: "Kullanıcı adı veya şifre hatalı" };
+    const clientId = await getClientId();
+    const identifier = crypto.createHash("sha256").update(clientId).digest("hex");
+    if (!rateLimit(`login:${identifier}`, { max: 5, windowSeconds: 600 }).ok) {
+      return { error: "Çok fazla giriş denemesi. Lütfen 10 dakika sonra tekrar deneyin." };
+    }
 
     const { data: user } = await supabase
       .from("admin_users")
@@ -34,7 +41,10 @@ export async function loginAction(_prev: ActionState, formData: FormData): Promi
       .eq("username", username)
       .single();
 
-    if (!user || hashPassword(password, user.salt) !== user.password_hash) {
+    const hash = hashPassword(password, user?.salt ?? "login-dummy-salt");
+    const stored = Buffer.from(user?.password_hash ?? "", "hex");
+    const submitted = Buffer.from(hash, "hex");
+    if (!user || stored.length !== submitted.length || !crypto.timingSafeEqual(stored, submitted)) {
       return { error: "Kullanıcı adı veya şifre hatalı" };
     }
 
@@ -52,17 +62,20 @@ export async function loginAction(_prev: ActionState, formData: FormData): Promi
     return { success: true };
   } catch (err) {
     if (isNextRedirect(err)) throw err;
-    return { error: err instanceof Error ? err.message : String(err) };
+    return { error: "Giriş şu anda tamamlanamadı. Lütfen tekrar deneyin." };
   }
 }
 
 export async function setupAction(_prev: ActionState, formData: FormData): Promise<ActionState> {
   try {
-    const { count } = await supabase
+    // Bootstrap must be explicitly enabled by the deployment operator.
+    if (process.env.ENABLE_ADMIN_BOOTSTRAP !== "true") return { error: "İlk yönetici kurulumu kapalı." };
+    const { count, error: countError } = await supabase
       .from("admin_users")
       .select("*", { count: "exact", head: true });
 
-    if ((count ?? 0) > 0) return { error: "Admin zaten mevcut" };
+    if (countError || count === null) return { error: "Kurulum şu anda tamamlanamadı." };
+    if (count > 0) return { error: "Admin zaten mevcut" };
 
     const username = String(formData.get("username") ?? "").trim();
     const password = String(formData.get("password") ?? "");
@@ -77,7 +90,7 @@ export async function setupAction(_prev: ActionState, formData: FormData): Promi
       .from("admin_users")
       .insert({ username, password_hash, salt, role: "yonetici" });
 
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
 
     return { success: true };
   } catch (err) {
@@ -108,7 +121,7 @@ export async function addUserAction(
       .from("admin_users")
       .insert({ username, password_hash, salt, role });
 
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
 
     revalidatePath("/yonetim/kullanicilar");
     return { success: true };
@@ -157,7 +170,7 @@ export async function changePasswordAction(
 ): Promise<ActionState> {
   try {
     const token = (await cookies()).get("dou_sid")?.value;
-    const session = token ? verifyToken(token) : null;
+    const session = await getActiveSession(token);
     if (!session) redirect("/yonetim/giris");
 
     const current = String(formData.get("current") ?? "");

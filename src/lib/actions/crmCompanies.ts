@@ -28,7 +28,7 @@ export async function addCompany(data: CompanyInput): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { data: newComp, error } = await sb().from("crm_companies").insert(data).select("id").single();
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/firmalar");
     return { error: null, id: newComp.id };
   } catch (e) {
@@ -43,7 +43,7 @@ export async function updateCompany(id: string, data: Partial<CompanyInput>): Pr
       .from("crm_companies")
       .update({ ...data, updated_at: new Date().toISOString() })
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/firmalar");
     return { error: null };
   } catch (e) {
@@ -55,7 +55,7 @@ export async function deleteCompany(id: string): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("crm_companies").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/firmalar");
     return { error: null };
   } catch (e) {

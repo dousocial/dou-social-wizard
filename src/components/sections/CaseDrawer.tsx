@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useModalFocus } from "@/components/ui/useModalFocus";
+
+import { useEffect, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
@@ -52,6 +54,7 @@ function DrawerContent({
   tS: ReturnType<typeof useTranslations>;
   onClose: () => void;
 }) {
+  useModalFocus(true, "case-drawer");
   return (
     <>
       {/* Backdrop */}
@@ -76,6 +79,7 @@ function DrawerContent({
         exit={{ x: "100%" }}
         transition={{ duration: 0.5, ease: EASE }}
         className="fixed right-0 top-0 z-50 flex h-dvh w-full max-w-2xl flex-col border-l border-mute-200 bg-paper shadow-2xl"
+        id="case-drawer"
         role="dialog"
         aria-modal="true"
         aria-label={content.title}
@@ -244,9 +248,8 @@ export function CaseDrawer({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const tItems = useTranslations("Cases.items") as any;
   const tS = useTranslations("Cases._shared");
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
 
-  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     const lenis = getLenis();

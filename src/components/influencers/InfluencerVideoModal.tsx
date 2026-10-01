@@ -1,5 +1,7 @@
 "use client";
 
+import { useModalFocus } from "@/components/ui/useModalFocus";
+
 import { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -23,6 +25,7 @@ export function InfluencerVideoModal({
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  useModalFocus(isOpen && mounted, "influencer-video-modal");
 
   useEffect(() => {
     // Portal hedefi yalnızca tarayıcıda kullanılabilir.
@@ -93,6 +96,7 @@ export function InfluencerVideoModal({
             exit={{ opacity: 0, scale: 0.98, y: 16 }}
             transition={{ duration: 0.3, ease: EASE }}
             className="relative z-10 flex h-full w-full max-w-4xl flex-col overflow-hidden bg-ink text-paper shadow-2xl md:h-[82vh] md:max-h-[760px] md:flex-row md:rounded-3xl md:border md:border-mute-200 md:bg-paper md:text-ink"
+            id="influencer-video-modal"
             role="dialog"
             aria-modal="true"
             aria-label={`${influencer.name} İçerik İnceleme`}

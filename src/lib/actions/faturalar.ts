@@ -9,7 +9,7 @@ export async function addFatura(data: FaturaInput): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_faturalar").insert(data);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
     revalidatePath("/yonetim/musteriler");
     return { error: null };
@@ -19,7 +19,7 @@ export async function updateFatura(id: string, musteriId: string, data: Partial<
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_faturalar").update(data).eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${musteriId}`);
     return { error: null };
   } catch (e) { return { error: String(e) }; }
@@ -28,7 +28,7 @@ export async function deleteFatura(id: string, musteriId: string): Promise<Actio
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_faturalar").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${musteriId}`);
     return { error: null };
   } catch (e) { return { error: String(e) }; }
@@ -38,7 +38,7 @@ export async function markOdendi(id: string, musteriId: string): Promise<ActionR
     await requirePermission("crm.write");
     const today = new Date().toISOString().split("T")[0];
     const { error } = await sb().from("musteri_faturalar").update({ durum: "odendi", odeme_tarihi: today }).eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${musteriId}`);
     return { error: null };
   } catch (e) { return { error: String(e) }; }

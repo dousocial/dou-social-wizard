@@ -42,7 +42,7 @@ export async function saveMonthlyPlan(data: MonthlyPlanInput): Promise<Result> {
     if (!data.client_id || !/^\d{4}-(0[1-9]|1[0-2])$/.test(data.period)) return { error: "Müşteri ve YYYY-AA dönem bilgisi zorunludur." };
     const payload = { ...data, notes: cleanMultiline(data.notes) };
     const { data: plan, error } = await sb().from("crm_monthly_plans").upsert(payload, { onConflict: "client_id,period" }).select("id").single();
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(operationPath);
     return { error: null, id: plan.id };
   } catch (error) { return { error: String(error) }; }
@@ -54,7 +54,7 @@ export async function generateMonthlyPlans(period: string): Promise<Result> {
     if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(period)) return { error: "Dönem YYYY-AA biçiminde olmalıdır." };
     const supabase = sb();
     const { data: contracts, error } = await supabase.from("crm_contracts").select("id,client_id,monthly_post_count,monthly_video_count,monthly_shoot_days");
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     const rows = (contracts ?? []).map(contract => ({
       client_id: contract.client_id, contract_id: contract.id, period, status: "planlaniyor",
       agreed_post_count: contract.monthly_post_count || 0, agreed_video_count: contract.monthly_video_count || 0,
@@ -69,7 +69,7 @@ export async function generateMonthlyPlans(period: string): Promise<Result> {
 }
 
 export async function deleteMonthlyPlan(id: string): Promise<Result> {
-  try { await requirePermission("content.write"); const { error } = await sb().from("crm_monthly_plans").delete().eq("id", id); if (error) return { error: error.message }; revalidatePath(operationPath); return { error: null }; }
+  try { await requirePermission("content.write"); const { error } = await sb().from("crm_monthly_plans").delete().eq("id", id); if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." }; revalidatePath(operationPath); return { error: null }; }
   catch (error) { return { error: String(error) }; }
 }
 
@@ -79,17 +79,17 @@ export async function addReference(data: ReferenceInput): Promise<Result> {
     if (!data.client_id || !cleanText(data.title)) return { error: "Müşteri ve başlık zorunludur." };
     const payload = { ...data, title: cleanText(data.title), source_url: cleanText(data.source_url), preview_url: cleanText(data.preview_url), description: cleanMultiline(data.description), adapt_notes: cleanMultiline(data.adapt_notes), avoid_notes: cleanMultiline(data.avoid_notes), coordinator_note: cleanMultiline(data.coordinator_note) };
     const { data: row, error } = await sb().from("crm_reference_assets").insert(payload).select("id").single();
-    if (error) return { error: error.message }; revalidatePath(operationPath); return { error: null, id: row.id };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." }; revalidatePath(operationPath); return { error: null, id: row.id };
   } catch (error) { return { error: String(error) }; }
 }
 
 export async function updateReferenceStatus(id: string, status: ReferenceInput["status"]): Promise<Result> {
-  try { await requirePermission("content.write"); const { error } = await sb().from("crm_reference_assets").update({ status, updated_at: new Date().toISOString() }).eq("id", id); if (error) return { error: error.message }; revalidatePath(operationPath); return { error: null }; }
+  try { await requirePermission("content.write"); const { error } = await sb().from("crm_reference_assets").update({ status, updated_at: new Date().toISOString() }).eq("id", id); if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." }; revalidatePath(operationPath); return { error: null }; }
   catch (error) { return { error: String(error) }; }
 }
 
 export async function deleteReference(id: string): Promise<Result> {
-  try { await requirePermission("content.write"); const { error } = await sb().from("crm_reference_assets").delete().eq("id", id); if (error) return { error: error.message }; revalidatePath(operationPath); return { error: null }; }
+  try { await requirePermission("content.write"); const { error } = await sb().from("crm_reference_assets").delete().eq("id", id); if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." }; revalidatePath(operationPath); return { error: null }; }
   catch (error) { return { error: String(error) }; }
 }
 
@@ -105,16 +105,16 @@ export async function addShoot(data: ShootInput): Promise<Result> {
     if ((count ?? 0) >= 3 && (!cleanText(data.extra_reason) || !data.coordinator_approved)) return { error: "Dördüncü çekim için ek çekim nedeni ve koordinatör onayı zorunludur." };
     const payload = { ...data, location: cleanText(data.location), team_members: (data.team_members ?? []).map(cleanText).filter(Boolean), content_titles: (data.content_titles ?? []).map(cleanText).filter(Boolean), equipment: (data.equipment ?? []).map(cleanText).filter(Boolean), client_contact: cleanText(data.client_contact), required_products: cleanMultiline(data.required_products), speakers: cleanText(data.speakers), wardrobe: cleanMultiline(data.wardrobe), notes: cleanMultiline(data.notes), extra_reason: cleanMultiline(data.extra_reason) };
     const { data: row, error } = await supabase.from("crm_shoots").insert(payload).select("id").single();
-    if (error) return { error: error.message }; revalidatePath(operationPath); return { error: null, id: row.id };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." }; revalidatePath(operationPath); return { error: null, id: row.id };
   } catch (error) { return { error: String(error) }; }
 }
 
 export async function updateShootStatus(id: string, status: ShootInput["status"]): Promise<Result> {
-  try { await requirePermission("content.write"); const { error } = await sb().from("crm_shoots").update({ status, updated_at: new Date().toISOString() }).eq("id", id); if (error) return { error: error.message }; revalidatePath(operationPath); return { error: null }; }
+  try { await requirePermission("content.write"); const { error } = await sb().from("crm_shoots").update({ status, updated_at: new Date().toISOString() }).eq("id", id); if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." }; revalidatePath(operationPath); return { error: null }; }
   catch (error) { return { error: String(error) }; }
 }
 
 export async function deleteShoot(id: string): Promise<Result> {
-  try { await requirePermission("content.write"); const { error } = await sb().from("crm_shoots").delete().eq("id", id); if (error) return { error: error.message }; revalidatePath(operationPath); return { error: null }; }
+  try { await requirePermission("content.write"); const { error } = await sb().from("crm_shoots").delete().eq("id", id); if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." }; revalidatePath(operationPath); return { error: null }; }
   catch (error) { return { error: String(error) }; }
 }

@@ -22,7 +22,7 @@ export async function addGorev(data: GorevInput): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_gorevler").insert(data);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
     return { error: null };
   } catch (e) { return { error: String(e) }; }
@@ -32,7 +32,7 @@ export async function updateGorev(id: string, musteriId: string, data: Partial<G
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_gorevler").update(data).eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${musteriId}`);
     return { error: null };
   } catch (e) { return { error: String(e) }; }
@@ -42,7 +42,7 @@ export async function deleteGorev(id: string, musteriId: string): Promise<Action
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_gorevler").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${musteriId}`);
     return { error: null };
   } catch (e) { return { error: String(e) }; }

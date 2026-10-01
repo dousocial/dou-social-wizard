@@ -52,7 +52,7 @@ export async function addContract(data: ContractInput): Promise<ActionResult> {
     const supabase = sb();
     const payload = normalize(data);
     const { data: contract, error } = await supabase.from("crm_contracts").insert(payload).select("id").single();
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     await supabase.from("musteriler").update({
       aylik_ucret: payload.monthly_fee,
       baslangic_tarihi: payload.start_date,
@@ -73,7 +73,7 @@ export async function updateContract(id: string, data: ContractInput): Promise<A
     const supabase = sb();
     const payload = normalize(data);
     const { error } = await supabase.from("crm_contracts").update({ ...payload, updated_at: new Date().toISOString() }).eq("id", id).eq("client_id", data.client_id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     await supabase.from("musteriler").update({
       aylik_ucret: payload.monthly_fee,
       baslangic_tarihi: payload.start_date,
@@ -92,7 +92,7 @@ export async function deleteContract(id: string, clientId: string): Promise<Acti
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("crm_contracts").delete().eq("id", id).eq("client_id", clientId);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${clientId}`);
     return { error: null };
   } catch (error) {

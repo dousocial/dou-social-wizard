@@ -69,7 +69,7 @@ export async function addMusteri(data: MusteriInput): Promise<ActionResult> {
     const normalized = normalizeMusteriInput(data);
     if (normalized.error || !normalized.data) return { error: normalized.error ?? "Geçersiz müşteri verisi." };
     const { error } = await sb().from("musteriler").insert(normalized.data);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/musteriler");
     return { error: null };
   } catch (e) {
@@ -86,7 +86,7 @@ export async function updateMusteri(id: string, data: MusteriInput): Promise<Act
       .from("musteriler")
       .update({ ...normalized.data, updated_at: new Date().toISOString() })
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/musteriler/${id}`);
     return { error: null };
@@ -99,7 +99,7 @@ export async function deleteMusteri(id: string): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteriler").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/musteriler");
     return { error: null };
   } catch (e) {
@@ -125,7 +125,7 @@ export async function addMetrik(data: MetrikInput): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_metrikleri").insert(data);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
     return { error: null };
   } catch (e) {
@@ -144,7 +144,7 @@ export async function updateMetrik(
       .from("musteri_metrikleri")
       .update(data)
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${musteriId}`);
     return { error: null };
   } catch (e) {
@@ -159,7 +159,7 @@ export async function deleteMetrik(id: string, musteriId: string): Promise<Actio
       .from("musteri_metrikleri")
       .delete()
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${musteriId}`);
     return { error: null };
   } catch (e) {

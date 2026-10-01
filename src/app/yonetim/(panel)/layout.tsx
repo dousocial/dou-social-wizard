@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { verifyToken } from "@/lib/session";
+import { getActiveSession } from "@/lib/session";
 import { AdminNav } from "./_components/AdminNav";
 import { NotificationBell } from "./_components/NotificationBell";
 import { LogoutButton } from "./_components/LogoutButton";
@@ -19,7 +19,7 @@ const ROLE_LABEL: Record<string, string> = {
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
   const token = cookieStore.get("dou_sid")?.value;
-  const session = token ? verifyToken(token) : null;
+  const session = await getActiveSession(token);
 
   if (!session) {
     redirect("/yonetim/giris");

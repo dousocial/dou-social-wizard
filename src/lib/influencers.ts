@@ -90,7 +90,7 @@ export async function getPublishedInfluencers(): Promise<InfluencerItem[]> {
       order: typeof row.sira === "number" ? row.sira : 0,
     }));
   } catch (err) {
-    console.error("[getPublishedInfluencers] Error fetching:", err);
+    console.error("Published influencers could not be loaded");
     return [];
   }
 }
