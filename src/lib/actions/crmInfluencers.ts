@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
+import { requirePermission } from "@/lib/session";
 import { cleanMultiline, cleanText, formatPhoneTR, isValidPhoneTR } from "@/lib/crmValidation";
 
 function sb() {
@@ -92,6 +93,7 @@ function normalizeInfluencerInput<T extends Partial<InfluencerInput>>(
 
 export async function addInfluencer(data: InfluencerInput): Promise<ActionResult> {
   try {
+    await requirePermission("crm.write");
     const normalized = normalizeInfluencerInput(data, true);
     if (normalized.error || !normalized.data) return { error: normalized.error ?? "Geçersiz influencer verisi." };
     const { data: row, error } = await sb()
@@ -99,7 +101,7 @@ export async function addInfluencer(data: InfluencerInput): Promise<ActionResult
       .insert(normalized.data)
       .select("id")
       .single();
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/influencerlar");
     return { error: null, id: row.id };
   } catch (e) {
@@ -112,13 +114,14 @@ export async function updateInfluencer(
   data: Partial<InfluencerInput>
 ): Promise<ActionResult> {
   try {
+    await requirePermission("crm.write");
     const normalized = normalizeInfluencerInput(data, false);
     if (normalized.error || !normalized.data) return { error: normalized.error ?? "Geçersiz influencer verisi." };
     const { error } = await sb()
       .from("influencers")
       .update({ ...normalized.data, updated_at: new Date().toISOString() })
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/influencerlar");
     return { error: null };
   } catch (e) {
@@ -128,8 +131,9 @@ export async function updateInfluencer(
 
 export async function deleteInfluencer(id: string): Promise<ActionResult> {
   try {
+    await requirePermission("crm.write");
     const { error } = await sb().from("influencers").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/influencerlar");
     return { error: null };
   } catch (e) {
@@ -164,12 +168,13 @@ export type CollaborationInput = {
 
 export async function addCollaboration(data: CollaborationInput): Promise<ActionResult> {
   try {
+    await requirePermission("crm.write");
     const { data: row, error } = await sb()
       .from("influencer_collaborations")
       .insert(data)
       .select("id")
       .single();
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/influencerlar");
     return { error: null, id: row.id };
   } catch (e) {
@@ -182,11 +187,12 @@ export async function updateCollaboration(
   data: Partial<CollaborationInput>
 ): Promise<ActionResult> {
   try {
+    await requirePermission("crm.write");
     const { error } = await sb()
       .from("influencer_collaborations")
       .update({ ...data, updated_at: new Date().toISOString() })
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/influencerlar");
     return { error: null };
   } catch (e) {
@@ -196,11 +202,12 @@ export async function updateCollaboration(
 
 export async function deleteCollaboration(id: string): Promise<ActionResult> {
   try {
+    await requirePermission("crm.write");
     const { error } = await sb()
       .from("influencer_collaborations")
       .delete()
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/influencerlar");
     return { error: null };
   } catch (e) {
@@ -220,12 +227,13 @@ export type ProjectLinkInput = {
 
 export async function addProjectLink(data: ProjectLinkInput): Promise<ActionResult> {
   try {
+    await requirePermission("crm.write");
     const { data: row, error } = await sb()
       .from("influencer_projects")
       .insert(data)
       .select("id")
       .single();
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/influencerlar");
     return { error: null, id: row.id };
   } catch (e) {
@@ -235,11 +243,12 @@ export async function addProjectLink(data: ProjectLinkInput): Promise<ActionResu
 
 export async function deleteProjectLink(id: string): Promise<ActionResult> {
   try {
+    await requirePermission("crm.write");
     const { error } = await sb()
       .from("influencer_projects")
       .delete()
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/influencerlar");
     return { error: null };
   } catch (e) {

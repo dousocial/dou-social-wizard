@@ -1,5 +1,7 @@
 "use client";
 
+import { useModalFocus } from "@/components/ui/useModalFocus";
+
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
@@ -61,6 +63,7 @@ export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
   );
   const t = useTranslations("Nav");
   const reduceMotion = useReducedMotion();
+  useModalFocus(open && mounted, "mobile-menu-panel");
 
   // Lenis scroll kilidi — body.overflow çalışmaz, lenis.stop() gerekir
   useEffect(() => {

@@ -22,7 +22,7 @@ export async function addIletisim(data: IletisimInput): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_iletisimler").insert(data);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
     return { error: null };
   } catch (e) { return { error: String(e) }; }
@@ -32,7 +32,7 @@ export async function deleteIletisim(id: string, musteriId: string): Promise<Act
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_iletisimler").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${musteriId}`);
     return { error: null };
   } catch (e) { return { error: String(e) }; }

@@ -26,7 +26,7 @@ export async function addPayment(data: PaymentInput): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("crm_payments").insert(data);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${data.client_id}`);
     return { error: null };
   } catch (e) {
@@ -49,7 +49,7 @@ export async function updatePaymentStatus(
       .from("crm_payments")
       .update(data)
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${clientId}`);
     return { error: null };
   } catch (e) {
@@ -61,7 +61,7 @@ export async function deletePayment(id: string, clientId: string): Promise<Actio
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("crm_payments").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${clientId}`);
     return { error: null };
   } catch (e) {

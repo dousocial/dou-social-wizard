@@ -32,7 +32,7 @@ export async function FAQSection() {
       {/* JSON-LD for Google featured snippets */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
       />
 
       <Section spacing="md" className="border-t border-mute-100">

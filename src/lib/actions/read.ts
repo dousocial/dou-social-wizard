@@ -4,12 +4,12 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { supabase } from "@/lib/supabase";
-import { verifyToken } from "@/lib/session";
+import { getActiveSession } from "@/lib/session";
 
 async function getCurrentUsername(): Promise<string> {
   const cookieStore = await cookies();
   const token = cookieStore.get("dou_sid")?.value;
-  const session = token ? verifyToken(token) : null;
+  const session = await getActiveSession(token);
   if (!session) redirect("/yonetim/giris");
   const { data } = await supabase
     .from("admin_users")

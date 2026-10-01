@@ -26,7 +26,7 @@ export async function addFollowUp(data: FollowUpInput): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await supabase.from("crm_follow_ups").insert(data);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
 
     // Fırsatın next_follow_up_date ve last_contact_date değerlerini otomatik güncelle
     const { error: leadErr } = await supabase
@@ -38,7 +38,7 @@ export async function addFollowUp(data: FollowUpInput): Promise<ActionResult> {
       })
       .eq("id", data.lead_id);
 
-    if (leadErr) console.error("Fırsat takip tarihi güncellenemedi:", leadErr.message);
+    if (leadErr) console.error("Fırsat takip tarihi güncellenemedi");
 
     revalidatePath("/yonetim");
     revalidatePath("/yonetim/musteriler");
@@ -53,7 +53,7 @@ export async function updateFollowUp(id: string, leadId: string, data: Partial<F
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("crm_follow_ups").update(data).eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim");
     revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${leadId}`);
@@ -70,7 +70,7 @@ export async function toggleFollowUpCompleted(id: string, leadId: string, comple
       .from("crm_follow_ups")
       .update({ completed })
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim");
     revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${leadId}`);
@@ -84,7 +84,7 @@ export async function deleteFollowUp(id: string, leadId: string): Promise<Action
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("crm_follow_ups").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim");
     revalidatePath("/yonetim/musteriler");
     revalidatePath(`/yonetim/crm-leads/${leadId}`);

@@ -47,7 +47,7 @@ export async function addTeklif(data: TeklifInput): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_teklifler").insert(data);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     
     if (data.musteri_id) revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
     if (data.lead_id) revalidatePath(`/yonetim/crm-leads/${data.lead_id}`);
@@ -60,7 +60,7 @@ export async function updateTeklif(id: string, ids: { musteriId?: string | null;
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_teklifler").update(data).eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     
     if (ids.musteriId) revalidatePath(`/yonetim/musteriler/${ids.musteriId}`);
     if (ids.leadId) revalidatePath(`/yonetim/crm-leads/${ids.leadId}`);
@@ -73,7 +73,7 @@ export async function deleteTeklif(id: string, ids: { musteriId?: string | null;
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_teklifler").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     
     if (ids.musteriId) revalidatePath(`/yonetim/musteriler/${ids.musteriId}`);
     if (ids.leadId) revalidatePath(`/yonetim/crm-leads/${ids.leadId}`);
@@ -118,7 +118,7 @@ export async function createThreePackageOffers(leadId: string, companyId?: strin
     const missing = templates.filter(template => !existingLevels.has(template.package_level));
     if (missing.length === 0) return { error: "Üç paket seviyesi de zaten oluşturulmuş." };
     const { error } = await supabase.from("musteri_teklifler").insert(missing);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/crm-leads/${leadId}`);
     return { error: null };
   } catch (error) {

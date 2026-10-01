@@ -66,12 +66,28 @@ export function verifyToken(token: string): SessionPayload | null {
     const dotIdx = payload.lastIndexOf(".");
     const userPart = payload.slice(0, dotIdx);   // "userId:role"
     const ts = payload.slice(dotIdx + 1);
-    if (Date.now() - Number(ts) > 30 * 24 * 3600 * 1000) return null;
+    const issuedAt = Number(ts);
+    if (!/^\d+$/.test(ts) || !Number.isSafeInteger(issuedAt)) return null;
+    if (issuedAt > Date.now() + 60_000 || Date.now() - issuedAt > 30 * 24 * 3600 * 1000) return null;
     const colonIdx = userPart.indexOf(":");
     const userId = userPart.slice(0, colonIdx);
     const role = userPart.slice(colonIdx + 1);
     if (!userId || !isUserRole(role)) return null;
     return { userId, role };
+  } catch {
+    return null;
+  }
+}
+
+/** A signed cookie is insufficient after a user is removed or their role changes. */
+export async function getActiveSession(token: string | undefined): Promise<SessionPayload | null> {
+  const signed = token ? verifyToken(token) : null;
+  if (!signed) return null;
+  try {
+    const { supabase } = await import("./supabase");
+    const { data, error } = await supabase.from("admin_users").select("id, role").eq("id", signed.userId).single();
+    if (error || !data || !isUserRole(data.role)) return null;
+    return { userId: data.id, role: data.role };
   } catch {
     return null;
   }
@@ -84,7 +100,7 @@ export async function requireSession(): Promise<SessionPayload> {
   const cookieStore = await cookies();
   const token = cookieStore.get("dou_sid")?.value;
   if (!token) redirect("/yonetim/giris");
-  const session = verifyToken(token!);
+  const session = await getActiveSession(token);
   if (!session) redirect("/yonetim/giris");
   return session!;
 }

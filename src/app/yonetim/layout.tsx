@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 export const dynamic = "force-dynamic";
 
-export default function YonetimLayout({ children }: { children: React.ReactNode }) {
+export default async function YonetimLayout({ children }: { children: React.ReactNode }) {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <html lang="tr" suppressHydrationWarning>
       <head>
@@ -13,7 +15,7 @@ export default function YonetimLayout({ children }: { children: React.ReactNode 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet" />
         {/* Tema flash önleme — hidrasyon öncesi çalışır */}
-        <script id="adm-theme-init" dangerouslySetInnerHTML={{ __html: `
+        <script nonce={nonce} id="adm-theme-init" dangerouslySetInnerHTML={{ __html: `
           try {
             var t = localStorage.getItem('adm-theme');
             if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');

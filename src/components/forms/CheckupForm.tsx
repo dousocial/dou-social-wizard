@@ -74,7 +74,7 @@ export function CheckupForm() {
 
   if (state.status === "success") {
     return (
-      <div className="rounded-2xl border border-mute-200 bg-mute-50 p-10 text-center">
+      <div role="status" className="rounded-2xl border border-mute-200 bg-mute-50 p-10 text-center">
         <div className="text-4xl">✅</div>
         <h3 className="mt-4 font-display text-3xl tracking-tight text-ink">
           {t("successTitle")}
@@ -274,7 +274,7 @@ export function CheckupForm() {
       <KVKKConsentField />
 
       {state.status === "error" && (
-        <p className="text-sm text-accent">{t(`errors.${state.error}`)}</p>
+        <p role="alert" className="text-sm text-accent">{t(`errors.${state.error}`)}</p>
       )}
 
       <Button type="submit" size="lg" disabled={isPending}>

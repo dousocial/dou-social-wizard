@@ -26,7 +26,7 @@ export async function addContentTask(data: ContentTaskInput): Promise<ActionResu
   try {
     await requirePermission("content.write");
     const { error } = await sb().from("crm_content_tasks").insert(data);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${data.client_id}`);
     return { error: null };
   } catch (e) {
@@ -41,7 +41,7 @@ export async function updateContentTask(id: string, clientId: string, data: Part
       .from("crm_content_tasks")
       .update({ ...data, updated_at: new Date().toISOString() })
       .eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${clientId}`);
     return { error: null };
   } catch (e) {
@@ -53,7 +53,7 @@ export async function deleteContentTask(id: string, clientId: string): Promise<A
   try {
     await requirePermission("content.write");
     const { error } = await sb().from("crm_content_tasks").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${clientId}`);
     return { error: null };
   } catch (e) {

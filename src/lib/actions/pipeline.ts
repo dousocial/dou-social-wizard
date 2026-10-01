@@ -13,7 +13,7 @@ export async function movePipelineAsama(id: string, asama: string): Promise<Acti
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteriler").update({ pipeline_asamasi: asama }).eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath("/yonetim/pipeline");
     revalidatePath("/yonetim/musteriler");
     return { error: null };

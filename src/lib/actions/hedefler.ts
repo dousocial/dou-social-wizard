@@ -9,7 +9,7 @@ export async function upsertHedef(data: HedefInput): Promise<ActionResult> {
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_hedefler").upsert(data, { onConflict: "musteri_id,ay" });
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${data.musteri_id}`);
     return { error: null };
   } catch (e) { return { error: String(e) }; }
@@ -18,7 +18,7 @@ export async function deleteHedef(id: string, musteriId: string): Promise<Action
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("musteri_hedefler").delete().eq("id", id);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/musteriler/${musteriId}`);
     return { error: null };
   } catch (e) { return { error: String(e) }; }

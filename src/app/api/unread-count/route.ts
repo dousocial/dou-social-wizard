@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { verifyToken } from "@/lib/session";
+import { getActiveSession } from "@/lib/session";
 import { supabase } from "@/lib/supabase";
 
 export async function GET() {
   const cookieStore = await cookies();
   const token = cookieStore.get("dou_sid")?.value;
-  const session = token ? verifyToken(token) : null;
+  const session = await getActiveSession(token);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const [contactsRes, auditsRes, latestContactRes, latestAuditRes] = await Promise.all([

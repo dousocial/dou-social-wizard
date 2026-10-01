@@ -54,7 +54,7 @@ export async function fetchGoogleReviews(businessName = "Dou Social Denizli Rekl
       };
     }).filter((r: GoogleReview) => r.text.length > 0 && r.rating === 5);
   } catch (err) {
-    console.error("Google Reviews fetch error:", err);
+    console.error("Google Reviews could not be loaded");
     return [];
   }
 }

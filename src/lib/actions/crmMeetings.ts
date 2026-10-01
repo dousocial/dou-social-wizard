@@ -44,7 +44,7 @@ export async function addMeeting(data: MeetingInput): Promise<ActionResult> {
     await requirePermission("crm.write");
     if (!data.lead_id || !data.meeting_at) return { error: "Fırsat ve görüşme tarihi zorunludur." };
     const { data: meeting, error } = await sb().from("crm_meetings").insert(normalize(data)).select("id").single();
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/crm-leads/${data.lead_id}`);
     return { error: null, id: meeting.id };
   } catch (error) {
@@ -59,7 +59,7 @@ export async function updateMeeting(id: string, leadId: string, data: Partial<Me
     const { lead_id: _leadId, ...payload } = normalized;
     void _leadId;
     const { error } = await sb().from("crm_meetings").update({ ...payload, updated_at: new Date().toISOString() }).eq("id", id).eq("lead_id", leadId);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/crm-leads/${leadId}`);
     return { error: null };
   } catch (error) {
@@ -71,7 +71,7 @@ export async function deleteMeeting(id: string, leadId: string): Promise<ActionR
   try {
     await requirePermission("crm.write");
     const { error } = await sb().from("crm_meetings").delete().eq("id", id).eq("lead_id", leadId);
-    if (error) return { error: error.message };
+    if (error) return { error: "İşlem tamamlanamadı. Lütfen tekrar deneyin." };
     revalidatePath(`/yonetim/crm-leads/${leadId}`);
     return { error: null };
   } catch (error) {
