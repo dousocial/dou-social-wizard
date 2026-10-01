@@ -1,60 +1,16 @@
 "use client";
 
-import { useRef, useState, useEffect, useSyncExternalStore } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Noise } from "@/components/ui/Noise";
 import { siteConfig } from "@/config/site";
 import { HeroParticles } from "./HeroParticles";
 
-// ─── Easing ──────────────────────────────────────────────────────────────────
-const EASE = [0.16, 1, 0.3, 1] as const;
-
-// ─── Entrance variants ────────────────────────────────────────────────────────
-const containerVariants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.11, delayChildren: 0.15 } },
-};
-
-const titleVariants = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.85, ease: EASE } },
-};
-
-const subtleVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
-};
-
-const scrollIndicatorVariants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { duration: 0.6, delay: 1.2 } },
-};
-
-const subscribeToClient = () => () => {};
-const clientSnapshot = () => true;
-const serverSnapshot = () => false;
-
-// ─── Component ────────────────────────────────────────────────────────────────
-
+// Render the first screen without scroll observers or entrance animations.
 export function Hero() {
   const t = useTranslations("Hero");
-  const reduceMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Gate parallax to client-side only → prevents SSR/CSR style mismatch
-  const isClient = useSyncExternalStore(
-    subscribeToClient,
-    clientSnapshot,
-    serverSnapshot
-  );
   const [videoEnabled, setVideoEnabled] = useState(false);
   useEffect(() => {
     const desktop = window.matchMedia(
@@ -68,28 +24,14 @@ export function Hero() {
     return () => window.clearTimeout(timer);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "35%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-
-  const parallaxActive = isClient && !reduceMotion;
-  const bgStyle = parallaxActive ? { y: bgY } : {};
-  const contentStyle = parallaxActive ? { y: contentY, opacity } : {};
-
   return (
     <section
-      ref={sectionRef}
       className="relative flex min-h-[100svh] items-center overflow-hidden"
       aria-label="Hero"
     >
       {/* ── Video background ───────────────────────────────────────── */}
-      <motion.div
+      <div
         aria-hidden
-        style={bgStyle}
         className="pointer-events-none absolute inset-0 select-none"
       >
         {/* Fallback — her zaman siyah, tema değişiminden etkilenmiyor */}
@@ -118,7 +60,6 @@ export function Hero() {
             className="absolute inset-0 hidden h-full w-full object-cover md:block"
             src="/videos/hero-bg.mp4"
             style={{
-              display: reduceMotion ? "none" : undefined,
               pointerEvents: "none",
             }}
           />
@@ -127,11 +68,11 @@ export function Hero() {
         {/* Karartma + marka rengi geçişi — her iki temada da güçlü kontrast */}
         <div className="absolute inset-0 bg-black/50 md:bg-black/60" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,_rgb(128_0_0_/_0.25)_0%,_transparent_65%)]" />
-        <HeroParticles />
+        {videoEnabled && <HeroParticles />}
 
         {/* Noise texture */}
         <Noise opacity={0.03} />
-      </motion.div>
+      </div>
 
       {/* ── Touch shield — z-[1], sits between video bg and z-10 content.
            iOS Safari shows its native play/pause overlay whenever a touch
@@ -142,15 +83,9 @@ export function Hero() {
 
       {/* ── Content ────────────────────────────────────────────────── */}
       <Container className="relative z-10 w-full">
-        <motion.div
-          style={contentStyle}
-          variants={containerVariants}
-          initial={false}
-          animate="show"
-          className="flex flex-col items-center py-32 text-center md:py-40 lg:py-48"
-        >
+        <div className="flex flex-col items-center py-20 text-center md:py-40 lg:py-48">
           {/* Eyebrow badge */}
-          <motion.div variants={subtleVariants}>
+          <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium tracking-widest text-white/70 uppercase backdrop-blur-sm">
               <span
                 aria-hidden
@@ -158,36 +93,31 @@ export function Hero() {
               />
               {siteConfig.contact.location}
             </span>
-          </motion.div>
+          </div>
 
           {/* Main heading */}
-          <motion.h1
-            variants={titleVariants}
+          <h1
             className="font-display mt-8 max-w-4xl leading-[1.02] font-bold tracking-tight text-white"
-            style={{ fontSize: "var(--text-6xl)" }}
+            style={{ fontSize: "clamp(2.5rem, 2rem + 5vw, 6rem)" }}
           >
             {t("titleBefore")}{" "}
             <span className="bg-gradient-to-r from-red-400 via-red-500 to-red-700 bg-clip-text font-bold text-transparent">
               {t("titleHighlight")}
             </span>{" "}
             {t("titleAfter")}
-          </motion.h1>
+          </h1>
 
           {/* Subtitle */}
-          <motion.p
-            variants={subtleVariants}
+          <p
             data-geo-summary
             className="mt-7 max-w-2xl leading-relaxed text-white/65"
             style={{ fontSize: "var(--text-lg)" }}
           >
             {t("subtitle")}
-          </motion.p>
+          </p>
 
           {/* CTA buttons */}
-          <motion.div
-            variants={subtleVariants}
-            className="mt-12 flex flex-col gap-3 sm:flex-row sm:gap-4"
-          >
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4 md:mt-12">
             <ButtonLink href="/dijital-checkup" variant="primary" size="lg">
               {t("ctaPrimary")}
             </ButtonLink>
@@ -199,13 +129,10 @@ export function Hero() {
             >
               {t("ctaSecondary")}
             </ButtonLink>
-          </motion.div>
+          </div>
 
           {/* Social proof stats */}
-          <motion.div
-            variants={subtleVariants}
-            className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-4"
-          >
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 md:mt-16">
             {[
               { value: "10+", label: "Marka" },
               { value: "250k+", label: "Reklam Bütçesi" },
@@ -226,15 +153,12 @@ export function Hero() {
                 </span>
               </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </Container>
 
       {/* ── Scroll indicator ──────────────────────────────────────── */}
-      <motion.div
-        variants={scrollIndicatorVariants}
-        initial="hidden"
-        animate="show"
+      <div
         aria-hidden
         className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
       >
@@ -242,18 +166,9 @@ export function Hero() {
           Scroll
         </span>
         <div className="relative h-10 w-px overflow-hidden bg-white/20">
-          <motion.div
-            className="bg-accent absolute top-0 left-0 h-full w-full"
-            animate={reduceMotion ? {} : { y: ["-100%", "100%"] }}
-            transition={{
-              duration: 1.2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              repeatDelay: 0.4,
-            }}
-          />
+          <div className="bg-accent absolute top-0 left-0 h-full w-full" />
         </div>
-      </motion.div>
+      </div>
 
       {/* ── Bottom fade to paper ───────────────────────────────────── */}
       <div

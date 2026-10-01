@@ -272,3 +272,10 @@ video::-webkit-media-controls-start-playback-button {
 
 /* reCAPTCHA badge'i gizle — formlarda manuel bildirim var */
 .grecaptcha-badge { visibility: hidden !important; }
+
+/* Defer painting below the first screen; retain content for search and accessibility.
+   The browser remembers the measured height after a section becomes visible. */
+.home-sections > section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
+}

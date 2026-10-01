@@ -31,5 +31,37 @@
       "total-byte-weight": 630281
     }
   },
-  "note": "Yerel ve canlı ölçümler aynı sunucuda değildir. Canlı son ölçüm dağıtımdan sonra eklenecek."
+  "note": "Canlı ve yerel ölçümler ayrı etiketlenmiştir. Ara canlı sonuç 59; çizim sadeleştirmesi sonrası yerel sonuç 88. Nihai canlı sonuç dağıtım sonrasında ayrıca ölçülür.",
+  "intermediateLive": {
+    "url": "https://www.dousocial.com/",
+    "date": "2026-10-01T09:52:14.215Z",
+    "scores": {
+      "performance": 0.59,
+      "accessibility": 0.96,
+      "seo": 1
+    },
+    "metrics": {
+      "first-contentful-paint": 3492.7250000000004,
+      "largest-contentful-paint": 4619.131,
+      "total-blocking-time": 541.5,
+      "cumulative-layout-shift": 0.003376838632663449,
+      "total-byte-weight": 705935
+    }
+  },
+  "renderingLocal": {
+    "url": "http://localhost:3107/",
+    "date": "2026-10-01T09:56:41.896Z",
+    "scores": {
+      "performance": 0.88,
+      "accessibility": 0.96,
+      "seo": 0.92
+    },
+    "metrics": {
+      "first-contentful-paint": 1221.16305,
+      "largest-contentful-paint": 3877.4891500000003,
+      "total-blocking-time": 100.50000000000045,
+      "cumulative-layout-shift": 0,
+      "total-byte-weight": 624715
+    }
+  }
 }
