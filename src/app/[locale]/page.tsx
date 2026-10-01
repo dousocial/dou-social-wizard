@@ -1,4 +1,3 @@
-import { MarketingServicesSection } from "@/components/sections/MarketingServicesSection";
 import { use } from "react";
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
@@ -106,7 +105,6 @@ export default function Home({ params }: PageProps<"/[locale]">) {
       <MarqueeStrip />
       <ClientLogos />
       <Services />
-      <MarketingServicesSection />
       <HowWeWork />
       <Team />
 

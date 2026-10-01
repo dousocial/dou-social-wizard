@@ -70,7 +70,7 @@ export default async function MusterilerPage({
               phone: audit.phone,
               sector: audit.sector,
               source: "inbound" as const,
-              notes: `Dijital Analiz Raporu Başvurusu.\nGenel Puan: ${audit.score_overall}\nInstagram: ${audit.score_instagram}\nLinkedIn: ${audit.score_linkedin}\nYouTube: ${audit.score_youtube}\nGoogle: ${audit.score_google}`,
+              notes: `Dijital Analiz Raporu Başvurusu.\n${audit.report_text || ""}`,
             };
           }
         } else if (params.convert_contact) {

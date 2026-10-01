@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { AuditPDFButton } from "@/components/admin/AuditPDFButton";
 import { ReadToggleButton } from "../../_components/ReadToggleButton";
@@ -43,7 +44,7 @@ export function LeadsList({ audits }: { audits: Audit[] }) {
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
           <thead>
             <tr>
-              {["Tarih", "İşletme", "Sektör", "Telefon", "E-posta", "Genel", "IG", "LI", "YT", "GB", "Mod", "PDF", "Durum"].map((h, i) => (
+              {["Tarih", "İşletme", "Sektör", "Telefon", "E-posta", "Genel", "IG", "LI", "YT", "GB", "Mod", "PDF", "CRM", "Durum"].map((h, i) => (
                 <th key={h} style={{ ...th, textAlign: i >= 5 && i <= 9 ? "center" : "left" }}>{h}</th>
               ))}
             </tr>
@@ -110,6 +111,7 @@ export function LeadsList({ audits }: { audits: Audit[] }) {
                       }}
                     />
                   </td>
+                  <td style={td} onClick={e => e.stopPropagation()}><Link href={`/yonetim/musteriler?tab=adaylar&convert_audit=${encodeURIComponent(String(a.id))}`} style={{ color: "var(--c-text)", whiteSpace: "nowrap" }}>CRM’e aktar →</Link></td>
                   <td style={td} onClick={e => e.stopPropagation()}>
                     <ReadToggleButton
                       id={String(a.id)}

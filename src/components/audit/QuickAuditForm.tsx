@@ -13,6 +13,8 @@ const AdvancedAudit = dynamic(() =>
 
 export function QuickAuditForm() {
   const en = useLocale() === "en";
+  const [phone, setPhone] = useState("");
+  const [consent, setConsent] = useState(false);
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
   const [pending, setPending] = useState(false);
@@ -37,6 +39,8 @@ export function QuickAuditForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          phone: phone.trim(),
+          consent,
           website: website.trim(),
           instagram: instagram.trim(),
         }),
@@ -72,8 +76,8 @@ export function QuickAuditForm() {
       >
         <p className="text-mute-600 mb-6 text-sm" id="quick-audit-help">
           {en
-            ? "One field is enough. No phone number or email required."
-            : "Tek bir alan yeterli. Telefon veya e-posta zorunlu değil."}
+            ? "Enter a website or Instagram username and your phone number. No email required."
+            : "Web sitesi veya Instagram kullanıcı adı ile telefonunuzu paylaşın. E-posta zorunlu değil."}
         </p>
         <div className="grid gap-6 md:grid-cols-2">
           <div>
@@ -119,10 +123,49 @@ export function QuickAuditForm() {
             />
           </div>
         </div>
+        <div className="mt-6">
+          <label
+            htmlFor="audit-phone"
+            className="text-ink mb-2 block text-sm font-medium"
+          >
+            {en ? "Phone number" : "Telefon numarası"}
+          </label>
+          <input
+            id="audit-phone"
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            required
+            maxLength={40}
+            value={phone}
+            onChange={(event) => setPhone(event.target.value)}
+            placeholder="05xx xxx xx xx"
+            className="border-mute-200 bg-paper text-ink focus-visible:outline-accent w-full rounded-xl border px-4 py-3 focus-visible:outline-2"
+          />
+        </div>
+        <label className="text-mute-600 mt-5 flex items-start gap-3 text-sm">
+          <input
+            type="checkbox"
+            name="consent"
+            required
+            checked={consent}
+            onChange={(event) => setConsent(event.target.checked)}
+            className="accent-accent mt-1 h-4 w-4 shrink-0"
+          />
+          <span>
+            {en
+              ? "I agree to my phone number and analysis being saved so DOU Social can respond to this request."
+              : "Telefon numaramın ve analizimin DOU Social’ın bu talebime yanıt vermesi için kaydedilmesini kabul ediyorum."}{" "}
+            <Link href="/gizlilik-politikasi" className="text-accent underline">
+              {en ? "Privacy policy" : "Gizlilik politikası"}
+            </Link>
+          </span>
+        </label>
         <p className="text-mute-500 mt-5 text-xs leading-relaxed">
           {en
-            ? "We review accessible public information. Private Instagram metrics require account access. The submitted addresses are not stored as a lead."
-            : "Erişilebilen herkese açık bilgiler incelenir. Özel Instagram istatistikleri için hesap erişimi gerekir. Girdiğiniz adresler başvuru kaydı olarak saklanmaz."}
+            ? "We review accessible public information. Private Instagram metrics require account access. Your phone and review are saved as an analysis request."
+            : "Erişilebilen herkese açık bilgiler incelenir. Özel Instagram istatistikleri için hesap erişimi gerekir. Telefonunuz ve analiziniz başvuru kaydı olarak saklanır."}
         </p>
         {error && (
           <p role="alert" className="mt-4 text-sm text-red-600">

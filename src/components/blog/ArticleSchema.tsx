@@ -11,6 +11,7 @@ export function ArticleSchema({ post, url, siteUrl }: Props) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
+    image: post.cover ? new URL(post.cover, siteUrl).href : undefined,
     description: post.description,
     datePublished: post.date,
     dateModified: post.date,

@@ -1430,7 +1430,7 @@
       },
       "free": {
         "title": "Free, no sign-up",
-        "description": "A website address or username is enough. No phone number or email required."
+        "description": "A website or username and your phone number are enough. No email required."
       }
     },
     "formEyebrow": "Analysis Form",

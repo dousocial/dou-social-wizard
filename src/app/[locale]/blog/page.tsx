@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { localizedUrl } from "@/lib/site";
 import { routing } from "@/i18n/routing";
 import { use } from "react";
@@ -61,13 +62,17 @@ export default function BlogHubPage({ params }: PageProps<"/[locale]/blog">) {
               className="font-display text-ink mt-6 leading-[1.05] tracking-tight"
               style={{ fontSize: "var(--text-6xl)" }}
             >
-              {locale === "en" ? "Your guide to digital marketing." : "Dijital pazarlamada rehberiniz."}
+              {locale === "en"
+                ? "Your guide to digital marketing."
+                : "Dijital pazarlamada rehberiniz."}
             </h1>
             <p
               className="text-mute-600 mt-6 max-w-xl"
               style={{ fontSize: "var(--text-lg)" }}
             >
-              {locale === "en" ? "Guides to advertising, social media and event production." : "Google Ads, Meta, Instagram, reklam yönetimi ve Denizli çekim hizmetleri için uygulama rehberleri."}
+              {locale === "en"
+                ? "Guides to advertising, social media and event production."
+                : "Google Ads, Meta, Instagram, reklam yönetimi ve Denizli çekim hizmetleri için uygulama rehberleri."}
             </p>
           </Reveal>
         </Container>
@@ -85,7 +90,9 @@ export default function BlogHubPage({ params }: PageProps<"/[locale]/blog">) {
                 className="font-display text-ink mt-8 font-bold tracking-tight"
                 style={{ fontSize: "var(--text-5xl)" }}
               >
-                {locale === "en" ? "Our articles are being prepared." : "Blog yazılarımız hazırlanıyor."}
+                {locale === "en"
+                  ? "Our articles are being prepared."
+                  : "Blog yazılarımız hazırlanıyor."}
               </h2>
             </Reveal>
           ) : (
@@ -101,13 +108,12 @@ export default function BlogHubPage({ params }: PageProps<"/[locale]/blog">) {
                   >
                     {/* Cover görseli */}
                     {post.cover ? (
-                      <div className="bg-mute-100 aspect-[16/9] overflow-hidden rounded-xl">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                      <div className="bg-mute-100 relative aspect-[16/9] overflow-hidden rounded-xl">
+                        <Image
                           src={post.cover}
                           alt={post.title}
-                          loading="lazy"
-                          decoding="async"
+                          fill
+                          sizes="(max-width: 767px) 100vw, 33vw"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
