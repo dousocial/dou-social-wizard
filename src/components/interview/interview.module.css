@@ -86,6 +86,32 @@
   text-underline-offset: 5px;
   margin-top: 18px;
 }
+.instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border: 1px solid #20221f;
+  border-radius: 9px;
+  background: #20221f;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.instagram svg {
+  flex-shrink: 0;
+}
+.instagram:hover {
+  background: #9b3434;
+  border-color: #9b3434;
+}
+.instagram:focus-visible {
+  outline: 3px solid #9b3434;
+  outline-offset: 4px;
+}
 .panel {
   background: white;
   border: 1px solid #e0e2da;

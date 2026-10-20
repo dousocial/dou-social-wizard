@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { interviewSlots, type InterviewAvailability } from "@/lib/interview";
 import styles from "./interview.module.css";
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
 
 const slots = interviewSlots();
 
@@ -131,6 +132,35 @@ export function InterviewBooking() {
             Son randevu 18.00’de başlar. Her aday yalnızca bir saat seçebilir.
             Dolu saatler seçilemez; liste otomatik güncellenir.
           </p>
+          <a
+            className={styles.instagram}
+            href={siteConfig.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Bizi Instagram’da takip et — @dou.social (yeni sekmede açılır)"
+          >
+            <svg
+              width="19"
+              height="19"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r=".7"
+                fill="currentColor"
+                stroke="none"
+              />
+            </svg>
+            <span>Bizi Instagram’da takip et</span>
+            <span aria-hidden="true">↗</span>
+          </a>
           <a className={styles.contact} href="https://wa.me/905300845468">
             Sorun mu yaşıyorsun? Bize yaz ↗
           </a>
