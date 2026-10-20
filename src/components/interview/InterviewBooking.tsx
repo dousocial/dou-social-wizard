@@ -128,10 +128,6 @@ export function InterviewBooking() {
             <span>10.00–18.00</span>
             <span>15 dakika / görüşme</span>
           </div>
-          <p className={styles.note}>
-            Son randevu 18.00’de başlar. Her aday yalnızca bir saat seçebilir.
-            Dolu saatler seçilemez; liste otomatik güncellenir.
-          </p>
           <a
             className={styles.instagram}
             href={siteConfig.social.instagram}
