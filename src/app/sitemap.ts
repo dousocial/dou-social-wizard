@@ -1,3 +1,4 @@
+import { REAL_PROJECTS } from "@/lib/real-projects";
 import type { MetadataRoute } from "next";
 import { NOINDEX_PATHS, SITE_URL, STATIC_PATHS } from "@/lib/site";
 import { SERVICE_SLUGS } from "@/lib/services";
@@ -70,6 +71,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         alternates: { languages: alternateLanguages(path) },
       });
     }
+  }
+
+  for (const project of REAL_PROJECTS) {
+    const path = `/projeler/${project.slug}`;
+    for (const locale of LOCALES)
+      entries.push({
+        url: url(path, locale),
+        changeFrequency: "monthly",
+        priority: 0.7,
+        alternates: { languages: alternateLanguages(path) },
+      });
   }
 
   // Blog posts (per locale, since slugs differ between locales)

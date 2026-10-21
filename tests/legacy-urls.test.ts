@@ -57,6 +57,12 @@ describe("legacy URL migration", () => {
   it.each([
     "/blog/google-ads-tiklama-var-talep-yok",
     "/blog/new-article",
+    "/projeler/fitlife-kitchen",
+    "/en/projeler/fitlife-kitchen",
+    "/projeler/en20-spor-merkezi",
+    "/en/projeler/en20-spor-merkezi",
+    "/projeler/pamair-havacilik",
+    "/en/projeler/pamair-havacilik",
     "/blog",
     "/mulakat",
     "/en/hizmetler",

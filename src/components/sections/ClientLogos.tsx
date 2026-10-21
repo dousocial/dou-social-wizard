@@ -3,18 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
-const CLIENTS = [
-  { name: "Yapıgranit Mermercilik", logo: "yapigranit", dark: true },
-  { name: "Fitlife Kitchen", logo: "fitlife", dark: false },
-  { name: "EN20 Spor Salonu", logo: "en20", dark: true },
-  { name: "Kayra Designer", logo: "kayra", dark: false },
-  { name: "B2 Mimarlık", logo: "b2mimarlik", dark: false },
-  { name: "Vintora Etiket", logo: "vintora", dark: false },
-  { name: "Real Broker", logo: "rb", dark: false },
-  { name: "Diyetisyen Ceylin Yastıkçı", logo: "ceylin", dark: false },
-  { name: "Hangarage", logo: "han", dark: false },
-  { name: "Pamair Havacılık", logo: "pamair", dark: false },
-];
+import { Link } from "@/i18n/navigation";
+import { CLIENT_REFERENCES } from "@/lib/client-references";
 
 export async function ClientLogos() {
   const t = await getTranslations("ClientLogos");
@@ -33,25 +23,30 @@ export async function ClientLogos() {
           </h2>
         </div>
         <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5 md:gap-4">
-          {CLIENTS.map((client) => (
+          {CLIENT_REFERENCES.map((client) => (
             <li
-              key={client.logo}
+              key={client.id}
               className="border-mute-200 bg-paper overflow-hidden rounded-2xl border"
             >
-              <div
-                className={`relative aspect-[4/3] ${client.dark ? "bg-[#253238]" : "bg-[#f5f2ed]"}`}
+              <Link
+                href={`/projeler#${client.id}`}
+                className="group focus-visible:outline-accent block focus-visible:outline-2 focus-visible:outline-offset-4"
               >
-                <Image
-                  src={`/logos/${client.logo}.webp`}
-                  alt={client.name}
-                  fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
-                  className="object-contain p-5 md:p-7"
-                />
-              </div>
-              <p className="text-ink flex min-h-14 items-center justify-center px-3 py-3 text-center text-xs leading-relaxed font-medium">
-                {client.name}
-              </p>
+                <div
+                  className={`relative aspect-[4/3] ${client.dark ? "bg-[#253238]" : "bg-[#f5f2ed]"}`}
+                >
+                  <Image
+                    src={`/logos/${client.id}.webp`}
+                    alt={client.name}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
+                    className="object-contain p-5 md:p-7"
+                  />
+                </div>
+                <p className="text-ink flex min-h-14 items-center justify-center px-3 py-3 text-center text-xs leading-relaxed font-medium">
+                  {client.name}
+                </p>
+              </Link>
             </li>
           ))}
         </ul>

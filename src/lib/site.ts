@@ -27,8 +27,8 @@ export const STATIC_PATHS = [
   "/cerez-politikasi",
 ] as const;
 
-// The projects hub is a placeholder until real work is published.
-export const NOINDEX_PATHS = ["/projeler"] as const;
+// Only populated public pages are included in the sitemap.
+export const NOINDEX_PATHS: readonly string[] = [];
 
 /**
  * Build a fully-qualified URL from a path + locale.

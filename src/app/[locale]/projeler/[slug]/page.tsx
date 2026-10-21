@@ -1,3 +1,5 @@
+import { REAL_PROJECTS, getRealProject } from "@/lib/real-projects";
+import { RealProjectDetail } from "@/components/cases/RealProjectDetail";
 import { alternatesFor } from "@/lib/site";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -40,7 +42,9 @@ async function getProjectFromDB(
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    CASE_SLUGS.map((slug) => ({ locale, slug }))
+    [...CASE_SLUGS, ...REAL_PROJECTS.map((project) => project.slug)].map(
+      (slug) => ({ locale, slug })
+    )
   );
 }
 
@@ -48,6 +52,16 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/projeler/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
+
+  const realProject = getRealProject(slug);
+  if (realProject) {
+    const l = locale === "en" ? "en" : "tr";
+    return {
+      title: realProject.title[l],
+      description: realProject.summary[l],
+      alternates: alternatesFor(`/projeler/${slug}`, l),
+    };
+  }
 
   if (isCaseSlug(slug)) {
     const t = await getTranslations({
@@ -81,6 +95,15 @@ export default async function CaseDetailPage({
 }: PageProps<"/[locale]/projeler/[slug]">) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+
+  const realProject = getRealProject(slug);
+  if (realProject)
+    return (
+      <RealProjectDetail
+        project={realProject}
+        locale={locale === "en" ? "en" : "tr"}
+      />
+    );
 
   // ── i18n-based (existing) projects ──────────────────────────────────────
   if (isCaseSlug(slug)) {

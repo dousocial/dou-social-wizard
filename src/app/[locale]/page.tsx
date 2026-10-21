@@ -1,4 +1,4 @@
-import { use } from "react";
+import { REAL_PROJECTS } from "@/lib/real-projects";
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
@@ -11,6 +11,8 @@ import { Team } from "@/components/sections/Team";
 // import { ClientsGrid } from "@/components/sections/ClientsGrid";
 import { TestimonialsServer } from "@/components/sections/TestimonialsServer";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -94,9 +96,10 @@ export async function generateMetadata({
   };
 }
 
-export default function Home({ params }: PageProps<"/[locale]">) {
-  const { locale } = use(params);
+export default async function Home({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("ClientPortfolio");
 
   return (
     <>
@@ -109,27 +112,36 @@ export default function Home({ params }: PageProps<"/[locale]">) {
         <HowWeWork />
         <Team />
 
-        {/* <ClientsGrid /> */}
         <Section spacing="md" className="border-mute-100 border-t">
           <Container>
-            <Reveal className="flex flex-col items-center py-24 text-center">
-              <span className="border-accent/30 bg-accent/5 text-accent inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold tracking-widest uppercase">
-                <span className="bg-accent h-1.5 w-1.5 animate-pulse rounded-full" />
-                Çok Yakında
-              </span>
-              <h2
-                className="font-display text-ink mt-8 font-bold tracking-tight"
-                style={{ fontSize: "var(--text-5xl)" }}
-              >
-                Projelerimiz hazırlanıyor.
-              </h2>
-              <p
-                className="text-mute-500 mt-5 max-w-md"
-                style={{ fontSize: "var(--text-lg)" }}
-              >
-                Gerçekleştirdiğimiz çalışmaları en kısa sürede burada paylaşıyor
-                olacağız.
+            <Reveal className="max-w-3xl py-8">
+              <p className="text-accent text-xs font-semibold tracking-[0.2em] uppercase">
+                {t("eyebrow")}
               </p>
+              <h2 className="font-display text-ink mt-5 text-3xl leading-tight tracking-tight md:text-5xl">
+                {t("title")}
+              </h2>
+              <p className="text-mute-600 mt-5 max-w-2xl text-lg leading-relaxed">
+                {t("lead")}
+              </p>
+              <ul className="mt-7 grid gap-3">
+                {REAL_PROJECTS.map((project) => (
+                  <li key={project.slug}>
+                    <Link
+                      href={`/projeler/${project.slug}`}
+                      className="border-mute-200 text-ink hover:text-accent block rounded-xl border p-4 text-base"
+                    >
+                      {project.title[locale === "en" ? "en" : "tr"]} →
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/projeler"
+                className="bg-accent focus-visible:outline-accent mt-7 inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4"
+              >
+                {t("cta")} →
+              </Link>
             </Reveal>
           </Container>
         </Section>

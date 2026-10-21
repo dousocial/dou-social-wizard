@@ -55,13 +55,9 @@ export const RETIRED_URLS: ReadonlySet<string> = new Set([
   "/en/blog/spor-salonu-dijital-pazarlama-trendleri-2026",
   "/en/blog/whatsapp-ve-crm-entegrasyonu-ile-musteri-adaylarini-satisa-cevirme",
   "/en/projeler/bkare-mimarlik-insaat",
-  "/en/projeler/en20-spor-merkezi",
-  "/en/projeler/fitlife-kitchen",
   "/en/projeler/kayra-designer-store",
   "/en/projeler/yapigranit-mermer",
   "/projeler/bkare-mimarlik-insaat",
-  "/projeler/en20-spor-merkezi",
-  "/projeler/fitlife-kitchen",
   "/projeler/kayra-designer-store",
   "/projeler/yapigranit-mermer",
 ]);

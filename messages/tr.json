@@ -1004,11 +1004,11 @@
     }
   },
   "Cases": {
-    "metaTitle": "Projeler",
-    "metaDescription": "DOU Social ile çalışan markaların ölçülebilir sonuçları. Meta Ads, sosyal medya, web ve marka stratejisinde gerçek case study'ler.",
-    "eyebrow": "Projeler",
-    "heroTitle": "Sayılarla konuşan işler.",
-    "heroLead": "Beğeni değil dönüşüm. Görüntülenme değil satış. Birlikte çalıştığımız markaların ölçülebilir sonuçları.",
+    "metaTitle": "Projelerimiz ve Referans Markalarımız",
+    "metaDescription": "Pamair, EN20 ve Fitlife Kitchen için sosyal medya, web sitesi, çekim ve Meta reklam çalışmalarımızı keşfedin. DOU Social referans markalarını inceleyin.",
+    "eyebrow": "Referanslarımız",
+    "heroTitle": "Markalarla birlikte üretiyoruz.",
+    "heroLead": "Pamair, EN20 ve Fitlife Kitchen için sosyal medya, web sitesi, çekim ve Meta reklam çalışmalarımızı ve iki aylık dönüşüm sonuçlarını keşfedin. Birlikte çalıştığımız diğer markaları da inceleyin.",
     "_shared": {
       "back": "Tüm projeler",
       "viewAll": "Tüm projeler",
@@ -2397,5 +2397,11 @@
       "reach": "Toplam Kitle Erişimi",
       "organic": "Özgün & Yüksek Etkileşim"
     }
+  },
+  "ClientPortfolio": {
+    "eyebrow": "Referanslarımız",
+    "title": "Farklı sektörler, farklı hikâyeler.",
+    "lead": "Pamair, EN20 ve Fitlife Kitchen için sosyal medya, web sitesi, çekim ve Meta reklam çalışmalarımızı inceleyin. Birlikte çalıştığımız diğer markaları da keşfedin.",
+    "cta": "Çalışmaları ve markaları incele"
   }
 }

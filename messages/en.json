@@ -1003,11 +1003,11 @@
     }
   },
   "Cases": {
-    "metaTitle": "Work",
-    "metaDescription": "Measurable outcomes from brands working with DOU Social. Real case studies across Meta Ads, social, web and brand strategy.",
-    "eyebrow": "Work",
-    "heroTitle": "Work that speaks in numbers.",
-    "heroLead": "Not likes — conversions. Not impressions — sales. Measurable outcomes from the brands we work with.",
+    "metaTitle": "Our Projects and Client Brands",
+    "metaDescription": "Explore our social media, website, production and Meta Ads work for Pamair, EN20 and Fitlife Kitchen, alongside DOU Social’s other client brands.",
+    "eyebrow": "Our clients",
+    "heroTitle": "Creating together with brands.",
+    "heroLead": "Explore our social media, website, production and Meta Ads work for Pamair, EN20 and Fitlife Kitchen, including conversion results after two months. Meet our other client brands too.",
     "_shared": {
       "back": "All projects",
       "viewAll": "All projects",
@@ -2396,5 +2396,11 @@
       "reach": "Total Audience Reach",
       "organic": "Authentic & High Impact"
     }
+  },
+  "ClientPortfolio": {
+    "eyebrow": "Our clients",
+    "title": "Different sectors. Different stories.",
+    "lead": "Explore our social media, website, production and Meta Ads work for Pamair, EN20 and Fitlife Kitchen, and meet our other client brands.",
+    "cta": "Explore projects and brands"
   }
 }
