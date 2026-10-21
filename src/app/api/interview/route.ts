@@ -7,6 +7,7 @@ import {
   INTERVIEW_START,
   INTERVIEW_MINUTES,
   normalizeInterviewName,
+  isInterviewSlotClosed,
 } from "@/lib/interview";
 import { readJsonBody } from "@/lib/request-json";
 import { getClientId, rateLimit } from "@/lib/rate-limit";
@@ -52,7 +53,8 @@ export async function GET(request: NextRequest) {
   const response = respond({
     slots: Array.from({ length: INTERVIEW_COUNT }, (_, index) => ({
       index,
-      booked: booked.has(index),
+      booked: booked.has(index) || isInterviewSlotClosed(index),
+      ...(isInterviewSlotClosed(index) ? { closed: true } : {}),
     })),
     ownBooking: own
       ? { slotIndex: own.slot_index, fullName: own.full_name }
@@ -115,6 +117,8 @@ export async function POST(request: NextRequest) {
       { error: "Bu görüşmenin saati geçti. Başka bir saat seçin." },
       409
     );
+  if (isInterviewSlotClosed(slotIndex))
+    return respond({ error: "12.00–13.00 arası randevuya kapalı. Başka bir saat seçin." }, 409);
   const browserKey = hash(token);
   const { data, error } = await supabase
     .from("interview_bookings")

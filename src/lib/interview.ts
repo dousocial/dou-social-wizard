@@ -3,6 +3,11 @@ export const INTERVIEW_START = Date.parse("2026-10-23T10:00:00+03:00");
 export const INTERVIEW_COUNT = 33;
 export const INTERVIEW_MINUTES = 15;
 
+// 12:00–13:00 lunch break; stable indices preserve existing reservations.
+export function isInterviewSlotClosed(index: number) {
+  return index >= 8 && index < 12;
+}
+
 export function interviewSlots() {
   return Array.from({ length: INTERVIEW_COUNT }, (_, index) => {
     const start = new Date(
@@ -43,6 +48,6 @@ export function normalizeInterviewName(input: unknown) {
 }
 
 export type InterviewAvailability = {
-  slots: { index: number; booked: boolean }[];
+  slots: { index: number; booked: boolean; closed?: boolean }[];
   ownBooking: { slotIndex: number; fullName: string } | null;
 };

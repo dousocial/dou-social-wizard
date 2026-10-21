@@ -55,6 +55,7 @@ describe("PostgreSQL reservation constraints", () => {
         "utf8"
       )
     );
+    await db.exec(readFileSync(new URL("../supabase/interview-lunch-break.sql", import.meta.url), "utf8"));
   });
   afterAll(async () => {
     await db?.close();
@@ -91,6 +92,18 @@ describe("PostgreSQL reservation constraints", () => {
     await expect(book(-1, "Aday Beş", "e")).rejects.toMatchObject({
       code: "23514",
     });
+  });
+  it.each([8, 9, 10, 11])("rejects lunch slot %s at the database boundary", async (slot) => {
+    await expect(book(slot, "Öğle Adayı", "h")).rejects.toMatchObject({ code: "23514" });
+  });
+  it("allows 13:00 after lunch", async () => {
+    await expect(book(12, "Öğleden Sonra", "i")).resolves.toBeDefined();
+  });
+  it("makes a cancelled slot reusable, including its previous name and browser", async () => {
+    await book(3, "İptal Adayı", "j");
+    await db.query("UPDATE interview_bookings SET cancelled_at = now() WHERE slot_index = 3");
+    await expect(book(3, "Yeni Aday", "k")).resolves.toBeDefined();
+    await expect(book(4, "İptal Adayı", "j")).resolves.toBeDefined();
   });
   it("allows the last 18:00 slot", async () => {
     await expect(book(32, "Aday Altı", "f")).resolves.toBeDefined();

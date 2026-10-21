@@ -117,6 +117,18 @@ describe("interview HTTP boundary", () => {
       ownBooking: { fullName: "Ali Şahin", slotIndex: 1 },
     });
   });
+  it.each([8, 9, 10, 11])("rejects closed lunch slot %s without a database write", async (slotIndex) => {
+    expect((await POST(request({ fullName: "Ali Şahin", slotIndex }))).status).toBe(409);
+    expect(mocks.from).not.toHaveBeenCalled();
+  });
+  it("advertises lunch as unavailable even to older clients", async () => {
+    mocks.from.mockReturnValue(query({ data: null, error: null }));
+    const response = await GET(new NextRequest("https://www.dousocial.com/api/interview"));
+    const body = await response.json();
+    expect(body.slots.filter((slot: { closed?: boolean }) => slot.closed).map((slot: { index: number }) => slot.index)).toEqual([8,9,10,11]);
+    expect(body.slots[8]).toEqual({ index: 8, booked: true, closed: true });
+    expect(body.slots[12].booked).toBe(false);
+  });
   it("confirms only a successful insert", async () => {
     mocks.from.mockReturnValue(
       query({ data: { full_name: "Ali Şahin", slot_index: 32 }, error: null })

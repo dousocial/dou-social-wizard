@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { interviewSlots, type InterviewAvailability } from "@/lib/interview";
+import { interviewSlots, isInterviewSlotClosed, type InterviewAvailability } from "@/lib/interview";
 import styles from "./interview.module.css";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
@@ -60,11 +60,11 @@ export function InterviewBooking() {
   const selectedSlot = selected === null ? null : slots[selected];
   const selectedUnavailable =
     selected !== null &&
-    (availability?.slots[selected]?.booked ||
+    (isInterviewSlotClosed(selected) || availability?.slots[selected]?.booked ||
       Date.parse(slots[selected].start) <= now);
   const remaining =
     availability?.slots.filter(
-      (slot) => !slot.booked && Date.parse(slots[slot.index].start) > now
+      (slot) => !isInterviewSlotClosed(slot.index) && !slot.booked && Date.parse(slots[slot.index].start) > now
     ).length ?? 0;
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -256,8 +256,9 @@ export function InterviewBooking() {
                 {slots.map((slot) => {
                   const booked =
                     availability?.slots[slot.index]?.booked ?? false;
+                  const closed = isInterviewSlotClosed(slot.index) || availability?.slots[slot.index]?.closed;
                   const past = now > 0 && Date.parse(slot.start) <= now;
-                  const disabled = booked || past;
+                  const disabled = closed || booked || past;
                   return (
                     <label
                       key={slot.index}
@@ -274,11 +275,13 @@ export function InterviewBooking() {
                           setError("");
                         }}
                         required
-                        aria-label={`${slot.label}, ${booked ? "Dolu" : past ? "Saati geçti" : "Boş"}`}
+                        aria-label={`${slot.label}, ${closed ? "Kapalı" : booked ? "Dolu" : past ? "Saati geçti" : "Boş"}`}
                       />
                       <strong>{slot.label.split("–")[0]}</strong>
                       <span>
-                        {booked
+                        {closed
+                          ? "Kapalı"
+                          : booked
                           ? "Dolu"
                           : past
                             ? "Geçti"
