@@ -1,6 +1,8 @@
 // Exact legacy URLs verified against Search Console and production on 2026-10-21.
 // No catch-all: current and future content must remain reachable.
 export const LEGACY_REDIRECTS: Readonly<Record<string, string>> = {
+  "/blog/denizli-tekstil-markalari-icin-dijital-pazarlama-ve-ihracat":
+    "/blog/denizli-tekstil-b2b-musteri-kazanimi",
   "/denizli-reklam-ajansi": "/dijital-pazarlama-ajansi",
   "/en/denizli-reklam-ajansi": "/en/dijital-pazarlama-ajansi",
   "/blog/sosyal-medya-ajansi-nasil-secilir":
@@ -21,7 +23,6 @@ export const RETIRED_URLS: ReadonlySet<string> = new Set([
   "/blog/denizli-organize-sanayi-dosb-ihracat-dijital-pazarlama",
   "/blog/denizli-sanayi-ve-uretim-firmalari-icin-dijital-donusum-rehberi",
   "/blog/denizli-sosyal-medya-yonetimi-fiyatlari-ve-stratejileri",
-  "/blog/denizli-tekstil-markalari-icin-dijital-pazarlama-ve-ihracat",
   "/blog/denizli-video-produksiyon-ve-drone-cekim-hizmetleri",
   "/blog/denizli-yerel-seo-google-haritalarda-ilk-siraya-cikma",
   "/blog/eticaret-donusum-orani-optimizasyonu-cro-ipuclari",

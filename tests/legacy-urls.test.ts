@@ -68,6 +68,15 @@ describe("legacy URL migration", () => {
       expect((await middleware(req(path))).status).toBe(200);
     }
   );
+  it("preserves the historical textile destination through its new replacement", async () => {
+    const response = await middleware(
+      req("/blog/denizli-tekstil-markalari-icin-dijital-pazarlama-ve-ihracat")
+    );
+    expect(response.status).toBe(308);
+    expect(response.headers.get("location")).toBe(
+      "https://www.dousocial.com/blog/denizli-tekstil-b2b-musteri-kazanimi"
+    );
+  });
   it("still protects the administration panel", async () => {
     const response = await middleware(req("/yonetim/musteriler"));
     expect(response.headers.get("location")).toBe(
