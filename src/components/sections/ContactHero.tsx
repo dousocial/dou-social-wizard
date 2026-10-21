@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -54,25 +55,25 @@ const PLATFORMS = [
     name: "Facebook",
     Logo: FacebookLogo,
     color: "#1877F2",
-    href: "https://www.facebook.com/profile.php?id=61587124940165",
+    href: siteConfig.social.facebook,
   },
   {
     name: "Instagram",
     Logo: InstagramLogo,
     color: "#E4405F",
-    href: "https://www.instagram.com/dou.social",
+    href: siteConfig.social.instagram,
   },
   {
     name: "LinkedIn",
     Logo: LinkedInLogo,
     color: "#0A66C2",
-    href: "https://www.linkedin.com/company/dou-dijital-marketing/",
+    href: siteConfig.social.linkedin,
   },
   {
     name: "WhatsApp",
     Logo: WhatsAppLogo,
     color: "#25D366",
-    href: "https://wa.me/905300845468",
+    href: siteConfig.social.whatsapp,
   },
   {
     name: "Google",

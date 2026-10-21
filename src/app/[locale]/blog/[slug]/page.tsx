@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { buildArticleSchema } from "@/lib/article-schema";
 import { MARKETING_SERVICES } from "@/lib/marketing-services";
 import { use } from "react";
 import type { Metadata } from "next";
@@ -41,6 +42,7 @@ export async function generateMetadata({
   if (!post) return {};
   const currentLocale = locale === "en" ? "en" : "tr";
   const url = localizedUrl(`/blog/${slug}`, currentLocale);
+  const article = buildArticleSchema(post, url, SITE_URL);
   return {
     title: post.seoTitle ?? post.title,
     description: post.description,
@@ -48,6 +50,9 @@ export async function generateMetadata({
       canonical: url,
     },
     openGraph: {
+      type: "article",
+      publishedTime: article.datePublished,
+      modifiedTime: article.dateModified,
       url,
       title: post.seoTitle ?? post.title,
       description: post.description,

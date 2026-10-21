@@ -46,5 +46,14 @@ export function buildArticleSchema(
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     isPartOf: { "@id": `${siteUrl}#website` },
+    citation: post.references
+      ?.filter((reference) => {
+        try {
+          return ["https:", "http:"].includes(new URL(reference).protocol);
+        } catch {
+          return false;
+        }
+      })
+      .map((reference) => ({ "@type": "CreativeWork", url: reference })),
   };
 }

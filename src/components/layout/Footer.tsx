@@ -3,6 +3,7 @@ import { MARKETING_SERVICES } from "@/lib/marketing-services";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/brand/Logo";
+import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/Container";
 
 const SERVICES = [
@@ -26,14 +27,14 @@ const COMPANY = [
 ] as const;
 
 const SOCIAL = [
-  { href: "https://www.instagram.com/dou.social", label: "Instagram" },
+  { href: siteConfig.social.instagram, label: "Instagram" },
   {
-    href: "https://www.linkedin.com/company/dou-dijital-marketing/",
+    href: siteConfig.social.linkedin,
     label: "LinkedIn",
   },
-  { href: "https://www.youtube.com/@DouSocial", label: "YouTube" },
+  { href: siteConfig.social.youtube, label: "YouTube" },
   {
-    href: "https://www.facebook.com/profile.php?id=61587124940165",
+    href: siteConfig.social.facebook,
     label: "Facebook",
   },
 ];
@@ -110,7 +111,7 @@ export function Footer() {
               <p>Merkezefendi / Denizli</p>
               <p>
                 <a
-                  href="https://wa.me/905300845468"
+                  href={siteConfig.social.whatsapp}
                   className="hover:text-ink transition"
                 >
                   +90 530 084 54 68

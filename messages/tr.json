@@ -1602,27 +1602,27 @@
       "ctaSecondary": "Görüşme planla",
       "problemEyebrow": "Sorun",
       "processEyebrow": "Çalışma sistemi",
-      "casesEyebrow": "Sonuçlar",
+      "casesEyebrow": "Hizmetler ve rehberler",
       "faqEyebrow": "Sıkça sorulanlar"
     },
     "denizli-sosyal-medya-ajansi": {
-      "metaTitle": "Denizli Sosyal Medya Ajansı — DOU Social",
-      "metaDescription": "Denizli'de sosyal medya ajansı arıyorsan: Instagram, TikTok ve Meta Ads yönetiminde ölçülebilir sonuç üreten yerel ajans. Ücretsiz teklif.",
+      "metaTitle": "Denizli Sosyal Medya Ajansı",
+      "metaDescription": "Denizli’de sosyal medya yönetimi: içerik planı, Reels, tasarım ve Meta reklamları. Kapsamı, hesap sahipliğini ve raporlamayı DOU Social ile netleştirin.",
       "eyebrow": "Denizli · Sosyal Medya Ajansı",
       "title": "Denizli'nin sosyal medya ajansı.",
       "lead": "Denizli merkezli marka ve işletmelere Instagram, TikTok ve Meta Ads yönetimi. Yerel pazarı tanıyan, ölçülebilir sonuç üreten bir ekip.",
       "proof": [
         {
-          "value": "30+",
-          "label": "Birlikte çalıştığımız Denizli markası"
+          "value": "Plan",
+          "label": "Aylık içerik ve yayın planı"
         },
         {
-          "value": "3.2x",
-          "label": "Ortalama ROAS"
+          "value": "İçerik",
+          "label": "Tasarım, metin ve Reels üretimi"
         },
         {
-          "value": "%41",
-          "label": "Lead maliyeti tasarrufu"
+          "value": "Takip",
+          "label": "Hesap ve talep raporlaması"
         }
       ],
       "problemsTitle": "Denizli'de sosyal medya yönetiminde sıkça karşılaştığımız.",
@@ -1659,27 +1659,7 @@
           "description": "Yerel hedefli Meta Ads, haftalık dashboard, aylık optimizasyon görüşmesi."
         }
       ],
-      "casesTitle": "Yerel sonuçlar.",
-      "cases": [
-        {
-          "slug": "restoran-yerel-buyume",
-          "metric": "2x",
-          "industry": "Restoran · Denizli",
-          "title": "Şube ziyareti 2 katına çıktı"
-        },
-        {
-          "slug": "e-ticaret-3x-donusum",
-          "metric": "3.4x",
-          "industry": "E-ticaret",
-          "title": "Mağaza dönüşümü 3.4x"
-        },
-        {
-          "slug": "saglik-klinigi-marka-yenileme",
-          "metric": "4x",
-          "industry": "Sağlık",
-          "title": "Organik trafik 4x"
-        }
-      ],
+      "casesTitle": "İhtiyacınıza uygun sonraki adımlar.",
       "faqTitle": "Aklındakiler.",
       "faq": [
         {
@@ -1698,33 +1678,50 @@
           "q": "Asgari sözleşme süresi?",
           "a": "3 ay. Sosyal medyada anlamlı veri görmek için minimum 3 ay gerekli, daha kısası tarafımıza da sana da haksızlık olur."
         }
+      ],
+      "resources": [
+        {
+          "href": "/google-ads-yonetimi",
+          "title": "Google Ads yönetimi",
+          "description": "Arama kampanyası, bütçe ve dönüşüm takibi."
+        },
+        {
+          "href": "/hizmetler/sosyal-medya-marka",
+          "title": "Sosyal medya yönetimi",
+          "description": "İçerik planı, marka dili ve yayın süreci."
+        },
+        {
+          "href": "/dijital-checkup",
+          "title": "Ücretsiz dijital analiz",
+          "description": "Web siteniz veya Instagram hesabınızla başlayın."
+        }
       ]
     },
     "meta-ads-ajansi": {
       "metaTitle": "Meta Ads Ajansı — Facebook & Instagram Reklam Yönetimi",
-      "metaDescription": "Meta Ads ajansı arıyorsan: Facebook ve Instagram reklamlarında ölçülebilir ROAS. Hesap audit'inden ölçeklendirmeye, tek elden yönetim.",
+      "metaDescription": "Facebook ve Instagram reklamları için hedef kitle, kreatif test, bütçe ve dönüşüm takibi. DOU Social’ın Meta reklam yönetimi kapsamını inceleyin.",
       "eyebrow": "Meta Ads Ajansı",
       "title": "Reklam bütçeni harcama, sonuca dönüştür.",
       "lead": "Facebook ve Instagram reklamlarında doğru hedefleme, sürekli A/B test, sıkı bütçe disiplini. Tahmin değil, ölçülebilir ROAS.",
       "proof": [
         {
-          "value": "3.2x",
-          "label": "Ortalama ROAS artışı"
+          "value": "Hedef",
+          "label": "İşletmenize uygun kampanya planı"
         },
         {
-          "value": "%41",
-          "label": "CPL düşüşü"
+          "value": "Test",
+          "label": "İçerik ve hedef kitle değerlendirmesi"
         },
         {
-          "value": "100+",
-          "label": "Yönetilen kampanya"
+          "value": "Rapor",
+          "label": "Harcama ve müşteri talebi takibi"
         }
       ],
       "problemsTitle": "Meta Ads hesabında sıkça gördüğümüz.",
       "problems": [
         {
           "title": "Bütçe sızıntısı",
-          "description": "Geniş kitle, tek tip kreatif, fatigue ölçülmüyor. Ortalama bütçenin %30'u boşa."
+          "description": "Hedef kitle, kreatif çeşitliliği ve tekrar gösterim birlikte değerlendirilmediğinde bütçenin hangi ihtiyaca hizmet ettiği belirsizleşir."
         },
         {
           "title": "Yanlış funnel",
@@ -1754,27 +1751,7 @@
           "description": "Haftalık dashboard, ay sonu strateji görüşmesi. Karar verirken net görünürlük."
         }
       ],
-      "casesTitle": "Performans hikâyeleri.",
-      "cases": [
-        {
-          "slug": "e-ticaret-3x-donusum",
-          "metric": "3.4x",
-          "industry": "E-ticaret",
-          "title": "ROAS 1.2 → 4.1"
-        },
-        {
-          "slug": "online-egitim-lansmani",
-          "metric": "5.8x",
-          "industry": "Online Eğitim",
-          "title": "Lansman ROAS 5.8x"
-        },
-        {
-          "slug": "b2b-yazilim-lead-jenerasyonu",
-          "metric": "−58%",
-          "industry": "B2B SaaS",
-          "title": "CPL %58 düştü"
-        }
-      ],
+      "casesTitle": "İhtiyacınıza uygun sonraki adımlar.",
       "faqTitle": "Aklındakiler.",
       "faq": [
         {
@@ -1793,26 +1770,43 @@
           "q": "Sözleşme süresi?",
           "a": "Asgari 3 ay. Meta'nın öğrenme dönemi + ilk optimizasyon için bu süre minimum."
         }
+      ],
+      "resources": [
+        {
+          "href": "/facebook-reklam-yonetimi",
+          "title": "Facebook reklam yönetimi",
+          "description": "Form ve web sitesi başvurularını birlikte planlayın."
+        },
+        {
+          "href": "/instagram-reklam-yonetimi",
+          "title": "Instagram reklam yönetimi",
+          "description": "Reels, Stories ve mesaj talepleri için kapsam."
+        },
+        {
+          "href": "/google-ads-yonetimi",
+          "title": "Google Ads yönetimi",
+          "description": "Arama niyetine uygun kampanya ve hedef sayfa."
+        }
       ]
     },
     "instagram-reklam-yonetimi": {
-      "metaTitle": "Instagram Reklam Yönetimi — DOU Social",
+      "metaTitle": "Instagram Reklam Yönetimi",
       "metaDescription": "Instagram reklam yönetiminde uzman ajans: doğru hedefleme, etkili kreatif, sürekli optimizasyon. Reklam bütçeni daha verimli kullan.",
       "eyebrow": "Instagram Reklam Yönetimi",
       "title": "Instagram'da görünmek değil, satmak.",
       "lead": "Instagram reklamlarında doğru kreatif, doğru kitle, doğru bütçe. Beğeni değil dönüşüm. Görüntülenme değil satış.",
       "proof": [
         {
-          "value": "%41",
-          "label": "Ortalama CPL düşüşü"
+          "value": "Hedef",
+          "label": "İşletmenize uygun kampanya planı"
         },
         {
-          "value": "2.8x",
-          "label": "Etkileşim artışı"
+          "value": "Test",
+          "label": "İçerik ve hedef kitle değerlendirmesi"
         },
         {
-          "value": "100+",
-          "label": "Yönetilen kampanya"
+          "value": "Rapor",
+          "label": "Harcama ve müşteri talebi takibi"
         }
       ],
       "problemsTitle": "Instagram reklamlarında karşılaştığımız.",
@@ -1849,27 +1843,7 @@
           "description": "Reklam → mobile-first landing → checkout. Sızıntıyı kapat, dönüşümü ölçeklendir."
         }
       ],
-      "casesTitle": "Instagram reklam sonuçları.",
-      "cases": [
-        {
-          "slug": "e-ticaret-3x-donusum",
-          "metric": "3.4x",
-          "industry": "E-ticaret",
-          "title": "Mağaza dönüşümü 3.4x"
-        },
-        {
-          "slug": "online-egitim-lansmani",
-          "metric": "940",
-          "industry": "Online Eğitim",
-          "title": "Lansmanda 940 satış"
-        },
-        {
-          "slug": "restoran-yerel-buyume",
-          "metric": "8.3K",
-          "industry": "Restoran",
-          "title": "Yeni takipçi + 2x ziyaret"
-        }
-      ],
+      "casesTitle": "İhtiyacınıza uygun sonraki adımlar.",
       "faqTitle": "Aklındakiler.",
       "faq": [
         {
@@ -1886,28 +1860,40 @@
         },
         {
           "q": "Story ads gerçekten işe yarıyor mu?",
-          "a": "Doğru kullanıldığında. Native Story tasarım dili (full-bleed, hızlı tempo, açık CTA) ile feed reklamlarından %20-30 daha düşük CPL gördük."
+          "a": "Stories, Reels ve akışın sonucu içeriğe, teklife ve hedefe göre değişir. Aynı sonuç tanımıyla test edip nitelikli talepleri ve maliyeti birlikte değerlendiririz; önceden sabit bir tasarruf oranı vaat etmeyiz."
+        }
+      ],
+      "resources": [
+        {
+          "href": "/facebook-reklam-yonetimi",
+          "title": "Facebook reklam yönetimi",
+          "description": "Form ve web sitesi başvurularını birlikte planlayın."
+        },
+        {
+          "href": "/google-ads-yonetimi",
+          "title": "Google Ads yönetimi",
+          "description": "Arama niyetine uygun kampanya ve hedef sayfa."
         }
       ]
     },
     "dijital-pazarlama-ajansi": {
-      "metaTitle": "Dijital Pazarlama Ajansı — DOU Social",
+      "metaTitle": "Denizli Dijital Pazarlama ve Reklam Ajansı",
       "metaDescription": "Reklam, içerik, sosyal medya, web ve marka stratejisi — markanın dijital büyümesini tek elden yöneten ajans. Türkiye + global.",
       "eyebrow": "Dijital Pazarlama Ajansı",
       "title": "Markanın dijital büyüme operasyonu.",
-      "lead": "Reklam, içerik, sosyal medya, web ve marka stratejisi — beş hizmet, tek operasyon. Tutarlı marka, ölçülebilir sonuç.",
+      "lead": "Denizli merkezli DOU Social; Google Ads ve Meta reklamları, sosyal medya, içerik ve web sitesi çalışmalarını hedefinize göre birlikte planlar. Hizmet kapsamını ve ölçüm yöntemini başlangıçta netleştiririz.",
       "proof": [
         {
-          "value": "30+",
-          "label": "Birlikte çalıştığımız marka"
+          "value": "Hedef",
+          "label": "İşletmenize uygun kampanya planı"
         },
         {
-          "value": "5",
-          "label": "Tek elden yönetilen hizmet"
+          "value": "Test",
+          "label": "İçerik ve hedef kitle değerlendirmesi"
         },
         {
-          "value": "%41",
-          "label": "Ortalama CPL tasarrufu"
+          "value": "Rapor",
+          "label": "Harcama ve müşteri talebi takibi"
         }
       ],
       "problemsTitle": "Markanın dijitalde dağınık olmasının bedeli.",
@@ -1944,27 +1930,7 @@
           "description": "Tek dashboard, haftalık karar, aylık strateji görüşmesi. Resim her zaman net."
         }
       ],
-      "casesTitle": "Tek elden yönetilen sonuçlar.",
-      "cases": [
-        {
-          "slug": "saglik-klinigi-marka-yenileme",
-          "metric": "4x",
-          "industry": "Sağlık",
-          "title": "Marka + web + içerik + SEO"
-        },
-        {
-          "slug": "online-egitim-lansmani",
-          "metric": "940",
-          "industry": "Online Eğitim",
-          "title": "İçerik + email + reklam"
-        },
-        {
-          "slug": "b2b-yazilim-lead-jenerasyonu",
-          "metric": "−58%",
-          "industry": "B2B SaaS",
-          "title": "LinkedIn + Google + içerik"
-        }
-      ],
+      "casesTitle": "İhtiyacınıza uygun sonraki adımlar.",
       "faqTitle": "Aklındakiler.",
       "faq": [
         {
@@ -1973,7 +1939,7 @@
         },
         {
           "q": "Bundle paketler avantajlı mı?",
-          "a": "Evet. 2+ hizmet birlikte alındığında %15-25 paket fiyatı uygulanıyor. Daha önemlisi: aynı ekiple çalıştığın için brief karmaşası yok."
+          "a": "Hizmetler birlikte planlanabilir. Fiyat; teslimler, çalışma sıklığı ve gerekli kurulumlara göre teklif edilir. Medya bütçesi, hizmet bedeli ve kapsam dışı işler ayrı belirtilir."
         },
         {
           "q": "Mevcut ajansımdan geçiş zor mu?",
@@ -1983,12 +1949,29 @@
           "q": "Sözleşme nasıl?",
           "a": "Asgari 3 ay, sonrası aylık. İlk 30 gün içinde memnun değilsen sözleşme sonlanır, ödenen ay iadelidir."
         }
+      ],
+      "resources": [
+        {
+          "href": "/google-ads-yonetimi",
+          "title": "Google Ads yönetimi",
+          "description": "Arama kampanyası, bütçe ve dönüşüm takibi."
+        },
+        {
+          "href": "/hizmetler/sosyal-medya-marka",
+          "title": "Sosyal medya yönetimi",
+          "description": "İçerik planı, marka dili ve yayın süreci."
+        },
+        {
+          "href": "/dijital-checkup",
+          "title": "Ücretsiz dijital analiz",
+          "description": "Web siteniz veya Instagram hesabınızla başlayın."
+        }
       ]
     }
   },
   "Blog": {
-    "metaTitle": "Blog",
-    "metaDescription": "Reklam, içerik, marka stratejisi üzerine sahadan notlar. DOU Social ekibinden taktik, framework ve case analizleri.",
+    "metaTitle": "Dijital Pazarlama Blogu: Google Ads, Instagram ve SEO",
+    "metaDescription": "Google Ads bütçesi, Instagram reklamları, B2B pazarlama ve Denizli işletmeleri için uygulama rehberleri. Kaynaklar, kontrol listeleri ve örnek hesaplar.",
     "eyebrow": "Blog",
     "heroTitle": "Sahadan notlar.",
     "heroLead": "Reklam, içerik, sosyal medya ve marka stratejisi üzerine taktik düzeyde, kullanılabilir yazılar.",

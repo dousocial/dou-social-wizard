@@ -16,11 +16,10 @@ interface ProcessStep {
   title: string;
   description: string;
 }
-interface CaseRef {
-  slug: string;
-  metric: string;
-  industry: string;
+interface RelatedResource {
+  href: string;
   title: string;
+  description: string;
 }
 interface FAQItem {
   q: string;
@@ -38,7 +37,7 @@ export function SEOLandingTemplate({ slug }: { slug: string }) {
   const proof = t.raw("proof") as ProofMetric[];
   const problems = t.raw("problems") as ProblemPoint[];
   const process = t.raw("process") as ProcessStep[];
-  const cases = t.raw("cases") as CaseRef[];
+  const resources = t.raw("resources") as RelatedResource[];
   const faqs = t.raw("faq") as FAQItem[];
 
   return (
@@ -48,13 +47,13 @@ export function SEOLandingTemplate({ slug }: { slug: string }) {
       <Section spacing="lg">
         <Container>
           <Reveal className="max-w-4xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <p className="text-accent text-xs font-semibold tracking-[0.2em] uppercase">
               {t("eyebrow")}
             </p>
-            <h1 className="mt-6 font-display text-5xl leading-[1.05] tracking-tight text-ink md:text-7xl">
+            <h1 className="font-display text-ink mt-6 text-5xl leading-[1.05] tracking-tight md:text-7xl">
               {t("title")}
             </h1>
-            <p className="mt-6 max-w-2xl text-xl text-mute-600 md:text-2xl">
+            <p className="text-mute-600 mt-6 max-w-2xl text-xl md:text-2xl">
               {t("lead")}
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -67,8 +66,11 @@ export function SEOLandingTemplate({ slug }: { slug: string }) {
         </Container>
       </Section>
 
-      {/* Sosyal kanıt */}
-      <Section spacing="md" className="border-t border-mute-100 bg-ink text-paper">
+      {/* Service scope: only verifiable process information. */}
+      <Section
+        spacing="md"
+        className="border-mute-100 bg-ink text-paper border-t"
+      >
         <Container>
           <Reveal stagger className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
             {proof.map((m, i) => (
@@ -77,7 +79,7 @@ export function SEOLandingTemplate({ slug }: { slug: string }) {
                   <span className="font-display text-5xl leading-none tracking-tight md:text-6xl">
                     {m.value}
                   </span>
-                  <p className="mt-3 text-sm text-mute-300">{m.label}</p>
+                  <p className="text-mute-300 mt-3 text-sm">{m.label}</p>
                 </div>
               </RevealItem>
             ))}
@@ -89,22 +91,26 @@ export function SEOLandingTemplate({ slug }: { slug: string }) {
       <Section spacing="md">
         <Container>
           <Reveal className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <p className="text-accent text-xs font-semibold tracking-[0.2em] uppercase">
               {tShared("problemEyebrow")}
             </p>
-            <h2 className="mt-4 font-display text-3xl leading-tight tracking-tight text-ink md:text-5xl">
+            <h2 className="font-display text-ink mt-4 text-3xl leading-tight tracking-tight md:text-5xl">
               {t("problemsTitle")}
             </h2>
           </Reveal>
-          <Reveal stagger as="ul" className="mt-12 grid gap-px bg-mute-200 md:grid-cols-3">
+          <Reveal
+            stagger
+            as="ul"
+            className="bg-mute-200 mt-12 grid gap-px md:grid-cols-3"
+          >
             {problems.map((p, i) => (
               <RevealItem key={i} as="li">
-                <div className="flex h-full flex-col bg-paper p-8">
-                  <span className="font-display text-3xl text-accent">✕</span>
-                  <h3 className="mt-6 font-display text-xl tracking-tight text-ink">
+                <div className="bg-paper flex h-full flex-col p-8">
+                  <span className="font-display text-accent text-3xl">✕</span>
+                  <h3 className="font-display text-ink mt-6 text-xl tracking-tight">
                     {p.title}
                   </h3>
-                  <p className="mt-3 text-sm text-mute-600">{p.description}</p>
+                  <p className="text-mute-600 mt-3 text-sm">{p.description}</p>
                 </div>
               </RevealItem>
             ))}
@@ -116,24 +122,24 @@ export function SEOLandingTemplate({ slug }: { slug: string }) {
       <Section spacing="md" className="bg-mute-50">
         <Container>
           <Reveal className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <p className="text-accent text-xs font-semibold tracking-[0.2em] uppercase">
               {tShared("processEyebrow")}
             </p>
-            <h2 className="mt-4 font-display text-3xl leading-tight tracking-tight text-ink md:text-5xl">
+            <h2 className="font-display text-ink mt-4 text-3xl leading-tight tracking-tight md:text-5xl">
               {t("processTitle")}
             </h2>
           </Reveal>
           <Reveal stagger as="ol" className="mt-12 grid gap-12 md:grid-cols-2">
             {process.map((s, i) => (
               <RevealItem key={i} as="li" className="flex gap-6">
-                <span className="font-display text-4xl leading-none tracking-tight text-accent">
+                <span className="font-display text-accent text-4xl leading-none tracking-tight">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="font-display text-2xl tracking-tight text-ink">
+                  <h3 className="font-display text-ink text-2xl tracking-tight">
                     {s.title}
                   </h3>
-                  <p className="mt-3 text-mute-600">{s.description}</p>
+                  <p className="text-mute-600 mt-3">{s.description}</p>
                 </div>
               </RevealItem>
             ))}
@@ -141,35 +147,33 @@ export function SEOLandingTemplate({ slug }: { slug: string }) {
         </Container>
       </Section>
 
-      {/* Mini case studies */}
+      {/* Relevant services, without unverified case-study claims. */}
       <Section spacing="md">
         <Container>
           <Reveal className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <p className="text-accent text-xs font-semibold tracking-[0.2em] uppercase">
               {tShared("casesEyebrow")}
             </p>
-            <h2 className="mt-4 font-display text-3xl leading-tight tracking-tight text-ink md:text-5xl">
+            <h2 className="font-display text-ink mt-4 text-3xl leading-tight tracking-tight md:text-5xl">
               {t("casesTitle")}
             </h2>
           </Reveal>
           <Reveal stagger className="mt-12 grid gap-8 md:grid-cols-3">
-            {cases.map((c) => (
-              <RevealItem key={c.slug}>
-                <Link
-                  href={`/projeler/${c.slug}` as never}
-                  className="group block"
-                >
-                  <div className="aspect-[4/3] flex items-center justify-center overflow-hidden bg-mute-100 transition group-hover:bg-mute-200">
-                    <span className="font-display text-6xl leading-none text-mute-300 transition group-hover:text-accent">
-                      {c.metric}
-                    </span>
-                  </div>
-                  <p className="mt-4 text-xs uppercase tracking-wider text-mute-500">
-                    {c.industry}
-                  </p>
-                  <h3 className="mt-2 font-display text-xl leading-tight tracking-tight text-ink transition group-hover:text-accent">
-                    {c.title}
+            {resources.map((resource) => (
+              <RevealItem key={resource.href}>
+                <Link href={resource.href as never} className="group block">
+                  <h3 className="font-display text-ink group-hover:text-accent mt-2 text-xl leading-tight tracking-tight transition">
+                    {resource.title}
                   </h3>
+                  <p className="text-mute-600 mt-3 text-sm">
+                    {resource.description}
+                  </p>
+                  <span
+                    className="text-accent mt-4 inline-block text-sm"
+                    aria-hidden="true"
+                  >
+                    →
+                  </span>
                 </Link>
               </RevealItem>
             ))}
@@ -178,15 +182,15 @@ export function SEOLandingTemplate({ slug }: { slug: string }) {
       </Section>
 
       {/* FAQ */}
-      <Section spacing="md" className="border-t border-mute-100">
+      <Section spacing="md" className="border-mute-100 border-t">
         <Container>
           <Reveal className="grid gap-12 md:grid-cols-[1fr_2fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+              <p className="text-accent text-xs font-semibold tracking-[0.2em] uppercase">
                 {tShared("faqEyebrow")}
               </p>
               <h2
-                className="mt-4 font-display leading-tight tracking-tight text-ink"
+                className="font-display text-ink mt-4 leading-tight tracking-tight"
                 style={{ fontSize: "var(--text-3xl)" }}
               >
                 {t("faqTitle")}

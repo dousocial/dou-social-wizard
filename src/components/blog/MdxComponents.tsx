@@ -5,37 +5,43 @@ import { cn } from "@/lib/utils";
 export const mdxComponents: MDXRemoteProps["components"] = {
   h1: (props) => (
     <h1
-      className="mt-12 font-display text-4xl leading-tight tracking-tight text-ink md:text-5xl"
+      className="font-display text-ink mt-12 text-4xl leading-tight tracking-tight md:text-5xl"
       {...props}
     />
   ),
   h2: (props) => (
     <h2
-      className="mt-12 font-display text-3xl leading-tight tracking-tight text-ink md:text-4xl"
+      className="font-display text-ink mt-12 text-3xl leading-tight tracking-tight md:text-4xl"
       {...props}
     />
   ),
   h3: (props) => (
     <h3
-      className="mt-8 font-display text-2xl leading-tight tracking-tight text-ink"
+      className="font-display text-ink mt-8 text-2xl leading-tight tracking-tight"
       {...props}
     />
   ),
-  p: (props) => <p className="mt-6 text-lg text-mute-700" {...props} />,
+  p: (props) => <p className="text-mute-700 mt-6 text-lg" {...props} />,
   ul: (props) => (
-    <ul className="mt-6 space-y-2 pl-6 text-lg text-mute-700 [&>li]:list-disc" {...props} />
+    <ul
+      className="text-mute-700 mt-6 space-y-2 pl-6 text-lg [&>li]:list-disc"
+      {...props}
+    />
   ),
   ol: (props) => (
-    <ol className="mt-6 space-y-2 pl-6 text-lg text-mute-700 [&>li]:list-decimal" {...props} />
+    <ol
+      className="text-mute-700 mt-6 space-y-2 pl-6 text-lg [&>li]:list-decimal"
+      {...props}
+    />
   ),
   li: (props) => <li {...props} />,
   blockquote: (props) => (
     <blockquote
-      className="mt-8 border-l-2 border-accent pl-6 text-xl italic text-mute-700"
+      className="border-accent text-mute-700 mt-8 border-l-2 pl-6 text-xl italic"
       {...props}
     />
   ),
-  hr: () => <hr className="mt-12 border-mute-200" />,
+  hr: () => <hr className="border-mute-200 mt-12" />,
   a: ({ href = "", children, ...rest }) => {
     const isExternal = /^https?:\/\//.test(href);
     if (isExternal) {
@@ -52,23 +58,51 @@ export const mdxComponents: MDXRemoteProps["components"] = {
       );
     }
     return (
-      <Link href={href} className="text-accent underline-offset-4 hover:underline">
+      <Link
+        href={href}
+        className="text-accent underline-offset-4 hover:underline"
+      >
         {children}
       </Link>
     );
   },
-  strong: (props) => <strong className="font-semibold text-ink" {...props} />,
+  table: (props) => (
+    <div
+      className="border-mute-200 mt-8 max-w-full overflow-x-auto rounded-xl border"
+      role="region"
+      aria-label="Karşılaştırma tablosu"
+      tabIndex={0}
+    >
+      <table
+        className="w-full min-w-[32rem] border-collapse text-left text-sm"
+        {...props}
+      />
+    </div>
+  ),
+  th: (props) => (
+    <th
+      className="border-mute-200 bg-mute-50 text-ink border-b p-4 font-semibold"
+      {...props}
+    />
+  ),
+  td: (props) => (
+    <td
+      className="border-mute-100 text-mute-700 border-b p-4 align-top"
+      {...props}
+    />
+  ),
+  strong: (props) => <strong className="text-ink font-semibold" {...props} />,
   code: (props) => (
     <code
-      className="rounded bg-mute-100 px-1.5 py-0.5 font-mono text-sm text-ink"
+      className="bg-mute-100 text-ink rounded px-1.5 py-0.5 font-mono text-sm"
       {...props}
     />
   ),
   pre: (props) => (
     <pre
       className={cn(
-        "mt-6 overflow-x-auto rounded-lg bg-ink p-6 text-sm text-paper",
-        "[&_code]:bg-transparent [&_code]:text-paper [&_code]:p-0"
+        "bg-ink text-paper mt-6 overflow-x-auto rounded-lg p-6 text-sm",
+        "[&_code]:text-paper [&_code]:bg-transparent [&_code]:p-0"
       )}
       {...props}
     />

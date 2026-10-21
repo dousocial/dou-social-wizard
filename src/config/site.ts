@@ -35,7 +35,7 @@ export const siteConfig = {
     tagline: "Dijital dönüşümünüzü birlikte tasarlıyoruz.",
     /** public/brand/ klasöründe olmalı */
     logo: {
-      dark:  "/brand/dou-logo.png",        // koyu logo (beyaz zemin)
+      dark:  "/brand/dou-logo-dark.png",        // koyu logo (beyaz zemin)
       light: "/brand/dou-logo-light.png",  // açık logo (siyah zemin)
       width:  160,
       height:  48,
@@ -55,13 +55,14 @@ export const siteConfig = {
       district: "Merkezefendi",
       city:     "Denizli",
       country:  "TR",
+      postalCode: "20020",
     },
   },
 
   // ── Sosyal medya ─────────────────────────────────────────────────────
   social: {
     instagram: "https://www.instagram.com/dou.social",
-    linkedin:  "https://www.linkedin.com/company/dou-dijital-marketing/",
+    linkedin:  "https://www.linkedin.com/company/dou-social-tr",
     youtube:   "https://www.youtube.com/@DouSocial",
     facebook:  "https://www.facebook.com/profile.php?id=61587124940165",
     whatsapp:  "https://wa.me/905300845468",

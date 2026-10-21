@@ -9,6 +9,7 @@ const BLOG_ROOT = path.join(process.cwd(), "content", "blog");
 export interface BlogFrontmatter {
   title: string;
   seoTitle?: string;
+  references?: string[];
   description: string;
   date: string; // ISO date (YYYY-MM-DD)
   author?: string;

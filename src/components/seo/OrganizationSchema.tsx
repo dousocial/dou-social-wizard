@@ -19,7 +19,7 @@ export function OrganizationSchema({
   const { brand, contact, social, seo } = siteConfig;
   const organization = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "ProfessionalService"],
     "@id": `${SITE_URL}#organization`,
     name: brand.name,
     alternateName: brand.alternateName,
@@ -35,7 +35,20 @@ export function OrganizationSchema({
       addressLocality: contact.address.district,
       addressRegion: contact.address.city,
       addressCountry: contact.address.country,
+      postalCode: contact.address.postalCode,
     },
+    areaServed: [
+      { "@type": "City", name: "Denizli" },
+      { "@type": "Country", name: "Türkiye" },
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
+      },
+    ],
     sameAs: [
       social.instagram,
       social.linkedin,

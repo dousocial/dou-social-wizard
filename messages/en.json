@@ -1601,27 +1601,27 @@
       "ctaSecondary": "Book a call",
       "problemEyebrow": "Problem",
       "processEyebrow": "How we work",
-      "casesEyebrow": "Outcomes",
+      "casesEyebrow": "Services and guides",
       "faqEyebrow": "FAQ"
     },
     "denizli-sosyal-medya-ajansi": {
-      "metaTitle": "Denizli Social Media Agency — DOU Social",
-      "metaDescription": "Looking for a social media agency in Denizli? Instagram, TikTok and Meta Ads management with measurable outcomes. Free quote.",
+      "metaTitle": "Denizli Social Media Agency",
+      "metaDescription": "Social media management in Denizli: content planning, Reels, design and Meta ads. Explore scope, account ownership and reporting with DOU Social.",
       "eyebrow": "Denizli · Social Media Agency",
       "title": "The social media agency of Denizli.",
       "lead": "Instagram, TikTok and Meta Ads management for Denizli-based brands. A team that knows the local market and delivers measurable outcomes.",
       "proof": [
         {
-          "value": "30+",
-          "label": "Denizli brands we work with"
+          "value": "Plan",
+          "label": "Monthly content and publishing plan"
         },
         {
-          "value": "3.2x",
-          "label": "Average ROAS"
+          "value": "Content",
+          "label": "Design, copy and Reels production"
         },
         {
-          "value": "−41%",
-          "label": "Cost per lead"
+          "value": "Tracking",
+          "label": "Account and enquiry reporting"
         }
       ],
       "problemsTitle": "What we typically see in Denizli social media accounts.",
@@ -1658,27 +1658,7 @@
           "description": "Locally-targeted Meta Ads, weekly dashboard, monthly optimization call."
         }
       ],
-      "casesTitle": "Local outcomes.",
-      "cases": [
-        {
-          "slug": "restoran-yerel-buyume",
-          "metric": "2x",
-          "industry": "Restaurant · Denizli",
-          "title": "Doubled in-store visits"
-        },
-        {
-          "slug": "e-ticaret-3x-donusum",
-          "metric": "3.4x",
-          "industry": "E-commerce",
-          "title": "3.4x conversions"
-        },
-        {
-          "slug": "saglik-klinigi-marka-yenileme",
-          "metric": "4x",
-          "industry": "Healthcare",
-          "title": "4x organic traffic"
-        }
-      ],
+      "casesTitle": "Find the right next step.",
       "faqTitle": "What you might wonder.",
       "faq": [
         {
@@ -1697,33 +1677,50 @@
           "q": "Minimum contract length?",
           "a": "3 months. Social media needs at least 3 months of consistent work to produce meaningful data."
         }
+      ],
+      "resources": [
+        {
+          "href": "/google-ads-yonetimi",
+          "title": "Google Ads management",
+          "description": "Search campaigns, budgets and conversion tracking."
+        },
+        {
+          "href": "/hizmetler/sosyal-medya-marka",
+          "title": "Social media management",
+          "description": "Content planning, brand voice and publishing."
+        },
+        {
+          "href": "/dijital-checkup",
+          "title": "Free digital review",
+          "description": "Start with your website or Instagram account."
+        }
       ]
     },
     "meta-ads-ajansi": {
       "metaTitle": "Meta Ads Agency — Facebook & Instagram Ad Management",
-      "metaDescription": "Looking for a Meta Ads agency? Measurable ROAS on Facebook and Instagram. Account audit to scaling, all under one roof.",
+      "metaDescription": "Audience planning, creative tests, budgets and conversion tracking for Facebook and Instagram ads. Explore DOU Social’s Meta advertising services.",
       "eyebrow": "Meta Ads Agency",
       "title": "Stop spending. Start converting.",
       "lead": "Smart targeting, continuous A/B testing, strict budget discipline on Facebook and Instagram. Not guesses — measurable ROAS.",
       "proof": [
         {
-          "value": "3.2x",
-          "label": "Average ROAS lift"
+          "value": "Goals",
+          "label": "Campaign planning for your business"
         },
         {
-          "value": "−41%",
-          "label": "CPL reduction"
+          "value": "Testing",
+          "label": "Creative and audience evaluation"
         },
         {
-          "value": "100+",
-          "label": "Campaigns managed"
+          "value": "Reporting",
+          "label": "Spend and customer enquiry tracking"
         }
       ],
       "problemsTitle": "What we commonly see in Meta Ads accounts.",
       "problems": [
         {
           "title": "Budget leak",
-          "description": "Broad audiences, single creative, no fatigue tracking. ~30% of budget wasted."
+          "description": "Without reviewing audiences, creative variety and ad frequency together, it becomes unclear which business goal the spend supports."
         },
         {
           "title": "Wrong funnel",
@@ -1753,27 +1750,7 @@
           "description": "Weekly dashboard, end-of-month strategy call. Clear visibility for every decision."
         }
       ],
-      "casesTitle": "Performance stories.",
-      "cases": [
-        {
-          "slug": "e-ticaret-3x-donusum",
-          "metric": "3.4x",
-          "industry": "E-commerce",
-          "title": "ROAS 1.2 → 4.1"
-        },
-        {
-          "slug": "online-egitim-lansmani",
-          "metric": "5.8x",
-          "industry": "Online Education",
-          "title": "Launch ROAS 5.8x"
-        },
-        {
-          "slug": "b2b-yazilim-lead-jenerasyonu",
-          "metric": "−58%",
-          "industry": "B2B SaaS",
-          "title": "CPL down 58%"
-        }
-      ],
+      "casesTitle": "Find the right next step.",
       "faqTitle": "What you might wonder.",
       "faq": [
         {
@@ -1792,26 +1769,43 @@
           "q": "Contract length?",
           "a": "Minimum 3 months. Meta's learning phase + first optimization round needs at least this."
         }
+      ],
+      "resources": [
+        {
+          "href": "/facebook-reklam-yonetimi",
+          "title": "Facebook advertising",
+          "description": "Plan lead forms and website enquiries."
+        },
+        {
+          "href": "/instagram-reklam-yonetimi",
+          "title": "Instagram advertising",
+          "description": "Scope for Reels, Stories and messaging enquiries."
+        },
+        {
+          "href": "/google-ads-yonetimi",
+          "title": "Google Ads management",
+          "description": "Campaigns and landing pages matched to search intent."
+        }
       ]
     },
     "instagram-reklam-yonetimi": {
-      "metaTitle": "Instagram Ads Management — DOU Social",
+      "metaTitle": "Instagram Ads Management",
       "metaDescription": "Expert Instagram ads management: smart targeting, native creatives, continuous optimization. Make every ad TRY count.",
       "eyebrow": "Instagram Ads Management",
       "title": "On Instagram, don't just appear — sell.",
       "lead": "Right creative, right audience, right budget on Instagram ads. Not likes — conversions. Not impressions — sales.",
       "proof": [
         {
-          "value": "−41%",
-          "label": "Average CPL reduction"
+          "value": "Goals",
+          "label": "Campaign planning for your business"
         },
         {
-          "value": "2.8x",
-          "label": "Engagement lift"
+          "value": "Testing",
+          "label": "Creative and audience evaluation"
         },
         {
-          "value": "100+",
-          "label": "Campaigns managed"
+          "value": "Reporting",
+          "label": "Spend and customer enquiry tracking"
         }
       ],
       "problemsTitle": "What we typically see on Instagram ads.",
@@ -1848,27 +1842,7 @@
           "description": "Ad → mobile-first landing → checkout. Plug the leak, scale conversion."
         }
       ],
-      "casesTitle": "Instagram ad outcomes.",
-      "cases": [
-        {
-          "slug": "e-ticaret-3x-donusum",
-          "metric": "3.4x",
-          "industry": "E-commerce",
-          "title": "Store conversion 3.4x"
-        },
-        {
-          "slug": "online-egitim-lansmani",
-          "metric": "940",
-          "industry": "Online Education",
-          "title": "940 launch sales"
-        },
-        {
-          "slug": "restoran-yerel-buyume",
-          "metric": "8.3K",
-          "industry": "Restaurant",
-          "title": "New followers + 2x visits"
-        }
-      ],
+      "casesTitle": "Find the right next step.",
       "faqTitle": "What you might wonder.",
       "faq": [
         {
@@ -1885,28 +1859,40 @@
         },
         {
           "q": "Do Story ads actually work?",
-          "a": "Used right, yes. Native Story design (full-bleed, fast tempo, clear CTA) has shown 20-30% lower CPL than feed for us."
+          "a": "Stories, Reels and feed performance varies by creative, offer and objective. We compare qualified enquiries and cost using the same result definition, without promising a fixed saving."
+        }
+      ],
+      "resources": [
+        {
+          "href": "/facebook-reklam-yonetimi",
+          "title": "Facebook advertising",
+          "description": "Plan lead forms and website enquiries."
+        },
+        {
+          "href": "/google-ads-yonetimi",
+          "title": "Google Ads management",
+          "description": "Campaigns and landing pages matched to search intent."
         }
       ]
     },
     "dijital-pazarlama-ajansi": {
-      "metaTitle": "Digital Marketing Agency — DOU Social",
+      "metaTitle": "Digital Marketing and Advertising Agency in Denizli",
       "metaDescription": "Ads, content, social, web and brand strategy — your brand's digital growth managed under one roof. Turkey + global.",
       "eyebrow": "Digital Marketing Agency",
       "title": "Your brand's digital growth operation.",
-      "lead": "Ads, content, social, web and brand strategy — five services, one operation. Consistent brand, measurable outcomes.",
+      "lead": "Based in Denizli, DOU Social plans Google Ads, Meta advertising, social media, content and websites around your goals. We define the service scope and measurement approach at the start.",
       "proof": [
         {
-          "value": "30+",
-          "label": "Brands we work with"
+          "value": "Goals",
+          "label": "Campaign planning for your business"
         },
         {
-          "value": "5",
-          "label": "Services managed under one roof"
+          "value": "Testing",
+          "label": "Creative and audience evaluation"
         },
         {
-          "value": "−41%",
-          "label": "Average CPL reduction"
+          "value": "Reporting",
+          "label": "Spend and customer enquiry tracking"
         }
       ],
       "problemsTitle": "The cost of having your digital scattered.",
@@ -1943,27 +1929,7 @@
           "description": "One dashboard, weekly decisions, monthly strategy call. The picture stays clear."
         }
       ],
-      "casesTitle": "Outcomes managed under one roof.",
-      "cases": [
-        {
-          "slug": "saglik-klinigi-marka-yenileme",
-          "metric": "4x",
-          "industry": "Healthcare",
-          "title": "Brand + web + content + SEO"
-        },
-        {
-          "slug": "online-egitim-lansmani",
-          "metric": "940",
-          "industry": "Online Education",
-          "title": "Content + email + ads"
-        },
-        {
-          "slug": "b2b-yazilim-lead-jenerasyonu",
-          "metric": "−58%",
-          "industry": "B2B SaaS",
-          "title": "LinkedIn + Google + content"
-        }
-      ],
+      "casesTitle": "Find the right next step.",
       "faqTitle": "What you might wonder.",
       "faq": [
         {
@@ -1972,7 +1938,7 @@
         },
         {
           "q": "Are bundles better priced?",
-          "a": "Yes. With 2+ services together, 15-25% bundle pricing applies. More importantly: the same team avoids brief-handover chaos."
+          "a": "Services can be planned together. Pricing depends on deliverables, working frequency and setup requirements. Media spend, service fees and out-of-scope work are stated separately."
         },
         {
           "q": "Is migrating from my current agency hard?",
@@ -1982,12 +1948,29 @@
           "q": "Contract terms?",
           "a": "Minimum 3 months, then monthly. If you're not happy in the first 30 days, the contract closes and the paid month is refunded."
         }
+      ],
+      "resources": [
+        {
+          "href": "/google-ads-yonetimi",
+          "title": "Google Ads management",
+          "description": "Search campaigns, budgets and conversion tracking."
+        },
+        {
+          "href": "/hizmetler/sosyal-medya-marka",
+          "title": "Social media management",
+          "description": "Content planning, brand voice and publishing."
+        },
+        {
+          "href": "/dijital-checkup",
+          "title": "Free digital review",
+          "description": "Start with your website or Instagram account."
+        }
       ]
     }
   },
   "Blog": {
-    "metaTitle": "Blog",
-    "metaDescription": "Field notes on ads, content and brand strategy. Tactics, frameworks and case analysis from the DOU Social team.",
+    "metaTitle": "Digital Marketing Blog: Google Ads, Instagram and SEO",
+    "metaDescription": "Practical guides to Google Ads budgets, Instagram advertising and B2B marketing. Sources, checklists and worked examples from DOU Social in Denizli.",
     "eyebrow": "Blog",
     "heroTitle": "Notes from the field.",
     "heroLead": "Tactical, usable writing on ads, content, social media and brand strategy.",

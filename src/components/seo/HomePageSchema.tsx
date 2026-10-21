@@ -42,10 +42,6 @@ export function HomePageSchema({ locale }: { locale: Locale }) {
         "@type": "ImageObject",
         url: `${localizedUrl("/", "tr")}${brand.logo.dark}`,
       },
-      speakable: {
-        "@type": "SpeakableSpecification",
-        cssSelector: ["h1", "[data-geo-summary]"],
-      },
     },
     {
       "@type": "ProfessionalService",
@@ -57,7 +53,6 @@ export function HomePageSchema({ locale }: { locale: Locale }) {
       image: `${localizedUrl("/", "tr")}${brand.logo.dark}`,
       telephone: contact.phoneTel,
       email: contact.email,
-      priceRange: "$$",
       areaServed: [
         { "@type": "City", name: "Denizli" },
         { "@type": "Country", name: "Türkiye" },
@@ -68,6 +63,7 @@ export function HomePageSchema({ locale }: { locale: Locale }) {
         addressLocality: contact.address.district,
         addressRegion: contact.address.city,
         addressCountry: contact.address.country,
+        postalCode: contact.address.postalCode,
       },
       sameAs: [
         social.instagram,
