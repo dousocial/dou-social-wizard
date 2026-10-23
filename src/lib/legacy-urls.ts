@@ -16,6 +16,8 @@ export const LEGACY_REDIRECTS: Readonly<Record<string, string>> = {
 };
 
 export const RETIRED_URLS: ReadonlySet<string> = new Set([
+  "/mulakat",
+  "/en/mulakat",
   "/blog/b2b-sirketler-icin-linkedin-pazarlamasi-ve-lead-generation",
   "/blog/denizli-avukat-ve-hukuk-burolari-icin-web-tasarim-ve-seo",
   "/blog/denizli-dijital-pazarlama-ajansi-neden-dou-social",

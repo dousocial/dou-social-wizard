@@ -64,7 +64,6 @@ describe("legacy URL migration", () => {
     "/projeler/pamair-havacilik",
     "/en/projeler/pamair-havacilik",
     "/blog",
-    "/mulakat",
     "/en/hizmetler",
     "/api/interview",
     "/yonetim/giris",
