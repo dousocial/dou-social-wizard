@@ -21,6 +21,7 @@ const NAV_ITEMS = [
   { href: "/blog", key: "blog" },
   { href: "/sss", key: "faq" },
   { href: "/iletisim", key: "contact" },
+  { href: "/cekilisyap", key: "giveaway" },
 ] as const;
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -103,7 +104,7 @@ export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
         aria-controls="mobile-menu-panel"
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "relative flex h-10 w-10 items-center justify-center transition-colors duration-300 lg:hidden",
+          "relative flex h-10 w-10 items-center justify-center transition-colors duration-300 xl:hidden",
           forceLight ? "text-white" : "text-ink"
         )}
       >
@@ -138,7 +139,7 @@ export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
                   animate={reduceMotion ? { opacity: 1 } : "show"}
                   exit={reduceMotion ? { opacity: 0 } : "exit"}
                   onClick={close}
-                  className="bg-ink/40 fixed inset-0 lg:hidden"
+                  className="bg-ink/40 fixed inset-0 xl:hidden"
                   style={{ zIndex: 998 }}
                   aria-hidden
                 />
@@ -154,7 +155,7 @@ export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
                   initial={reduceMotion ? { x: "100%" } : "hidden"}
                   animate={reduceMotion ? { x: 0 } : "show"}
                   exit={reduceMotion ? { x: "100%" } : "exit"}
-                  className="bg-paper fixed top-0 right-0 flex h-full w-[min(340px,88vw)] flex-col overflow-y-auto shadow-2xl lg:hidden"
+                  className="bg-paper fixed top-0 right-0 flex h-full w-[min(340px,88vw)] flex-col overflow-y-auto shadow-2xl xl:hidden"
                   style={{ zIndex: 999 }}
                 >
                   {/* Panel üstü */}
@@ -192,7 +193,13 @@ export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
                       <motion.div key={item.key} variants={navItemVariants}>
                         <Link
                           href={item.href as never}
-                          onClick={close}
+                          onClick={(event) => {
+                            close();
+                            if (item.key === "giveaway") {
+                              event.preventDefault();
+                              window.location.assign("/cekilisyap");
+                            }
+                          }}
                           className="border-mute-100 font-display text-ink hover:text-accent active:text-accent flex items-center justify-between border-b py-5 text-2xl tracking-tight transition-colors"
                         >
                           <span>{t(item.key)}</span>
@@ -239,3 +246,4 @@ export function MobileMenu({ forceLight = false }: { forceLight?: boolean }) {
     </>
   );
 }
+
