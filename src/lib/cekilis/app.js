@@ -25,7 +25,8 @@ const json=(data,status=200,headers={})=>new Response(JSON.stringify(data),{stat
 async function provider(path,token,init={}) {const r=await fetch('https://api.apify.com/v2/'+path,{...init,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'}});if(!r.ok)throw Error(r.status===401?'Yorum servisinin API anahtarı geçersiz.':r.status===402?'Yorum servisinin bakiyesi yetersiz.':'Yorum servisi isteği tamamlanamadı.');return r;}
 const hex=bytes=>Array.from(new Uint8Array(bytes)).map(n=>n.toString(16).padStart(2,'0')).join('');
 async function signature(value,secret) {const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);return hex(await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(value)));}
-async function jobCookie(request,secret) {const value=(request.headers.get('cookie')||'').split('; ').find(c=>c.startsWith('draw_job='))?.slice(9);if(!value)return null;const [id,expiry,sig]=value.split('.');if(!/^[A-Za-z0-9]+$/.test(id)||Number(expiry)<Date.now()||await signature(id+'.'+expiry,secret)!==sig)return null;return id;}
+async function jobCookie(request,secret) {const value=(request.headers.get('cookie')||'').split('; ').find(c=>c.startsWith('draw_job='))?.slice(9);if(!value)return null;const [id,expiry,mode,sig]=value.split('.');if(!/^[A-Za-z0-9]+$/.test(id)||!['preview','thousand'].includes(mode)||Number(expiry)<Date.now()||await signature(id+'.'+expiry+'.'+mode,secret)!==sig)return null;return {id,mode};}
+export function providerComment(c,reply=false) {const time=c.timestamp??c.created_at??c.createdAt;return {id:String(c.id??c.pk??''),username:c.ownerUsername||c.owner?.username||c.user?.username||c.username,text:c.text??c.message,timestamp:typeof time==='number'?new Date(time*1000).toISOString():time,reply:Boolean(reply||c.parentId||c.parent_id||c.parentCommentUrl)};}
 async function api(request,env,url) {
   const origin=request.headers.get('origin');if(origin&&origin!==url.origin)return json({error:'Geçersiz istek kaynağı.'},403);
   if(url.pathname==='/api/cekilisyap/status'&&request.method==='GET')return json({configured:Boolean(env.APIFY_API_TOKEN)});
@@ -38,20 +39,24 @@ async function api(request,env,url) {
     const token=env.APIFY_API_TOKEN;if(!token)return json({error:'Canlı yorum servisi henüz bağlı değil. Demo çekilişini deneyebilir veya yorumlarını JSON olarak yükleyebilirsin.'},503);
     if(request.method==='POST') {
       const body=await limitedBody(request),clean=instagramUrl(String(body.url||''));if(!clean)return json({error:'Geçerli bir Instagram post veya Reels bağlantısı girin.'},400);
-      const active=await jobCookie(request,token);if(active){const old=(await(await provider('actor-runs/'+active,token)).json()).data;if(['READY','RUNNING'].includes(old.status))return json({id:active,status:old.status});}
-      const r=await provider('acts/apify~instagram-comment-scraper/runs?timeout=480&memory=256',token,{method:'POST',body:JSON.stringify({directUrls:[clean],resultsLimit:10000,includeReplies:true})}),{data}=await r.json(),expiry=Date.now()+3600000,value=data.id+'.'+expiry;
+      const mode=body.mode||'preview';if(!['preview','thousand'].includes(mode))return json({error:'Yorum toplama seçeneği geçersiz.'},400);const active=await jobCookie(request,token);if(active){const old=(await(await provider('actor-runs/'+active.id,token)).json()).data;if(['READY','RUNNING'].includes(old.status)){if(active.mode!==mode)return json({error:'Önce devam eden yorum aktarımının bitmesini bekleyin.'},409);return json({id:active.id,status:old.status});}}
+      const deep=mode==='thousand',actor=deep?'louisdeconinck~instagram-comments-scraper':'apify~instagram-comment-scraper',input=deep?{urls:[clean],maxComments:1000}:{directUrls:[clean],resultsLimit:10000,includeReplies:true};
+      const r=await provider('acts/'+actor+'/runs?timeout=480&memory=256&maxTotalChargeUsd=2',token,{method:'POST',body:JSON.stringify(input)}),{data}=await r.json(),expiry=Date.now()+3600000,value=data.id+'.'+expiry+'.'+mode;
       const cookie=`draw_job=${value}.${await signature(value,token)}; HttpOnly; SameSite=Strict; Path=/api/cekilisyap/comments; Max-Age=3600${url.protocol==='https:'?'; Secure':''}`;
       return json({id:data.id,status:data.status},202,{'Set-Cookie':cookie});
     }
     if(request.method==='GET') {
-      const id=await jobCookie(request,token);if(!id)return json({error:'Yorum aktarımı oturumu bulunamadı. Bağlantıyı yeniden gönderin.'},400);
-      const {data:run}=await(await provider('actor-runs/'+id,token)).json();if(['FAILED','ABORTED','TIMED-OUT'].includes(run.status))return json({error:'Yorum servisi aktarımı tamamlayamadı. Yeniden deneyin.'},502);
+      const job=await jobCookie(request,token);if(!job)return json({error:'Yorum aktarımı oturumu bulunamadı. Bağlantıyı yeniden gönderin.'},400);
+      const {data:run}=await(await provider('actor-runs/'+job.id,token)).json();if(['FAILED','ABORTED','TIMED-OUT'].includes(run.status))return json({error:'Yorum servisi aktarımı tamamlayamadı. Yeniden deneyin.'},502);
       if(run.status!=='SUCCEEDED')return json({status:run.status,count:run.stats?.outputItems||0});
       const offset=Number(url.searchParams.get('offset')||0);if(!Number.isInteger(offset)||offset<0||offset>20000)return json({error:'Geçersiz sayfa.'},400);
       const r=await provider(`datasets/${run.defaultDatasetId}/items?format=json&offset=${offset}&limit=1000`,token),items=await r.json(),total=Number(r.headers.get('x-apify-pagination-total')||items.length);
       if(total>=10000)return json({error:'Yorum toplama sınırına ulaşıldı. Eksik listeyle çekiliş başlatılmadı.'},422);
       if(items.some(c=>c.error))return json({error:'Gönderiye veya yorumlara erişilemedi. Herkese açık bir gönderi kullanın.'},422);
-      const comments=items.flatMap(c=>[{id:String(c.id),username:c.ownerUsername||c.owner?.username,text:c.text,timestamp:c.timestamp,reply:Boolean(c.parentId||c.parent_id)},...(c.replies||[]).map(r=>({id:String(r.id),username:r.ownerUsername||r.owner?.username,text:r.text,timestamp:r.timestamp,reply:true}))]);
+      if(job.mode==='thousand'&&(total<1000||total>1000||offset!==0))return json({error:`1.000 yorum hedefi karşılanmadı: servis ${total} kayıt döndürdü. Bu sağlayıcı ücretsiz Apify hesaplarında 15 yorumla sınırlıdır; ücretli planı ve gönderinin yorum sayısını kontrol edin. Eksik liste çekilişe alınmadı.`},422);
+      const comments=items.flatMap(c=>[providerComment(c),...(c.replies||[]).map(r=>providerComment(r,true))]);
+      if(comments.some(c=>!c.id))return json({error:'Yorum servisi kimliği eksik kayıt döndürdü; liste yüklenmedi.'},422);
+      if(job.mode==='thousand'&&normalizeComments(comments).length<1000)return json({error:'1.000 farklı yorum alınamadı. Tekrarlanan kayıtlar hedefe sayılmadı; eksik liste yüklenmedi.'},422);
       return json({status:'SUCCEEDED',comments,count:total,nextOffset:offset+items.length<total?offset+items.length:null,capped:total>=10000});
     }
   }

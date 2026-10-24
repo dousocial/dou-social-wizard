@@ -70,3 +70,18 @@ test('Empty, HTML and malformed backend responses show a readable error instead 
   }
   const offline=createService(false,async()=>{throw Error('Network unavailable');});assert.equal((await offline('/api/cekilisyap/status')).status,503);
 });
+
+test('Thousand-comment mode uses the deep provider, enforces unique comments and signs its target',async()=>{
+  const original=globalThis.fetch,calls=[];let size=1000,duplicate=false;
+  globalThis.fetch=async(url,init)=>{calls.push({url:String(url),init});if(String(url).includes('/runs?'))return Response.json({data:{id:'deep123',status:'READY'}});if(String(url).includes('/actor-runs/'))return Response.json({data:{status:'SUCCEEDED',defaultDatasetId:'datasetDeep'}});return Response.json(Array.from({length:size},(_,i)=>({pk:String(duplicate?1:i+1),text:'@friend test',created_at:1792756800,user:{username:'entrant'+i}})),{headers:{'x-apify-pagination-total':String(size)}});};
+  try{
+    const start=await worker.fetch(new Request('https://draw.test/api/cekilisyap/comments',{method:'POST',body:JSON.stringify({url:'https://instagram.com/p/Ab/',mode:'thousand'})}),{APIFY_API_TOKEN:'secret'});
+    assert.equal(start.status,202);assert.match(calls[0].url,/louisdeconinck~instagram-comments-scraper/);assert.match(calls[0].url,/maxTotalChargeUsd=2/);assert.equal(JSON.parse(calls[0].init.body).maxComments,1000);
+    const cookie=start.headers.get('set-cookie').split(';')[0],poll=()=>worker.fetch(new Request('https://draw.test/api/cekilisyap/comments?offset=0',{headers:{cookie}}),{APIFY_API_TOKEN:'secret'});
+    const full=await poll();assert.equal(full.status,200);const data=await full.json();assert.equal(normalizeComments(data.comments).length,1000);assert.equal(data.nextOffset,null);assert.equal(data.comments[0].username,'entrant0');assert.equal(data.comments[0].timestamp,'2026-10-23T12:00:00.000Z');
+    size=15;const partial=await poll();assert.equal(partial.status,422);assert.match((await partial.json()).error,/15 kayıt/);
+    size=1000;duplicate=true;assert.equal((await poll()).status,422);
+    const tampered=await worker.fetch(new Request('https://draw.test/api/cekilisyap/comments',{headers:{cookie:cookie.replace('.thousand.','.preview.')}}),{APIFY_API_TOKEN:'secret'});assert.equal(tampered.status,400);
+    const invalid=await worker.fetch(new Request('https://draw.test/api/cekilisyap/comments',{method:'POST',body:JSON.stringify({url:'https://instagram.com/p/Ab/',mode:'arbitrary-actor'})}),{APIFY_API_TOKEN:'secret'});assert.equal(invalid.status,400);
+  }finally{globalThis.fetch=original;}
+});
