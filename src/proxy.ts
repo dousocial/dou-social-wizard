@@ -11,6 +11,11 @@ const intlMiddleware = createMiddleware(routing);
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // The giveaway returns a complete HTML document, outside the locale layouts.
+  if (pathname === "/cekilisyap" || pathname === "/cekilisyap/") {
+    return NextResponse.next();
+  }
+
   // ── Admin panel auth ────────────────────────────────────────────────────
   if (pathname.startsWith("/yonetim")) {
     const nonce = randomBytes(16).toString("base64");
@@ -83,3 +88,4 @@ export default async function middleware(req: NextRequest) {
 export const config = {
   matcher: "/((?!_next|_vercel|.*\\..*).*)",
 };
+

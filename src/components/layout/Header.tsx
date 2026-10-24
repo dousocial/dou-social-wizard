@@ -21,6 +21,7 @@ const NAV_ITEMS = [
   { href: "/blog", key: "blog" },
   { href: "/sss", key: "faq" },
   { href: "/iletisim", key: "contact" },
+  { href: "/cekilisyap", key: "giveaway" },
 ] as const;
 
 const SCROLL_THRESHOLD = 24;
@@ -86,7 +87,7 @@ export function Header({
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 lg:flex" role="navigation">
+          <nav className="hidden items-center gap-1 xl:flex" role="navigation">
             {NAV_ITEMS.map((item) => {
               const active = isActive(item.href);
               return (
@@ -94,6 +95,11 @@ export function Header({
                   key={item.key}
                   href={item.href as never}
                   onClick={(e) => {
+                    if (item.key === "giveaway") {
+                      e.preventDefault();
+                      window.location.assign("/cekilisyap");
+                      return;
+                    }
                     if (active) {
                       e.preventDefault();
                       scrollToTop();
@@ -161,7 +167,7 @@ export function Header({
                 delay: 0.1,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="hidden lg:block"
+              className="hidden xl:block"
             >
               <ButtonLink href="/dijital-checkup" size="sm">
                 {t("cta")}
@@ -175,3 +181,4 @@ export function Header({
     </header>
   );
 }
+
